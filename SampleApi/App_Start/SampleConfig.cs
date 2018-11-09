@@ -100,7 +100,7 @@ namespace SampleApi
             }
         }
         /// <summary>
-        /// 启用受限视图
+        /// 启用受限视图sss
         /// </summary>
         public bool EnableLimtView
         {
