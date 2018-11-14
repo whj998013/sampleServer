@@ -31,7 +31,6 @@ namespace SampleApi
             _AllSampleCanLend = ConfigHelper.GetValue("AllSampleCanLend") == "true" ? true : false;
             _SampleAdminRoleId = long.Parse(ConfigHelper.GetValue("SampleAdminRoleId"));
             _SampleDevelopmentRoleId = long.Parse(ConfigHelper.GetValue("SampleDevelopmentRoleId"));
-
         }
 
         /// <summary>

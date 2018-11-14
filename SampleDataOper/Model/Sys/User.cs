@@ -17,13 +17,13 @@ namespace SampleDataOper.Model
         public string DdId { get; set; }
         public string Avatar { get; set; }
         public string LoginStr { get; set; }
-        public UserRole Role { get; set; }
+        public UserRoleU Role { get; set; }
         public DateTime? LoginOverTime { get; set; }
         [NotMapped]
         public string Ticket { get; set; }
     }
 
-    public enum UserRole
+    public enum UserRoleU
     {
         一般用户=0,
         打样开发=1,

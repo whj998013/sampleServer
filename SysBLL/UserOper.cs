@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
 using SampleDataOper.Model;
-using SampleBLL.Model;
 
-namespace SampleBLL
+
+namespace SysBLL
 {
     public class UserOper
     {

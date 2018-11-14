@@ -160,7 +160,7 @@ namespace SampleApi.Controllers
 
         public static object ReturnUser(User _user)
         {
-            bool isLimt = !SampleConfig.GetSampleConfig().EnableLimtView || _user.Role != UserRole.一般用户;
+            bool isLimt = !SampleConfig.GetSampleConfig().EnableLimtView || _user.Role != UserRoleU.一般用户;
             _user.Ticket = DESEncrypt.Encrypt((_user.Name + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
             bool allSampleCanLend = SampleConfig.GetSampleConfig().AllSampleCanLend;
             return new { _user.Name, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt, allSampleCanLend };

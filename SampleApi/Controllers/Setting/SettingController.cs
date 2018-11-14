@@ -55,7 +55,7 @@ namespace SampleApi.Controllers.Setting
             var re = ddoper.GetRoleUserList(developmentId);
             re.Result.List.ForEach(p =>
             {
-                if (!UserOper.SetUserRole(p.Userid, UserRole.打样开发))
+                if (!UserOper.SetUserRole(p.Userid, UserRoleU.打样开发))
                 {
                     var ddUser = ddoper.GetUserInfoById(p.Userid);
                     UserOper.AddUser(new User
@@ -64,7 +64,7 @@ namespace SampleApi.Controllers.Setting
                         Name = ddUser.Name,
                         DepartName = ddoper.GetDeptName(ddUser.Department[0]),
                         Avatar = ddUser.Avatar,
-                        Role = UserRole.打样开发,
+                        Role = UserRoleU.打样开发,
                     });
                 }
             });
@@ -72,7 +72,7 @@ namespace SampleApi.Controllers.Setting
             re = ddoper.GetRoleUserList(adminId);
             re.Result.List.ForEach(p =>
             {
-                if (!UserOper.SetUserRole(p.Userid, UserRole.样衣管理员))
+                if (!UserOper.SetUserRole(p.Userid, UserRoleU.样衣管理员))
                 {
                     var ddUser = ddoper.GetUserInfoById(p.Userid);
                     UserOper.AddUser(new User
@@ -81,7 +81,7 @@ namespace SampleApi.Controllers.Setting
                         Name = ddUser.Name,
                         DepartName = ddoper.GetDeptName(ddUser.Department[0]),
                         Avatar = ddUser.Avatar,
-                        Role = UserRole.样衣管理员,
+                        Role = UserRoleU.样衣管理员,
                     });
                 }
 
