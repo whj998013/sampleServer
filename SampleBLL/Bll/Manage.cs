@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper.Model;
 using SampleDataOper;
+using IBLL.Sample;
 namespace SampleBLL
 {
     public class Manage

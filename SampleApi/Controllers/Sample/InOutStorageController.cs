@@ -5,10 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SampleDataOper;
-using SampleDataOper.Model;
+using Model.Sample;
 using SG.SessionManage;
 using SampleBLL;
 using SampleBLL.Model;
+using IBLL.Sample;
 
 namespace SampleApi.Controllers.Sample
 {
@@ -21,7 +22,7 @@ namespace SampleApi.Controllers.Sample
             string id = (string)obj.styleId;
             if (id != "")
             {
-                SampleBaseInfo sample = new SampleBaseInfo();
+                ISampleBaseInfo sample = new SampleBaseInfo();
                 string title, content;
                 if (SampleConfig.GetSampleConfig().IsInputStrageNeedAlow)
                 {
@@ -95,8 +96,8 @@ namespace SampleApi.Controllers.Sample
             object re ;
             if (obj.UserId.Count > 0)
             {
-                var exp = PredicateBuilder.False<SampleBaseInfo>();
-                var exp2 = PredicateBuilder.True<SampleBaseInfo>();
+                var exp = PredicateBuilder.False<ISampleBaseInfo>();
+                var exp2 = PredicateBuilder.True<ISampleBaseInfo>();
                 obj.UserId.ForEach(p =>
                 {
                     exp = exp.Or(t => t.DdId==p);

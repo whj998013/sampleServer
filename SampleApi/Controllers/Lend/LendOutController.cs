@@ -6,10 +6,10 @@ using System.Net.Http;
 using System.Web.Http;
 using SG.SessionManage;
 using SampleDataOper;
-using SampleDataOper.Model;
 using SampleApi.Controllers.Sample;
 using SampleBLL;
 using SampleBLL.Model;
+using Model.Sys;
 
 namespace SampleApi.Controllers.Lend
 {

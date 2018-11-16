@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using SampleDataOper.Model;
+using IBLL.Sample;
+using Model.Sample;
+using Model.Product;
 using SampleDataOper;
 using SG.Utilities;
+using IBLL.Product;
 namespace SampleBLL
 {
     /// <summary>
@@ -14,12 +16,12 @@ namespace SampleBLL
     /// </summary>
     public class SampleHelper
     {
-        public static dynamic GetDdLenOutObj(LendRecord p)
+        public static dynamic GetDdLenOutObj(ILendRecord p)
         {
             object obj = null;
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(item => item.StyleId == p.StyleId);
+                ISampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(item => item.StyleId == p.StyleId);
                 if (sb != null)
                 {
                     var pic = sc.StyleFiles.FirstOrDefault(f => f.SytleId == p.StyleId && f.FileType == FileType.Pic);
@@ -45,14 +47,14 @@ namespace SampleBLL
             }
         }
 
-        public static dynamic GetReturnObj(SampleBaseInfo baseinfo)
+        public static dynamic GetReturnObj(ISampleBaseInfo baseinfo)
         {
             using (SampleContext sc = new SampleContext())
             {
 
-                Proofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
+                IProofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pr == null) pr = new Proofing();
-                ProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
+                IProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pd == null) pd = new ProductionRecord();
                 var Files = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId).Select(p => new { p.DisplayName, p.FileName, p.FileType }).ToList();
                 var FirstPic = Files.FirstOrDefault(p => p.FileType == FileType.Pic);
@@ -98,14 +100,14 @@ namespace SampleBLL
             }
         }
 
-        public static dynamic GetEditObj(SampleBaseInfo baseinfo)
+        public static dynamic GetEditObj(ISampleBaseInfo baseinfo)
         {
             using (SampleContext sc = new SampleContext())
             {
 
-                Proofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
+                IProofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pr == null) pr = new Proofing();
-                ProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
+                IProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pd == null) pd = new ProductionRecord();
                 var FileList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.File).Select(p => new { name = p.DisplayName, reallyName = p.FileName }).ToList();
                 var PicList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.Pic).Select(p => new { name = p.FileName, reallyName = p.FileName }).ToList();

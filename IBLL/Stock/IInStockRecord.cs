@@ -1,0 +1,15 @@
+﻿using System;
+
+namespace IBLL.Stock
+{
+    public interface IInStockRecord:IBaseModel
+    {
+        int Id { get; set; }
+        DateTime? InStockDate { get; set; }
+        int InStockNum { get; set; }
+        double Price { get; set; }
+        string Size { get; set; }
+        string StockId { get; set; }
+        string StyleId { get; set; }
+    }
+}

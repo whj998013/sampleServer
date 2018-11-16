@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper.Model;
 using SG.Utilities;
 using SampleDataOper;
+using Model.Sys;
+using Model.Sample;
+using IBLL.Sample;
 
 namespace SampleBLL
 {

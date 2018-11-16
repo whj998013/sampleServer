@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.SessionState;
-using SampleDataOper.Model;
-using SampleDataOper;
 using SampleBLL;
+using Model.Sys;
 namespace SG.SessionManage
 {
     public static class SessionManage

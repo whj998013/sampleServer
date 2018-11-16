@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
-using SampleDataOper.Model;
-
+using IBLL.Sample;
+using Model.Sys;
+using IBLL.Sys;
 
 namespace SysBLL
 {

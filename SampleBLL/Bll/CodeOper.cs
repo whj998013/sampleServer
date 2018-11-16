@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SampleBLL;
 using SampleDataOper;
-using SampleDataOper.Model;
+using Model.Sys;
+using Model.Sample;
+using IBLL.Sys;
 
 namespace SampleBLL
 {

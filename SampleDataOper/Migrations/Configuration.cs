@@ -4,7 +4,10 @@ namespace SampleDataOper.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Model;
+    using IBLL.Sys;
+    using Model.Sample;
+    using Model.Sys;
+     
 
     internal sealed class Configuration : DbMigrationsConfiguration<SampleDataOper.SampleContext>
     {

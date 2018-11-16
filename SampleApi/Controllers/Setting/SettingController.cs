@@ -5,9 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SampleDataOper;
-using SampleDataOper.Model;
 using SG.DdApi;
 using SampleBLL;
+using IBLL.Sys;
+using Model.Sys;
 
 namespace SampleApi.Controllers.Setting
 {

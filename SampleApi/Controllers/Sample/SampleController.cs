@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using SampleDataOper.Model;
 using SG.SessionManage;
 using System.Web;
 using System.IO;
@@ -13,6 +12,9 @@ using SG.Utilities;
 using System.Linq.Expressions;
 using SampleBLL;
 using SampleBLL.Model;
+using IBLL.Sample;
+using IBLL.Sys;
+using Model.Sys;
 
 namespace SampleApi.Controllers.Sample
 {
@@ -24,7 +26,7 @@ namespace SampleApi.Controllers.Sample
         public object GetSampleList(SeachModel seachObj)
         {
 
-            var exp = PredicateBuilder.True<SampleBaseInfo>();
+            var exp = PredicateBuilder.True<ISampleBaseInfo>();
             exp = exp.And(p => !p.IsDelete && (int)p.State>2);
             if (seachObj.State != SampleState.所有)
             {

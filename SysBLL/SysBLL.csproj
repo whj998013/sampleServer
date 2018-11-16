@@ -53,6 +53,14 @@
     <Compile Include="UserOper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SampleDataOper\SampleDataOper.csproj">
       <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
       <Name>SampleDataOper</Name>

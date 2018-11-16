@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
-using SampleDataOper.Model;
-using SampleBLL.Model;
+using IBLL.Sys;
+using Model.Sys;
+using IBLL.Sample;
+
 
 namespace SampleBLL
 {

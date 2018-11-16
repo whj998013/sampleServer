@@ -1,18 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SampleDataOper.Model;
 using SG.Utilities;
 using SampleDataOper;
 using SampleBLL;
 using SampleBLL.Model;
 using System;
+using IBLL.Sample;
+using Model.Sys;
+using Model.Sample;
+using Model.Stock;
+using Model.Product;
 
 namespace SampleBLL
 {
     public class SampleInfo
     {
 
+        private User currentUser { get; set; } = new User();
+        public bool IsNewSample { get; set; } = true;
+        public SampleBaseInfo BaseInfo { get; set; } = new SampleBaseInfo();
+        public Proofing ProofingInfo { get; set; } = new Proofing();
+        public ProductionRecord ProductInfo { get; set; } = new ProductionRecord();
+        public List<StyleFile> Files { get; set; } = new List<StyleFile>();
+        public List<Stock> StockList { get; set; } = new List<Stock>();
         public SampleInfo(User user)
         {
             currentUser = user;
@@ -66,14 +77,7 @@ namespace SampleBLL
                 return BaseInfo.StyleNo;
             }
         }
-        private User currentUser { get; set; } = new User();
-        public bool IsNewSample { get; set; } = true;
-        public SampleBaseInfo BaseInfo { get; set; } = new SampleBaseInfo();
-        public Proofing ProofingInfo { get; set; } = new Proofing();
-        public ProductionRecord ProductInfo { get; set; } = new ProductionRecord();
-        public List<StyleFile> Files { get; set; } = new List<StyleFile>();
 
-        public List<Stock> StockList { get; set; } = new List<Stock>();
 
         public void AddFile(string filename, string fileUrl, string displayName, FileType filetype)
         {
@@ -126,7 +130,7 @@ namespace SampleBLL
                 BaseInfo.Counts = sample.Counts;
                 BaseInfo.Material = JsonHelper.ToJson(sample.MaterialItems);
                 BaseInfo.StyleTag = JsonHelper.ToJson(sample.StyleTagItems);
-                if(IsNewSample) BaseInfo.DdId = currentUser.DdId;
+                if (IsNewSample) BaseInfo.DdId = currentUser.DdId;
                 BaseInfo.HaveStock = sample.HaveStock;
                 BaseInfo.CostPrice = sample.CostPrice;
                 BaseInfo.FactoryPrice = sample.FactoryPrice;

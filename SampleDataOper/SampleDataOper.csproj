@@ -49,26 +49,6 @@
   <ItemGroup>
     <Compile Include="KeyMange.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\BaseModel.cs" />
-    <Compile Include="Model\Code.cs" />
-    <Compile Include="Model\IFToS.cs" />
-    <Compile Include="Model\Stock\InStockRecord.cs" />
-    <Compile Include="Model\KM.cs" />
-    <Compile Include="Model\Sample\LendRecord.cs" />
-    <Compile Include="Model\Sample\Material.cs" />
-    <Compile Include="Model\Sample\SampleLendout.cs" />
-    <Compile Include="Model\Product\ProductionRecord.cs" />
-    <Compile Include="Model\Sample\Proofing.cs" />
-    <Compile Include="Model\Sample\SampleBaseInfo.cs" />
-    <Compile Include="Model\Sample\SampleReturn.cs" />
-    <Compile Include="Model\Sys\Permission.cs" />
-    <Compile Include="Model\Sys\Role.cs" />
-    <Compile Include="Model\Sys\UserRolePermission.cs" />
-    <Compile Include="Model\Sys\Setting.cs" />
-    <Compile Include="Model\Stock\Stock.cs" />
-    <Compile Include="Model\Sample\StyleFile.cs" />
-    <Compile Include="Model\Sys\User.cs" />
-    <Compile Include="Model\Sys\UserRole.cs" />
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleContext.cs" />
@@ -81,6 +61,14 @@
     <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
       <Name>SG.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

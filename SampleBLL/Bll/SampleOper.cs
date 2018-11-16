@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper.Model;
 using SG.Utilities;
 using SampleBLL;
-
+using IBLL.Sample;
 namespace SampleDataOper
 {
     public class SampleOper
@@ -15,7 +14,7 @@ namespace SampleDataOper
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
                     var re = SampleHelper.GetEditObj(s);
@@ -30,7 +29,7 @@ namespace SampleDataOper
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
 
@@ -42,11 +41,11 @@ namespace SampleDataOper
             }
         }
 
-        public static SampleBaseInfo DeleteSample(string styleId, string user)
+        public static ISampleBaseInfo DeleteSample(string styleId, string user)
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
                     s.Delete(user);
@@ -56,11 +55,11 @@ namespace SampleDataOper
                 else return null;
             }
         }
-        public static SampleBaseInfo AcceptInStorage(string styleId)
+        public static ISampleBaseInfo AcceptInStorage(string styleId)
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
                     s.State = SampleState.在库;
@@ -76,11 +75,11 @@ namespace SampleDataOper
         /// </summary>
         /// <param name="styleId"></param>
         /// <returns></returns>
-        public static SampleBaseInfo PutInStorage(string styleId)
+        public static ISampleBaseInfo PutInStorage(string styleId)
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
                     s.State = SampleState.在库;
@@ -95,11 +94,11 @@ namespace SampleDataOper
         /// </summary>
         /// <param name="styleId"></param>
         /// <returns></returns>
-        public static SampleBaseInfo RequestPutInStorage(string styleId)
+        public static ISampleBaseInfo RequestPutInStorage(string styleId)
         {
             using (SampleContext sc = new SampleContext())
             {
-                SampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
+                ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
                 {
                     s.State = SampleState.待入库;
@@ -110,14 +109,14 @@ namespace SampleDataOper
             }
         }
 
-        public static object GetSampleList(Func<SampleBaseInfo, bool> whereLambda = null, Func<SampleBaseInfo, object> orderbyLamba = null, int PageId = 1, int PageSize = 20)
+        public static object GetSampleList(Func<ISampleBaseInfo, bool> whereLambda = null, Func<ISampleBaseInfo, object> orderbyLamba = null, int PageId = 1, int PageSize = 20)
         {
             if (orderbyLamba == null) orderbyLamba = p => p.State;
             if (whereLambda == null) whereLambda = (p => true);
             using (SampleContext sc = new SampleContext())
             {
                 int count = sc.SampleBaseInfos.Count(whereLambda);
-                List<SampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+                List<ISampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
                 List<object> obj = new List<object>();
                 sampleinfo.ForEach(p =>
                 {
@@ -127,14 +126,14 @@ namespace SampleDataOper
             }
         }
 
-        public static object GetSampleListOrderByDesc(Func<SampleBaseInfo, bool> whereLambda = null, Func<SampleBaseInfo, object> orderbyLamba = null, int PageId = 1, int PageSize = 20)
+        public static object GetSampleListOrderByDesc(Func<ISampleBaseInfo, bool> whereLambda = null, Func<ISampleBaseInfo, object> orderbyLamba = null, int PageId = 1, int PageSize = 20)
         {
             if (orderbyLamba == null) orderbyLamba = p => p.State;
             if (whereLambda == null) whereLambda = (p => true);
             using (SampleContext sc = new SampleContext())
             {
                 int count = sc.SampleBaseInfos.Count(whereLambda);
-                List<SampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+                List<ISampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
                 List<object> obj = new List<object>();
                 sampleinfo.ForEach(p =>
                 {

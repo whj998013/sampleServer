@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using SG.DdApi;
 using SampleDataOper;
-using SampleDataOper.Model;
+
 using SG.Utilities;
 using SG.SessionManage;
+using Model.Sys;
+using IBLL.Sys;
 
 namespace SampleApi.Controllers
 {
@@ -143,7 +145,7 @@ namespace SampleApi.Controllers
         [HttpGet]
         public IHttpActionResult GetLogin()
         {
-            var _user = SessionManage.CurrentUser;
+            User _user = SessionManage.CurrentUser;
             if (_user == null) return NotFound();
             else return Ok(LoginHelp.ReturnUser(_user));
         }

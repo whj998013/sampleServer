@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using SG.Utilities;
 using SampleDataOper;
 using System.IO;
-using SampleDataOper.Model;
 using SG.DdApi;
-
 using DingTalk.Api;
 using DingTalk.Api.Request;
 using DingTalk.Api.Response;
@@ -21,13 +19,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            SampleContext dc = new SampleContext();
-            var re = dc.Users.ToList();
-            re.ForEach(p =>
-            {
-                Console.Write(p.Id);
-            });
-               
+
 
             //DdOperator ddOper = DdOperator.GetDdApi();
             //ddOper.CorpId = "ding99dd341fc99a25eb";
