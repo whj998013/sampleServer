@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
-using IBLL.Sys;
+using SG.Interface.Sys;
 using Model.Sys;
-using IBLL.Sample;
+using SG.Interface.Sample;
 
 
 namespace SampleBLL

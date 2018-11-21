@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBLL.Sys
+namespace SG.Interface.Sys
 {
     public interface IUser: IBaseModel
     {

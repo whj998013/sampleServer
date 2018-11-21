@@ -1,4 +1,4 @@
-﻿namespace IBLL.Sys
+﻿namespace SG.Interface.Sys
 {
     public interface IUserRole:IBaseModel
     {

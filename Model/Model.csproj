@@ -64,9 +64,9 @@
     <Compile Include="Sys\UserRolePermission.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IBLL\IBLL.csproj">
+    <ProjectReference Include="..\IBLL\SG.Interface.csproj">
       <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
-      <Name>IBLL</Name>
+      <Name>SG.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

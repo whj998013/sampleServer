@@ -7,7 +7,7 @@ using System.Web.Http;
 using SampleDataOper;
 using SG.DdApi;
 using SampleBLL;
-using IBLL.Sys;
+using SG.Interface.Sys;
 using Model.Sys;
 
 namespace SampleApi.Controllers.Setting

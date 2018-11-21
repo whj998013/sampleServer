@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBLL.Sample;
+using SG.Interface.Sample;
 using Model.Sample;
 using Model.Product;
 using SampleDataOper;
 using SG.Utilities;
-using IBLL.Product;
+using SG.Interface.Product;
 namespace SampleBLL
 {
     /// <summary>

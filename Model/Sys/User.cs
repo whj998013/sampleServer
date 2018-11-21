@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBLL.Sys;
+using SG.Interface.Sys;
 
 namespace Model.Sys
 {

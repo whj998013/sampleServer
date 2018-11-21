@@ -6,7 +6,7 @@ using SampleDataOper;
 using SampleBLL;
 using SampleBLL.Model;
 using System;
-using IBLL.Sample;
+using SG.Interface.Sample;
 using Model.Sys;
 using Model.Sample;
 using Model.Stock;

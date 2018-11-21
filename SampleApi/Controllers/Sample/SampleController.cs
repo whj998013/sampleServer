@@ -12,8 +12,8 @@ using SG.Utilities;
 using System.Linq.Expressions;
 using SampleBLL;
 using SampleBLL.Model;
-using IBLL.Sample;
-using IBLL.Sys;
+using SG.Interface.Sample;
+using SG.Interface.Sys;
 using Model.Sys;
 
 namespace SampleApi.Controllers.Sample

@@ -1,4 +1,4 @@
-﻿namespace IBLL.Sample
+﻿namespace SG.Interface.Sample
 {
     public interface IStyleFile: IBaseModel
     {

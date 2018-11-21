@@ -9,7 +9,7 @@ using Model.Sample;
 using SG.SessionManage;
 using SampleBLL;
 using SampleBLL.Model;
-using IBLL.Sample;
+using SG.Interface.Sample;
 
 namespace SampleApi.Controllers.Sample
 {

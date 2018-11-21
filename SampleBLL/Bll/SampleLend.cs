@@ -7,8 +7,8 @@ using SG.Utilities;
 using SampleDataOper;
 using Model.Sys;
 using Model.Sample;
-using IBLL.Sample;
-
+using SG.Interface.Sample;
+using SG.Interface;
 namespace SampleBLL
 {
     public class SampleLend

@@ -1,4 +1,4 @@
-﻿namespace IBLL.Stock
+﻿namespace SG.Interface.Stock
 {
     public interface IStock:IBaseModel
     {

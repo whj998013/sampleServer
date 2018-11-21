@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBLL.Sample;
+using SG.Interface.Sample;
 namespace Model.Sample
 {
     /// <summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
-using IBLL.Sys;
+using SG.Interface.Sys;
 using Model.Sys;
 using SG.DdApi;
 using EntityFramework.Extensions;
@@ -21,15 +21,7 @@ namespace SysBLL
         {
             DdOper = oper;
         }
-        public void SyncUserRoleFromDd()
-        {
-            var roleList = GetRoleList("管理系统");
-            UpdateRoles(roleList);
-
-
-
-            
-        }
+ 
 
         /// <summary>
         /// 从钉钉取得指定角色组的所有角色
@@ -59,7 +51,7 @@ namespace SysBLL
         /// 同步数据库角色
         /// </summary>
         /// <param name="roleList"></param>
-        private void UpdateRoles(List<IRole> roleList)
+        public void UpdateRoles(List<IRole> roleList)
         {
            using (SampleContext sc=new SampleContext())
             {
@@ -71,7 +63,6 @@ namespace SysBLL
                     if (reobj == null)
                     {
                         sc.Roles.Add(new Role { RoleId = p.RoleId, Name = p.Name });
-
                     }
                     else
                     {
@@ -81,9 +72,7 @@ namespace SysBLL
                  });
                 sc.SaveChanges();
             };
-            
         }
-                
 
     }
 }

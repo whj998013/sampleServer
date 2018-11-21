@@ -7,7 +7,7 @@ using SampleBLL;
 using SampleDataOper;
 using Model.Sys;
 using Model.Sample;
-using IBLL.Sys;
+using SG.Interface.Sys;
 
 namespace SampleBLL
 {

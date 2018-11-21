@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBLL.Sample
+namespace SG.Interface.Sample
 {
     public interface IProofing: IBaseModel
     {

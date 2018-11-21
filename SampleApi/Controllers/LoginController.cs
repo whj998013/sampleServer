@@ -10,7 +10,7 @@ using SampleDataOper;
 using SG.Utilities;
 using SG.SessionManage;
 using Model.Sys;
-using IBLL.Sys;
+using SG.Interface.Sys;
 
 namespace SampleApi.Controllers
 {

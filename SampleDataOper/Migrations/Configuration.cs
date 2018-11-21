@@ -4,7 +4,7 @@ namespace SampleDataOper.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using IBLL.Sys;
+    using SG.Interface.Sys;
     using Model.Sample;
     using Model.Sys;
      

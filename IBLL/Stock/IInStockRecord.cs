@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBLL.Stock
+namespace SG.Interface.Stock
 {
     public interface IInStockRecord:IBaseModel
     {

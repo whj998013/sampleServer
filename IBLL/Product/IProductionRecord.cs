@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBLL.Product
+namespace SG.Interface.Product
 {
     public interface IProductionRecord:IBaseModel
     {

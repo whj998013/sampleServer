@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Utilities;
 using SampleBLL;
-using IBLL.Sample;
+using SG.Interface.Sample;
 namespace SampleDataOper
 {
     public class SampleOper

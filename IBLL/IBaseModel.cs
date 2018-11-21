@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBLL
+namespace SG.Interface
 {
     public interface IBaseModel
     {
