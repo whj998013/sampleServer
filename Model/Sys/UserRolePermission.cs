@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IBLL.Sys;
 namespace Model.Sys
 {
-   public class UserRolePermission : IUserRolePermission
+   public class UserRolePermission :BaseModel, IUserRolePermission
     {
         public int Id { get; set; }
         public int UserId { get; set; }

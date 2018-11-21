@@ -77,6 +77,8 @@ namespace SampleDataOper
         /// 用户角色权限对应表
         /// </summary>
         public DbSet<UserRolePermission> UserRolePermissions { get; set; }
+
+      
     }
 
 }

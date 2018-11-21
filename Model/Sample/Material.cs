@@ -7,6 +7,7 @@ using IBLL.Sample;
 
 namespace Model.Sample
 {
+
     public  class Material : BaseModel, IMaterial
     {
         public int Id { get; set; }

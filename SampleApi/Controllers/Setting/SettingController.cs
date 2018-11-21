@@ -53,7 +53,8 @@ namespace SampleApi.Controllers.Setting
             UserOper.ClearRoleBeforDate();
 
             //同步工艺人员
-            var re = ddoper.GetRoleUserList(developmentId);
+            RoleProvider roleoper = new RoleProvider(ddoper);
+            var re = roleoper.GetRoleUserList(developmentId);
             re.Result.List.ForEach(p =>
             {
                 if (!UserOper.SetUserRole(p.Userid, UserRoleU.打样开发))
@@ -70,7 +71,7 @@ namespace SampleApi.Controllers.Setting
                 }
             });
             //设置钉钉样衣管理员
-            re = ddoper.GetRoleUserList(adminId);
+            re = roleoper.GetRoleUserList(adminId);
             re.Result.List.ForEach(p =>
             {
                 if (!UserOper.SetUserRole(p.Userid, UserRoleU.样衣管理员))

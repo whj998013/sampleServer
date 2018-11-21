@@ -7,10 +7,10 @@ using IBLL.Sys;
 
 namespace Model.Sys
 {
-    public class Role : IRole
+    public class Role :BaseModel, IRole
     {
         public int Id { get; set; }
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
         public string Name { get; set; }
         public string Note { get; set; }
          

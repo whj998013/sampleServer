@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace IBLL
 {
     public interface ICovertToSon
     {
@@ -13,7 +13,7 @@ namespace Model
     }
     public static class IFToS
     {
-        public static S ToSon<F, S>(this F ObjF) where F : ICovertToSon, new() where S : F, new()
+        public static S ToSon<F, S>(this F ObjF) where F : ICovertToSon where S : F, new()
         {
             if (ObjF == null) return default(S);
             S son = new S();

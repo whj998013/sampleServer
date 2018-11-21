@@ -9,7 +9,7 @@ namespace Model.Sys
     /// <summary>
     /// 权限点
     /// </summary>
-    public class Permission : IPermission
+    public class Permission :BaseModel, IPermission
     {
         public int Id { get; set; }
         /// <summary>

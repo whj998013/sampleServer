@@ -1,9 +1,9 @@
 ﻿namespace IBLL.Sys
 {
-    public interface IUserRole
+    public interface IUserRole:IBaseModel
     {
         int Id { get; set; }
-        int RoleId { get; set; }
+        long RoleId { get; set; }
         int UserId { get; set; }
     }
 }

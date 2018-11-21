@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="Sys\Code.cs" />
-    <Compile Include="IFToS.cs" />
     <Compile Include="Sys\KM.cs" />
     <Compile Include="Product\ProductionRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

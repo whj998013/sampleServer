@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
 using IBLL.Sys;
+using Model.Sys;
+using SG.DdApi;
+using EntityFramework.Extensions;
 
 namespace SysBLL
 {
@@ -13,15 +16,74 @@ namespace SysBLL
     /// </summary>
     public class RoleOper
     {
-        public void AddRole(IRole newRole)
+        private IDdOper DdOper { get; set; }
+        public RoleOper(IDdOper oper)
         {
-            using(SampleContext sdo=new SampleContext())
-            {
-            
-
-
-            }
+            DdOper = oper;
         }
+        public void SyncUserRoleFromDd()
+        {
+            var roleList = GetRoleList("管理系统");
+            UpdateRoles(roleList);
+
+
+
+            
+        }
+
+        /// <summary>
+        /// 从钉钉取得指定角色组的所有角色
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public List<IRole> GetRoleList(string groupName)
+        {
+            List<IRole> roleList = new List<IRole>();
+            RoleProvider rp = new RoleProvider(DdOper);
+            var roles = rp.GetRoles();
+            foreach (var r in roles.Result.List)
+            {
+                if (r.Name == groupName)
+                {
+                    r.Roles.ForEach(p =>
+                    {
+                        roleList.Add(new Role() { Name = p.Name, RoleId = p.Id });
+
+                    });
+                }
+            }
+            return roleList;
+        }
+
+        /// <summary>
+        /// 同步数据库角色
+        /// </summary>
+        /// <param name="roleList"></param>
+        private void UpdateRoles(List<IRole> roleList)
+        {
+           using (SampleContext sc=new SampleContext())
+            {
+                var re = sc.Roles.ToList();
+                re.ForEach(p => p.IsDelete = true);
+                roleList.ForEach(p =>
+                {
+                    var reobj = re.Where(t => t.RoleId == p.RoleId).SingleOrDefault();
+                    if (reobj == null)
+                    {
+                        sc.Roles.Add(new Role { RoleId = p.RoleId, Name = p.Name });
+
+                    }
+                    else
+                    {
+                        reobj.IsDelete = false;
+                        reobj.Name = p.Name;
+                    }
+                 });
+                sc.SaveChanges();
+            };
+            
+        }
+                
 
     }
 }

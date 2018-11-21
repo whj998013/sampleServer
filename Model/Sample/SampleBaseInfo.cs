@@ -17,7 +17,6 @@ namespace Model.Sample
         /// 款号
         /// </summary>
         public string StyleNo { get; set; }
-       
         /// <summary>
         /// 原料成份
         /// </summary>
