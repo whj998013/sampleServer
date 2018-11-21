@@ -12,7 +12,7 @@ using DingTalk.Api.Request;
 using DingTalk.Api.Response;
 using DingTalk;
 using SG.Interface.Sys;
-using Model.Sys;
+using SG.Model.Sys;
 using SysBLL;
 
 namespace ConsoleApp1

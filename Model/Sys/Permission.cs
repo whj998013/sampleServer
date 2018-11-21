@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
-namespace Model.Sys
+namespace SG.Model.Sys
 {
     /// <summary>
     /// 权限点

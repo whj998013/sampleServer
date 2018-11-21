@@ -9,7 +9,7 @@ using SampleDataOper;
 using SampleApi.Controllers.Sample;
 using SampleBLL;
 using SampleBLL.Model;
-using Model.Sys;
+using SG.Model.Sys;
 
 namespace SampleApi.Controllers.Lend
 {

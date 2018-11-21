@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sample;
-namespace Model.Sample
+namespace SG.Model.Sample
 {
    public  class SampleReturn : BaseModel, ISampleReturn
     {

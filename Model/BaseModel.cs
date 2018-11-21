@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface;
 
-namespace Model
+namespace SG.Model
 {
     public abstract class BaseModel :  IBaseModel
     {

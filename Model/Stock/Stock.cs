@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Stock;
-namespace Model.Stock
+namespace SG.Model.Stock
 {
     /// <summary>
     /// 库存记录

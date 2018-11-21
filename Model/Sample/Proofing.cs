@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sample;
 
-namespace Model.Sample
+namespace SG.Model.Sample
 {
     /// <summary>
     /// 打样信息表

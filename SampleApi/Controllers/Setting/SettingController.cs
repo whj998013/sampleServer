@@ -8,7 +8,7 @@ using SampleDataOper;
 using SG.DdApi;
 using SampleBLL;
 using SG.Interface.Sys;
-using Model.Sys;
+using SG.Model.Sys;
 
 namespace SampleApi.Controllers.Setting
 {

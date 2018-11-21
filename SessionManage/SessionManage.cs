@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.SessionState;
 using SampleBLL;
-using Model.Sys;
+using SG.Model.Sys;
 namespace SG.SessionManage
 {
     public static class SessionManage

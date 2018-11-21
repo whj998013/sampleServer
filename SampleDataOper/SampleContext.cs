@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Model.Product;
-using Model.Sample;
-using Model.Stock;
-using Model.Sys;
+using SG.Model.Product;
+using SG.Model.Sample;
+using SG.Model.Stock;
+using SG.Model.Sys;
 
 namespace SampleDataOper
 {

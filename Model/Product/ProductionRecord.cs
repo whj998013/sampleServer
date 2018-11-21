@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Product;
 
-namespace Model.Product
+namespace SG.Model.Product
 {
     /// <summary>
     /// 样衣的大货生产记录

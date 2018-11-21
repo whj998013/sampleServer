@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SampleDataOper;
-using Model.Sample;
+using SG.Model.Sample;
 using SG.SessionManage;
 using SampleBLL;
 using SampleBLL.Model;

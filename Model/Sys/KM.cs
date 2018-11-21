@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
 
-namespace Model.Sys
+namespace SG.Model.Sys
 {
     /// <summary>
     /// SampleInfo为样品信息，SampleLend为借出单，Stock为库存单

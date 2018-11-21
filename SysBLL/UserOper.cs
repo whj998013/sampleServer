@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
 using SG.Interface.Sample;
-using Model.Sys;
+using SG.Model.Sys;
 using SG.Interface.Sys;
 
 namespace SysBLL

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
-using Model.Sys;
+using SG.Model.Sys;
 using SampleDataOper;
 using SG.DdApi;
 namespace SysBLL

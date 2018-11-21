@@ -7,10 +7,10 @@ using SampleBLL;
 using SampleBLL.Model;
 using System;
 using SG.Interface.Sample;
-using Model.Sys;
-using Model.Sample;
-using Model.Stock;
-using Model.Product;
+using SG.Model.Sys;
+using SG.Model.Sample;
+using SG.Model.Stock;
+using SG.Model.Product;
 
 namespace SampleBLL
 {

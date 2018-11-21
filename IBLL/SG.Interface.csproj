@@ -7,11 +7,12 @@
     <ProjectGuid>{D89EFAD8-9536-42C5-B9B3-902E3ED88AFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IBLL</RootNamespace>
-    <AssemblyName>IBLL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>SG.Interface</RootNamespace>
+    <AssemblyName>SG.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,7 @@
     <Compile Include="Stock\IInStockRecord.cs" />
     <Compile Include="Stock\IStock.cs" />
     <Compile Include="Sys\ICode.cs" />
+    <Compile Include="Sys\IGetUserInfo.cs" />
     <Compile Include="Sys\IKm.cs" />
     <Compile Include="Sys\IPermission.cs" />
     <Compile Include="Sys\IRole.cs" />

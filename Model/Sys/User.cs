@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
 
-namespace Model.Sys
+namespace SG.Model.Sys
 {
     public class User : BaseModel, IUser
     {

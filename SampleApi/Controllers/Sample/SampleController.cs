@@ -14,7 +14,7 @@ using SampleBLL;
 using SampleBLL.Model;
 using SG.Interface.Sample;
 using SG.Interface.Sys;
-using Model.Sys;
+using SG.Model.Sys;
 
 namespace SampleApi.Controllers.Sample
 {

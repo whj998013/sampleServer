@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SampleDataOper;
 using SG.Interface.Sys;
-using Model.Sys;
+using SG.Model.Sys;
 using SG.Interface.Sample;
 
 

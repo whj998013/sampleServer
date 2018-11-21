@@ -5,8 +5,8 @@ namespace SampleDataOper.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using SG.Interface.Sys;
-    using Model.Sample;
-    using Model.Sys;
+    using SG.Model.Sample;
+    using SG.Model.Sys;
      
 
     internal sealed class Configuration : DbMigrationsConfiguration<SampleDataOper.SampleContext>

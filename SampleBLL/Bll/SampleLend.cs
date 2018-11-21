@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Utilities;
 using SampleDataOper;
-using Model.Sys;
-using Model.Sample;
+using SG.Model.Sys;
+using SG.Model.Sample;
 using SG.Interface.Sample;
 using SG.Interface;
 namespace SampleBLL
