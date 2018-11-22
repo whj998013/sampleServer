@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Sys
 {
-    public interface IRole:IBaseModel
+    public interface IRole
     {
         int Id { get; set; }
         string Name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace SG.Interface.Sys
 {
-    public interface IUser: IBaseModel
+    public interface IUser
     {
         string Avatar { get; set; }
         string DdId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Sample
 {
-    public interface ISampleLendout: IBaseModel
+    public interface ISampleLendout
     {
         string DdId { get; set; }
         int Id { get; set; }

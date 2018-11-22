@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Stock
 {
-    public interface IStock:IBaseModel
+    public interface IStock
     {
         string Color { get; set; }
         int Id { get; set; }

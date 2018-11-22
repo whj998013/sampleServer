@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Sample
 {
-    public interface ISampleReturn: IBaseModel
+    public interface ISampleReturn
     {
         int Id { get; set; }
         string ReturnNo { get; set; }

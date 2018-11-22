@@ -13,27 +13,23 @@ namespace SysBLL
     public class UserOper
     {
 
-        public UserOper()
-        {
-
-        }
 
         public static User GetUser(string Ddid)
         {
             return new SampleContext().Users.SingleOrDefault(p => p.DdId == Ddid);
         }
 
-     
-
-        public static void AddUser(User u)
+       
+        public void AddUser(User user)
         {
-            using(SampleContext sc=new SampleContext())
+          
+            using (SampleContext sc = new SampleContext())
             {
-                u.SetCreateUser("system");
-                sc.Users.Add(u);
+                user.SetCreateUser("system");
+                sc.Users.Add(user);
                 sc.SaveChanges();
             }
         }
- 
+
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="Stock\IInStockRecord.cs" />
     <Compile Include="Stock\IStock.cs" />
     <Compile Include="Sys\ICode.cs" />
+    <Compile Include="Sys\IGetRoles.cs" />
     <Compile Include="Sys\IGetUserInfo.cs" />
     <Compile Include="Sys\IKm.cs" />
     <Compile Include="Sys\IPermission.cs" />

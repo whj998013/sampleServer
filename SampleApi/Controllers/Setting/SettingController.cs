@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using SampleDataOper;
 using SG.DdApi;
+using SG.DdApi.Sys;
 using SampleBLL;
 using SG.Interface.Sys;
 using SG.Model.Sys;
@@ -55,7 +56,7 @@ namespace SampleApi.Controllers.Setting
             //同步工艺人员
             RoleProvider roleoper = new RoleProvider(ddoper);
             var re = roleoper.GetRoleUserList(developmentId);
-            re.Result.List.ForEach(p =>
+            re.ForEach(p =>
             {
                 if (!UserOper.SetUserRole(p.Userid, UserRoleU.打样开发))
                 {
@@ -72,7 +73,7 @@ namespace SampleApi.Controllers.Setting
             });
             //设置钉钉样衣管理员
             re = roleoper.GetRoleUserList(adminId);
-            re.Result.List.ForEach(p =>
+            re.ForEach(p =>
             {
                 if (!UserOper.SetUserRole(p.Userid, UserRoleU.样衣管理员))
                 {

@@ -2,7 +2,7 @@
 
 namespace SG.Interface.Stock
 {
-    public interface IInStockRecord:IBaseModel
+    public interface IInStockRecord
     {
         int Id { get; set; }
         DateTime? InStockDate { get; set; }

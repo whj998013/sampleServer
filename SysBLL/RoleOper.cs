@@ -16,37 +16,8 @@ namespace SysBLL
     /// </summary>
     public class RoleOper
     {
-        private IDdOper DdOper { get; set; }
-        public RoleOper(IDdOper oper)
-        {
-            DdOper = oper;
-        }
  
-
-        /// <summary>
-        /// 从钉钉取得指定角色组的所有角色
-        /// </summary>
-        /// <param name="groupName"></param>
-        /// <returns></returns>
-        public List<IRole> GetRoleList(string groupName)
-        {
-            List<IRole> roleList = new List<IRole>();
-            RoleProvider rp = new RoleProvider(DdOper);
-            var roles = rp.GetRoles();
-            foreach (var r in roles.Result.List)
-            {
-                if (r.Name == groupName)
-                {
-                    r.Roles.ForEach(p =>
-                    {
-                        roleList.Add(new Role() { Name = p.Name, RoleId = p.Id });
-
-                    });
-                }
-            }
-            return roleList;
-        }
-
+             
         /// <summary>
         /// 同步数据库角色
         /// </summary>

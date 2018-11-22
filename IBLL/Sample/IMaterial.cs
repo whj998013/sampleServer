@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Sample
 {
-    public interface IMaterial: IBaseModel
+    public interface IMaterial
     {
         string CnName { get; set; }
         string EnName { get; set; }

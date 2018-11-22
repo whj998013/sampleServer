@@ -2,7 +2,7 @@
 
 namespace SG.Interface.Product
 {
-    public interface IProductionRecord:IBaseModel
+    public interface IProductionRecord
     {
         string ClientName { get; set; }
         int Id { get; set; }

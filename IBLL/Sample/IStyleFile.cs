@@ -1,6 +1,6 @@
 ﻿namespace SG.Interface.Sample
 {
-    public interface IStyleFile: IBaseModel
+    public interface IStyleFile
     {
         string DisplayName { get; set; }
         string FileName { get; set; }

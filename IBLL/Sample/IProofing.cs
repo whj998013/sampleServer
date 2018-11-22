@@ -2,7 +2,7 @@
 
 namespace SG.Interface.Sample
 {
-    public interface IProofing: IBaseModel
+    public interface IProofing
     {
         int Id { get; set; }
         string MachineType { get; set; }

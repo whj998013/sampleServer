@@ -2,7 +2,7 @@
 
 namespace SG.Interface.Sample
 {
-    public interface ILendRecord: IBaseModel
+    public interface ILendRecord
     {
         string DdId { get; set; }
         int Id { get; set; }

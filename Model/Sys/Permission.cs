@@ -9,13 +9,13 @@ namespace SG.Model.Sys
     /// <summary>
     /// 权限点
     /// </summary>
-    public class Permission :BaseModel, IPermission
+    public class Permission : IPermission
     {
         public int Id { get; set; }
         /// <summary>
         /// 权限Key
         /// </summary>
-        public int PermissionId { get; set; }
+        public string Key { get; set; }
         /// <summary>
         /// 上级权限点
         /// </summary>
@@ -29,9 +29,6 @@ namespace SG.Model.Sys
         /// </summary>
         public string CnName { get; set; }
         
-        public string Note { get; set; }
-
-
     }
       
 }
