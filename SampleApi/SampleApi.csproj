@@ -107,7 +107,8 @@
     <Compile Include="Controllers\Sample\MySampleController.cs" />
     <Compile Include="Controllers\Sample\PrintController.cs" />
     <Compile Include="Controllers\Sample\SampleController.cs" />
-    <Compile Include="Controllers\Setting\SettingController.cs" />
+    <Compile Include="Controllers\Setting\RoleController.cs" />
+    <Compile Include="Controllers\Setting\SampleController.cs" />
     <Compile Include="Filter\Author.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

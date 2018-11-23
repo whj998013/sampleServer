@@ -19,7 +19,7 @@ namespace SG.Model.Sys
         /// <summary>
         /// 上级权限点
         /// </summary>
-        public int UpId { get; set; }
+        public string UpKey { get; set; }
         /// <summary>
         /// 权限名 sample_new_add,样品_新样品_新增
         /// </summary>

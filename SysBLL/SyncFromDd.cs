@@ -13,6 +13,10 @@ namespace SysBLL
 {
     public class SyncFromDd
     {
+        /// <summary>
+        /// 从钉钉同步角色和用户
+        /// </summary>
+        /// <param name="DdOper"></param>
         public static void SyncUserRole(IDdOper DdOper)
         {
             SampleContext sc = new SampleContext();
@@ -36,8 +40,8 @@ namespace SysBLL
                                         var user = uProvider.GetUserInfo(u.Userid);
                                         if (userList.Count(c => c.DdId == u.Userid) == 0)
                                         {
-                        //没有该用户，添加该用户
-                        uOper.AddUser(user);
+                                            //没有该用户，添加该用户
+                                            uOper.AddUser(user);
                                         }
                                         urList.Add(new UserRole
                                         {

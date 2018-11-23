@@ -7,7 +7,7 @@ namespace SampleDataOper.Migrations
     using SG.Interface.Sys;
     using SG.Model.Sample;
     using SG.Model.Sys;
-     
+
 
     internal sealed class Configuration : DbMigrationsConfiguration<SampleDataOper.SampleContext>
     {
@@ -22,82 +22,26 @@ namespace SampleDataOper.Migrations
             //  This method will be called after migrating to the latest version.
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            context.Codes.AddOrUpdate(
-                m => m.Id,
-                new Code { Id = 1, Type = CodeType.Color, CodeName = "ºìÉ«" },
-                new Code { Id = 2, Type = CodeType.Color, CodeName = "»ÆÉ«" },
-                new Code { Id = 3, Type = CodeType.Color, CodeName = "°×É«" },
-                new Code { Id = 4, Type = CodeType.Color, CodeName = "ºÚÉ«" },
-                new Code { Id = 5, Type = CodeType.Color, CodeName = "À¶É«" },
-                new Code { Id = 6, Type = CodeType.Color, CodeName = "ÂÌÉ«" },
-                new Code { Id = 7, Type = CodeType.Color, CodeName = "×ÏÉ«" },
-                new Code { Id = 8, Type = CodeType.Size, CodeName = "XL" },
-                new Code { Id = 9, Type = CodeType.Size, CodeName = "L" },
-                new Code { Id = 10, Type = CodeType.Size, CodeName = "M" },
-                new Code { Id = 11, Type = CodeType.Size, CodeName = "S" },
-                new Code { Id = 12, Type = CodeType.Size, CodeName = "XS" },
-                new Code { Id = 13, Type = CodeType.Size, CodeName = "·ÊÆÅÂë" },
-                new Code { Id = 14, Type = CodeType.Gauge, CodeName = "´ÖÕë" },
-                new Code { Id = 15, Type = CodeType.Gauge, CodeName = "Ï¸Õë" },
-                new Code { Id = 16, Type = CodeType.Gauge, CodeName = "3G" },
-                new Code { Id = 17, Type = CodeType.Gauge, CodeName = "5G" },
-                new Code { Id = 18, Type = CodeType.Gauge, CodeName = "7G" },
-                new Code { Id = 19, Type = CodeType.Gauge, CodeName = "12G" },
-                new Code { Id = 20, Type = CodeType.Gauge, CodeName = "14G" },
-                new Code { Id = 21, Type = CodeType.Material, CodeName = "ÃÞ" },
-                new Code { Id = 22, Type = CodeType.Material, CodeName = "ÑòÈÞ" },
-                new Code { Id = 23, Type = CodeType.Material, CodeName = "ÑòÃ«" },
-                new Code { Id = 24, Type = CodeType.Material, CodeName = "½ðÒøÏß" },
-                new Code { Id = 25, Type = CodeType.Tag, CodeName = "ÄÐ×°", Value1 = "#7B68EE" },
-                new Code { Id = 26, Type = CodeType.Tag, CodeName = "Å®×°", Value1 = "#2F4F4F" },
-                new Code { Id = 27, Type = CodeType.Tag, CodeName = "Í¯×°", Value1 = "#C71585" },
-                new Code { Id = 28, Type = CodeType.Tag, CodeName = "´º¼¾", Value1 = "#FFA2D3" },
-                new Code { Id = 29, Type = CodeType.Tag, CodeName = "Çï¼¾", Value1 = "#DC143C" },
-                new Code { Id = 30, Type = CodeType.Tag, CodeName = "¶¬¼¾", Value1 = "#48D1CC" },
-                new Code { Id = 31, Type = CodeType.Tag, CodeName = "Á÷ÐÐ¿î", Value1 = "#A52A2A" },
-                new Code { Id = 32, Type = CodeType.Tag, CodeName = "»ù±¾¿î", Value1 = "#8FBC8F" },
-                new Code { Id = 33, Type = CodeType.Tag, CodeName = "Å·ÃÀ·ç¸ñ", Value1 = "#00FF00" },
-                new Code { Id = 34, Type = CodeType.Kinds, CodeName = "³õÑù" },
-                new Code { Id = 35, Type = CodeType.Kinds, CodeName = "¿ª·¢Ñù" },
-                new Code { Id = 36, Type = CodeType.Kinds, CodeName = "Éú²úÑù" },
-                new Code { Id = 37, Type = CodeType.Kinds, CodeName = "ºÏÍ¬Ñù" },
-                new Code { Id = 38, Type = CodeType.Kinds, CodeName = "ÍÆÏúÑùÁôµ×" },
-                new Code { Id = 39, Type = CodeType.Kinds, CodeName = "¸´°ì" },
-                new Code { Id = 40, Type = CodeType.Kinds, CodeName = "Íâ¹º" },
-                new Code { Id = 41, Type = CodeType.Size, CodeName = "¾ùÂë" }
-                );
-            context.Materials.AddOrUpdate(m => m.Id,
-                new Material { Id = 1, CnName = "ëæÂÚ", EnName = "Acrylic" },
-                new Material { Id = 2, CnName = "ÄáÁú", EnName = "Nylon" },
-                new Material { Id = 3, CnName = "ÍÃÈÞ", EnName = "Angora" },
-                new Material { Id = 4, CnName = "ÑòÃ«", EnName = "Wool" },
-                new Material { Id = 5, CnName = "ÑòÈÞ", EnName = "Cashmere" },
-                new Material { Id = 6, CnName = "½ðÒøÏß", EnName = "Lurex" },
-                new Material { Id = 7, CnName = "½õÂÚ", EnName = "Polyamide" },
-                new Material { Id = 8, CnName = "ÑòÍÕÃ«", EnName = "Alpaca" },
-                new Material { Id = 9, CnName = "ÃÞ", EnName = "Cotton" },
-                new Material { Id = 10, CnName = "ÈËÔìË¿", EnName = "Rayon" },
-                new Material { Id = 11, CnName = "ÍÕÈÞ", EnName = "Camelhair" },
-                new Material { Id = 12, CnName = "ÜÑÂé", EnName = "Famine" },
-                new Material { Id = 13, CnName = "ÍÃÃ«", EnName = "Rabbithair" },
-                new Material { Id = 14, CnName = "ÕæË¿", EnName = "Silk" },
-                new Material { Id = 15, CnName = "´óÂé", EnName = "Hemp" },
-                new Material { Id = 16, CnName = "°±ÂÚ", EnName = "Spandex" },
-                new Material { Id = 17, CnName = "»ÆÂé", EnName = "Jute" },
-                new Material { Id = 18, CnName = "µÓÂÚ", EnName = "Polyester" },
-                new Material { Id = 19, CnName = "ÌìË¿", EnName = "Tencel" },
-                new Material { Id = 20, CnName = "ÑÇÂé", EnName = "Unen" },
-                new Material { Id = 21, CnName = "×õ²ÏË¿", EnName = "Tussahsilk" },
-                new Material { Id = 22, CnName = "Ñò×ÐÃ«", EnName = "Lambswool" },
-                new Material { Id = 23, CnName = "Õ³½º", EnName = "Viscose" },
-                new Material { Id = 24, CnName = "À³¿¨", EnName = "Lycra" },
-                new Material { Id = 25, CnName = "Âíº£Ã«", EnName = "Mohair" },
-                new Material { Id = 26, CnName = "Äª´ú¶û", EnName = "Model" },
-                new Material { Id = 27, CnName = "É£²ÏË¿", EnName = "Mulberrysilk" },
-                new Material { Id = 28, CnName = "êóÅ£Ã«", EnName = "Yarkhair" },
-                new Material { Id = 29, CnName = "´ó¶¹µ°°×ÏËÎ¬", EnName = "Soybeanproteinfibre" }
+            int i = 1;
+            DataDefaultList.GetCodeList().ForEach(p =>
+            {
+                p.Id = i++;
+                context.Codes.AddOrUpdate(m => m.Id,p);
+            });
 
-            );
+            i = 1;
+            DataDefaultList.GetMaterialList().ForEach(p =>
+            {
+                p.Id = i++;
+                context.Materials.AddOrUpdate(m => m.Id,p);
+            });
+          
+            i = 1;
+            DataDefaultList.GetPermissionsList().ForEach(p =>
+            {
+                p.Id = i++;
+                context.Permissions.AddOrUpdate(m => m.Id,p );
+            });
             context.SaveChanges();
         }
     }
