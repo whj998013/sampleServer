@@ -4,6 +4,7 @@ namespace SG.Interface
 {
     public interface IBaseModel
     {
+        
         DateTime? CreateDate { get; set; }
         string CreateUser { get; set; }
         DateTime? EditDate { get; set; }

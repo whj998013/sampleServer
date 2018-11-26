@@ -11,7 +11,7 @@ namespace SG.Model.Sys
     {
         public int Id { get; set; }
         public long RoleId { get; set; }
-        public string Name { get; set; }
+        public string RoleName { get; set; }
         public string Note { get; set; }
          
     }

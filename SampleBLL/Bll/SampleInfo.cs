@@ -92,7 +92,7 @@ namespace SampleBLL
                     FileType = filetype,
                     DisplayName = displayName
                 };
-                f.SetCreateUser(currentUser.Name);
+                f.SetCreateUser(currentUser.UserName);
                 Files.Add(f);
             }
             else
@@ -107,7 +107,7 @@ namespace SampleBLL
             if (file != null)
             {
                 file.IsDelete = true;
-                file.SetEditUser(currentUser.Name);
+                file.SetEditUser(currentUser.UserName);
                 return true;
             }
             else return false;
@@ -200,15 +200,15 @@ namespace SampleBLL
                         }
                     });
                     Files.RemoveAll(p => p.IsDelete);
-                    BaseInfo.SetCreateUser(currentUser.Name);
+                    BaseInfo.SetCreateUser(currentUser.UserName);
                     sc.SampleBaseInfos.Add(BaseInfo);
                     //写入打样信息
-                    ProofingInfo.SetCreateUser(currentUser.Name);
+                    ProofingInfo.SetCreateUser(currentUser.UserName);
                     sc.Proofings.Add(ProofingInfo);
                     //写入文件信息
                     sc.StyleFiles.AddRange(Files);
                     //写入大货信息
-                    ProductInfo.SetCreateUser(currentUser.Name);
+                    ProductInfo.SetCreateUser(currentUser.UserName);
                     sc.ProductionRecords.Add(ProductInfo);
 
                 }
@@ -224,9 +224,9 @@ namespace SampleBLL
 
                     });
 
-                    BaseInfo.SetEditUser(currentUser.Name);
-                    ProofingInfo.SetEditUser(currentUser.Name);
-                    ProductInfo.SetEditUser(currentUser.Name);
+                    BaseInfo.SetEditUser(currentUser.UserName);
+                    ProofingInfo.SetEditUser(currentUser.UserName);
+                    ProductInfo.SetEditUser(currentUser.UserName);
                     sc.Entry(BaseInfo).State = System.Data.Entity.EntityState.Modified;
                     if (ProofingInfo.Id > 0) sc.Entry(ProofingInfo).State = System.Data.Entity.EntityState.Modified;
                     else sc.Entry(ProofingInfo).State = System.Data.Entity.EntityState.Added;

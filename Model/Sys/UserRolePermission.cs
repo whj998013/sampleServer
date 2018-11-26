@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using SG.Interface.Sys;
 namespace SG.Model.Sys
 {
-   public class UserRolePermission :BaseModel, IUserRolePermission
+    public class UserRolePermission : BaseModel, IUserRolePermission
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
-        public int PermissionId { get; set; }
+        /// <summary>
+        /// PermissionKey
+        /// </summary>
+        public string Key { get; set; }
+        public long RoleId { get; set; }
+        public string DdId { get; set; }
     }
 }

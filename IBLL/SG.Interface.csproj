@@ -56,8 +56,6 @@
     <Compile Include="Stock\IInStockRecord.cs" />
     <Compile Include="Stock\IStock.cs" />
     <Compile Include="Sys\ICode.cs" />
-    <Compile Include="Sys\IGetRoles.cs" />
-    <Compile Include="Sys\IGetUserInfo.cs" />
     <Compile Include="Sys\IKm.cs" />
     <Compile Include="Sys\IPermission.cs" />
     <Compile Include="Sys\IRole.cs" />
@@ -65,6 +63,11 @@
     <Compile Include="Sys\IUser.cs" />
     <Compile Include="Sys\IUserRole.cs" />
     <Compile Include="Sys\IUserRolePermission.cs" />
+    <Compile Include="Sys\UserRolePermission\IRolePermission.cs" />
+    <Compile Include="Sys\UserRolePermission\IUserPermission.cs" />
+    <Compile Include="Sys\User\INameId.cs" />
+    <Compile Include="Sys\User\IUserInfo.cs" />
+    <Compile Include="Sys\User\IUserLoginInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

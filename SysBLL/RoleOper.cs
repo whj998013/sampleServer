@@ -33,12 +33,12 @@ namespace SysBLL
                     var reobj = re.Where(t => t.RoleId == p.RoleId).SingleOrDefault();
                     if (reobj == null)
                     {
-                        sc.Roles.Add(new Role { RoleId = p.RoleId, Name = p.Name });
+                        sc.Roles.Add(new Role { RoleId = p.RoleId, RoleName = p.RoleName });
                     }
                     else
                     {
                         reobj.IsDelete = false;
-                        reobj.Name = p.Name;
+                        reobj.RoleName = p.RoleName;
                     }
                  });
                 sc.SaveChanges();

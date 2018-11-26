@@ -22,7 +22,11 @@ namespace SampleDataOper.Migrations
               new Permission {  CnName = "已入库样衣管理", Name = "SampleMange_InStock_MangeInStock", Key = "P020101", UpKey = "P020100" },
               new Permission {  CnName = "入库审批", Name = "SampleMange_InStock_PassInStock", Key = "P020102", UpKey = "P020100" },
               new Permission {  CnName = "借用管理", Name = "SampleMange_LendStock", Key = "P020200", UpKey = "P020000" },
-              new Permission {  CnName = "系统设置", Name = "SampleMange_SystemMange", Key = "P020300", UpKey = "P020000" }
+              new Permission {  CnName = "系统设置", Name = "SampleMange_SystemMange", Key = "P030000", UpKey = "P000000" },
+              new Permission {  CnName = "色色权限配置", Name = "SampleMange_SystemMange", Key = "P030100", UpKey = "P030000" },
+              new Permission {  CnName = "样衣系统配置", Name = "SampleMange_SystemMange", Key = "P030300", UpKey = "P030000" }
+
+
             };
            
         }

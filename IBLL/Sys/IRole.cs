@@ -2,9 +2,7 @@
 {
     public interface IRole
     {
-        int Id { get; set; }
-        string Name { get; set; }
-        string Note { get; set; }
+        string RoleName { get; set; }
         long RoleId { get; set; }
     }
 }

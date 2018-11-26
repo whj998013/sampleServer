@@ -36,10 +36,10 @@ namespace SampleBLL
                     {
                         StyleId = style.StyleId,
                         DdId = _user.DdId,
-                        UserName = _user.Name,
+                        UserName = _user.UserName,
                         UserDept = _user.DepartName,
                     };
-                    lr.SetCreateUser(_user.Name);
+                    lr.SetCreateUser(_user.UserName);
                     sc.LendRecords.Add(lr);
                 }
                 else return false;

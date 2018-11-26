@@ -77,7 +77,7 @@ namespace SampleApi.Controllers.Sample
             string id = (string)obj.styleId;
             if (id != "")
             {
-                var sample = SampleOper.DeleteSample(id, SessionManage.CurrentUser.Name);
+                var sample = SampleOper.DeleteSample(id, SessionManage.CurrentUser.UserName);
                 //发钉钉消息
 
                 if (sample != null) return Ok("ok");

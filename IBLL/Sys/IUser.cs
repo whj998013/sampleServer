@@ -1,20 +1,10 @@
 ﻿using System;
-
+using SG.Interface.Sys;
 namespace SG.Interface.Sys
 {
-    public interface IUser
+    public interface IUser:IUserInfo,IUserLoginInfo
     {
-        string Avatar { get; set; }
-        string DdId { get; set; }
-        string DepartName { get; set; }
-        int Id { get; set; }
-        DateTime? LoginOverTime { get; set; }
-        string LoginStr { get; set; }
-        string Name { get; set; }
-        string PassWord { get; set; }
-        string Ticket { get; set; }
-        string UserName { get; set; }
-    }
+      }
     public enum UserRoleU
     {
         一般用户 = 0,

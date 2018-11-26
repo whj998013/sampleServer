@@ -46,9 +46,9 @@ namespace SysBLL
                                         urList.Add(new UserRole
                                         {
                                             RoleId = role.RoleId,
-                                            UserId = u.Userid,
-                                            RoleName = role.Name,
-                                            UserName = user.Name,
+                                            DdId = u.Userid,
+                                            RoleName = role.RoleName,
+                                            UserName = user.UserName,
                                         });
                                     });
                 }

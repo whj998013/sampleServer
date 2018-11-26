@@ -9,6 +9,7 @@ namespace SG.Model
 {
     public abstract class BaseModel :  IBaseModel
     {
+        
         public string Remark { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? EditDate { get; set; }

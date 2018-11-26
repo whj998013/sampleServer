@@ -1,10 +1,7 @@
 ﻿namespace SG.Interface.Sys
 {
-    public interface IUserRolePermission
+    public interface IUserRolePermission: IRolePermission,IUserPermission
     {
-        int Id { get; set; }
-        int PermissionId { get; set; }
-        int RoleId { get; set; }
-        int UserId { get; set; }
+       
     }
 }

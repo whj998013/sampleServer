@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using SG.Utilities;
 namespace SampleApi.Controllers.Setting
 {
     public class RoleSettingController : ApiController
@@ -19,6 +19,15 @@ namespace SampleApi.Controllers.Setting
             SyncFromDd.SyncUserRole(ddoper);
 
             return Ok();
+        }
+
+        public IHttpActionResult GetUserRoleData()
+        {
+           
+            var urp =new UrpOper().GetList();
+            var plist = new PermissionOper().GetList();
+            
+            return Ok(new { urp, plist });
         }
     }
 }

@@ -11,9 +11,9 @@ namespace SG.Model.Sys
     public class User : BaseModel, IUser
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string Account { get; set; }
         public string PassWord { get; set; }
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string DepartName { get; set; }
         public string DdId { get; set; }
         public string Avatar { get; set; }

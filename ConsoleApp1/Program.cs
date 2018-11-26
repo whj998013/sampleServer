@@ -23,10 +23,10 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-           // DdApi();
+            // DdApi();
 
-           var bb=new SampleContext().Roles.Update(p => new Role { IsDelete = false }).ToString();
-            Console.WriteLine(bb);
+            var re = new UrpOper().GetList();
+
             Console.ReadKey();
 
         }

@@ -170,7 +170,7 @@ namespace SampleApi.Controllers.Lend
             User user = SessionManage.CurrentUser;
             LendIdList.ForEach(p =>
             {
-                SampleLend.DoInstroage(p, user.Name);
+                SampleLend.DoInstroage(p, user.UserName);
             });
             return Ok();
         }
@@ -185,7 +185,7 @@ namespace SampleApi.Controllers.Lend
             User user = SessionManage.CurrentUser;
             lendId.ForEach(p =>
             {
-                SampleLend.DoBackLend(p, user.Name);
+                SampleLend.DoBackLend(p, user.UserName);
             });
             return Ok();
         }
@@ -201,7 +201,7 @@ namespace SampleApi.Controllers.Lend
             User user = SessionManage.CurrentUser;
             LendIdList.ForEach(p =>
             {
-                SampleLend.DoReturnLend(p, user.Name);
+                SampleLend.DoReturnLend(p, user.UserName);
             });
             return Ok();
         }

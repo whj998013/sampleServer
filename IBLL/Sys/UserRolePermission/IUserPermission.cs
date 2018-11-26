@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SG.Interface.Sys
 {
-    public interface IGetUserInfo
+   public interface IUserPermission
     {
-        IUser GetUserInfo(string DdId);
+        string Key { get; set; }
+        string DdId { get; set; }
+     
     }
 }

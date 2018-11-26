@@ -36,7 +36,7 @@ namespace SampleApi.Controllers
                     User nuser = new User()
                     {
                         DdId = ddUser.Userid,
-                        Name = ddUser.Name,
+                        UserName = ddUser.Name,
                         DepartName = ddoper.GetDeptName(ddUser.Department[0]),
                         LoginStr = LoginHelp.GetLoginHashStr(ddUser),
                         Avatar = ddUser.Avatar,
@@ -55,9 +55,9 @@ namespace SampleApi.Controllers
                     _user.LoginStr = LoginHelp.GetLoginHashStr(ddUser);
                     _user.LoginOverTime = DateTime.Now.AddDays(1);
                     ///比较是否有信息更新
-                    if (_user.Name != ddUser.Name || _user.DepartName != ddoper.GetDeptName(ddUser.Department[0]) || _user.Avatar != ddUser.Avatar)
+                    if (_user.UserName != ddUser.Name || _user.DepartName != ddoper.GetDeptName(ddUser.Department[0]) || _user.Avatar != ddUser.Avatar)
                     {
-                        _user.Name = ddUser.Name;
+                        _user.UserName = ddUser.Name;
                         _user.DepartName = ddoper.GetDeptName(ddUser.Department[0]);
                         _user.Avatar = ddUser.Avatar;
                     }
@@ -125,7 +125,7 @@ namespace SampleApi.Controllers
             {
                 using (SampleContext dc = new SampleContext())
                 {
-                    _user = dc.Users.Where(p => p.UserName == name && p.PassWord == pwd).FirstOrDefault();
+                    _user = dc.Users.Where(p => p.Account == name && p.PassWord == pwd).FirstOrDefault();
 
                 }
                 if (_user != null)
@@ -163,9 +163,9 @@ namespace SampleApi.Controllers
         public static object ReturnUser(User _user)
         {
             bool isLimt = !SampleConfig.GetSampleConfig().EnableLimtView || _user.Role != UserRoleU.一般用户;
-            _user.Ticket = DESEncrypt.Encrypt((_user.Name + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
+            _user.Ticket = DESEncrypt.Encrypt((_user.UserName + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
             bool allSampleCanLend = SampleConfig.GetSampleConfig().AllSampleCanLend;
-            return new { _user.Name, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt, allSampleCanLend };
+            return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt, allSampleCanLend };
         }
 
 

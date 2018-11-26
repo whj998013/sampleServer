@@ -9,7 +9,7 @@ namespace SG.Model.Sys
     public class UserRole : BaseModel, IUserRole
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string DdId { get; set; }
         public string UserName { get; set; }
         public long RoleId { get; set; }
         public string RoleName { get; set; }

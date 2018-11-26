@@ -23,7 +23,7 @@ namespace SysBLL
                 re.ForEach(p => p.IsDelete = true);
                 urList.ForEach(u =>
                 {
-                    var ur = re.SingleOrDefault(p => p.UserId == u.UserId && p.RoleId == u.RoleId);
+                    var ur = re.SingleOrDefault(p => p.DdId == u.DdId && p.RoleId == u.RoleId);
                     if (ur == null)
                     {
                         sc.UserRoles.Add((UserRole)u);
