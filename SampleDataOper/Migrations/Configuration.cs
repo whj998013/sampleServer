@@ -23,6 +23,12 @@ namespace SampleDataOper.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             int i = 1;
+            context.Roles.AddOrUpdate(m=>m.RoleId, new Role
+            {
+                RoleId = 0,
+                RoleName ="Ä¬ÈÏÓÃ»§"
+
+            });
             DataDefaultList.GetCodeList().ForEach(p =>
             {
                 p.Id = i++;

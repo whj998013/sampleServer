@@ -7,8 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SG.Utilities;
+using SampleApi.Models;
+
 namespace SampleApi.Controllers.Setting
 {
+    [Author]
     public class RoleSettingController : ApiController
     {
         //从钉钉同步用户及管理员
@@ -28,6 +31,18 @@ namespace SampleApi.Controllers.Setting
             var plist = new PermissionOper().GetList();
             
             return Ok(new { urp, plist });
+        }
+
+        public IHttpActionResult SaveRoleData(SaveRolesObj obj)
+        {
+
+            if (obj != null)
+            {
+                new UrpOper().UrpUpData(obj.RoleId, obj.PermissionKey);
+            }
+            else return BadRequest("提交了错误的修改数据！");
+
+            return Ok("更新用户权限成功！");
         }
     }
 }

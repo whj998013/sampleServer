@@ -26,7 +26,7 @@ namespace SysBLL
         {
            using (SampleContext sc=new SampleContext())
             {
-                var re = sc.Roles.ToList();
+                var re = sc.Roles.Where(p=>p.RoleId>0).ToList();
                 re.ForEach(p => p.IsDelete = true);
                 roleList.ForEach(p =>
                 {

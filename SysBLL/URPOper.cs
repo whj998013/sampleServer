@@ -13,7 +13,7 @@ namespace SysBLL
         public  List<UrpModel> GetList()
         {
             List<UrpModel> list = new List<UrpModel>();
-            var roles = DataQuery.GetRecords<Role>();
+            var roles = DataQuery.GetRecords<Role>().OrderBy(p=>p.RoleId).ToList();
             var roleUsers = DataQuery.GetRecords<UserRole>();
             var urps = DataQuery.GetRecords<UserRolePermission>();
             roles.ForEach(p =>
@@ -29,6 +29,23 @@ namespace SysBLL
             });
 
             return list;
+
+        }
+
+        public void UrpUpData(long roleId,List<string> KeyList)
+        {
+            using(SampleContext sc=new SampleContext())
+            {
+                var urpList = sc.UserRolePermissions.Where(p => p.RoleId == roleId).ToList();
+                urpList.ForEach(p => p.IsDelete=true);
+                KeyList.ForEach(p =>
+                {
+                    var urp = urpList.SingleOrDefault(u => u.RoleId == roleId && u.Key == p);
+                    if (urp != null) urp.IsDelete = false;
+                    else sc.UserRolePermissions.Add(new UserRolePermission { RoleId = roleId, Key = p });
+                });
+                sc.SaveChanges();
+            }
 
         }
 
