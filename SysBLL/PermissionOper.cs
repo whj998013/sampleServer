@@ -17,6 +17,6 @@ namespace SysBLL
             list.AddRange(re);
             return list;
         }
-
+     
     }
 }

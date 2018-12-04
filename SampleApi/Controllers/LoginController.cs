@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using SG.DdApi;
 using SampleDataOper;
+using SysBLL;
 using SG.Utilities;
 using SG.SessionManage;
 using SG.Model.Sys;
@@ -149,6 +150,7 @@ namespace SampleApi.Controllers
             else return Ok(LoginHelp.ReturnUser(_user));
         }
 
+
     }
 
     public class LoginHelp
@@ -157,12 +159,14 @@ namespace SampleApi.Controllers
         {
             return obj.GetHashCode().ToString() + DateTime.Now.GetHashCode().ToString();
         }
-
+        
         public static object ReturnUser(User _user)
         {
             bool isLimt = !SampleConfig.GetSampleConfig().EnableLimtView || _user.Role != UserRoleU.一般用户;
             _user.Ticket = DESEncrypt.Encrypt((_user.UserName + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
-            return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt };
+            bool allSampleCanLend = SampleConfig.GetSampleConfig().AllSampleCanLend;
+            var plist = new UrpOper().GetPermissionsKeys(_user.DdId);
+            return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt, allSampleCanLend, plist };
         }
 
 

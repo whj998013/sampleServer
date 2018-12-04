@@ -59,7 +59,7 @@
     <Compile Include="RoleOper.cs" />
     <Compile Include="SyncFromDd.cs" />
     <Compile Include="UserOper.cs" />
-    <Compile Include="UserRoleOper.cs" />
+    <Compile Include="UrOper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\打样流程管理\DdApi\SG.DdApi.csproj">

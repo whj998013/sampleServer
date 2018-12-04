@@ -9,7 +9,7 @@ using SampleDataOper;
 
 namespace SysBLL
 {
-   public class UserRoleOper
+   public class UrOper
     {
         /// <summary>
         /// 更新usrRole表
@@ -19,7 +19,7 @@ namespace SysBLL
         {
             using (SampleContext sc= new SampleContext())
             {             
-                var re = sc.UserRoles.ToList();
+                var re = sc.UserRoles.Where(p=>p.RoleId>0).ToList();
                 re.ForEach(p => p.IsDelete = true);
                 urList.ForEach(u =>
                 {

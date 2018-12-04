@@ -24,11 +24,25 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             // DdApi();
-
-            var re = new UrpOper().GetList();
-
+            var re = new UrpOper().GetPermissionsKeys("024131621536286788");
+            re.ToList().ForEach(p =>
+            {
+                Console.WriteLine(p);
+            });
             Console.ReadKey();
 
+        }
+        public static void Test2()
+        {
+
+            SampleContext sc = new SampleContext();
+            var re = sc.UserRolePermissions.Join(sc.Permissions, e => e.Key, o => o.Key, (e, o) => new { e.Key, o.Name, o.CnName }).Distinct();
+            Console.WriteLine(re.ToList());
+            re.ToList().ForEach(p =>
+            {
+                Console.WriteLine(p.Key + "  " + p.CnName + "  " + p.Name);
+            });
+            Console.ReadKey();
         }
 
         public static void DdApi()

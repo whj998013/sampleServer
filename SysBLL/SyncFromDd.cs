@@ -55,7 +55,7 @@ namespace SysBLL
 
             });
 
-            new UserRoleOper().UpdateRoles(urList); //同步UserRole表
+            new UrOper().UpdateRoles(urList); //同步UserRole表
 
         }
 
