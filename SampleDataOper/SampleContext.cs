@@ -48,11 +48,7 @@ namespace SampleDataOper
         /// 库存记录
         /// </summary>
         public DbSet<Stock> Stocks { get; set; }
-
-        /// <summary>
-        /// 入库记录
-        /// </summary>
-        public DbSet<InStockRecord> InstockRecords { get; set; }
+               
         /// <summary>
         /// 成份表
         /// </summary>

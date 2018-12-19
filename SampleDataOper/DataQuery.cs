@@ -43,7 +43,7 @@ namespace SampleDataOper
         /// <param name="pageSize">单页记录数</param>
         /// <param name="pageIndex">页数</param>
         /// <returns></returns>
-        public static List<T> GetAllRecords<T>( int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : BaseModel
+        public static List<T> GetAllRecords<T>( int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
             return new SampleContext().Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
@@ -55,7 +55,7 @@ namespace SampleDataOper
         /// <typeparam name="T">继承至BaseModel</typeparam>
         /// <param name="whereLambda">查询条件</param>
         /// <returns></returns>
-        public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda=null) where T : BaseModel
+        public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda=null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
             return new SampleContext().Set<T>().Where(whereLambda).ToList();

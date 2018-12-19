@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Stock\Goods.cs" />
+    <Compile Include="Stock\Warehouse.cs" />
     <Compile Include="Sys\Code.cs" />
     <Compile Include="Sys\KM.cs" />
     <Compile Include="Product\ProductionRecord.cs" />
@@ -55,7 +57,6 @@
     <Compile Include="Sample\SampleLendout.cs" />
     <Compile Include="Sample\SampleReturn.cs" />
     <Compile Include="Sample\StyleFile.cs" />
-    <Compile Include="Stock\InStockRecord.cs" />
     <Compile Include="Stock\Stock.cs" />
     <Compile Include="Sys\Permission.cs" />
     <Compile Include="Sys\Role.cs" />

@@ -53,7 +53,6 @@
     <Compile Include="Sample\ISampleLendout.cs" />
     <Compile Include="Sample\ISampleReturn.cs" />
     <Compile Include="Sample\IStyleFile.cs" />
-    <Compile Include="Stock\IInStockRecord.cs" />
     <Compile Include="Stock\IStock.cs" />
     <Compile Include="Sys\ICode.cs" />
     <Compile Include="Sys\IKm.cs" />

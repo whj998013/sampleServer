@@ -29,6 +29,7 @@ namespace SampleDataOper.Migrations
                 RoleName ="Ä¬ÈÏÓÃ»§"
 
             });
+            
             DataDefaultList.GetCodeList().ForEach(p =>
             {
                 p.Id = i++;

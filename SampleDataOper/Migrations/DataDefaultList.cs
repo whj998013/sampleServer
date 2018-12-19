@@ -15,20 +15,23 @@ namespace SampleDataOper.Migrations
         {
             return new List<Permission>(){
               new Permission {  CnName = "样衣库", Name = "Sample", Key = "P010000", UpKey = "P000000" },
+
               new Permission {  CnName = "找样衣", Name = "Sample_FindSample", Key = "P010100", UpKey = "P010000" },
               new Permission {  CnName = "我的样衣", Name = "Sample_MySample", Key = "P010200", UpKey = "P010000" },
               new Permission {  CnName = "查看", Name = "Sample_MySample_View", Key = "P010201", UpKey = "P010200" },
               new Permission {  CnName = "新增样衣", Name = "Sample_MySample_NewSample", Key = "P010202", UpKey = "P010200" },
-              new Permission {  CnName = "样衣库管理", Name = "SampleMange", Key = "P020000", UpKey = "P000000" },
-              new Permission {  CnName = "入库管理", Name = "SampleMange_InOutMange", Key = "P020100", UpKey = "P020000" },
-              new Permission {  CnName = "已入库样衣管理", Name = "SampleMange_InOutMange_InStockMange", Key = "P020101", UpKey = "P020100" },
-              new Permission {  CnName = "入库审批", Name = "SampleMange_InOutMange_PassInStock", Key = "P020102", UpKey = "P020100" },
-              new Permission {  CnName = "借用管理", Name = "SampleMange_LendMange", Key = "P020200", UpKey = "P020000" },
-              new Permission {  CnName = "借用审批", Name = "SampleMange_LendMange_LendAudit", Key = "P020201", UpKey = "P020200" },
-              new Permission {  CnName = "已借出样衣", Name = "SampleMange_LendMange_LendOutView", Key = "P020202", UpKey = "P020200" },
-              new Permission {  CnName = "系统设置", Name = "SampleMange_SystemMange", Key = "P030000", UpKey = "P000000" },
-              new Permission {  CnName = "角色权限配置", Name = "SampleMange_SystemMange_RoleUserMange", Key = "P030100", UpKey = "P030000" },
-              new Permission {  CnName = "样衣系统配置", Name = "SampleMange_SystemMange_SampleMange", Key = "P030300", UpKey = "P030000" }
+
+              new Permission {  CnName = "入库管理", Name = "Sample_InOutMange", Key = "P010300", UpKey = "P010000" },
+              new Permission {  CnName = "已入库样衣管理", Name = "Sample_InOutMange_InStockMange", Key = "P010301", UpKey = "P010300" },
+              new Permission {  CnName = "入库审批", Name = "Sample_InOutMange_PassInStock", Key = "P010302", UpKey = "P010300" },
+
+              new Permission {  CnName = "借用管理", Name = "Sample_LendMange", Key = "P010400", UpKey = "P010000" },
+              new Permission {  CnName = "借用审批", Name = "Sample_LendMange_LendAudit", Key = "P010401", UpKey = "P010400" },
+              new Permission {  CnName = "已借出样衣", Name = "Sample_LendMange_LendOutView", Key = "P010402", UpKey = "P010400" },
+              
+              new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000" },
+              new Permission {  CnName = "角色权限配置", Name = "SystemMange_RoleUserMange", Key = "P990100", UpKey = "P990000" },
+              new Permission {  CnName = "样衣系统配置", Name = "SystemMange_SampleMange", Key = "P990300", UpKey = "P990000" }
 
             };
            
