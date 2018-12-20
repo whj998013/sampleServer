@@ -23,7 +23,7 @@ namespace SampleBLL
         public Proofing ProofingInfo { get; set; } = new Proofing();
         public ProductionRecord ProductInfo { get; set; } = new ProductionRecord();
         public List<StyleFile> Files { get; set; } = new List<StyleFile>();
-        public List<Stock> StockList { get; set; } = new List<Stock>();
+        public List<GarmentStock> StockList { get; set; } = new List<GarmentStock>();
         public SampleInfo(User user)
         {
             currentUser = user;
@@ -40,7 +40,7 @@ namespace SampleBLL
                     if (ProofingInfo == null) ProofingInfo = new Proofing();
                     ProductInfo = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == styleId);
                     if (ProductInfo == null) ProductInfo = new ProductionRecord();
-                    StockList = sc.Stocks.Where(p => p.StyleId == styleId).ToList();
+                    StockList = sc.GarmentStocks.Where(p => p.StyleId == styleId).ToList();
                     Files = sc.StyleFiles.Where(p => p.SytleId == BaseInfo.StyleId).ToList();
                     IsNewSample = false;
                     return true;
@@ -179,7 +179,7 @@ namespace SampleBLL
                     //新增数据 
                     sample.StockDataItems.ForEach(p =>
                     {
-                        sc.Stocks.Add(new Stock
+                        sc.GarmentStocks.Add(new GarmentStock
                         {
                             Color = p.Color,
                             Size = p.Size,

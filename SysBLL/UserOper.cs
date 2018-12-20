@@ -14,7 +14,7 @@ namespace SysBLL
     {
 
 
-        public static User GetUser(string Ddid)
+        public  User GetUser(string Ddid)
         {
             return new SampleContext().Users.SingleOrDefault(p => p.DdId == Ddid);
         }
@@ -29,6 +29,34 @@ namespace SysBLL
                 sc.Users.Add(user);
                 sc.SaveChanges();
             }
+        }
+
+        public void SyncUsers(List<User> users)
+        {
+            using(SampleContext sc=new SampleContext())
+            {
+                var ulist = sc.Users.ToList();
+                ulist.ForEach(p => p.IsDelete = true);
+                users.ForEach(p =>
+                {
+                    var u = ulist.SingleOrDefault(t => t.DdId == p.DdId);
+                    if (u == null)
+                    {
+                        sc.Users.Add(p);
+                    }
+                    else
+                    {
+                        u.UserName = p.UserName;
+                        u.IsLeader = p.IsLeader;
+                        u.DeptId = p.DeptId;
+                        u.DepartName = p.DepartName;
+                        u.Avatar = p.Avatar;
+                        u.IsDelete = false;
+                    };
+                });
+                sc.SaveChanges();
+            }
+
         }
 
     }

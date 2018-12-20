@@ -32,9 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,7 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Stock\Garment\Garment.cs" />
     <Compile Include="Stock\Goods.cs" />
+    <Compile Include="Sys\Dept.cs" />
+    <Compile Include="Sys\Unit.cs" />
     <Compile Include="Stock\Warehouse.cs" />
     <Compile Include="Sys\Code.cs" />
     <Compile Include="Sys\KM.cs" />
@@ -57,7 +64,7 @@
     <Compile Include="Sample\SampleLendout.cs" />
     <Compile Include="Sample\SampleReturn.cs" />
     <Compile Include="Sample\StyleFile.cs" />
-    <Compile Include="Stock\Stock.cs" />
+    <Compile Include="Stock\Garment\GarmentStock.cs" />
     <Compile Include="Sys\Permission.cs" />
     <Compile Include="Sys\Role.cs" />
     <Compile Include="Sys\Setting.cs" />
@@ -70,6 +77,12 @@
       <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
       <Name>SG.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Stock\Yarn\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

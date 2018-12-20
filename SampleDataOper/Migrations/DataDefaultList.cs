@@ -28,13 +28,17 @@ namespace SampleDataOper.Migrations
               new Permission {  CnName = "借用管理", Name = "Sample_LendMange", Key = "P010400", UpKey = "P010000" },
               new Permission {  CnName = "借用审批", Name = "Sample_LendMange_LendAudit", Key = "P010401", UpKey = "P010400" },
               new Permission {  CnName = "已借出样衣", Name = "Sample_LendMange_LendOutView", Key = "P010402", UpKey = "P010400" },
+
+              new Permission {  CnName = "手机端权限", Name = "Sample_Dd", Key = "P015000", UpKey = "P010000" },
+              new Permission {  CnName = "查看所有信息", Name = "Sample_Dd_ViewAllInfo", Key = "P015001", UpKey = "P015000" },
+              new Permission {  CnName = "样衣借用", Name = "Sample_Dd_SampleLend", Key = "P015002", UpKey = "P015000" },
               
               new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000" },
               new Permission {  CnName = "角色权限配置", Name = "SystemMange_RoleUserMange", Key = "P990100", UpKey = "P990000" },
               new Permission {  CnName = "样衣系统配置", Name = "SystemMange_SampleMange", Key = "P990300", UpKey = "P990000" }
 
             };
-           
+
         }
 
         public static List<Material> GetMaterialList()
@@ -70,6 +74,16 @@ namespace SampleDataOper.Migrations
                 new Material {  CnName = "牦牛毛", EnName = "Yarkhair" },
                 new Material {  CnName = "大豆蛋白纤维", EnName = "Soybeanproteinfibre" }
 
+            };
+        }
+
+        public static List<Unit> GetUnitList()
+        {
+            return new List<Unit>()
+            {
+                new Unit{Cnname="公斤",EnName="kg"},
+                new Unit{Cnname="克",EnName="g"},
+                new Unit{Cnname="件",EnName="Piece"}
             };
         }
 

@@ -24,12 +24,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             // DdApi();
-            var re = new UrpOper().GetPermissionsKeys("024131621536286788");
-            re.ToList().ForEach(p =>
-            {
-                Console.WriteLine(p);
-            });
-            Console.ReadKey();
+            DdApi();
+           
 
         }
         public static void Test2()
@@ -51,9 +47,16 @@ namespace ConsoleApp1
             ddOper.CorpId = "ding99dd341fc99a25eb";
             ddOper.CorpSecret = "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0";
             ddOper.AgentID = "132907517";
-            SyncFromDd.SyncUserRole(ddOper);
-
-            Console.Write("运行完成");
+            var re= SyncFromDd.SyncUserDept(ddOper);
+            int i = 0;
+            //var dept= new DeptProvider(ddOper).GetDepts();
+            // var uprd = new DeptProvider(ddOper);
+            re.ForEach(p =>
+            {
+                Console.WriteLine("姓名:"+p.UserName + "  部们：" + p.DepartName+"部们ID："+p.DeptId);
+                i++;
+            });
+            Console.Write("运行完成,共有"+i+"名员工.");
             Console.ReadLine();
 
         }

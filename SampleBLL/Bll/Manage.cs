@@ -21,7 +21,7 @@ namespace SampleBLL
             return null;
         }
 
-        public static object GetInputserList()
+        public static object GetInputUserList()
         {
             using (SampleContext sc = new SampleContext())
             {

@@ -16,7 +16,7 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         public object GetInputUserList()
         {            
-            return Ok(Manage.GetInputserList());
+            return Ok(Manage.GetInputUserList());
         }
 
     }

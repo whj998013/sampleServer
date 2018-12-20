@@ -23,7 +23,11 @@ namespace SG.Model.Stock
         /// <summary>
         /// 仓库地址
         /// </summary>
-        public string WareHouseAddress { get; set; }
+        public string WarehouseAddress { get; set; }
+        /// <summary>
+        /// 仓库电话
+        /// </summary>
+        public string WarehouseTel { get; set; }
         /// <summary>
         /// 仓库说明
         /// </summary>
@@ -31,7 +35,14 @@ namespace SG.Model.Stock
         /// <summary>
         /// 仓库类别
         /// </summary>
-        public string WarehouseType { get; set; }
+        public WarehouseType WarehouseType { get; set; }
 
+    }
+
+    public enum WarehouseType
+    {
+        Yarn=0,
+        Garment=1,
+        General= 2,
     }
 }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeptOper.cs" />
     <Compile Include="PermissionOper.cs" />
     <Compile Include="UrpOper.cs" />
     <Compile Include="Model\UrpModel.cs" />

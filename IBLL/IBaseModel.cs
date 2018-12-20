@@ -10,7 +10,7 @@ namespace SG.Interface
         DateTime? EditDate { get; set; }
         string EditUser { get; set; }
         bool IsDelete { get; set; }
-        string Remark { get; set; }
+        string OperRemark { get; set; }
         void Delete(string user);
         void SetCreateUser(string user);
         void SetEditUser(string user);

@@ -2,9 +2,9 @@
 using SG.Interface.Sys;
 namespace SG.Interface.Sys
 {
-    public interface IUser:IUserInfo,IUserLoginInfo
+    public interface IUser : IUserInfo, IUserLoginInfo
     {
-      }
+    }
     public enum UserRoleU
     {
         一般用户 = 0,

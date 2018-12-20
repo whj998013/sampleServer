@@ -55,8 +55,7 @@ namespace SysBLL
             //var urplist = new SampleContext().UserRolePermissions.Where(p=>p.IsDelete==false).Where(p => urList.Contains(p.RoleId)).Select(r=>r.Key).Distinct().ToList();
             SampleContext sc = new SampleContext();
             var re = sc.UserRolePermissions.Join(sc.Permissions, e => e.Key, o => o.Key, (e, o) => new {e.RoleId,e.IsDelete, e.Key, o.Name, o.CnName }).Where(p=>!p.IsDelete).Where(p => urList.Contains(p.RoleId)).Select(p=>p.Name).Distinct().ToList();
-
-
+            
             return re;
         }
 

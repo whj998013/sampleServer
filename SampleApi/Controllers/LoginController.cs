@@ -45,9 +45,10 @@ namespace SampleApi.Controllers
                     nuser.SetCreateUser("system");
                     ///首次登录，在数据库登录新用户
                     dc.Users.Add(nuser);
-
                     dc.SaveChanges();
                     _user = dc.Users.Where(p => p.DdId == ddUser.Userid).FirstOrDefault();
+                    //将用户加入默认用户组
+                    new UrOper().AddDefalutUR(_user);
                 }
                 else
                 {
@@ -162,11 +163,12 @@ namespace SampleApi.Controllers
         
         public static object ReturnUser(User _user)
         {
-            bool isLimt = !SampleConfig.GetSampleConfig().EnableLimtView || _user.Role != UserRoleU.一般用户;
+            bool enableLimtView = SampleConfig.GetSampleConfig().EnableLimtView ;
             _user.Ticket = DESEncrypt.Encrypt((_user.UserName + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
             bool allSampleCanLend = SampleConfig.GetSampleConfig().AllSampleCanLend;
             var plist = new UrpOper().GetPermissionsKeys(_user.DdId);
-            return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, isLimt, allSampleCanLend, plist };
+            var setting = new { enableLimtView, allSampleCanLend };
+            return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, setting, plist };
         }
 
 

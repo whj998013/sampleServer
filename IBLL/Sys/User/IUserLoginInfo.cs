@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SG.Interface.Sys
 {
-   public interface IUserLoginInfo
+   public interface IUserLoginInfo:INameId
     {
-        string DdId { get; set; }
-        string UserName { get; set; }
         DateTime? LoginOverTime { get; set; }
         string LoginStr { get; set; }
         string PassWord { get; set; }

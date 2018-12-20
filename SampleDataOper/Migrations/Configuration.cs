@@ -8,7 +8,6 @@ namespace SampleDataOper.Migrations
     using SG.Model.Sample;
     using SG.Model.Sys;
 
-
     internal sealed class Configuration : DbMigrationsConfiguration<SampleDataOper.SampleContext>
     {
         public Configuration()
@@ -23,13 +22,19 @@ namespace SampleDataOper.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             int i = 1;
+            
             context.Roles.AddOrUpdate(m=>m.RoleId, new Role
             {
                 RoleId = 0,
                 RoleName ="Ä¬ÈÏÓÃ»§"
+             });
 
+            DataDefaultList.GetUnitList().ForEach(p =>
+            {
+                p.Id = i++;
+                context.Units.AddOrUpdate(m => m.Id, p);
             });
-            
+
             DataDefaultList.GetCodeList().ForEach(p =>
             {
                 p.Id = i++;
@@ -47,7 +52,7 @@ namespace SampleDataOper.Migrations
             DataDefaultList.GetPermissionsList().ForEach(p =>
             {
                 p.Id = i++;
-                context.Permissions.AddOrUpdate(m => m.Id,p );
+                context.Permissions.AddOrUpdate(m => m.Key,p );
             });
             context.SaveChanges();
         }

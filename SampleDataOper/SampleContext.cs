@@ -47,7 +47,7 @@ namespace SampleDataOper
         /// <summary>
         /// 库存记录
         /// </summary>
-        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<GarmentStock> GarmentStocks { get; set; }
                
         /// <summary>
         /// 成份表
@@ -57,6 +57,10 @@ namespace SampleDataOper
         /// 用户表
         /// </summary>
         public DbSet<User> Users { get; set; }
+        /// <summary>
+        /// 部门表
+        /// </summary>
+        public DbSet<Dept> Depts { get; set; }
         /// <summary>
         /// 角色表
         /// </summary>
@@ -73,6 +77,11 @@ namespace SampleDataOper
         /// 用户角色权限对应表
         /// </summary>
         public DbSet<UserRolePermission> UserRolePermissions { get; set; }
+        /// <summary>
+        /// 单位表
+        /// </summary>
+        public DbSet<Unit> Units { get; set; }
+
 
       
     }

@@ -21,7 +21,6 @@ namespace SampleApi.Controllers
             var nonceStr = CommonHelper.randNonce();
             var timestamp = DdOperator.TimeStamp();            
             var signature = ddoper.GetSignature(nonceStr, timestamp, url);
-
             return Ok(new  { agentId,corpId,nonceStr,timestamp,signature,url});
         }
 

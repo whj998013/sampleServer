@@ -20,7 +20,7 @@ namespace SampleApi.Controllers.Setting
         {
             var ddoper = DdOperator.GetDdApi();
             SyncFromDd.SyncUserRole(ddoper);
-
+            SyncFromDd.SyncUserDept(ddoper);
             return Ok();
         }
 

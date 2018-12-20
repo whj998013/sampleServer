@@ -9,7 +9,7 @@ using SampleDataOper;
 
 namespace SysBLL
 {
-   public class UrOper
+    public class UrOper
     {
         /// <summary>
         /// 更新usrRole表
@@ -17,9 +17,9 @@ namespace SysBLL
         /// <param name="urList"></param>
         public void UpdateRoles(List<IUserRole> urList)
         {
-            using (SampleContext sc= new SampleContext())
-            {             
-                var re = sc.UserRoles.Where(p=>p.RoleId>0).ToList();
+            using (SampleContext sc = new SampleContext())
+            {
+                var re = sc.UserRoles.Where(p => p.RoleId > 0).ToList();
                 re.ForEach(p => p.IsDelete = true);
                 urList.ForEach(u =>
                 {
@@ -27,7 +27,8 @@ namespace SysBLL
                     if (ur == null)
                     {
                         sc.UserRoles.Add((UserRole)u);
-                    }else
+                    }
+                    else
                     {
                         ur.IsDelete = false;
                         ur.UserName = u.UserName;
@@ -37,6 +38,32 @@ namespace SysBLL
                 sc.SaveChanges();
             }
 
+        }
+
+        public void AddDefalutUR(INameId user)
+        {
+
+            using (SampleContext sc = new SampleContext())
+            {
+
+                var userobj = sc.UserRoles.SingleOrDefault(p => p.RoleId == 0 && p.DdId == user.DdId);
+                if (userobj == null)
+                {
+                    UserRole ur = new UserRole
+                    {
+                        DdId = user.DdId,
+                        UserName = user.UserName,
+                        RoleId = 0,
+                        RoleName = "默认用户"
+                    };
+                    sc.UserRoles.Add(ur);
+                }
+                else
+                {
+                    userobj.IsDelete = false;
+                }
+                sc.SaveChanges();
+            }
         }
     }
 }

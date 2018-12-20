@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sample;
+using SG.Interface.Stock;
 namespace SG.Model.Sample
 {
-    public class SampleBaseInfo : BaseModel, ISampleBaseInfo
+    public class SampleBaseInfo : BaseModel, ISampleBaseInfo,IPrice
     {
         public int Id { get; set; }       
         /// <summary>

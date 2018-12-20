@@ -14,6 +14,11 @@ namespace SG.Model.Sys
         public string Account { get; set; }
         public string PassWord { get; set; }
         public string UserName { get; set; }
+        /// <summary>
+        /// 是否主管
+        /// </summary>
+        public bool IsLeader { get; set; }
+        public string DeptId { get; set; }
         public string DepartName { get; set; }
         public string DdId { get; set; }
         public string Avatar { get; set; }

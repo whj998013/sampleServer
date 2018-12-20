@@ -142,7 +142,7 @@ namespace SampleBLL
                 if (sl != null)
                 {
                     sl.State = LendRecordStats.草拟;
-                    sl.Remark = sl.Remark + " 退回借出申请：" + user;
+                    sl.OperRemark = sl.OperRemark + " 退回借出申请：" + user;
                     var sb = sc.SampleBaseInfos.SingleOrDefault(p => !p.IsDelete && p.StyleId == sl.StyleId);
                     sb.State = SampleState.在库;
                     sc.SaveChanges();
@@ -168,7 +168,7 @@ namespace SampleBLL
                 {
                     sl.State = LendRecordStats.已还回;
                     sl.ReturnDate = DateTime.Now;
-                    sl.Remark = sl.Remark + " 还回审批人：" + user;
+                    sl.OperRemark = sl.OperRemark + " 还回审批人：" + user;
                     var sb = sc.SampleBaseInfos.SingleOrDefault(p => !p.IsDelete && p.StyleId == sl.StyleId);
                     sb.State = SampleState.在库;
                     sc.SaveChanges();
@@ -192,7 +192,7 @@ namespace SampleBLL
                 {
                     sl.State = LendRecordStats.已借出;
                     sl.LendOutDate = DateTime.Now;
-                    sl.Remark = sl.Remark + " 借出审批人：" + user;
+                    sl.OperRemark = sl.OperRemark + " 借出审批人：" + user;
                     var sb = sc.SampleBaseInfos.SingleOrDefault(p => !p.IsDelete && p.StyleId == sl.StyleId);
                     sb.State = SampleState.借出;
                     sc.SaveChanges();

@@ -14,6 +14,40 @@ namespace SysBLL
     public class SyncFromDd
     {
         /// <summary>
+        /// 同步钉钉用户和部门
+        /// </summary>
+        /// <param name="ddOper"></param>
+        public static List<User> SyncUserDept(IDdOper ddOper)
+        {
+
+            SampleContext sc = new SampleContext();
+            DeptProvider dProvider = new DeptProvider(ddOper);
+            List<User> uList = new List<User>();
+            List<Dept> depts = dProvider.GetDepts();
+            depts.ForEach(p =>
+            {
+                var deptUserList = dProvider.GetDeptUserList(p.DeptID);
+                deptUserList.ForEach(d =>
+                {
+                    d.DepartName = p.DeptName;
+                    var u = uList.SingleOrDefault(t => t.DdId == d.DdId);
+                    if (u == null) uList.Add(d);
+                    else u.DepartName = u.DepartName + ',' + d.DepartName;
+                    if (d.IsLeader) p.DeptAdminDdId = d.DdId;
+                });
+            });
+            new DeptOper().SyncDepts(depts);
+            new UserOper().SyncUsers(uList);
+            UrOper uroper = new UrOper();
+            uList.ForEach(p =>
+            {
+                uroper.AddDefalutUR(p);
+            });
+
+            return uList;
+        }
+
+        /// <summary>
         /// 从钉钉同步角色和用户
         /// </summary>
         /// <param name="DdOper"></param>
