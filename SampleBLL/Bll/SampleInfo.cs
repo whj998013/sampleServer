@@ -121,6 +121,7 @@ namespace SampleBLL
                 //基本信息
                 //BaseInfo.StyleId = (string)sample.styleId;
                 BaseInfo.StyleNo = sample.StyleNo;
+                BaseInfo.DeptName = sample.DeptName;
                 BaseInfo.Color = sample.Color;
                 BaseInfo.Size = sample.Size;
                 BaseInfo.Gauge = sample.Gauge;
@@ -153,6 +154,8 @@ namespace SampleBLL
                 ProofingInfo.ProofingCompany = (string)sample.ProofingCompany;
                 ProofingInfo.TechnologyPeople = (string)sample.TechnologyPeople;
                 ProofingInfo.ProgamPeople = (string)sample.ProgamPeople;
+                ProofingInfo.WeaveTime = sample.WeaveTime;
+                ProofingInfo.LinkTime = sample.LinkTime;
                 if (sample.ProofingDate != "")
                 {
                     ProofingInfo.ProofingDate = DateTime.Parse(sample.ProofingDate);

@@ -20,6 +20,7 @@
         SampleState State { get; set; }
         string StyleId { get; set; }
         string StyleNo { get; set; }
+        string DeptName { get; set; }
         string StyleTag { get; set; }
         int Weight { get; set; }
     }

@@ -19,8 +19,9 @@ namespace SampleApi.Controllers.Setting
         public object UpUserDataByDd()
         {
             var ddoper = DdOperator.GetDdApi();
-            SyncFromDd.SyncUserRole(ddoper);
             SyncFromDd.SyncUserDept(ddoper);
+            SyncFromDd.SyncUserRole(ddoper);
+          
             return Ok();
         }
 

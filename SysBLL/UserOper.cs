@@ -13,18 +13,82 @@ namespace SysBLL
     public class UserOper
     {
 
-
-        public  User GetUser(string Ddid)
+        /// <summary>
+        /// 根据DDid取得用户
+        /// </summary>
+        /// <param name="Ddid"></param>
+        /// <returns></returns>
+        public User GetUserByDdId(string Ddid)
         {
-            return new SampleContext().Users.SingleOrDefault(p => p.DdId == Ddid);
+            return DataQuery.GetRecords<User>(p => p.DdId == Ddid).SingleOrDefault();
         }
-
-       
-        public void AddUser(User user)
+        /// <summary>
+        /// 根据登录Str返回用户
+        /// </summary>
+        /// <param name="loginStr"></param>
+        /// <returns></returns>
+        public User GetUserByLoginStr(string loginStr)
         {
-          
+            using (SampleContext dc = new SampleContext())
+            {
+                var _user = dc.Users.Where(p => p.LoginStr == loginStr).FirstOrDefault();
+                if (_user != null)
+                {
+                    if (_user.LoginOverTime < DateTime.Now)
+                    {
+                        _user.LoginOverTime = null;
+                        dc.SaveChanges();
+                        _user = null;
+                    }
+
+                }
+                return _user;
+            };
+
+        }
+        /// <summary>
+        /// 根所用户密码返回用户
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public User GetUserByAccout(string uid, string pwd)
+        {
+
+            return DataQuery.GetRecords<User>(p => p.Account == uid && pwd == p.PassWord).SingleOrDefault();
+
+        }
+        /// <summary>
+        /// 更新登录信息
+        /// </summary>
+        public User UpDateLoginInfo(User _user)
+        {
             using (SampleContext sc = new SampleContext())
             {
+                var user = sc.Users.SingleOrDefault(p => p.DdId == _user.DdId);
+                SetLoginInfo(ref user);
+                sc.SaveChanges();
+                return user;
+            }
+
+        }
+        /// <summary>
+        ///生成登录唯一码
+        /// </summary>
+        /// <param name="user"></param>
+        private void SetLoginInfo(ref User user)
+        {
+            user.LoginStr = Guid.NewGuid().ToString(); // 9af7f46a-ea52-4aa3-b8c3-9fd484c2af12
+            user.LoginOverTime = DateTime.Now.AddDays(1);
+        }
+
+
+        public void AddUser(User user)
+        {
+
+            using (SampleContext sc = new SampleContext())
+            {
+                SetLoginInfo(ref user);
                 user.SetCreateUser("system");
                 sc.Users.Add(user);
                 sc.SaveChanges();
@@ -33,7 +97,7 @@ namespace SysBLL
 
         public void SyncUsers(List<User> users)
         {
-            using(SampleContext sc=new SampleContext())
+            using (SampleContext sc = new SampleContext())
             {
                 var ulist = sc.Users.ToList();
                 ulist.ForEach(p => p.IsDelete = true);

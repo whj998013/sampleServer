@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 using System.Web.SessionState;
-
+using SysBLL;
 
 namespace SampleApi
 {
@@ -23,7 +23,7 @@ namespace SampleApi
             ddOper.CorpId = ConfigurationManager.AppSettings["CorpId"];
             ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
             ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
-            ddOper.GetDeptList();
+            ddOper.SetDept(new DeptOper().GetDepts());
         }
         public override void Init()
         {

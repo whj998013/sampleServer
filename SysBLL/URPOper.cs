@@ -27,9 +27,7 @@ namespace SysBLL
                 nurp.PermissionList.AddRange(urps.Where(t => t.RoleId == p.RoleId).ToArray());
                 list.Add(nurp);
             });
-
             return list;
-
         }
 
         public void UrpUpData(long roleId,List<string> KeyList)

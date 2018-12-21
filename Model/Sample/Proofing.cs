@@ -28,6 +28,10 @@ namespace SG.Model.Sample
         /// </summary>
         public int WeaveTime { get; set; }
         /// <summary>
+        /// 套口时间
+        /// </summary>
+        public int LinkTime { get; set; }
+        /// <summary>
         /// 工艺员
         /// </summary>
         public string TechnologyPeople { get; set; }

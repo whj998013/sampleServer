@@ -156,6 +156,11 @@ namespace SampleBLL.Model
         public string StyleNo { get; set; }
 
         ///<summary>
+        /// 部门
+        /// </summary>
+        [DataMember(Name = "deptName")]
+        public string DeptName { get; set; }
+        ///<summary>
         /// 白色
         /// </summary>
         [DataMember(Name = "color")]
@@ -257,6 +262,18 @@ namespace SampleBLL.Model
         [DataMember(Name = "weight")]
         public int Weight { get; set; }
 
+
+        ///<summary>
+        /// 针机时间
+        /// </summary>
+        [DataMember(Name = "weaveTime")]
+        public int WeaveTime { get; set; }
+
+        ///<summary>
+        /// 套口时间
+        /// </summary>
+        [DataMember(Name = "linkTime")]
+        public int LinkTime { get; set; }
         ///<summary>
         /// 可否外借
         /// </summary>

@@ -38,7 +38,7 @@ namespace SampleBLL
                         p.LendOutNo,
                         sb.State,
                         sb.CanLendOut,
-                        LendState =p.State,
+                        LendState = p.State,
                         AsLend = sb.State == SampleState.在库,
                         StatsText = sb.State.ToString(),
                     };
@@ -87,6 +87,9 @@ namespace SampleBLL
                     pr.ProofingCompany,
                     pr.ProgamPeople,
                     pr.TechnologyPeople,
+                    baseinfo.DeptName,
+                    pr.WeaveTime,
+                    pr.LinkTime,
                     ProofingDate = pr.ProofingDate != null ? pr.ProofingDate.Value.Date.ToShortDateString() : "",
                     pd.ClientName,
                     pd.ProductFactory,
@@ -111,7 +114,7 @@ namespace SampleBLL
                 if (pd == null) pd = new ProductionRecord();
                 var FileList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.File).Select(p => new { name = p.DisplayName, reallyName = p.FileName }).ToList();
                 var PicList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.Pic).Select(p => new { name = p.FileName, reallyName = p.FileName }).ToList();
-                var StockData = sc.GarmentStocks.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p=>new { size=p.Size,color=p.Color,num=p.Num}).ToList();
+                var StockData = sc.GarmentStocks.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p => new { size = p.Size, color = p.Color, num = p.Num }).ToList();
                 return new
                 {
                     baseinfo.Id,
@@ -121,7 +124,7 @@ namespace SampleBLL
                     baseinfo.Weight,
                     baseinfo.Gauge,
                     baseinfo.Size,
-                    User=baseinfo.CreateUser,
+                    User = baseinfo.CreateUser,
                     baseinfo.Kinds,
                     baseinfo.Counts,
                     baseinfo.CanLendOut,
@@ -137,12 +140,15 @@ namespace SampleBLL
                     pr.ProofingCompany,
                     pr.ProgamPeople,
                     pr.TechnologyPeople,
+                    baseinfo.DeptName,
+                    pr.WeaveTime,
+                    pr.LinkTime,
                     ProofingDate = pr.ProofingDate != null ? pr.ProofingDate.Value.Date.ToShortDateString() : "",
                     pd.ClientName,
                     pd.ProductFactory,
                     pd.ProductNum,
                     pd.Price,
-                    ProductDate=pd.ProductDate!=null?pd.ProductDate.Value.ToShortDateString():"",
+                    ProductDate = pd.ProductDate != null ? pd.ProductDate.Value.ToShortDateString() : "",
                     StockData,
                     FileList,
                     PicList,

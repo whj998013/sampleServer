@@ -54,8 +54,9 @@ namespace SysBLL
         public static void SyncUserRole(IDdOper DdOper)
         {
             SampleContext sc = new SampleContext();
-            RoleProvider rProvider = new RoleProvider(DdOper);
             UserProvider uProvider = new UserProvider(DdOper);
+            RoleProvider rProvider = new RoleProvider(DdOper);
+          
             RoleOper rOper = new RoleOper();
             UserOper uOper = new UserOper();
 
