@@ -14,7 +14,7 @@ namespace SampleApi.Controllers.Setting
     [Author]
     public class RoleSettingController : ApiController
     {
-        //从钉钉同步用户及管理员
+        //从钉钉同步用户及管理员aa
         [HttpGet]
         public object UpUserDataByDd()
         {
