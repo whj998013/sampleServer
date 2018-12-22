@@ -61,10 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
-      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
-      <Name>SG.Utilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
       <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
       <Name>SG.DdApi</Name>

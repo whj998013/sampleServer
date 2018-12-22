@@ -62,10 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
-      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
-      <Name>SG.Utilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IBLL\SG.Interface.csproj">
       <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
       <Name>SG.Interface</Name>
@@ -77,6 +73,10 @@
     <ProjectReference Include="..\SampleDataOper\SampleDataOper.csproj">
       <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
       <Name>SampleDataOper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

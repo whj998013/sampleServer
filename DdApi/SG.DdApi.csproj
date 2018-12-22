@@ -72,10 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
-      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
-      <Name>SG.Utilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\样衣管理\DdServerApi\TopSdk.csproj">
       <Project>{9C11CAE5-5188-4E71-825B-68FC3135728A}</Project>
       <Name>TopSdk</Name>

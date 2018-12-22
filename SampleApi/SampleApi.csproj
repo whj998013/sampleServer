@@ -138,10 +138,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
-      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
-      <Name>SG.Utilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
       <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
       <Name>SG.DdApi</Name>
@@ -169,6 +165,10 @@
     <ProjectReference Include="..\SessionManage\SG.SessionManage.csproj">
       <Project>{98ed601d-c798-400b-9258-b9123b2072c5}</Project>
       <Name>SG.SessionManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\SysBLL\SysBLL.csproj">
       <Project>{b923e651-64a0-4bee-81ba-317e5b712749}</Project>
