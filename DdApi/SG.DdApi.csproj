@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B923E651-64A0-4BEE-81BA-317E5B712749}</ProjectGuid>
+    <ProjectGuid>{2DF7E39E-D790-49AB-A130-7CECF22B1541}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SysBLL</RootNamespace>
-    <AssemblyName>SysBLL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>SG.DdApi</RootNamespace>
+    <AssemblyName>SG.DdApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,14 +35,18 @@
     </Reference>
     <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\样衣管理\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,42 +55,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeptOper.cs" />
-    <Compile Include="PermissionOper.cs" />
-    <Compile Include="UrpOper.cs" />
-    <Compile Include="Model\UrpModel.cs" />
+    <Compile Include="IDdOper.cs" />
+    <Compile Include="Model\Jsticket.cs" />
+    <Compile Include="Msg\DbMsgOper.cs" />
+    <Compile Include="Msg\DdMsg.cs" />
+    <Compile Include="DdOperator.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="Msg\DdOAMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleOper.cs" />
-    <Compile Include="SyncFromDd.cs" />
-    <Compile Include="UserOper.cs" />
-    <Compile Include="UrOper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
-      <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
-      <Name>SG.DdApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DdServerApi\TopSdk.csproj">
-      <Project>{9c11cae5-5188-4e71-825b-68fc3135728a}</Project>
-      <Name>TopSdk</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IBLL\SG.Interface.csproj">
-      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
-      <Name>SG.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\SG.Model.csproj">
-      <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
-      <Name>SG.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SampleDataOper\SampleDataOper.csproj">
-      <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
-      <Name>SampleDataOper</Name>
-    </ProjectReference>
+    <Compile Include="Sys\DeptProvider.cs" />
+    <Compile Include="Sys\RoleProvider.cs" />
+    <Compile Include="Sys\UserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\老项目\Visual Studio 2015\内部管理系统\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\样衣管理\DdServerApi\TopSdk.csproj">
+      <Project>{9C11CAE5-5188-4E71-825B-68FC3135728A}</Project>
+      <Name>TopSdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\样衣管理\IBLL\SG.Interface.csproj">
+      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
+      <Name>SG.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\样衣管理\Model\SG.Model.csproj">
+      <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
+      <Name>SG.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

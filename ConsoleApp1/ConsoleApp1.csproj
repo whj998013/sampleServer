@@ -65,7 +65,7 @@
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
       <Name>SG.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\打样流程管理\DdApi\SG.DdApi.csproj">
+    <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
       <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
       <Name>SG.DdApi</Name>
     </ProjectReference>

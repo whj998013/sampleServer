@@ -43,7 +43,7 @@ namespace SysBLL
             {
                 uroper.AddDefalutUR(p);
             });
-
+            ddOper.SetDept(depts);
             return uList;
         }
 
