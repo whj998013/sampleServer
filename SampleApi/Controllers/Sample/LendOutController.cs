@@ -11,7 +11,7 @@ using SampleBLL;
 using SampleBLL.Model;
 using SG.Model.Sys;
 
-namespace SampleApi.Controllers.Lend
+namespace SampleApi.Controllers
 {
     [Author]
     public class LendOutController : ApiController

@@ -100,9 +100,9 @@
     <Compile Include="Controllers\DdController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\KeyController.cs" />
-    <Compile Include="Controllers\Lend\LendOutController.cs" />
+    <Compile Include="Controllers\Sample\LendOutController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\Manage\ManageController.cs" />
+    <Compile Include="Controllers\Sample\ManageController.cs" />
     <Compile Include="Controllers\Sample\InOutStorageController.cs" />
     <Compile Include="Controllers\Sample\MySampleController.cs" />
     <Compile Include="Controllers\Sample\PrintController.cs" />

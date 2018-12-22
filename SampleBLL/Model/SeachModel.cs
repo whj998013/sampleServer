@@ -29,7 +29,6 @@ namespace SampleBLL.Model
 
         public DateTime[] DateValue { get; set; }
 
-
         [DataMember(Name = "state")]
         public SampleState State { get; set; }
 
