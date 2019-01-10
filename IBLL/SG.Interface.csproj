@@ -52,7 +52,7 @@
     <Compile Include="Sample\ISampleBaseInfo.cs" />
     <Compile Include="Sample\ISampleLendout.cs" />
     <Compile Include="Sample\ISampleReturn.cs" />
-    <Compile Include="Sample\IStyleFile.cs" />
+    <Compile Include="Sys\IStyleFile.cs" />
     <Compile Include="Sys\IDept.cs" />
     <Compile Include="Stock\IPrice.cs" />
     <Compile Include="Stock\IStock.cs" />

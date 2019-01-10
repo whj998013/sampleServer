@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Proof\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DdApi\SG.DdApi.csproj">

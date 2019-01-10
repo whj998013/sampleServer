@@ -1,4 +1,4 @@
-﻿namespace SG.Interface.Sample
+﻿namespace SG.Interface.Sys
 {
     public interface IStyleFile
     {
@@ -13,6 +13,9 @@
     public enum FileType
     {
         Pic = 0,
-        File = 1
+        File = 1,
+        ClientFile=2,
+        TechnologyFile=3,
+        PlatemakingFile=4
     }
 }

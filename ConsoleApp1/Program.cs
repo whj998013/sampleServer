@@ -15,6 +15,8 @@ using SG.Interface.Sys;
 using SG.Model.Sys;
 using SysBLL;
 using EntityFramework.Extensions;
+using SG.Utilities;
+using SG.Model.Proof;
 
 namespace ConsoleApp1
 {
@@ -22,22 +24,35 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            // DdApi();
-            DdApi();
-           
 
+
+
+            Test2();
+
+        }
+
+        public static void test3()
+        {
+            bool re = DirFileHelper.IsExistDirectory(@"//192.168.1.202/sh_erp$/ww2");
+            if (re)
+            {
+                Console.WriteLine("在");
+            }
+            else
+            {
+                Console.WriteLine("不在");
+                DirFileHelper.CreateDirectory(@"//192.168.1.202/sh_erp$/ww2");
+            }
+            Console.ReadKey();
         }
         public static void Test2()
         {
 
             SampleContext sc = new SampleContext();
-            var re = sc.UserRolePermissions.Join(sc.Permissions, e => e.Key, o => o.Key, (e, o) => new { e.Key, o.Name, o.CnName }).Distinct();
-            Console.WriteLine(re.ToList());
-            re.ToList().ForEach(p =>
-            {
-                Console.WriteLine(p.Key + "  " + p.CnName + "  " + p.Name);
-            });
-            Console.ReadKey();
+            ProofOrder po = new ProofOrder();
+            
+
+
         }
 
         public static void DdApi()

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SG.Interface.Sample;
-namespace SG.Model.Sample
+using SG.Interface.Sys;
+namespace SG.Model.Sys
 {
     public class StyleFile : BaseModel, IStyleFile
     {
@@ -14,7 +14,7 @@ namespace SG.Model.Sample
         /// </summary>
         public string SytleId { get; set; }
         /// <summary>
-        /// 文件类型,0为样衣图片，1为附属图片，2为工艺单，3为程序
+        /// 文件类型,0为样衣图片，1为文件
         /// </summary>
         public FileType FileType { get; set; }
         /// <summary>
@@ -32,8 +32,6 @@ namespace SG.Model.Sample
         public string DisplayName { get; set; }
 
     }
-
- 
-
+    
     
 }

@@ -148,7 +148,7 @@ namespace SampleApi.Controllers.Sample
             //{
                 string picPath2 = Config.PicPath;
                 //string minPicPath = Config.MinPicPath;
-                string webPath = HttpContext.Current.Server.MapPath("~");
+                string webPath = HttpContext.Current.Server.MapPath("~") + SampleConfig.GetSampleConfig().SampleFilePath;
                 string picPath = webPath + @"pic\";
                 string minPicPath = webPath + @"pic\MinPic\";
                 HttpFileCollection files = HttpContext.Current.Request.Files;
@@ -173,10 +173,10 @@ namespace SampleApi.Controllers.Sample
                         ImageHelper.MakeSmallImg(filepath, minPicPath + filename, 300, 300);
                         DirFileHelper.DeleteFile(filepath);
 
-                        SessionManage.CurrentSample.AddFile(filename, picPath + filename, fname, FileType.Pic);
+                        SessionManage.CurrentSample.AddFile(filename, "", fname, FileType.Pic);
                     }
                 }
-                return Ok(new { url = filename, name = filename });
+                return Ok(new { name = filename });
             //}
             //catch (Exception e)
             //{
@@ -190,7 +190,7 @@ namespace SampleApi.Controllers.Sample
             try
             {
                 //string filePath = Config.FilePath;
-                string webPath = HttpContext.Current.Server.MapPath("~");
+                string webPath = HttpContext.Current.Server.MapPath("~")+SampleConfig.GetSampleConfig().SampleFilePath;
                 string filePath = webPath+ @"uploadfile\";
                 HttpFileCollection files = HttpContext.Current.Request.Files;
                 string filename = "";
@@ -204,10 +204,10 @@ namespace SampleApi.Controllers.Sample
                         filename = SessionManage.CurrentSample.StyleId + file.FileName;
                         UploadHelper.FileUpload(file, filePath, filename);
                         //file.SaveAs(filePath + filename);
-                        SessionManage.CurrentSample.AddFile(filename, filePath + filename, file.FileName, FileType.File);
+                        SessionManage.CurrentSample.AddFile(filename, "", file.FileName, FileType.File);
                     }
                 }
-                return Ok(new { url = filename, name = filename });
+                return Ok(new {  name = filename });
             }
             catch (Exception e)
             {

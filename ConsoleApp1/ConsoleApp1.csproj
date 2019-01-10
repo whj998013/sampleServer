@@ -85,6 +85,10 @@
       <Project>{98ed601d-c798-400b-9258-b9123b2072c5}</Project>
       <Name>SG.SessionManage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SysBLL\SysBLL.csproj">
       <Project>{b923e651-64a0-4bee-81ba-317e5b712749}</Project>
       <Name>SysBLL</Name>

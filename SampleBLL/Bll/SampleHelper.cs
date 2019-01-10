@@ -9,6 +9,7 @@ using SG.Model.Product;
 using SampleDataOper;
 using SG.Utilities;
 using SG.Interface.Product;
+using SG.Interface.Sys;
 namespace SampleBLL
 {
     /// <summary>

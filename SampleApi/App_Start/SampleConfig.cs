@@ -17,6 +17,7 @@ namespace SampleApi
         private bool _AllSampleCanLend;
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
+        private string _SampleFilePath;
         private static SampleConfig _instance = null; //单列对象
         public static SampleConfig GetSampleConfig()
         {
@@ -29,8 +30,16 @@ namespace SampleApi
             _InStrageAlowChange = ConfigHelper.GetValue("InStrageAlowChange") == "true" ? true : false;
             _EnableLimtView = ConfigHelper.GetValue("EnableLimtView") == "true" ? true : false;
             _AllSampleCanLend = ConfigHelper.GetValue("AllSampleCanLend") == "true" ? true : false;
+            _SampleFilePath = ConfigHelper.GetValue("SampleFilePath");
             _SampleAdminRoleId = long.Parse(ConfigHelper.GetValue("SampleAdminRoleId"));
             _SampleDevelopmentRoleId = long.Parse(ConfigHelper.GetValue("SampleDevelopmentRoleId"));
+        }
+        public string SampleFilePath
+        {
+            get
+            {
+                return _SampleFilePath;
+            }
         }
 
         /// <summary>

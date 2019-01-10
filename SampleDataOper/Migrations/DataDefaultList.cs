@@ -32,7 +32,12 @@ namespace SampleDataOper.Migrations
               new Permission {  CnName = "手机端权限", Name = "Sample_Dd", Key = "P015000", UpKey = "P010000" },
               new Permission {  CnName = "查看所有信息", Name = "Sample_Dd_ViewAllInfo", Key = "P015001", UpKey = "P015000" },
               new Permission {  CnName = "样衣借用", Name = "Sample_Dd_SampleLend", Key = "P015002", UpKey = "P015000" },
-              
+
+              new Permission {  CnName = "打样中心", Name = "Proof", Key = "P020000", UpKey = "P000000" },
+              new Permission {  CnName = "我的打样", Name = "Proof_MyProof", Key = "P020100", UpKey = "P020000" },
+              new Permission {  CnName = "打样管理", Name = "Proof_ProofMange", Key = "P020200", UpKey = "P020000" },
+
+
               new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000" },
               new Permission {  CnName = "角色权限配置", Name = "SystemMange_RoleUserMange", Key = "P990100", UpKey = "P990000" },
               new Permission {  CnName = "样衣系统配置", Name = "SystemMange_SampleMange", Key = "P990300", UpKey = "P990000" }
@@ -91,49 +96,60 @@ namespace SampleDataOper.Migrations
         {
             return new List<Code>()
             {
-                new Code { Id = 1, Type = CodeType.Color, CodeName = "红色" },
-                new Code { Id = 2, Type = CodeType.Color, CodeName = "黄色" },
-                new Code { Id = 3, Type = CodeType.Color, CodeName = "白色" },
-                new Code { Id = 4, Type = CodeType.Color, CodeName = "黑色" },
-                new Code { Id = 5, Type = CodeType.Color, CodeName = "蓝色" },
-                new Code { Id = 6, Type = CodeType.Color, CodeName = "绿色" },
-                new Code { Id = 7, Type = CodeType.Color, CodeName = "紫色" },
-                new Code { Id = 8, Type = CodeType.Size, CodeName = "XL" },
-                new Code { Id = 9, Type = CodeType.Size, CodeName = "L" },
-                new Code { Id = 10, Type = CodeType.Size, CodeName = "M" },
-                new Code { Id = 11, Type = CodeType.Size, CodeName = "S" },
-                new Code { Id = 12, Type = CodeType.Size, CodeName = "XS" },
-                new Code { Id = 13, Type = CodeType.Size, CodeName = "肥婆码" },
-                new Code { Id = 14, Type = CodeType.Gauge, CodeName = "粗针" },
-                new Code { Id = 15, Type = CodeType.Gauge, CodeName = "细针" },
-                new Code { Id = 16, Type = CodeType.Gauge, CodeName = "3G" },
-                new Code { Id = 17, Type = CodeType.Gauge, CodeName = "5G" },
-                new Code { Id = 18, Type = CodeType.Gauge, CodeName = "7G" },
-                new Code { Id = 19, Type = CodeType.Gauge, CodeName = "12G" },
-                new Code { Id = 20, Type = CodeType.Gauge, CodeName = "14G" },
-                new Code { Id = 21, Type = CodeType.Material, CodeName = "棉" },
-                new Code { Id = 22, Type = CodeType.Material, CodeName = "羊绒" },
-                new Code { Id = 23, Type = CodeType.Material, CodeName = "羊毛" },
-                new Code { Id = 24, Type = CodeType.Material, CodeName = "金银线" },
-                new Code { Id = 25, Type = CodeType.Tag, CodeName = "男装", Value1 = "#7B68EE" },
-                new Code { Id = 26, Type = CodeType.Tag, CodeName = "女装", Value1 = "#2F4F4F" },
-                new Code { Id = 27, Type = CodeType.Tag, CodeName = "童装", Value1 = "#C71585" },
-                new Code { Id = 28, Type = CodeType.Tag, CodeName = "春季", Value1 = "#FFA2D3" },
-                new Code { Id = 29, Type = CodeType.Tag, CodeName = "秋季", Value1 = "#DC143C" },
-                new Code { Id = 30, Type = CodeType.Tag, CodeName = "冬季", Value1 = "#48D1CC" },
-                new Code { Id = 31, Type = CodeType.Tag, CodeName = "流行款", Value1 = "#A52A2A" },
-                new Code { Id = 32, Type = CodeType.Tag, CodeName = "基本款", Value1 = "#8FBC8F" },
-                new Code { Id = 33, Type = CodeType.Tag, CodeName = "欧美风格", Value1 = "#00FF00" },
-                new Code { Id = 34, Type = CodeType.Kinds, CodeName = "初样" },
-                new Code { Id = 35, Type = CodeType.Kinds, CodeName = "开发样" },
-                new Code { Id = 36, Type = CodeType.Kinds, CodeName = "生产样" },
-                new Code { Id = 37, Type = CodeType.Kinds, CodeName = "合同样" },
-                new Code { Id = 38, Type = CodeType.Kinds, CodeName = "推销样留底" },
-                new Code { Id = 39, Type = CodeType.Kinds, CodeName = "复办" },
-                new Code { Id = 40, Type = CodeType.Kinds, CodeName = "外购" },
-                new Code { Id = 41, Type = CodeType.Size, CodeName = "均码" }
+                new Code {  Type = CodeType.Color, CodeName = "红色" },
+                new Code {  Type = CodeType.Color, CodeName = "黄色" },
+                new Code {  Type = CodeType.Color, CodeName = "白色" },
+                new Code {  Type = CodeType.Color, CodeName = "黑色" },
+                new Code {  Type = CodeType.Color, CodeName = "蓝色" },
+                new Code {  Type = CodeType.Color, CodeName = "绿色" },
+                new Code {  Type = CodeType.Color, CodeName = "紫色" },
+                new Code {  Type = CodeType.Size, CodeName = "XL" },
+                new Code {  Type = CodeType.Size, CodeName = "L" },
+                new Code {  Type = CodeType.Size, CodeName = "M" },
+                new Code {  Type = CodeType.Size, CodeName = "S" },
+                new Code {  Type = CodeType.Size, CodeName = "XS" },
+                new Code {  Type = CodeType.Size, CodeName = "肥婆码" },
+                new Code {  Type = CodeType.Gauge, CodeName = "粗针" },
+                new Code {  Type = CodeType.Gauge, CodeName = "细针" },
+                new Code {  Type = CodeType.Gauge, CodeName = "3G" },
+                new Code {  Type = CodeType.Gauge, CodeName = "5G" },
+                new Code {  Type = CodeType.Gauge, CodeName = "7G" },
+                new Code {  Type = CodeType.Gauge, CodeName = "12G" },
+                new Code {  Type = CodeType.Gauge, CodeName = "14G" },
+                new Code {  Type = CodeType.Tag, CodeName = "男装", Value1 = "#7B68EE" },
+                new Code {  Type = CodeType.Tag, CodeName = "女装", Value1 = "#2F4F4F" },
+                new Code {  Type = CodeType.Tag, CodeName = "童装", Value1 = "#C71585" },
+                new Code {  Type = CodeType.Tag, CodeName = "春季", Value1 = "#FFA2D3" },
+                new Code {  Type = CodeType.Tag, CodeName = "秋季", Value1 = "#DC143C" },
+                new Code {  Type = CodeType.Tag, CodeName = "冬季", Value1 = "#48D1CC" },
+                new Code {  Type = CodeType.Tag, CodeName = "流行款", Value1 = "#A52A2A" },
+                new Code {  Type = CodeType.Tag, CodeName = "基本款", Value1 = "#8FBC8F" },
+                new Code {  Type = CodeType.Tag, CodeName = "欧美风格", Value1 = "#00FF00" },
+                new Code {  Type = CodeType.Kinds, CodeName = "初样" },
+                new Code {  Type = CodeType.Kinds, CodeName = "开发样" },
+                new Code {  Type = CodeType.Kinds, CodeName = "生产样" },
+                new Code {  Type = CodeType.Kinds, CodeName = "合同样" },
+                new Code {  Type = CodeType.Kinds, CodeName = "推销样留底" },
+                new Code {  Type = CodeType.Kinds, CodeName = "复办" },
+                new Code {  Type = CodeType.Kinds, CodeName = "外购" },
+                new Code {  Type = CodeType.Size, CodeName = "均码" }
 
             };
+        }
+
+        public static List<Km> GetKmList()
+        {
+            return new List<Km>
+            {
+                new Km{KeyName="SampleLend",KeyValue=10000001,BeginKey="SL",Comment="样衣借用单"},
+                new Km{KeyName="SampleInfo",KeyValue=10000001,BeginKey="SI",Comment="样衣信息"},
+                new Km{KeyName="Stock",KeyValue=10000001,BeginKey="ST",Comment="样衣库存信息"},
+                new Km{KeyName="ProofOrder",KeyValue=10000001,BeginKey="PO",Comment="打样申请单"},
+                new Km{KeyName="ProofStyle",KeyValue=10000001,BeginKey="PS",Comment="打样款式信息"},
+
+
+            };
+
         }
 
     }

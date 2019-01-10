@@ -55,7 +55,16 @@ namespace SampleDataOper.Migrations
                 p.Id = i++;
                 context.Permissions.AddOrUpdate(m => m.Key,p );
             });
+
+            DataDefaultList.GetKmList().ForEach(p =>
+            {
+                if (context.KMs.SingleOrDefault(t => t.KeyName == p.KeyName) == null)
+                {
+                    context.KMs.Add(p);
+                }
+              });
             context.SaveChanges();
         }
+       
     }
 }

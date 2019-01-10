@@ -50,7 +50,7 @@ namespace SampleBLL
         {
             using (SampleContext sc = new SampleContext())
             {
-                var list = sc.Codes.Where(p => p.Type == CodeType.Color).OrderByDescending(t=>t.UseCount).Select(p => p.CodeName).ToList();
+                var list = sc.Codes.Where(p => p.Type == CodeType.Color).OrderByDescending(t=>t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
             }
         }
@@ -59,7 +59,7 @@ namespace SampleBLL
         {
             using (SampleContext sc = new SampleContext())
             {
-                var list = sc.Codes.Where(p => p.Type == CodeType.Size).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).ToList();
+                var list = sc.Codes.Where(p => p.Type == CodeType.Size).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
             }
         }
@@ -68,7 +68,7 @@ namespace SampleBLL
         {
             using (SampleContext sc = new SampleContext())
             {
-                var list = sc.Codes.Where(p => p.Type == CodeType.Gauge).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).ToList();
+                var list = sc.Codes.Where(p => p.Type == CodeType.Gauge).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
             }
         }
@@ -77,7 +77,7 @@ namespace SampleBLL
         {
             using (SampleContext sc = new SampleContext())
             {
-                var list = sc.Codes.Where(p => p.Type == CodeType.Kinds).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).ToList();
+                var list = sc.Codes.Where(p => p.Type == CodeType.Kinds).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
             }
         }

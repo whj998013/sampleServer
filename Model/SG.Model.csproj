@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Proof\ProofOrder.cs" />
+    <Compile Include="Proof\ProofStyle.cs" />
+    <Compile Include="Proof\ProofType.cs" />
     <Compile Include="Stock\Garment\Garment.cs" />
     <Compile Include="Stock\Goods.cs" />
     <Compile Include="Sys\Dept.cs" />
@@ -63,7 +66,7 @@
     <Compile Include="Sample\SampleBaseInfo.cs" />
     <Compile Include="Sample\SampleLendout.cs" />
     <Compile Include="Sample\SampleReturn.cs" />
-    <Compile Include="Sample\StyleFile.cs" />
+    <Compile Include="Sys\StyleFile.cs" />
     <Compile Include="Stock\Garment\GarmentStock.cs" />
     <Compile Include="Sys\Permission.cs" />
     <Compile Include="Sys\Role.cs" />

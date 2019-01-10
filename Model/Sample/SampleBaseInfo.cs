@@ -18,7 +18,6 @@ namespace SG.Model.Sample
         /// 款号
         /// </summary>
         public string StyleNo { get; set; }
-
         /// <summary>
         /// 部门
         /// </summary>
