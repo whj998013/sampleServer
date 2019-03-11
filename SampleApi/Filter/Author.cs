@@ -8,6 +8,7 @@ using System.Web.Http.Filters;
 using SG.SessionManage;
 namespace SampleApi
 {
+    //test
     public class Author : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
@@ -18,7 +19,6 @@ namespace SampleApi
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
                 HttpContext.Current.Response.Write("{code:0,msg:'身份验证过期或未登录，需重新验证。'}");
             }
-
         }
 
     }

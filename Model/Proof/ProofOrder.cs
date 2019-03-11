@@ -54,7 +54,7 @@ namespace SG.Model.Proof
         /// </summary>
         public DateTime? FinshDate { get; set; }
 
-       /// <summary>
+        /// <summary>
         /// 备注
         /// </summary>
         public string Remark { get; set; }
