@@ -7,7 +7,7 @@ using SampleDataOper;
 using SG.Interface.Sample;
 using SG.Model.Sys;
 using SG.Interface.Sys;
-
+using SG.Utilities;
 namespace SysBLL
 {
     public class UserOper
@@ -90,6 +90,7 @@ namespace SysBLL
             {
                 SetLoginInfo(ref user);
                 user.SetCreateUser("system");
+                user.Pinyin = PinyinHelper.PinyinString(user.UserName);
                 sc.Users.Add(user);
                 sc.SaveChanges();
             }
@@ -103,13 +104,16 @@ namespace SysBLL
                 ulist.ForEach(p => p.IsDelete = true);
                 users.ForEach(p =>
                 {
+                    
                     var u = ulist.SingleOrDefault(t => t.DdId == p.DdId);
                     if (u == null)
                     {
+                        p.Pinyin = PinyinHelper.PinyinString(p.UserName);
                         sc.Users.Add(p);
                     }
                     else
                     {
+                        u.Pinyin = PinyinHelper.PinyinString(u.UserName);
                         u.UserName = p.UserName;
                         u.IsLeader = p.IsLeader;
                         u.DeptId = p.DeptId;

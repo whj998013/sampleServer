@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SG.Model.Sys;
 using SG.Model.Sample;
 using SG.Interface.Sys;
+using SG.Model.Proof;
 
 namespace SampleDataOper.Migrations
 {
@@ -150,6 +151,22 @@ namespace SampleDataOper.Migrations
 
             };
 
+        }
+        public static List<ProofType> GetProofTypeList()
+        {
+            return new List<ProofType>
+            {
+                new ProofType{TypeName="初样",ProofPrice=0},
+                new ProofType{TypeName="修正样",ProofPrice=0},
+                new ProofType{TypeName="齐码样",ProofPrice=0},
+                new ProofType{TypeName="测试样",ProofPrice=0},
+                new ProofType{TypeName="试身样",ProofPrice=0},
+                new ProofType{TypeName="黑板",ProofPrice=0},
+                new ProofType{TypeName="白板",ProofPrice=0},
+                new ProofType{TypeName="齐色样",ProofPrice=0},
+                new ProofType{TypeName="颜色样",ProofPrice=0}
+
+            };
         }
 
     }

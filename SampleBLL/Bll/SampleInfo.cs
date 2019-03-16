@@ -12,6 +12,7 @@ using SG.Model.Sample;
 using SG.Model.Stock;
 using SG.Model.Product;
 using SG.Interface.Sys;
+using SysBLL;
 
 namespace SampleBLL
 {

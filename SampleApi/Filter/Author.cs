@@ -8,7 +8,7 @@ using System.Web.Http.Filters;
 using SG.SessionManage;
 namespace SampleApi
 {
-    //test
+    
     public class Author : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)

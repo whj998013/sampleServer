@@ -25,8 +25,10 @@ namespace SG.Model.Sys
         public string LoginStr { get; set; }
         public UserRoleU Role { get; set; }
         public DateTime? LoginOverTime { get; set; }
+        public string Pinyin { get; set; }
         [NotMapped]
         public string Ticket { get; set; }
+       
     }
 
 

@@ -25,9 +25,9 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-
-
-            Test2();
+            Console.Write(PinyinHelper.PinyinString("余廷雷"));
+            Console.ReadKey();
+           
 
         }
 

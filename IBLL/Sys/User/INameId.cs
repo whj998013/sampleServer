@@ -10,5 +10,6 @@ namespace SG.Interface.Sys
     {
         string DdId { get; set; }
         string UserName { get; set; }
+      
     }
 }

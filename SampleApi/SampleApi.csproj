@@ -100,6 +100,8 @@
     <Compile Include="Controllers\DdController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\KeyController.cs" />
+    <Compile Include="Controllers\Proof\NewProofController.cs" />
+    <Compile Include="Controllers\Public\PublicController.cs" />
     <Compile Include="Controllers\Sample\LendOutController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Sample\ManageController.cs" />
@@ -136,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Proof\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
@@ -154,6 +155,10 @@
     <ProjectReference Include="..\Model\SG.Model.csproj">
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProofBLL\ProofBLL.csproj">
+      <Project>{b73631ff-5811-4a33-b724-c2dfc8c65589}</Project>
+      <Name>ProofBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\SampleBLL\SampleBLL.csproj">
       <Project>{05806ebf-4d3b-4a2c-831d-963bcae85d79}</Project>

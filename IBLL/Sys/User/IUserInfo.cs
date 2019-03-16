@@ -10,5 +10,6 @@ namespace SG.Interface.Sys
     {
         string DepartName { get; set; }
         string Avatar { get; set; }
+        string Pinyin { get; set; }
     }
 }

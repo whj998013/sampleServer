@@ -15,7 +15,7 @@ using SampleBLL.Model;
 using SG.Interface.Sample;
 using SG.Interface.Sys;
 using SG.Model.Sys;
-
+using SysBLL;
 namespace SampleApi.Controllers.Sample
 {
 
@@ -130,18 +130,7 @@ namespace SampleApi.Controllers.Sample
                 return BadRequest(e.Message);
             }
         }
-        [HttpGet]
-        public object GetSelectList()
-        {
-            object ColorList = CodeOper.GetColorList();
-            object SizeList = CodeOper.GetSizeList();
-            object GaugeList = CodeOper.GetGaugeList();
-            object MaterialList = CodeOper.GetMaterialList();
-            object TagList = CodeOper.GetTagList();
-            object KindsList = CodeOper.GetKindsList();
-            return Ok(new { ColorList, SizeList, GaugeList, MaterialList, TagList, KindsList });
-        }
-
+     
         public object UpLoadPic()
         {
             //try

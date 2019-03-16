@@ -63,8 +63,17 @@ namespace SampleDataOper.Migrations
                     context.KMs.Add(p);
                 }
               });
+
+            DataDefaultList.GetProofTypeList().ForEach(p =>
+            {
+                if (context.ProofTypes.SingleOrDefault(t => t.TypeName == p.TypeName) == null)
+                {
+                    context.ProofTypes.Add(p);
+                }
+            });
             context.SaveChanges();
+
         }
-       
+
     }
 }
