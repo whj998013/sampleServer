@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using SG.Utilities;
 namespace SampleApi
 {
+  
     /// <summary>
     /// 系统配置项
     /// </summary>
-    public class SampleConfig
+    public class Config
     {
+
+        private  string _ProofFilePath;
         private bool _IsInputStrageNeedAlow;
         private bool _InStrageAlowChange;
         private bool _EnableLimtView;
@@ -18,13 +21,13 @@ namespace SampleApi
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
         private string _SampleFilePath;
-        private static SampleConfig _instance = null; //单列对象
-        public static SampleConfig GetSampleConfig()
+        private static Config _instance = null; //单列对象
+        public static Config GetSampleConfig()
         {
-            if (_instance == null) _instance = new SampleConfig();
+            if (_instance == null) _instance = new Config();
             return _instance;
         }
-        private SampleConfig()
+        private Config()
         {
             _IsInputStrageNeedAlow = ConfigHelper.GetValue("IsInputStrageNeedAlow") == "true" ? true : false;
             _InStrageAlowChange = ConfigHelper.GetValue("InStrageAlowChange") == "true" ? true : false;
@@ -33,6 +36,14 @@ namespace SampleApi
             _SampleFilePath = ConfigHelper.GetValue("SampleFilePath");
             _SampleAdminRoleId = long.Parse(ConfigHelper.GetValue("SampleAdminRoleId"));
             _SampleDevelopmentRoleId = long.Parse(ConfigHelper.GetValue("SampleDevelopmentRoleId"));
+            _ProofFilePath = ConfigHelper.GetValue("ProofFilePath");
+        }
+        public string ProofFilePath
+        {
+            get
+            {
+                return _ProofFilePath;
+            }
         }
         public string SampleFilePath
         {

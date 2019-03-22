@@ -60,5 +60,13 @@ namespace SampleDataOper
             if (whereLambda == null) whereLambda = p => true;
             return new SampleContext().Set<T>().Where(whereLambda).ToList();
         }
+
+        public static T GetSingle<T>(Func<T, bool> whereLambda=null)  where T:class
+        {
+            if (whereLambda == null) whereLambda = p => true;
+            return new SampleContext().Set<T>().Where(whereLambda).ToList().FirstOrDefault();
+        }
+            
+       
     }
 }

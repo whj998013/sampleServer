@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,7 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Proof\FileItemMode.cs" />
+    <Compile Include="Proof\ProofFile.cs" />
+    <Compile Include="Proof\ProofObj.cs" />
     <Compile Include="Proof\ProofOrder.cs" />
+    <Compile Include="Proof\ProofStatus.cs" />
     <Compile Include="Proof\ProofStyle.cs" />
     <Compile Include="Proof\ProofType.cs" />
     <Compile Include="Stock\Garment\Garment.cs" />
@@ -86,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Proof\ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

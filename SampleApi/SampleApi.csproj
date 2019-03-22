@@ -58,6 +58,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -94,12 +95,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\SampleConfig.cs" />
+    <Compile Include="config\Config.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="App_Start\WebConfig.cs" />
     <Compile Include="Controllers\DdController.cs" />
-    <Compile Include="Controllers\FileController.cs" />
-    <Compile Include="Controllers\KeyController.cs" />
+    <Compile Include="Controllers\Proof\MyProofController.cs" />
     <Compile Include="Controllers\Proof\NewProofController.cs" />
     <Compile Include="Controllers\Public\PublicController.cs" />
     <Compile Include="Controllers\Sample\LendOutController.cs" />

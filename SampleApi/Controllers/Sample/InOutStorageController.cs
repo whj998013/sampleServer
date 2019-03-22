@@ -24,7 +24,7 @@ namespace SampleApi.Controllers.Sample
             {
                 ISampleBaseInfo sample = new SampleBaseInfo();
                 string title, content;
-                if (SampleConfig.GetSampleConfig().IsInputStrageNeedAlow)
+                if (Config.GetSampleConfig().IsInputStrageNeedAlow)
                 {
                     sample = SampleOper.RequestPutInStorage(id);
                     title = "已发送入库申请";

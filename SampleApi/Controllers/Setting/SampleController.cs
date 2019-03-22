@@ -21,10 +21,10 @@ namespace SampleApi.Controllers.Setting
         {
             var obj = new BaseSetting
             {
-               IsInputStrageNeedAlow=SampleConfig.GetSampleConfig().IsInputStrageNeedAlow,
-               InStrageAlowChange= SampleConfig.GetSampleConfig().InStrageAlowChange,
-               EnableLimtView= SampleConfig.GetSampleConfig().EnableLimtView,
-               AllSampleCanLend= SampleConfig.GetSampleConfig().AllSampleCanLend,
+               IsInputStrageNeedAlow=Config.GetSampleConfig().IsInputStrageNeedAlow,
+               InStrageAlowChange= Config.GetSampleConfig().InStrageAlowChange,
+               EnableLimtView= Config.GetSampleConfig().EnableLimtView,
+               AllSampleCanLend= Config.GetSampleConfig().AllSampleCanLend,
             };
             return Ok(obj);
         }
@@ -32,10 +32,10 @@ namespace SampleApi.Controllers.Setting
         {
             try
             {
-                SampleConfig.GetSampleConfig().IsInputStrageNeedAlow = obj.IsInputStrageNeedAlow;
-                SampleConfig.GetSampleConfig().InStrageAlowChange = obj.InStrageAlowChange;
-                SampleConfig.GetSampleConfig().EnableLimtView = obj.EnableLimtView;
-                SampleConfig.GetSampleConfig().AllSampleCanLend = obj.AllSampleCanLend;
+                Config.GetSampleConfig().IsInputStrageNeedAlow = obj.IsInputStrageNeedAlow;
+                Config.GetSampleConfig().InStrageAlowChange = obj.InStrageAlowChange;
+                Config.GetSampleConfig().EnableLimtView = obj.EnableLimtView;
+                Config.GetSampleConfig().AllSampleCanLend = obj.AllSampleCanLend;
                 return Ok();
             }
             catch (Exception e)

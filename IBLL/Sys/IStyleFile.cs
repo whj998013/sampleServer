@@ -12,10 +12,15 @@
 
     public enum FileType
     {
+        //图片
         Pic = 0,
+        //文件
         File = 1,
+        //用户文件
         ClientFile=2,
+        //工艺文件
         TechnologyFile=3,
+        //制版文件
         PlatemakingFile=4
     }
 }

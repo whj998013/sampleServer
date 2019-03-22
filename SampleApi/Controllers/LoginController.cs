@@ -133,9 +133,9 @@ namespace SampleApi.Controllers
     {
         public static object ReturnUser(User _user)
         {
-            bool enableLimtView = SampleConfig.GetSampleConfig().EnableLimtView;
+            bool enableLimtView = Config.GetSampleConfig().EnableLimtView;
             _user.Ticket = DESEncrypt.Encrypt((_user.UserName + DateTime.Now.ToLongTimeString()).GetHashCode().ToString());
-            bool allSampleCanLend = SampleConfig.GetSampleConfig().AllSampleCanLend;
+            bool allSampleCanLend = Config.GetSampleConfig().AllSampleCanLend;
             var plist = new UrpOper().GetPermissionsKeys(_user.DdId);
             var setting = new { enableLimtView, allSampleCanLend };
             return new { _user.UserName, _user.Avatar, LoginCookie = DESEncrypt.Encrypt(_user.LoginStr, "998013"), _user.LoginOverTime, _user.Ticket, _user.Role, setting, plist };

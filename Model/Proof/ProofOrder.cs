@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +11,17 @@ namespace SG.Model.Proof
     /// <summary>
     /// 打样申请单
     /// </summary>
-   public class ProofOrder:BaseModel
+    public class ProofOrder : BaseModel
     {
+
         public int Id { get; set; }
         /// <summary>
         /// 打样单编号
         /// </summary>
+
         public string ProofOrderId { get; set; }
 
-        /// <summary>
-        /// 打样款式ID
-        /// </summary>
+
         public ProofStyle ProofStyle { get; set; }
         /// <summary>
         /// 申请用户DDid
@@ -28,6 +30,7 @@ namespace SG.Model.Proof
         /// <summary>
         /// 申请人姓名
         /// </summary>
+        [Required]
         public string ProofApplyUserName { get; set; }
         /// <summary>
         /// 申请部门名
@@ -40,11 +43,27 @@ namespace SG.Model.Proof
         /// <summary>
         /// 打样状态 草拟 审批 退回  排单 打样中 完成
         /// </summary>
-        public string ProofStatus { get; set; }
+        public ProofStatus ProofStatus { get; set; }
+
+        /// <summary>
+        /// 状态文本
+        /// </summary>
+        [NotMapped]
+        public string ProofStatusText
+        {
+            get
+            {
+                return ProofStatus.ToString();
+            }
+        }
         /// <summary>
         /// 要求完成日期
         /// </summary>
         public DateTime? RequiredDate { get; set; }
+        /// <summary>
+        /// 打样数量
+        /// </summary>
+        public int ProofNum { get; set; }
         /// <summary>
         /// 接收日期
         /// </summary>

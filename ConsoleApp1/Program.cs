@@ -25,7 +25,25 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            Console.Write(PinyinHelper.PinyinString("余廷雷"));
+            ProofStyle ps = new ProofStyle();
+            ProofOrder po = new ProofOrder();
+            ps.ProofStyleId = "ps1222";
+            po.ProofOrderId = "po1";
+            po.ProofStatus = ProofStatus.完成;
+            po.ProofApplyUserName = "aaa";
+            po.ProofStyle = ps;
+
+            SampleContext sc = new SampleContext();
+            //sc.ProofStyles.Add(ps);
+            //sc.SaveChanges();
+           // sc.ProofOrders.Add(po);
+           
+            //sc.SaveChanges();
+            
+            var po2 = sc.ProofOrders.Include("ProofStyle").SingleOrDefault();
+          //  var pss = sc.ProofStyles.ToList();
+
+            Console.WriteLine(po2.ProofStyle.ProofStyleId);
             Console.ReadKey();
            
 

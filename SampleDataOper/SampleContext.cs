@@ -14,7 +14,7 @@ namespace SampleDataOper
 {
     public class SampleContext : DbContext
     {
-
+        
         /// <summary>
         /// 样品信息表
         /// </summary>
@@ -82,9 +82,9 @@ namespace SampleDataOper
         /// 单位表
         /// </summary>
         public DbSet<Unit> Units { get; set; }
-        /// <summary>
-        /// 打样申请单
-        /// </summary>
+        // <summary>
+        // 打样申请单
+        //</summary>
         public DbSet<ProofOrder> ProofOrders { get; set; }
         /// <summary>
         /// 打样款式表
@@ -94,8 +94,18 @@ namespace SampleDataOper
         /// 打样类别表
         /// </summary>
         public DbSet<ProofType> ProofTypes { get; set; }
+        /// <summary>
+        /// 打样文件表
+        /// </summary>
+        public DbSet<ProofFile> ProofFiles { get; set; }
 
-      
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 
 }

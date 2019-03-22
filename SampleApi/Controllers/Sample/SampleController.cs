@@ -135,9 +135,8 @@ namespace SampleApi.Controllers.Sample
         {
             //try
             //{
-                string picPath2 = Config.PicPath;
                 //string minPicPath = Config.MinPicPath;
-                string webPath = HttpContext.Current.Server.MapPath("~") + SampleConfig.GetSampleConfig().SampleFilePath;
+                string webPath = HttpContext.Current.Server.MapPath("~") + Config.GetSampleConfig().SampleFilePath;
                 string picPath = webPath + @"pic\";
                 string minPicPath = webPath + @"pic\MinPic\";
                 HttpFileCollection files = HttpContext.Current.Request.Files;
@@ -179,7 +178,7 @@ namespace SampleApi.Controllers.Sample
             try
             {
                 //string filePath = Config.FilePath;
-                string webPath = HttpContext.Current.Server.MapPath("~")+SampleConfig.GetSampleConfig().SampleFilePath;
+                string webPath = HttpContext.Current.Server.MapPath("~")+Config.GetSampleConfig().SampleFilePath;
                 string filePath = webPath+ @"uploadfile\";
                 HttpFileCollection files = HttpContext.Current.Request.Files;
                 string filename = "";

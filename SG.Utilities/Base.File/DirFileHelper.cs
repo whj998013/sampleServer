@@ -232,10 +232,15 @@ namespace SG.Utilities
         /// 删除文件
         /// </summary>
         /// <param name="file">要删除的文件路径和名称</param>
-        public static void DeleteFile(string file)
+        public static bool DeleteFile(string file)
         {
-            if (File.Exists( file))
-                File.Delete( file);
+            if (File.Exists(file))
+            {
+                File.Delete(file);
+                return true;
+            }
+            else return false;
+
         }
         #endregion
 
@@ -274,7 +279,7 @@ namespace SG.Utilities
             dir1 = dir1.Replace("/", "\\");
             dir2 = dir2.Replace("/", "\\");
             if (File.Exists(dir1))
-                File.Move( dir1,  dir2);
+                File.Move(dir1, dir2);
         }
         #endregion
 

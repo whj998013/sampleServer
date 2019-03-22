@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +11,32 @@ namespace SG.Model.Proof
     /// <summary>
     /// 打样款式信息
     /// </summary>
-    public class ProofStyle: BaseModel
+    public class ProofStyle : BaseModel
     {
+
         public int Id { get; set; }
         /// <summary>
         /// 款式ID
         /// </summary>
+
         public string ProofStyleId { get; set; }
 
         /// <summary>
+        /// 打样申请单ID
+        /// </summary>
+        public string ProofOrderId { get; set; }
+        /// <summary>
         /// 打样类别：初样、修改样
         /// </summary>
-        public ProofType ProofType { get; set; }       
+        public ProofType ProofType { get; set; }
+        [NotMapped]
+        public string ProofTypeText
+        {
+            get
+            {
+                return ProofType.TypeName;
+            }
+        }
         // <summary>
         /// 款号
         /// </summary>
@@ -53,6 +69,11 @@ namespace SG.Model.Proof
         /// 针型
         /// </summary>
         public string Gauge { get; set; }
-        
+        /// <summary>
+        /// 打样文件
+        /// </summary>
+
+        public List<ProofFile> ProofFiles { get; set; } = new List<ProofFile>();
+
     }
 }
