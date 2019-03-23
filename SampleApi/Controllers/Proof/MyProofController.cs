@@ -7,6 +7,7 @@ using System.Web.Http;
 using ProofBLL;
 using SG.Model.Sys;
 using SG.SessionManage;
+using SG.Model.Proof;
 
 namespace SampleApi.Controllers.Proof
 {
@@ -17,7 +18,8 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult GetMyProofs()
         {
             User u = SessionManage.CurrentUser;
-            var list=ProofOrderOper.GetProofOrderList(u);
+            ProofOrderOper poo = new ProofOrderOper(u);
+            var list = poo.GetUserProofOrderList();
 
             return Ok(list);
         }
@@ -26,5 +28,20 @@ namespace SampleApi.Controllers.Proof
 
             return Ok();
         }
+        /// <summary>
+        /// 提交审批
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IHttpActionResult SubmitProof(dynamic proof)
+        {
+            User u = SessionManage.CurrentUser;
+            string proofOrderId = (string)proof.ProofOrderId;
+            ProofOrder po = new ProofOrderOper(u).GetProof(proofOrderId);
+
+
+            return Ok();
+        }
     }
+
 }

@@ -13,7 +13,7 @@ namespace DingTalk.Api.Request
     public class OapiImpaasUserGetprofileRequest : BaseDingTalkRequest<DingTalk.Api.Response.OapiImpaasUserGetprofileResponse>
     {
         /// <summary>
-        /// 获取profile入参
+        /// 获取用户属性入参
         /// </summary>
         public string Request { get; set; }
 
@@ -55,19 +55,19 @@ namespace DingTalk.Api.Request
 public class AccountInfoDomain : TopObject
 {
 	        /// <summary>
-	        /// 类型为channelUser有效
+	        /// type为channelUser时有效。接入方channel信息，该值由接入方接入IMPaaS平台时，向IMPaaS平台申请，例如“hema”“eleme”等。
 	        /// </summary>
 	        [XmlElement("channel")]
 	        public string Channel { get; set; }
 	
 	        /// <summary>
-	        /// 用户类型对应id
+	        /// 待操作成员id，ID类型由type字段确定。当type为“staff”时，本字段填写staffid，当type为“channelUser”时，本字段填写channelUserId。
 	        /// </summary>
 	        [XmlElement("id")]
 	        public string Id { get; set; }
 	
 	        /// <summary>
-	        /// 用户类型 员工:staff 二方：channelUser
+	        /// 代操作成员ID类型，目前支持“staff” “channelUser”两种类型
 	        /// </summary>
 	        [XmlElement("type")]
 	        public string Type { get; set; }

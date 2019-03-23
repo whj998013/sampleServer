@@ -22,6 +22,11 @@ namespace DingTalk.Api.Request
         public string CheckDateTo { get; set; }
 
         /// <summary>
+        /// 是否国际化
+        /// </summary>
+        public Nullable<bool> IsI18n { get; set; }
+
+        /// <summary>
         /// 企业内的员工id列表，最多不能超过50个
         /// </summary>
         public List<string> UserIds { get; set; }
@@ -43,6 +48,7 @@ namespace DingTalk.Api.Request
             TopDictionary parameters = new TopDictionary();
             parameters.Add("checkDateFrom", this.CheckDateFrom);
             parameters.Add("checkDateTo", this.CheckDateTo);
+            parameters.Add("isI18n", this.IsI18n);
             parameters.Add("userIds", TopUtils.ObjectToJson(this.UserIds));
             if (this.otherParams != null)
             {
@@ -53,6 +59,9 @@ namespace DingTalk.Api.Request
 
         public override void Validate()
         {
+            RequestValidator.ValidateRequired("checkDateFrom", this.CheckDateFrom);
+            RequestValidator.ValidateRequired("checkDateTo", this.CheckDateTo);
+            RequestValidator.ValidateRequired("userIds", this.UserIds);
         }
 
         #endregion

@@ -91,6 +91,12 @@ public class RecordresultDomain : TopObject
 	        public string CheckType { get; set; }
 	
 	        /// <summary>
+	        /// classId
+	        /// </summary>
+	        [XmlElement("classId")]
+	        public long ClassId { get; set; }
+	
+	        /// <summary>
 	        /// deviceId
 	        /// </summary>
 	        [XmlElement("deviceId")]
@@ -119,6 +125,18 @@ public class RecordresultDomain : TopObject
 	        /// </summary>
 	        [XmlElement("id")]
 	        public long Id { get; set; }
+	
+	        /// <summary>
+	        /// invalidRecordMsg
+	        /// </summary>
+	        [XmlElement("invalidRecordMsg")]
+	        public string InvalidRecordMsg { get; set; }
+	
+	        /// <summary>
+	        /// invalidRecordType
+	        /// </summary>
+	        [XmlElement("invalidRecordType")]
+	        public string InvalidRecordType { get; set; }
 	
 	        /// <summary>
 	        /// isLegal

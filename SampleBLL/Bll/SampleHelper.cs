@@ -20,7 +20,7 @@ namespace SampleBLL
         public static dynamic GetDdLenOutObj(ILendRecord p)
         {
             object obj = null;
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(item => item.StyleId == p.StyleId);
                 if (sb != null)
@@ -50,7 +50,7 @@ namespace SampleBLL
 
         public static dynamic GetReturnObj(ISampleBaseInfo baseinfo)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 IProofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
@@ -106,7 +106,7 @@ namespace SampleBLL
 
         public static dynamic GetEditObj(ISampleBaseInfo baseinfo)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 IProofing pr = sc.Proofings.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);

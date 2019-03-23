@@ -26,8 +26,8 @@ namespace DingTalk.Api.Response
         /// 返回结果
         /// </summary>
         [XmlArray("result")]
-        [XmlArrayItem("emp_field_info_vo")]
-        public List<EmpFieldInfoVoDomain> Result { get; set; }
+        [XmlArrayItem("emp_field_info_v_o")]
+        public List<EmpFieldInfoVODomain> Result { get; set; }
 
         /// <summary>
         /// 调用是否成功
@@ -36,11 +36,11 @@ namespace DingTalk.Api.Response
         public bool Success { get; set; }
 
 	/// <summary>
-/// EmpFieldInfoVoDomain Data Structure.
+/// EmpFieldVODomain Data Structure.
 /// </summary>
 [Serializable]
 
-public class EmpFieldInfoVoDomain : TopObject
+public class EmpFieldVODomain : TopObject
 {
 	        /// <summary>
 	        /// 字段编码
@@ -61,10 +61,37 @@ public class EmpFieldInfoVoDomain : TopObject
 	        public string GroupId { get; set; }
 	
 	        /// <summary>
+	        /// 字段值翻译
+	        /// </summary>
+	        [XmlElement("label")]
+	        public string Label { get; set; }
+	
+	        /// <summary>
 	        /// 字段值
 	        /// </summary>
 	        [XmlElement("value")]
 	        public string Value { get; set; }
+}
+
+	/// <summary>
+/// EmpFieldInfoVODomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class EmpFieldInfoVODomain : TopObject
+{
+	        /// <summary>
+	        /// 字段信息列表
+	        /// </summary>
+	        [XmlArray("field_list")]
+	        [XmlArrayItem("emp_field_v_o")]
+	        public List<EmpFieldVODomain> FieldList { get; set; }
+	
+	        /// <summary>
+	        /// 员工id
+	        /// </summary>
+	        [XmlElement("userid")]
+	        public string Userid { get; set; }
 }
 
     }

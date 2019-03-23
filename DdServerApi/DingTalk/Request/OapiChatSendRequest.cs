@@ -53,6 +53,13 @@ namespace DingTalk.Api.Request
         public MarkdownDomain Markdown_ { set { this.Markdown = TopUtils.ObjectToJson(value); } } 
 
         /// <summary>
+        /// 消息格式
+        /// </summary>
+        public string Msg { get; set; }
+
+        public MsgDomain Msg_ { set { this.Msg = TopUtils.ObjectToJson(value); } } 
+
+        /// <summary>
         /// 消息类型
         /// </summary>
         public string Msgtype { get; set; }
@@ -99,6 +106,7 @@ namespace DingTalk.Api.Request
             parameters.Add("image", this.Image);
             parameters.Add("link", this.Link);
             parameters.Add("markdown", this.Markdown);
+            parameters.Add("msg", this.Msg);
             parameters.Add("msgtype", this.Msgtype);
             parameters.Add("oa", this.Oa);
             parameters.Add("text", this.Text);
@@ -336,12 +344,6 @@ public class OaDomain : TopObject
 public class VoiceDomain : TopObject
 {
 	        /// <summary>
-	        /// 时长
-	        /// </summary>
-	        [XmlElement("duration")]
-	        public string Duration { get; set; }
-	
-	        /// <summary>
 	        /// 语音mediaId
 	        /// </summary>
 	        [XmlElement("media_id")]
@@ -440,6 +442,82 @@ public class MarkdownDomain : TopObject
 	        /// </summary>
 	        [XmlElement("title")]
 	        public string Title { get; set; }
+}
+
+	/// <summary>
+/// BtnJsonListDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class BtnJsonListDomain : TopObject
+{
+	        /// <summary>
+	        /// action_url
+	        /// </summary>
+	        [XmlElement("action_url")]
+	        public string ActionUrl { get; set; }
+	
+	        /// <summary>
+	        /// title
+	        /// </summary>
+	        [XmlElement("title")]
+	        public string Title { get; set; }
+}
+
+	/// <summary>
+/// MsgDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class MsgDomain : TopObject
+{
+	        /// <summary>
+	        /// action_card
+	        /// </summary>
+	        [XmlElement("action_card")]
+	        public ActionCardDomain ActionCard { get; set; }
+	
+	        /// <summary>
+	        /// 文件消息
+	        /// </summary>
+	        [XmlElement("file")]
+	        public FileDomain File { get; set; }
+	
+	        /// <summary>
+	        /// 图片消息
+	        /// </summary>
+	        [XmlElement("image")]
+	        public ImageDomain Image { get; set; }
+	
+	        /// <summary>
+	        /// link消息
+	        /// </summary>
+	        [XmlElement("link")]
+	        public LinkDomain Link { get; set; }
+	
+	        /// <summary>
+	        /// 消息类型
+	        /// </summary>
+	        [XmlElement("msgtype")]
+	        public string Msgtype { get; set; }
+	
+	        /// <summary>
+	        /// oa消息
+	        /// </summary>
+	        [XmlElement("oa")]
+	        public OaDomain Oa { get; set; }
+	
+	        /// <summary>
+	        /// 文本消息
+	        /// </summary>
+	        [XmlElement("text")]
+	        public TextDomain Text { get; set; }
+	
+	        /// <summary>
+	        /// 语音消息
+	        /// </summary>
+	        [XmlElement("voice")]
+	        public VoiceDomain Voice { get; set; }
 }
 
         #endregion

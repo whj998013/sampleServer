@@ -20,7 +20,7 @@ namespace SampleDataOper
         public static List<T> GetRecords<T>(int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SampleContext().Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new SunginDataContext().Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace SampleDataOper
         public static List<T> GetRecords<T>(Func<T, bool> whereLambda=null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SampleContext().Set<T>().Where(whereLambda).Where(p=>p.IsDelete==false).ToList();
+            return new SunginDataContext().Set<T>().Where(whereLambda).Where(p=>p.IsDelete==false).ToList();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SampleDataOper
         public static List<T> GetAllRecords<T>( int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SampleContext().Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new SunginDataContext().Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
         /// <summary>
@@ -58,13 +58,13 @@ namespace SampleDataOper
         public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda=null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SampleContext().Set<T>().Where(whereLambda).ToList();
+            return new SunginDataContext().Set<T>().Where(whereLambda).ToList();
         }
 
         public static T GetSingle<T>(Func<T, bool> whereLambda=null)  where T:class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SampleContext().Set<T>().Where(whereLambda).ToList().FirstOrDefault();
+            return new SunginDataContext().Set<T>().Where(whereLambda).ToList().FirstOrDefault();
         }
             
        

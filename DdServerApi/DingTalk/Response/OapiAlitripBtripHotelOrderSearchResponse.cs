@@ -101,6 +101,12 @@ public class OpenPriceInfoDomain : TopObject
 	        public string Category { get; set; }
 	
 	        /// <summary>
+	        /// 流水创建时间
+	        /// </summary>
+	        [XmlElement("gmt_create")]
+	        public string GmtCreate { get; set; }
+	
+	        /// <summary>
 	        /// 结算方式:1个人现付，2:企业现付,4:企业月结，8企业预存
 	        /// </summary>
 	        [XmlElement("pay_type")]
@@ -229,10 +235,22 @@ public class OpenHotelOrderRsDomain : TopObject
 	        public long Night { get; set; }
 	
 	        /// <summary>
+	        /// 订单状态
+	        /// </summary>
+	        [XmlElement("order_status")]
+	        public long OrderStatus { get; set; }
+	
+	        /// <summary>
 	        /// 订单状态描述
 	        /// </summary>
 	        [XmlElement("order_status_desc")]
 	        public string OrderStatusDesc { get; set; }
+	
+	        /// <summary>
+	        /// 订单类型
+	        /// </summary>
+	        [XmlElement("order_type")]
+	        public long OrderType { get; set; }
 	
 	        /// <summary>
 	        /// 订单类型描述
@@ -258,6 +276,12 @@ public class OpenHotelOrderRsDomain : TopObject
 	        /// </summary>
 	        [XmlElement("room_type")]
 	        public string RoomType { get; set; }
+	
+	        /// <summary>
+	        /// 第三方行程id
+	        /// </summary>
+	        [XmlElement("thirdpart_itinerary_id")]
+	        public string ThirdpartItineraryId { get; set; }
 	
 	        /// <summary>
 	        /// 用户名称

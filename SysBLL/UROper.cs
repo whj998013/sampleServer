@@ -17,7 +17,7 @@ namespace SysBLL
         /// <param name="urList"></param>
         public void UpdateRoles(List<IUserRole> urList)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var re = sc.UserRoles.Where(p => p.RoleId > 0).ToList();
                 re.ForEach(p => p.IsDelete = true);
@@ -43,7 +43,7 @@ namespace SysBLL
         public void AddDefalutUR(INameId user)
         {
 
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 var userobj = sc.UserRoles.SingleOrDefault(p => p.RoleId == 0 && p.DdId == user.DdId);

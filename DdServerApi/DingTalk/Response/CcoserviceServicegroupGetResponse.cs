@@ -36,6 +36,12 @@ namespace DingTalk.Api.Response
 public class ServiceConversationModelDomain : TopObject
 {
 	        /// <summary>
+	        /// conversationType
+	        /// </summary>
+	        [XmlElement("conversation_type")]
+	        public long ConversationType { get; set; }
+	
+	        /// <summary>
 	        /// ownerDingtalkId
 	        /// </summary>
 	        [XmlElement("owner_dingtalk_id")]

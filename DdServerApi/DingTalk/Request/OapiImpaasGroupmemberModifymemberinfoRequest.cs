@@ -55,6 +55,12 @@ namespace DingTalk.Api.Request
 public class GroupMemberInfoDomain : TopObject
 {
 	        /// <summary>
+	        /// 扩展属性
+	        /// </summary>
+	        [XmlElement("ext")]
+	        public string Ext { get; set; }
+	
+	        /// <summary>
 	        /// 用户id
 	        /// </summary>
 	        [XmlElement("id")]

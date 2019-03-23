@@ -11,7 +11,7 @@ namespace SysBLL
         public static string GetKey(string keyName)
         {
             string k = "";
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var key = sc.KMs.Where(p => p.KeyName == keyName).SingleOrDefault();
                 if (key != null)

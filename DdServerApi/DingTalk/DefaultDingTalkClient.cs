@@ -309,7 +309,7 @@ namespace DingTalk.Api
                     {
                         IDingTalkUploadRequest<T> uRequest = (IDingTalkUploadRequest<T>)request;
                         IDictionary<string, FileItem> fileParams = TopUtils.CleanupDictionary(uRequest.GetFileParameters());
-                        body = webUtils.DoPost(realServerUrl, txtParams, fileParams, request.GetHeaderParameters());
+                        body = webUtils.DoPost(realServerUrl, null, fileParams, request.GetHeaderParameters());
                     }
                     else
                     {

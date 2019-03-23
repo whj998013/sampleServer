@@ -33,7 +33,7 @@ namespace ConsoleApp1
             po.ProofApplyUserName = "aaa";
             po.ProofStyle = ps;
 
-            SampleContext sc = new SampleContext();
+            SunginDataContext sc = new SunginDataContext();
             //sc.ProofStyles.Add(ps);
             //sc.SaveChanges();
            // sc.ProofOrders.Add(po);
@@ -66,7 +66,7 @@ namespace ConsoleApp1
         public static void Test2()
         {
 
-            SampleContext sc = new SampleContext();
+            SunginDataContext sc = new SunginDataContext();
             ProofOrder po = new ProofOrder();
             
 

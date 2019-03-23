@@ -25,9 +25,8 @@ namespace DingTalk.Api.Response
         /// <summary>
         /// 结果对象
         /// </summary>
-        [XmlArray("module")]
-        [XmlArrayItem("open_api_new_apply_rs")]
-        public List<OpenApiNewApplyRsDomain> Module { get; set; }
+        [XmlElement("module")]
+        public OpenApiNewApplyRsDomain Module { get; set; }
 
         /// <summary>
         /// 成功标识

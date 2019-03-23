@@ -75,7 +75,7 @@ namespace DingTalk.Api.Request
             RequestValidator.ValidateMaxListSize("dept_id_list", this.DeptIdList, 20);
             RequestValidator.ValidateRequired("msgcontent", this.Msgcontent);
             RequestValidator.ValidateRequired("msgtype", this.Msgtype);
-            RequestValidator.ValidateMaxListSize("userid_list", this.UseridList, 20);
+            RequestValidator.ValidateMaxListSize("userid_list", this.UseridList, 100);
         }
 
         #endregion

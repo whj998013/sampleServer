@@ -10,6 +10,8 @@ using System.Text;
 using System.Collections.Specialized;
 using Top.Api;
 using Top.Api.Util;
+using System.Reflection;
+using System.Xml.Serialization;
 
 namespace FastJSON
 {
@@ -415,6 +417,25 @@ namespace FastJSON
             {
                 var p = g[ii];
                 object o = p.Getter(obj);
+
+                String itemName = null;
+                PropertyInfo pi = t.GetProperty(p.Name);
+                XmlElementAttribute[] xeas = pi.GetCustomAttributes(typeof(XmlElementAttribute), true) as XmlElementAttribute[];
+                if (xeas != null && xeas.Length > 0)
+                {
+                    itemName = xeas[0].ElementName;
+                }
+
+                // 获取列表属性名称
+                if (itemName == null)
+                {
+                    XmlArrayAttribute[] xaas = pi.GetCustomAttributes(typeof(XmlArrayAttribute), true) as XmlArrayAttribute[];
+                    if (xaas != null && xaas.Length > 0)
+                    {
+                        itemName = xaas[0].ElementName;
+                    }
+                }
+
                 if (_params.SerializeNullValues == false && (o == null || o is DBNull))
                 {
                     //append = false;
@@ -424,9 +445,9 @@ namespace FastJSON
                     if (append)
                         _output.Append(',');
                     if (_params.SerializeToLowerCaseNames)
-                        WritePair(p.lcName, o);
+                        WritePair(p.lcName, o, itemName);
                     else
-                        WritePair(p.Name, o);
+                        WritePair(p.Name, o, itemName);
                     if (o != null && _params.UseExtensions)
                     {
                         Type tt = o.GetType();
@@ -464,10 +485,22 @@ namespace FastJSON
 
         private void WritePair(string name, object value)
         {
+            WritePair(name, value, null);
+        }
+
+        private void WritePair(string name, object value, String defaultName)
+        {
             if (_params.UseApiNamingStyle)
             {
-                string newName = StringUtil.ToUnderlineStyle(name.TrimEnd('_'));
-                WriteStringFast(newName);
+                if(defaultName != null)
+                {
+                    WriteStringFast(defaultName);
+                }
+                else
+                {
+                    string newName = StringUtil.ToUnderlineStyle(name.TrimEnd('_'));
+                    WriteStringFast(newName);
+                }
             }
             else
             {

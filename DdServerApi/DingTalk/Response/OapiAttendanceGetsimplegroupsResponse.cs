@@ -99,6 +99,32 @@ public class ClassSettingVoDomain : TopObject
 }
 
 	/// <summary>
+/// SetionTimeVODomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class SetionTimeVODomain : TopObject
+{
+	        /// <summary>
+	        /// 打卡时间跨度
+	        /// </summary>
+	        [XmlElement("across")]
+	        public long Across { get; set; }
+	
+	        /// <summary>
+	        /// 打卡时间
+	        /// </summary>
+	        [XmlElement("check_time")]
+	        public string CheckTime { get; set; }
+	
+	        /// <summary>
+	        /// 打卡类型枚举（Onduty和OffDuty）
+	        /// </summary>
+	        [XmlElement("check_type")]
+	        public string CheckType { get; set; }
+}
+
+	/// <summary>
 /// AtSectionVoDomain Data Structure.
 /// </summary>
 [Serializable]
@@ -109,8 +135,8 @@ public class AtSectionVoDomain : TopObject
 	        /// 时间段列表
 	        /// </summary>
 	        [XmlArray("times")]
-	        [XmlArrayItem("at_time_vo")]
-	        public List<AtTimeVoDomain> Times { get; set; }
+	        [XmlArrayItem("setion_time_v_o")]
+	        public List<SetionTimeVODomain> Times { get; set; }
 }
 
 	/// <summary>
@@ -167,6 +193,13 @@ public class AtGroupForTopVoDomain : TopObject
 	        public long DefaultClassId { get; set; }
 	
 	        /// <summary>
+	        /// 考勤组添加的部门Id列表
+	        /// </summary>
+	        [XmlArray("dept_ids")]
+	        [XmlArrayItem("number")]
+	        public List<long> DeptIds { get; set; }
+	
+	        /// <summary>
 	        /// 关联的部门
 	        /// </summary>
 	        [XmlArray("dept_name_list")]
@@ -216,6 +249,13 @@ public class AtGroupForTopVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("type")]
 	        public string Type { get; set; }
+	
+	        /// <summary>
+	        /// 考勤组里按照人添加的人
+	        /// </summary>
+	        [XmlArray("user_ids")]
+	        [XmlArrayItem("string")]
+	        public List<string> UserIds { get; set; }
 	
 	        /// <summary>
 	        /// 固定班次的工作日班次

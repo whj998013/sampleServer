@@ -24,7 +24,7 @@ namespace SysBLL
         /// <param name="roleList"></param>
         public void UpdateRoles(List<IRole> roleList)
         {
-           using (SampleContext sc=new SampleContext())
+           using (SunginDataContext sc=new SunginDataContext())
             {
                 var re = sc.Roles.Where(p=>p.RoleId>0).ToList();
                 re.ForEach(p => p.IsDelete = true);

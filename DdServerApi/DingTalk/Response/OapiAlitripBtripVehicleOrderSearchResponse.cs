@@ -49,6 +49,12 @@ public class OpenPriceInfoDomain : TopObject
 	        public string Category { get; set; }
 	
 	        /// <summary>
+	        /// 流水创建时间
+	        /// </summary>
+	        [XmlElement("gmt_create")]
+	        public string GmtCreate { get; set; }
+	
+	        /// <summary>
 	        /// 结算方式:1：个人现付，2:企业现付,4:企业月结，8、企业预存
 	        /// </summary>
 	        [XmlElement("pay_type")]
@@ -278,6 +284,12 @@ public class OpenVehicleOrderRsDomain : TopObject
 	        /// </summary>
 	        [XmlElement("taken_time")]
 	        public string TakenTime { get; set; }
+	
+	        /// <summary>
+	        /// 第三方行程id
+	        /// </summary>
+	        [XmlElement("thirdpart_itinerary_id")]
+	        public string ThirdpartItineraryId { get; set; }
 	
 	        /// <summary>
 	        /// 目的地

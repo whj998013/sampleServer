@@ -147,14 +147,17 @@ namespace Top.Api.Util
             byte[] itemBoundaryBytes = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\n");
             byte[] endBoundaryBytes = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
 
-            // 组装文本请求参数
-            string textTemplate = "Content-Disposition:form-data;name=\"{0}\"\r\nContent-Type:text/plain\r\n\r\n{1}";
-            foreach (KeyValuePair<string, string> kv in textParams)
+            if(textParams != null)
             {
-                string textEntry = string.Format(textTemplate, kv.Key, kv.Value);
-                byte[] itemBytes = Encoding.UTF8.GetBytes(textEntry);
-                reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);
-                reqStream.Write(itemBytes, 0, itemBytes.Length);
+                // 组装文本请求参数
+                string textTemplate = "Content-Disposition:form-data;name=\"{0}\"\r\nContent-Type:text/plain\r\n\r\n{1}";
+                foreach (KeyValuePair<string, string> kv in textParams)
+                {
+                    string textEntry = string.Format(textTemplate, kv.Key, kv.Value);
+                    byte[] itemBytes = Encoding.UTF8.GetBytes(textEntry);
+                    reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);
+                    reqStream.Write(itemBytes, 0, itemBytes.Length);
+                }
             }
 
             // 组装文件请求参数

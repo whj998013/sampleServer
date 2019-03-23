@@ -35,7 +35,7 @@ namespace SampleBLL
         {
             try
             {
-                using (SampleContext sc = new SampleContext())
+                using (SunginDataContext sc = new SunginDataContext())
                 {
                     BaseInfo = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                     ProofingInfo = sc.Proofings.SingleOrDefault(p => p.StyleId == styleId);
@@ -117,7 +117,7 @@ namespace SampleBLL
         }
         public bool SaveSample(SampleFullInfoModel sample)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 //基本信息

@@ -60,6 +60,12 @@ public class ColumnForTopVoDomain : TopObject
 	        public long Id { get; set; }
 	
 	        /// <summary>
+	        /// name
+	        /// </summary>
+	        [XmlElement("name")]
+	        public string Name { get; set; }
+	
+	        /// <summary>
 	        /// 列状态
 	        /// </summary>
 	        [XmlElement("status")]

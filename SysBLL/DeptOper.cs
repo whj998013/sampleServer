@@ -17,7 +17,7 @@ namespace SysBLL
 
         public void SyncDepts(List<Dept> depts)
         {
-            using (SampleContext sc=new SampleContext())
+            using (SunginDataContext sc=new SunginDataContext())
             {
                 var deptList = sc.Depts.ToList();
                 deptList.ForEach(p => p.IsDelete = true);

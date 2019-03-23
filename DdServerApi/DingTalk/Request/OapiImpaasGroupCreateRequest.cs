@@ -55,13 +55,13 @@ namespace DingTalk.Api.Request
 public class BaseGroupMemberInfoDomain : TopObject
 {
 	        /// <summary>
-	        /// 账号id
+	        /// 创建者账号ID，类型由type字段决定
 	        /// </summary>
 	        [XmlElement("id")]
 	        public string Id { get; set; }
 	
 	        /// <summary>
-	        /// 账号类型
+	        /// 账号ID类型，当type=staff时，id填写staffid，当type=channelUser时，id字段填写channelUserId
 	        /// </summary>
 	        [XmlElement("type")]
 	        public string Type { get; set; }
@@ -75,7 +75,7 @@ public class BaseGroupMemberInfoDomain : TopObject
 public class CreateGroupRequestDomain : TopObject
 {
 	        /// <summary>
-	        /// hema
+	        /// 接入方channel信息，该值由接入方接入IMPaaS平台时，向IMPaaS平台申请，例如“hema”“eleme”等。
 	        /// </summary>
 	        [XmlElement("channel")]
 	        public string Channel { get; set; }
@@ -87,7 +87,13 @@ public class CreateGroupRequestDomain : TopObject
 	        public BaseGroupMemberInfoDomain Creater { get; set; }
 	
 	        /// <summary>
-	        /// 扩展数据
+	        /// 二级会话入口ID
+	        /// </summary>
+	        [XmlElement("entrance_id")]
+	        public Nullable<long> EntranceId { get; set; }
+	
+	        /// <summary>
+	        /// 扩展数据,业务可以自定义，目前最大支持256B
 	        /// </summary>
 	        [XmlElement("extension")]
 	        public string Extension { get; set; }
@@ -106,10 +112,16 @@ public class CreateGroupRequestDomain : TopObject
 	        public string Name { get; set; }
 	
 	        /// <summary>
-	        /// 群类型
+	        /// 群类型,目前没有使用，填0即可
 	        /// </summary>
 	        [XmlElement("type")]
 	        public Nullable<long> Type { get; set; }
+	
+	        /// <summary>
+	        /// uuid, 用于防止弱网情况下超时导致重复创建, 一分钟内传递相同的uuid会返回同一个群，传空则不去重
+	        /// </summary>
+	        [XmlElement("uuid")]
+	        public string Uuid { get; set; }
 }
 
         #endregion

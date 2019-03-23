@@ -53,6 +53,13 @@ namespace DingTalk.Api.Request
         public MarkdownDomain Markdown_ { set { this.Markdown = TopUtils.ObjectToJson(value); } } 
 
         /// <summary>
+        /// 消息内容
+        /// </summary>
+        public string Msg { get; set; }
+
+        public MsgDomain Msg_ { set { this.Msg = TopUtils.ObjectToJson(value); } } 
+
+        /// <summary>
         /// text
         /// </summary>
         public string Msgtype { get; set; }
@@ -104,6 +111,7 @@ namespace DingTalk.Api.Request
             parameters.Add("image", this.Image);
             parameters.Add("link", this.Link);
             parameters.Add("markdown", this.Markdown);
+            parameters.Add("msg", this.Msg);
             parameters.Add("msgtype", this.Msgtype);
             parameters.Add("oa", this.Oa);
             parameters.Add("sender", this.Sender);
@@ -407,8 +415,9 @@ public class ActionCardDomain : TopObject
 	        /// <summary>
 	        /// 使用独立跳转ActionCard样式时的按钮列表；必须与btn_orientation同时设置
 	        /// </summary>
-	        [XmlElement("btn_json_list")]
-	        public BtnJsonDomain BtnJsonList { get; set; }
+	        [XmlArray("btn_json_list")]
+	        [XmlArrayItem("btn_json")]
+	        public List<BtnJsonDomain> BtnJsonList { get; set; }
 	
 	        /// <summary>
 	        /// 使用独立跳转ActionCard样式时的按钮排列方式，竖直排列(0)，横向排列(1)；必须与btn_json_list同时设置
@@ -439,6 +448,68 @@ public class ActionCardDomain : TopObject
 	        /// </summary>
 	        [XmlElement("title")]
 	        public string Title { get; set; }
+}
+
+	/// <summary>
+/// MsgDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class MsgDomain : TopObject
+{
+	        /// <summary>
+	        /// 消息内容，支持markdown，语法参考标准markdown语法。图片举例：![alt text](mediaId)
+	        /// </summary>
+	        [XmlElement("action_card")]
+	        public ActionCardDomain ActionCard { get; set; }
+	
+	        /// <summary>
+	        /// file
+	        /// </summary>
+	        [XmlElement("file")]
+	        public FileDomain File { get; set; }
+	
+	        /// <summary>
+	        /// image
+	        /// </summary>
+	        [XmlElement("image")]
+	        public ImageDomain Image { get; set; }
+	
+	        /// <summary>
+	        /// link
+	        /// </summary>
+	        [XmlElement("link")]
+	        public LinkDomain Link { get; set; }
+	
+	        /// <summary>
+	        /// markdown消息
+	        /// </summary>
+	        [XmlElement("markdown")]
+	        public MarkdownDomain Markdown { get; set; }
+	
+	        /// <summary>
+	        /// msgtype
+	        /// </summary>
+	        [XmlElement("msgtype")]
+	        public string Msgtype { get; set; }
+	
+	        /// <summary>
+	        /// oa消息
+	        /// </summary>
+	        [XmlElement("oa")]
+	        public OaDomain Oa { get; set; }
+	
+	        /// <summary>
+	        /// text
+	        /// </summary>
+	        [XmlElement("text")]
+	        public TextDomain Text { get; set; }
+	
+	        /// <summary>
+	        /// voice
+	        /// </summary>
+	        [XmlElement("voice")]
+	        public VoiceDomain Voice { get; set; }
 }
 
         #endregion

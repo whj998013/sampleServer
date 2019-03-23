@@ -12,7 +12,7 @@ namespace SampleDataOper
     {
         public static object GetPrintSample(string styleId)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -27,7 +27,7 @@ namespace SampleDataOper
         }
         public static object GetSample(string styleId)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -43,7 +43,7 @@ namespace SampleDataOper
 
         public static ISampleBaseInfo DeleteSample(string styleId, string user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -57,7 +57,7 @@ namespace SampleDataOper
         }
         public static ISampleBaseInfo AcceptInStorage(string styleId)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -77,7 +77,7 @@ namespace SampleDataOper
         /// <returns></returns>
         public static ISampleBaseInfo PutInStorage(string styleId)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -96,7 +96,7 @@ namespace SampleDataOper
         /// <returns></returns>
         public static ISampleBaseInfo RequestPutInStorage(string styleId)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 ISampleBaseInfo s = sc.SampleBaseInfos.FirstOrDefault(p => p.StyleId == styleId);
                 if (s != null)
@@ -113,7 +113,7 @@ namespace SampleDataOper
         {
             if (orderbyLamba == null) orderbyLamba = p => p.State;
             if (whereLambda == null) whereLambda = (p => true);
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 int count = sc.SampleBaseInfos.Count(whereLambda);
                 List<ISampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
@@ -130,7 +130,7 @@ namespace SampleDataOper
         {
             if (orderbyLamba == null) orderbyLamba = p => p.State;
             if (whereLambda == null) whereLambda = (p => true);
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 int count = sc.SampleBaseInfos.Count(whereLambda);
                 List<ISampleBaseInfo> sampleinfo = sc.SampleBaseInfos.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();

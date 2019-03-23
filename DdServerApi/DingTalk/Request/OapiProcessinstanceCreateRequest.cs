@@ -86,7 +86,6 @@ namespace DingTalk.Api.Request
 
         public override void Validate()
         {
-            RequestValidator.ValidateRequired("approvers", this.Approvers);
             RequestValidator.ValidateMaxListSize("approvers", this.Approvers, 20);
             RequestValidator.ValidateMaxListSize("cc_list", this.CcList, 20);
             RequestValidator.ValidateRequired("dept_id", this.DeptId);

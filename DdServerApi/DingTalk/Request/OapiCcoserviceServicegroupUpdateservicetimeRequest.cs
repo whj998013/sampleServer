@@ -26,6 +26,11 @@ namespace DingTalk.Api.Request
         /// </summary>
         public string StartTime { get; set; }
 
+        /// <summary>
+        /// 日期类型,0-工作日;1-每日;99-端上不显示
+        /// </summary>
+        public Nullable<long> TimeType { get; set; }
+
         #region IDingTalkRequest Members
 
         public override string GetApiName()
@@ -44,6 +49,7 @@ namespace DingTalk.Api.Request
             parameters.Add("end_time", this.EndTime);
             parameters.Add("open_conversation_id", this.OpenConversationId);
             parameters.Add("start_time", this.StartTime);
+            parameters.Add("time_type", this.TimeType);
             if (this.otherParams != null)
             {
                 parameters.AddAll(this.otherParams);

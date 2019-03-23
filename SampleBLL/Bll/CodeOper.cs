@@ -15,7 +15,7 @@ namespace SampleBLL
     {
         public static void AddCode(Code _code)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {                
                 {
                     var code = sc.Codes.Where(p => p.CodeName == _code.CodeName).SingleOrDefault();
@@ -30,7 +30,7 @@ namespace SampleBLL
 
         public static void AddCode(List<Code> codes)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 foreach (var m in codes)
@@ -48,7 +48,7 @@ namespace SampleBLL
 
         public static object GetColorList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Color).OrderByDescending(t=>t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
@@ -57,7 +57,7 @@ namespace SampleBLL
 
         public static object GetSizeList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Size).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
@@ -66,7 +66,7 @@ namespace SampleBLL
 
         public static object GetGaugeList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Gauge).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
@@ -75,7 +75,7 @@ namespace SampleBLL
 
         public static object GetKindsList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Kinds).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
                 return list;
@@ -85,7 +85,7 @@ namespace SampleBLL
 
         public static object GetMaterialList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 //var list = sc.Codes.Where(p => p.Type == CodeType.Material).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).ToList();
                 var list = sc.Materials.OrderByDescending(p=>p.UseCount).Select(p => new { p.CnName, p.EnName, p.UseCount}).ToList();
@@ -95,7 +95,7 @@ namespace SampleBLL
 
         public static object GetTagList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Tag).OrderByDescending(t => t.UseCount).Select(p => new { name = p.CodeName, color = p.Value1 }).ToList();
                 return list;

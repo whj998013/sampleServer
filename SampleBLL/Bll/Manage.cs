@@ -11,7 +11,7 @@ namespace SampleBLL
     {
         public object GetLendUserList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
 
@@ -23,7 +23,7 @@ namespace SampleBLL
 
         public static object GetInputUserList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 var re = sc.SampleBaseInfos.Where(p => !p.IsDelete && p.State == SampleState.待入库).Select(p => new { p.DdId, p.CreateUser }).Distinct();

@@ -29,7 +29,7 @@ namespace SysBLL
         /// <returns></returns>
         public User GetUserByLoginStr(string loginStr)
         {
-            using (SampleContext dc = new SampleContext())
+            using (SunginDataContext dc = new SunginDataContext())
             {
                 var _user = dc.Users.Where(p => p.LoginStr == loginStr).FirstOrDefault();
                 if (_user != null)
@@ -63,7 +63,7 @@ namespace SysBLL
         /// </summary>
         public User UpDateLoginInfo(User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var user = sc.Users.SingleOrDefault(p => p.DdId == _user.DdId);
                 SetLoginInfo(ref user);
@@ -86,7 +86,7 @@ namespace SysBLL
         public void AddUser(User user)
         {
 
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 SetLoginInfo(ref user);
                 user.SetCreateUser("system");
@@ -98,7 +98,7 @@ namespace SysBLL
 
         public void SyncUsers(List<User> users)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var ulist = sc.Users.ToList();
                 ulist.ForEach(p => p.IsDelete = true);

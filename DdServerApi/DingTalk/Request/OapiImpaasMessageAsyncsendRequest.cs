@@ -13,7 +13,7 @@ namespace DingTalk.Api.Request
     public class OapiImpaasMessageAsyncsendRequest : BaseDingTalkRequest<DingTalk.Api.Response.OapiImpaasMessageAsyncsendResponse>
     {
         /// <summary>
-        /// 消息发送的信息
+        /// 发送消息的结构
         /// </summary>
         public string Request { get; set; }
 
@@ -55,7 +55,7 @@ namespace DingTalk.Api.Request
 public class AccountInfoDomain : TopObject
 {
 	        /// <summary>
-	        /// 账号通道
+	        /// 账号通道:eleme,hema等
 	        /// </summary>
 	        [XmlElement("channel")]
 	        public string Channel { get; set; }
@@ -67,7 +67,7 @@ public class AccountInfoDomain : TopObject
 	        public string Id { get; set; }
 	
 	        /// <summary>
-	        /// 账号类型
+	        /// 账号类型:channelUser/staff。当类型为channelUser时，填写app自己的账号，当类型为staff时，填写钉钉的staffid
 	        /// </summary>
 	        [XmlElement("type")]
 	        public string Type { get; set; }
@@ -87,7 +87,7 @@ public class XpnContentModelDomain : TopObject
 	        public string AlertContent { get; set; }
 	
 	        /// <summary>
-	        /// 推送参数
+	        /// 推送参数，透传
 	        /// </summary>
 	        [XmlElement("params")]
 	        public string Params { get; set; }
@@ -113,32 +113,32 @@ public class AsyncSendMessageRequestDomain : TopObject
 	        public string MsgContent { get; set; }
 	
 	        /// <summary>
-	        /// 消息的可扩展字段
+	        /// 消息的可扩展字段，透传
 	        /// </summary>
 	        [XmlElement("msg_extension")]
 	        public string MsgExtension { get; set; }
 	
 	        /// <summary>
-	        /// 消息的特性：静默消息，单边消息等
+	        /// 消息的特性：静默消息，系统消息
 	        /// </summary>
 	        [XmlElement("msg_feature")]
 	        public string MsgFeature { get; set; }
 	
 	        /// <summary>
-	        /// 消息类型：text，image
+	        /// 消息类型：text，image，user-defined
 	        /// </summary>
 	        [XmlElement("msg_type")]
 	        public string MsgType { get; set; }
 	
 	        /// <summary>
-	        /// 接受者
+	        /// 接受者，暂不支持，可不填
 	        /// </summary>
 	        [XmlArray("receiverid_list")]
 	        [XmlArrayItem("json")]
 	        public List<string> ReceiveridList { get; set; }
 	
 	        /// <summary>
-	        /// 发送者
+	        /// 发送者，暂不支持，可不填
 	        /// </summary>
 	        [XmlElement("senderid")]
 	        public AccountInfoDomain Senderid { get; set; }

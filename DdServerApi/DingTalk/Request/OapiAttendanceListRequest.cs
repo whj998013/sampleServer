@@ -12,6 +12,11 @@ namespace DingTalk.Api.Request
     public class OapiAttendanceListRequest : BaseDingTalkRequest<DingTalk.Api.Response.OapiAttendanceListResponse>
     {
         /// <summary>
+        /// 是否国际化
+        /// </summary>
+        public Nullable<bool> IsI18n { get; set; }
+
+        /// <summary>
         /// 表示获取考勤数据的条数，最大不能超过50条
         /// </summary>
         public Nullable<long> Limit { get; set; }
@@ -51,6 +56,7 @@ namespace DingTalk.Api.Request
         public override IDictionary<string, string> GetParameters()
         {
             TopDictionary parameters = new TopDictionary();
+            parameters.Add("isI18n", this.IsI18n);
             parameters.Add("limit", this.Limit);
             parameters.Add("offset", this.Offset);
             parameters.Add("userIdList", TopUtils.ObjectToJson(this.UserIdList));

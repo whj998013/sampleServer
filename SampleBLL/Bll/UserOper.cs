@@ -15,12 +15,12 @@ namespace SampleBLL
     {
         public static User GetUser(string Ddid)
         {
-            return new SampleContext().Users.SingleOrDefault(p => p.DdId == Ddid);
+            return new SunginDataContext().Users.SingleOrDefault(p => p.DdId == Ddid);
         }
 
         public static bool SetUserRole(string Ddid, UserRoleU ur)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var u = GetUser(Ddid);
                 if (u != null)
@@ -37,7 +37,7 @@ namespace SampleBLL
 
         public static void ClearRoleBeforDate()
         {
-            using (SampleContext sc=new SampleContext())
+            using (SunginDataContext sc=new SunginDataContext())
             {
                 var list = sc.Users.Where(p =>p.Role!=UserRoleU.一般用户).ToList();
                 list.ForEach(p =>
@@ -52,7 +52,7 @@ namespace SampleBLL
 
         public static void AddUser(User u)
         {
-            using(SampleContext sc=new SampleContext())
+            using(SunginDataContext sc=new SunginDataContext())
             {
                 u.SetCreateUser("system");
                 sc.Users.Add(u);
@@ -65,7 +65,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetInStorageUserList()
         {
-            using (SampleContext sc=new SampleContext())
+            using (SunginDataContext sc=new SunginDataContext())
             {
 
                 var ubase = sc.SampleBaseInfos.Where(p => !p.IsDelete && p.State == SampleState.待入库).Select(p => new {p.DdId, Name=p.CreateUser }).Distinct().ToList();

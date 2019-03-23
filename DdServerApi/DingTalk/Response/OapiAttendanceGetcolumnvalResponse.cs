@@ -81,6 +81,12 @@ public class ColumnValForTopVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("column_vo")]
 	        public ColumnForTopVoDomain ColumnVo { get; set; }
+	
+	        /// <summary>
+	        /// 一些不需要计算得固定值，如出勤天数等
+	        /// </summary>
+	        [XmlElement("fixed_value")]
+	        public string FixedValue { get; set; }
 }
 
 	/// <summary>

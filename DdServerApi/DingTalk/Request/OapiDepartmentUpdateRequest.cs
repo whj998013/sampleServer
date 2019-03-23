@@ -42,6 +42,21 @@ namespace DingTalk.Api.Request
         public string DeptPermits { get; set; }
 
         /// <summary>
+        /// 部门群是否包含隐藏部门
+        /// </summary>
+        public Nullable<bool> GroupContainHiddenDept { get; set; }
+
+        /// <summary>
+        /// 部门群是否包含外包部门
+        /// </summary>
+        public Nullable<bool> GroupContainOuterDept { get; set; }
+
+        /// <summary>
+        /// 本门群是否包含子部门
+        /// </summary>
+        public Nullable<bool> GroupContainSubDept { get; set; }
+
+        /// <summary>
         /// 部门id
         /// </summary>
         public Nullable<long> Id { get; set; }
@@ -127,6 +142,9 @@ namespace DingTalk.Api.Request
             parameters.Add("deptManagerUseridList", this.DeptManagerUseridList);
             parameters.Add("deptPerimits", this.DeptPerimits);
             parameters.Add("deptPermits", this.DeptPermits);
+            parameters.Add("groupContainHiddenDept", this.GroupContainHiddenDept);
+            parameters.Add("groupContainOuterDept", this.GroupContainOuterDept);
+            parameters.Add("groupContainSubDept", this.GroupContainSubDept);
             parameters.Add("id", this.Id);
             parameters.Add("lang", this.Lang);
             parameters.Add("name", this.Name);

@@ -24,7 +24,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static bool DoLend(string styleId, User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {             
 
                 var style = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
@@ -52,7 +52,7 @@ namespace SampleBLL
 
         public static object GetLendOutListPC(User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 var lendlist = sc.LendRecords.Where(p => p.DdId == _user.DdId && (p.State == LendRecordStats.借出审批 || p.State == LendRecordStats.已借出)).ToList();
@@ -76,7 +76,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetLendOutListDD(User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
 
                 var lendlist = sc.LendRecords.Where(p => p.DdId == _user.DdId && (p.State == LendRecordStats.借出审批 || p.State == LendRecordStats.已借出)).ToList();
@@ -113,7 +113,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static bool CancelLend(string StyleId, User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var lr = sc.LendRecords.SingleOrDefault(p => p.StyleId == StyleId && p.DdId == _user.DdId && p.State == LendRecordStats.借出审批);
                 if (lr != null)
@@ -136,7 +136,7 @@ namespace SampleBLL
         /// <param name="user"></param>
         public static bool DoBackLend(int LenId, string user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var sl = sc.LendRecords.SingleOrDefault(p => !p.IsDelete && p.Id == LenId);
                 if (sl != null)
@@ -161,7 +161,7 @@ namespace SampleBLL
         public static bool DoReturnLend(int LendId, string user)
         {
 
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var sl = sc.LendRecords.SingleOrDefault(p => !p.IsDelete && p.Id == LendId);
                 if (sl != null)
@@ -185,7 +185,7 @@ namespace SampleBLL
         /// <param name="styleId"></param>
         public static bool DoInstroage(int LendId, string user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var sl = sc.LendRecords.SingleOrDefault(p => !p.IsDelete && p.Id == LendId);
                 if (sl != null)
@@ -209,7 +209,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static bool ApplyLendOut(int LendId, User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var lr = sc.LendRecords.SingleOrDefault(p => p.Id == LendId);
                 SampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(s => s.StyleId == lr.StyleId);
@@ -236,7 +236,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static bool DoDelete(int LendId, User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 LendRecord lr = sc.LendRecords.SingleOrDefault(p => p.Id == LendId);
                 if (lr != null) sc.Entry(lr).State = System.Data.Entity.EntityState.Deleted;
@@ -253,7 +253,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetLendList(User _user)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 //SampleLendout slo = sc.SampleLendouts.SingleOrDefault(p => p.DdId == _user.DdId && p.State == LendStats.草拟);
 
@@ -275,7 +275,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetLendOutUserList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var re = sc.LendRecords.Where(p => p.State == LendRecordStats.已借出).Select(p => new { p.DdId, Name = p.UserName }).Distinct().ToList();
                 return re;
@@ -288,7 +288,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetLendUserList()
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 var re = sc.LendRecords.Where(p => p.State == LendRecordStats.借出审批).Select(p => new { p.DdId, Name = p.UserName }).Distinct().ToList();
                 return re;
@@ -301,7 +301,7 @@ namespace SampleBLL
         public static object GetAllLendList(int PageId = 1, int PageSize = 20)
         {
 
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 int count = sc.LendRecords.Count(p => !p.IsDelete && p.State == LendRecordStats.借出审批);
 
@@ -324,7 +324,7 @@ namespace SampleBLL
         /// <returns></returns>
         public static object GetAllLendOutList(int PageId = 1, int PageSize = 20)
         {
-            using (SampleContext sc = new SampleContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
                 int count = sc.LendRecords.Count(p => !p.IsDelete && p.State == LendRecordStats.已借出);
 

@@ -55,13 +55,13 @@ namespace DingTalk.Api.Request
 public class BaseGroupMemberInfoDomain : TopObject
 {
 	        /// <summary>
-	        /// 群主id
+	        /// 修改后的群主ID，ID类型由type字段决定
 	        /// </summary>
 	        [XmlElement("id")]
 	        public string Id { get; set; }
 	
 	        /// <summary>
-	        /// id类型 员工or openid
+	        /// ID类型，当type=staff时，id填写staffid，当type=channelUser时，id字段填写channelUserId
 	        /// </summary>
 	        [XmlElement("type")]
 	        public string Type { get; set; }
@@ -75,19 +75,19 @@ public class BaseGroupMemberInfoDomain : TopObject
 public class GroupInfoModifyRequestDomain : TopObject
 {
 	        /// <summary>
-	        /// 会话id
+	        /// 群ID，由创建群接口返回
 	        /// </summary>
 	        [XmlElement("chatid")]
 	        public string Chatid { get; set; }
 	
 	        /// <summary>
-	        /// 群名称
+	        /// 修改后的群名称
 	        /// </summary>
 	        [XmlElement("group_name")]
 	        public string GroupName { get; set; }
 	
 	        /// <summary>
-	        /// 群主信息
+	        /// 修改后的群主，若为空或与当前群主相同，则不会对群主进行变更操作。
 	        /// </summary>
 	        [XmlElement("group_owner")]
 	        public BaseGroupMemberInfoDomain GroupOwner { get; set; }

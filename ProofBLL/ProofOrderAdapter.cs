@@ -16,7 +16,7 @@ namespace ProofBLL
         private ProofStyle _proofSryle { get; set; } = new ProofStyle();
         private ProofObj _proofObj { get; set; }
         private User _user { get; set; }
-        private SampleContext sc = new SampleContext();
+        private SunginDataContext sc = new SunginDataContext();
         public ProofOrderAdapter(User user)
         {
             _user = user;

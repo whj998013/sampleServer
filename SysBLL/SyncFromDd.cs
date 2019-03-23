@@ -20,7 +20,7 @@ namespace SysBLL
         public static List<User> SyncUserDept(IDdOper ddOper)
         {
 
-            SampleContext sc = new SampleContext();
+            SunginDataContext sc = new SunginDataContext();
             DeptProvider dProvider = new DeptProvider(ddOper);
             List<User> uList = new List<User>();
             List<Dept> depts = dProvider.GetDepts();
@@ -53,7 +53,7 @@ namespace SysBLL
         /// <param name="DdOper"></param>
         public static void SyncUserRole(IDdOper DdOper)
         {
-            SampleContext sc = new SampleContext();
+            SunginDataContext sc = new SunginDataContext();
             UserProvider uProvider = new UserProvider(DdOper);
             RoleProvider rProvider = new RoleProvider(DdOper);
           

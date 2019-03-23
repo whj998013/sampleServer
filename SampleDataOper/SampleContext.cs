@@ -12,7 +12,7 @@ using SG.Model.Proof;
 
 namespace SampleDataOper
 {
-    public class SampleContext : DbContext
+    public class SunginDataContext : DbContext
     {
         
         /// <summary>
