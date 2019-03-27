@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Routing;
 using System.Web.SessionState;
 using SysBLL;
+using System.Threading.Tasks;
 
 namespace SampleApi
 {
@@ -24,6 +25,16 @@ namespace SampleApi
             ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
             ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
             ddOper.SetDept(new DeptOper().GetDepts());
+
+            Task.Run(async delegate
+            {
+                await Task.Delay(5000);
+                DdCallbackOper dcb = new DdCallbackOper(ddOper);
+                dcb.RegisterCallBack();
+            });
+           
+
+            
         }
         public override void Init()
         {

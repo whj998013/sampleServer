@@ -55,6 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Approve\ApproveItem.cs" />
+    <Compile Include="Approve\NewApprove.cs" />
+    <Compile Include="Callback\DdCallback.cs" />
+    <Compile Include="DdEncrypt.cs" />
     <Compile Include="IDdOper.cs" />
     <Compile Include="Model\Jsticket.cs" />
     <Compile Include="Msg\DbMsgOper.cs" />
@@ -63,6 +67,9 @@
     <Compile Include="HttpHelper.cs" />
     <Compile Include="Msg\DdOAMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Suite\API_DingTalk.cs" />
+    <Compile Include="Suite\Cryptography.cs" />
+    <Compile Include="Suite\DingTalkCrypt.cs" />
     <Compile Include="Sys\DeptProvider.cs" />
     <Compile Include="Sys\RoleProvider.cs" />
     <Compile Include="Sys\UserProvider.cs" />
@@ -83,6 +90,10 @@
     <ProjectReference Include="..\..\样衣管理\Model\SG.Model.csproj">
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

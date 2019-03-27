@@ -21,6 +21,7 @@ namespace SampleApi
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
         private string _SampleFilePath;
+        private string _ProofProcessCode;
         private static Config _instance = null; //单列对象
         public static Config GetSampleConfig()
         {
@@ -37,6 +38,15 @@ namespace SampleApi
             _SampleAdminRoleId = long.Parse(ConfigHelper.GetValue("SampleAdminRoleId"));
             _SampleDevelopmentRoleId = long.Parse(ConfigHelper.GetValue("SampleDevelopmentRoleId"));
             _ProofFilePath = ConfigHelper.GetValue("ProofFilePath");
+            _ProofProcessCode = ConfigHelper.GetValue("ProofProcessCode");
+
+        }
+        public string ProofProcessCode
+        {
+            get
+            {
+                return _ProofProcessCode;
+            }
         }
         public string ProofFilePath
         {

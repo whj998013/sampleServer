@@ -13,5 +13,6 @@ namespace SG.DdApi
         string JsApiTicket { get; }
         string GetDeptName(long DeptId);
         void SetDept(List<Dept> depts);
+        string  TimeStamp();
     }
 }

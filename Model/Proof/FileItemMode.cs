@@ -12,8 +12,8 @@ namespace SG.Model.Proof
         ///<summary>
         /// 按人名查询早晚打卡.txt
         /// </summary>
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
+        [DataMember(Name = "displayName")]
+        public string DisplayName { get; set; }
 
         ///<summary>
         /// 
@@ -27,5 +27,17 @@ namespace SG.Model.Proof
         [DataMember(Name = "url")]
         public string Url { get; set; }
 
+
+        ///<summary>
+        /// 
+        /// </summary>
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
+        ///<summary>
+        /// 
+        /// </summary>
+        [DataMember(Name = "proofStyleId")]
+        public string ProofStyleId { get; set; }
     }
 }

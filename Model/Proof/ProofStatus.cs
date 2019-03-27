@@ -8,12 +8,13 @@ namespace SG.Model.Proof
 {
     public enum ProofStatus
     {
+        退回 = 10,
         草拟 = 0,
         审批 = 1,
         排单 = 2,
         打样中 = 3,
-        完成 = 4,
-        退回 = 5,
+        交样 = 4,
+        完成 = 5,
 
     }
 }

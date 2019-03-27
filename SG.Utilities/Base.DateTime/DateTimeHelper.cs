@@ -13,6 +13,14 @@ namespace SG.Utilities
     /// </summary>
     public class DateTimeHelper
     {
+        public static string GetDataSecStr()
+        {
+            var dt = DateTime.Now;
+            long tn = dt.Day * 86400 + dt.Hour * 3600 + dt.Minute * 60 + dt.Second;
+            string dstr = tn.ToString("x8");
+            return dstr;
+        }
+
         /// <summary>
         /// 当前日期
         /// </summary>

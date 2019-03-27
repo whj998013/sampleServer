@@ -32,25 +32,29 @@ namespace SampleApi.Controllers.Proof
             string filePath = webPath + @"tempfile\";
             HttpFileCollection files = HttpContext.Current.Request.Files;
             string proofId = HttpContext.Current.Request.Form["ProofStyleId"];
-            string filename = "";
-            foreach (string key in files.AllKeys)
+            if (proofId != "")
             {
-                HttpPostedFile file = files[key];//file.ContentLength文件长度
-                if (string.IsNullOrEmpty(file.FileName) == false)
+                string filename = "";
+                foreach (string key in files.AllKeys)
                 {
-                    filename = proofId + "_" + file.FileName;
-                    UploadHelper.FileUpload(file, filePath, filename);
+                    HttpPostedFile file = files[key];//file.ContentLength文件长度
+                    if (string.IsNullOrEmpty(file.FileName) == false)
+                    {
+                        filename = proofId + "_" + DateTimeHelper.GetDataSecStr() + "_" + file.FileName;
+                        UploadHelper.FileUpload(file, filePath, filename);
+                    }
                 }
+                var re = new { name = filename, url = @"\src\proof\tempfile\" + filename };
+                return Ok(re);
             }
-            var re = new { name = filename, url = @"\src\proof\tempfile\" + filename };
-            return Ok(re);
+            else return BadRequest("申请单号不能为空!");
+
         }
         public IHttpActionResult RemoveFile(FileItemModel obj)
         {
-            if (obj != null)
+            if (obj != null && obj.Id == 0)
             {
-                string webPath = HttpContext.Current.Server.MapPath("~") + Config.GetSampleConfig().ProofFilePath;
-
+                string webPath = HttpContext.Current.Server.MapPath("~");
                 bool re = DirFileHelper.DeleteFile(webPath + obj.Url);
                 if (!re) return NotFound();
                 return Ok();
@@ -61,6 +65,8 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult SaveProof(ProofObj obj)
         {
             User u = SessionManage.CurrentUser;
+            obj.FinshDate = obj.FinshDate.AddHours(8);
+            if (obj.ProofOrderId == "" || obj.ProofStyleId == "") return BadRequest("申请单号和样品单号不能为空！");
             if (u != null)
             {
                 string webPath = Config.GetSampleConfig().ProofFilePath;
@@ -75,7 +81,40 @@ namespace SampleApi.Controllers.Proof
 
                 });
                 poa.SaveProofOrder();
-               
+
+            }
+
+            return Ok();
+        }
+        /// <summary>
+        /// 更新打样单
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public IHttpActionResult UpdateProof(ProofObj obj)
+        {
+            User u = SessionManage.CurrentUser;
+            obj.FinshDate = obj.FinshDate.AddHours(8);
+            if (obj.ProofOrderId == "" || obj.ProofStyleId == "") return BadRequest("申请单号和样品单号不能为空！");
+            if (u != null)
+            {
+                string webPath = Config.GetSampleConfig().ProofFilePath;
+                ProofOrderAdapter poa = new ProofOrderAdapter(u);
+                poa.UpdateProofOrder(obj);
+                obj.FileListItems.ForEach(p =>
+                {
+                    if (p.Id == 0)
+                    {
+                        string path1 = p.Url;
+                        string path2 = webPath + @"gy\" + p.FullName;
+                        DirFileHelper.MoveFile(path1, path2);
+                        p.Url = path2;
+                    }
+
+
+                });
+                poa.SaveProofOrder();
+
             }
 
             return Ok();

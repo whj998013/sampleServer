@@ -186,7 +186,7 @@ namespace SG.DdApi
         /// 生成时间戳
         /// </summary>
         /// <returns></returns>
-        public static string TimeStamp()
+        public  string TimeStamp()
         {
             DateTime dt1 = Convert.ToDateTime("1970-01-01 00:00:00");
             TimeSpan ts = DateTime.Now - dt1;

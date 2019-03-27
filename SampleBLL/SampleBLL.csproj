@@ -70,9 +70,9 @@
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SampleDataOper\SampleDataOper.csproj">
+    <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
       <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
-      <Name>SampleDataOper</Name>
+      <Name>SunginDataOper</Name>
     </ProjectReference>
     <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>

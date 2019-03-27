@@ -56,6 +56,16 @@ namespace SG.Model.Proof
                 return ProofStatus.ToString();
             }
         }
+        [NotMapped]
+        public string CreateDateStr
+        {
+            get
+            {
+               
+                if(CreateDate!=null) return CreateDate.Value.ToLongDateString();
+                return "";
+            }
+        }
         /// <summary>
         /// 要求完成日期
         /// </summary>
