@@ -38,7 +38,7 @@ namespace ConsoleApp1
                 string re = yo.AddYd(po);
 
             }
-            catch (Exception e)
+            catch (Exception ess)
             {
 
                 Console.ReadKey();
