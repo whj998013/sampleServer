@@ -169,5 +169,55 @@ namespace SampleDataOper.Migrations
             };
         }
 
+        public static List<Process> GetProcessList()
+        {
+            return new List<Process>
+            {
+                new Process{ProcessName="工艺"},
+                new Process{ProcessName="程序"},
+                new Process{ProcessName="织片"},
+                new Process{ProcessName="套口"},
+                new Process{ProcessName="车唛"},
+                new Process{ProcessName="钉扣"},
+                new Process{ProcessName="大烫"},
+                new Process{ProcessName="洗水"},
+                new Process{ProcessName="检验"},
+                new Process{ProcessName="初检"},
+                new Process{ProcessName="终检"},
+                new Process{ProcessName="包装"},
+                
+        };
+        }
+
+        public static List<WorkerDept> GetWorkerDepts()
+        {
+            return new List<WorkerDept>
+            {
+                new WorkerDept{DeptName="样品部"},
+                new WorkerDept{DeptName="电机部"},
+                new WorkerDept{DeptName="洗水部"},
+                new WorkerDept{DeptName="套口部"},
+                new WorkerDept{DeptName="整烫部"},
+                new WorkerDept{DeptName="检验部"},
+                new WorkerDept{DeptName="包装部"},
+           };
+        }
+
+        public static List<Job> GetJobs()
+        {
+            return new List<Job>
+            {
+             new Job{JobName="工艺员"},
+             new Job{JobName="程序员"},
+             new Job{JobName="电机工"},
+             new Job{JobName="手摇机工"},
+             new Job{JobName="套口工"},
+             new Job{JobName="洗水工"},
+             new Job{JobName="烫工"},
+             new Job{JobName="检验工"},
+
+           };
+        }
+
     }
 }

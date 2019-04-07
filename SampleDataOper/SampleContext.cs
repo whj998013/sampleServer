@@ -98,7 +98,30 @@ namespace SampleDataOper
         /// 打样文件表
         /// </summary>
         public DbSet<ProofFile> ProofFiles { get; set; }
+        /// <summary>
+        /// 打样任务表
+        /// </summary>
+        public DbSet<ProofTask> ProofTasks { get; set; }
 
+        /// <summary>
+        /// 工序表
+        /// </summary>
+        public DbSet<Process> Processlist { get; set; }
+
+        /// <summary>
+        /// 生产人员部门
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        public DbSet<WorkerDept> WorkerDepts { get; set; }
+        /// <summary>
+        /// 生产人员
+        /// </summary>
+        public DbSet<Worker> Workers { get; set; }
+
+        /// <summary>
+        /// 岗位表
+        /// </summary>
+        public DbSet<Job> jobs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

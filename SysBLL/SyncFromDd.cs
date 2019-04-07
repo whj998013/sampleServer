@@ -84,6 +84,7 @@ namespace SysBLL
                                             DdId = u.Userid,
                                             RoleName = role.RoleName,
                                             UserName = user.UserName,
+                                         
                                         });
                                     });
                 }

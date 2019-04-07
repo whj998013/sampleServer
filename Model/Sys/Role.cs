@@ -7,12 +7,14 @@ using SG.Interface.Sys;
 
 namespace SG.Model.Sys
 {
-    public class Role :BaseModel, IRole
+    public class Role : BaseModel, IRole
     {
         public int Id { get; set; }
         public long RoleId { get; set; }
         public string RoleName { get; set; }
         public string Note { get; set; }
+
+       
          
     }
 }

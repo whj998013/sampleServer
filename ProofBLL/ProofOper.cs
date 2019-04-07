@@ -46,7 +46,22 @@ namespace ProofBLL
             return poList;
         }
 
-        public ProofOrder GetProof(string proofOrderId)
+        public List<ProofOrder> GetPlanProofList()
+        {
+            List<ProofOrder> poList = new List<ProofOrder>();
+            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.排单||p.ProofStatus==ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p=>p.CreateDate).ToList();
+            //poList.ForEach(p =>
+            //{
+            //    Sdc.Entry(p.ProofStyle).Collection(c => c.ProofFiles).Query().Where(f => !f.IsDelete);
+            //    Sdc.Entry(p).Collection(c => c.ProofTasks).Query().Where(f => !f.IsDelete);
+
+            //    //p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).;
+
+            //});
+            return poList;
+        }
+
+        public  ProofOrder GetProof(string proofOrderId)
         {
             ProofOrder po = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
             return po;

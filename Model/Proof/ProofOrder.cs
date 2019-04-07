@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SG.Model.Sys;
 
 namespace SG.Model.Proof
 {
@@ -21,7 +22,10 @@ namespace SG.Model.Proof
 
         public string ProofOrderId { get; set; }
 
-
+        /// <summary>
+        /// 打样单编号
+        /// </summary>
+        public string Dydbh { get; set; }
         public ProofStyle ProofStyle { get; set; }
         /// <summary>
         /// 申请用户DDid
@@ -32,6 +36,20 @@ namespace SG.Model.Proof
         /// </summary>
         [Required]
         public string ProofApplyUserName { get; set; }
+        /// <summary>
+        /// 指定程序 
+        /// </summary>
+        public string DesignatedCX { get; set; }
+
+        /// <summary>
+        /// 指定工艺
+        /// </summary>
+        public string DesignatedGY { get; set; }
+
+        /// <summary>
+        /// 紧急度
+        /// </summary>
+        public string Urgency { get; set; }
         /// <summary>
         /// 申请部门名
         /// </summary>
@@ -61,11 +79,13 @@ namespace SG.Model.Proof
         {
             get
             {
-               
-                if(CreateDate!=null) return CreateDate.Value.ToLongDateString();
+
+                if (CreateDate != null) return CreateDate.Value.ToLongDateString();
                 return "";
             }
         }
+        public  List<ProofTask> ProofTasks { get; set; }
+
         /// <summary>
         /// 要求完成日期
         /// </summary>

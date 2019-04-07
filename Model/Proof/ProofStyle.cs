@@ -34,10 +34,11 @@ namespace SG.Model.Proof
         {
             get
             {
+                if (ProofType == null) return "";
                 return ProofType.TypeName;
             }
         }
-        // <summary>
+        /// <summary>
         /// 款号
         /// </summary>
         public string ProofStyleNo { get; set; }

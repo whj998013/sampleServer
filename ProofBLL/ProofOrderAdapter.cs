@@ -27,7 +27,7 @@ namespace ProofBLL
             if (CheckObj(obj))
             {
                 _proofSryle.ProofStyleId = obj.ProofStyleId;
-                _proofSryle.ProofType = DataQuery.GetSingle<ProofType>(p => p.TypeName == obj.ProofType);
+                _proofSryle.ProofType = sdc.ProofTypes.SingleOrDefault(p => p.TypeName == obj.ProofType);
                 _proofSryle.ProofStyleNo = obj.ProofStyleNo;
                 _proofSryle.ClentName = obj.ClentName;
                 _proofSryle.ClientNo = obj.ClientNo;
@@ -55,6 +55,10 @@ namespace ProofBLL
                 _proofOrder.ProofStyle = _proofSryle;
                 _proofOrder.ProofOrderId = obj.ProofOrderId;
                 _proofOrder.ProofApplyUserDdId = _user.DdId;
+                _proofOrder.DesignatedCX = obj.DesignatedCX;
+                _proofOrder.DesignatedGY = obj.DesignatedGY;
+                _proofOrder.Remark = obj.Remark;
+                _proofOrder.Urgency = obj.Urgency;
                 _proofOrder.ProofApplyUserName = _user.UserName;
                 _proofOrder.ProofApplyDeptName = _user.DepartName;
                 _proofOrder.ProofStatus = ProofStatus.草拟;
@@ -79,7 +83,7 @@ namespace ProofBLL
                 if (CheckObj(obj))
                 {
                     _proofSryle.ProofStyleId = obj.ProofStyleId;
-                    _proofSryle.ProofType = DataQuery.GetSingle<ProofType>(p => p.TypeName == obj.ProofType);
+                    _proofSryle.ProofType = sdc.ProofTypes.SingleOrDefault<ProofType>(p => p.TypeName == obj.ProofType);
                     _proofSryle.ProofStyleNo = obj.ProofStyleNo;
                     _proofSryle.ClentName = obj.ClentName;
                     _proofSryle.ClientNo = obj.ClientNo;
@@ -95,7 +99,7 @@ namespace ProofBLL
                         if (obj.FileListItems.Count(p => p.Id == f.Id) == 0) f.Delete(_user.UserName);
 
                     });
-                    
+
                     obj.FileListItems.ForEach(f =>
                     {
                         if (f.Id == 0)
@@ -118,6 +122,10 @@ namespace ProofBLL
                     _proofOrder.ProofApplyUserDdId = _user.DdId;
                     _proofOrder.ProofApplyUserName = _user.UserName;
                     _proofOrder.ProofApplyDeptName = _user.DepartName;
+                    _proofOrder.DesignatedCX = obj.DesignatedCX;
+                    _proofOrder.DesignatedGY = obj.DesignatedGY;
+                    _proofOrder.Remark = obj.Remark;
+                    _proofOrder.Urgency = obj.Urgency;
                     _proofOrder.ProofStatus = ProofStatus.草拟;
                     _proofOrder.RequiredDate = obj.FinshDate;
                     _proofOrder.ProofNum = obj.ProofNum;

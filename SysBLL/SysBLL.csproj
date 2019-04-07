@@ -64,6 +64,7 @@
     <Compile Include="SyncFromDd.cs" />
     <Compile Include="UserOper.cs" />
     <Compile Include="UrOper.cs" />
+    <Compile Include="WorkerOper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DdApi\SG.DdApi.csproj">

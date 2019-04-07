@@ -38,7 +38,7 @@ namespace SysBLL
                         //拒绝
                         Poa.RefuseApprove(pid);
                     }
-                    int i = 0;
+                 
                     //钉钉样衣申请回调
                 }
             }

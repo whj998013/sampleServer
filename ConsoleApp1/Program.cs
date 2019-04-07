@@ -17,7 +17,10 @@ using SysBLL;
 using EntityFramework.Extensions;
 using SG.Utilities;
 using SG.Model.Proof;
-
+using System.Data.Entity;
+using ProofData.Bll;
+using ProofData;
+using ProofBLL;
 namespace ConsoleApp1
 {
     class Program
@@ -25,9 +28,28 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-           Console.Write( DateTimeHelper.GetDataSecStr());
-           Console.ReadKey();
-           
+            try
+            {
+
+                SunginDataContext sdc = new SunginDataContext();
+                ProofOrder po = sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == "PS10000140").SingleOrDefault();
+
+                YdOper yo = new YdOper();
+                string re = yo.AddYd(po);
+
+            }
+            catch (Exception e)
+            {
+
+                Console.ReadKey();
+            }
+
+
+
+
+
+            Console.ReadKey();
+
 
         }
 
@@ -50,7 +72,7 @@ namespace ConsoleApp1
 
             SunginDataContext sc = new SunginDataContext();
             ProofOrder po = new ProofOrder();
-            
+
 
 
         }
@@ -66,10 +88,10 @@ namespace ConsoleApp1
             //var dre = dck.DeleteRegister();
             //var regre = dck.SendRegister();
             var re = dck.GetRegister();
-          
 
 
-           
+
+
             Console.ReadLine();
 
         }

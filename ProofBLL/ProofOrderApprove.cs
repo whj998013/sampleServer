@@ -7,14 +7,21 @@ using SG.DdApi.Approve;
 using SG.Model.Proof;
 using SampleDataOper;
 using System.Data.Entity;
+using ProofData.Bll;
 namespace ProofBLL
 {
     public class ProofOrderApprove
     {
-        private SunginDataContext sdc = new SunginDataContext();
+        private SunginDataContext sdc;
+        public ProofOrderApprove(SunginDataContext _sdc)
+        {
+            sdc = _sdc;
+            
+        }
         public ProofOrderApprove()
         {
-          
+            sdc = new SunginDataContext();
+
         }
         public static List<ApproveItem> ToApprove(ProofOrder order)
         {
@@ -55,13 +62,21 @@ namespace ProofBLL
 
             return la;
         }
-
+        /// <summary>
+        /// 订订审批通过，添加订单到打样系统，并修改状态
+        /// </summary>
+        /// <param name="DdApprovalCode"></param>
         public  void AgreeApprove(string DdApprovalCode)
         {
             var order = GetProofByDdApprovalCode(DdApprovalCode);
-            order.ProofStatus = ProofStatus.排单;
-            sdc.SaveChanges();
-          
+            YdOper yo = new YdOper();
+            string dio = yo.AddYd(order);
+            if (dio != "")
+            {
+                order.Dydbh = dio;
+                order.ProofStatus = ProofStatus.排单;
+                sdc.SaveChanges();
+            }
 
         }
         public  void RefuseApprove(string DdApprovalCode)

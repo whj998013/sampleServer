@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B73631FF-5811-4A33-B724-C2DFC8C65589}</ProjectGuid>
+    <ProjectGuid>{BC7DEE56-B961-4F6C-9323-4BEC6892BC94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProofBLL</RootNamespace>
-    <AssemblyName>ProofBLL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>ProofData</RootNamespace>
+    <AssemblyName>ProofData</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -40,6 +40,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,40 +50,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProofClient.cs" />
-    <Compile Include="ProofOper.cs" />
-    <Compile Include="ProofOrderAdapter.cs" />
-    <Compile Include="ProofOrderApprove.cs" />
-    <Compile Include="ProofPlanOper.cs" />
-    <Compile Include="ProofTypeOper.cs" />
-    <Compile Include="ProofWorker.cs" />
+    <Compile Include="Bll\ClientOper.cs" />
+    <Compile Include="Bll\ProofUserOper.cs" />
+    <Compile Include="Bll\YdOper.cs" />
+    <Compile Include="Model\dy_gx_info.cs" />
+    <Compile Include="Model\dy_gy_zb_info.cs" />
+    <Compile Include="ProofDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\scgl_bh.cs" />
+    <Compile Include="Model\scgl_ybgx.cs" />
+    <Compile Include="Model\xt_dept.cs" />
+    <Compile Include="Model\xt_khb.cs" />
+    <Compile Include="Model\xt_ryb.cs" />
+    <Compile Include="Model\xt_zdcs.cs" />
+    <Compile Include="Model\ypgl_gx.cs" />
+    <Compile Include="Model\ypgl_gxczrback.cs" />
+    <Compile Include="Model\ypgl_gyzbjl.cs" />
+    <Compile Include="Model\ypgl_yd.cs" />
+    <Compile Include="Model\ypgl_zb.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
-      <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
-      <Name>SG.DdApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IBLL\SG.Interface.csproj">
-      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
-      <Name>SG.Interface</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Model\SG.Model.csproj">
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProofData\ProofData.csproj">
-      <Project>{bc7dee56-b961-4f6c-9323-4bec6892bc94}</Project>
-      <Name>ProofData</Name>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
-      <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
-      <Name>SunginDataOper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

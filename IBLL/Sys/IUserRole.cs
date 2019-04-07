@@ -4,5 +4,7 @@
     {
         long RoleId { get; set; }
         string RoleName { get; set; }
+   
+
     }
 }

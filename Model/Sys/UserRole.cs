@@ -13,6 +13,6 @@ namespace SG.Model.Sys
         public string UserName { get; set; }
         public long RoleId { get; set; }
         public string RoleName { get; set; }
-
+       
     }
 }

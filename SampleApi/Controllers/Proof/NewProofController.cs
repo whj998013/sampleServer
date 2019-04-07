@@ -71,7 +71,7 @@ namespace SampleApi.Controllers.Proof
             {
                 string webPath = Config.GetSampleConfig().ProofFilePath;
                 ProofOrderAdapter poa = new ProofOrderAdapter(u);
-                poa.CreateProofOrder(obj);
+              
                 obj.FileListItems.ForEach(p =>
                 {
                     string path1 = p.Url;
@@ -80,6 +80,7 @@ namespace SampleApi.Controllers.Proof
                     p.Url = path2;
 
                 });
+                poa.CreateProofOrder(obj);
                 poa.SaveProofOrder();
 
             }
@@ -100,7 +101,7 @@ namespace SampleApi.Controllers.Proof
             {
                 string webPath = Config.GetSampleConfig().ProofFilePath;
                 ProofOrderAdapter poa = new ProofOrderAdapter(u);
-                poa.UpdateProofOrder(obj);
+              
                 obj.FileListItems.ForEach(p =>
                 {
                     if (p.Id == 0)
@@ -113,6 +114,7 @@ namespace SampleApi.Controllers.Proof
 
 
                 });
+                poa.UpdateProofOrder(obj);
                 poa.SaveProofOrder();
 
             }

@@ -33,6 +33,7 @@ namespace SysBLL
                         ur.IsDelete = false;
                         ur.UserName = u.UserName;
                         ur.RoleName = u.RoleName;
+                        
                     }
                 });
                 sc.SaveChanges();
@@ -40,7 +41,7 @@ namespace SysBLL
 
         }
 
-        public void AddDefalutUR(INameId user)
+        public void AddDefalutUR(User user)
         {
 
             using (SunginDataContext sc = new SunginDataContext())
@@ -54,7 +55,8 @@ namespace SysBLL
                         DdId = user.DdId,
                         UserName = user.UserName,
                         RoleId = 0,
-                        RoleName = "默认用户"
+                        RoleName = "默认用户",
+                 
                     };
                     sc.UserRoles.Add(ur);
                 }

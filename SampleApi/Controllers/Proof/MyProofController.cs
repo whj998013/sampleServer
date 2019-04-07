@@ -10,11 +10,11 @@ using SG.SessionManage;
 using SG.Model.Proof;
 using SG.DdApi;
 using SG.DdApi.Approve;
-
+using SampleDataOper;
 namespace SampleApi.Controllers.Proof
 {
+   
     [Author]
-
     public class MyProofController : ApiController
     {
         public IHttpActionResult GetMyProofs()

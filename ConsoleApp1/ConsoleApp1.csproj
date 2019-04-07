@@ -77,6 +77,22 @@
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProofBLL\ProofBLL.csproj">
+      <Project>{b73631ff-5811-4a33-b724-c2dfc8c65589}</Project>
+      <Name>ProofBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProofData\ProofData.csproj">
+      <Project>{bc7dee56-b961-4f6c-9323-4bec6892bc94}</Project>
+      <Name>ProofData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleApi\SampleApi.csproj">
+      <Project>{57a8a62d-a00b-4abf-81cd-06018684ae98}</Project>
+      <Name>SampleApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleBLL\SampleBLL.csproj">
+      <Project>{05806ebf-4d3b-4a2c-831d-963bcae85d79}</Project>
+      <Name>SampleBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
       <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
       <Name>SunginDataOper</Name>

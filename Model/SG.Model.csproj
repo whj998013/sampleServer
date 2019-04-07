@@ -55,10 +55,15 @@
     <Compile Include="Proof\ProofOrder.cs" />
     <Compile Include="Proof\ProofStatus.cs" />
     <Compile Include="Proof\ProofStyle.cs" />
+    <Compile Include="Proof\ProofTask.cs" />
     <Compile Include="Proof\ProofType.cs" />
+    <Compile Include="Sys\Job.cs" />
+    <Compile Include="Sys\WorkDept.cs" />
+    <Compile Include="Sys\Worker.cs" />
     <Compile Include="Stock\Garment\Garment.cs" />
     <Compile Include="Stock\Goods.cs" />
     <Compile Include="Sys\Dept.cs" />
+    <Compile Include="Sys\Process.cs" />
     <Compile Include="Sys\Unit.cs" />
     <Compile Include="Stock\Warehouse.cs" />
     <Compile Include="Sys\Code.cs" />

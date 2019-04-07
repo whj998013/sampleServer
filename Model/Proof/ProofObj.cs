@@ -100,7 +100,22 @@ namespace SG.Model.Proof
         /// </summary>
         [DataMember(Name = "ProofNum")]
         public int ProofNum { get; set; }
+        [DataMember(Name = "DesignatedGY")]
+        public string DesignatedGY { get; set; }
+        [DataMember(Name = "DesignatedCX")]
+        public string DesignatedCX { get; set; }
 
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [DataMember(Name = "Remark")]
+        public string Remark { get; set; }
+
+        /// <summary>
+        /// 紧急度
+        /// </summary>
+        [DataMember(Name = "Urgency")]
+        public string Urgency { get; set; }
     }
 
 }

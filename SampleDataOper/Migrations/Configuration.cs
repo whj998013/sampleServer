@@ -71,6 +71,30 @@ namespace SampleDataOper.Migrations
                     context.ProofTypes.Add(p);
                 }
             });
+            DataDefaultList.GetProcessList().ForEach(p =>
+            {
+                if (context.Processlist.SingleOrDefault(t => t.ProcessName == p.ProcessName) == null)
+                {
+                    context.Processlist.Add(p);
+                }
+            });
+
+            DataDefaultList.GetWorkerDepts().ForEach(p =>
+            {
+                if(context.WorkerDepts.SingleOrDefault(bm=>bm.DeptName==p.DeptName)==null)
+                {
+                    context.WorkerDepts.Add(p);
+                }
+
+            });
+
+            DataDefaultList.GetJobs().ForEach(p =>
+            {
+                if (context.jobs.SingleOrDefault(job => job.JobName == p.JobName) == null)
+                {
+                    context.jobs.Add(p);
+                }
+            });
             context.SaveChanges();
 
         }
