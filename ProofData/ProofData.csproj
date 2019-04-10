@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bll\ClientOper.cs" />
+    <Compile Include="Bll\GyOper.cs" />
     <Compile Include="Bll\ProofUserOper.cs" />
     <Compile Include="Bll\YdOper.cs" />
     <Compile Include="Model\dy_gx_info.cs" />

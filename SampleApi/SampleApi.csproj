@@ -101,6 +101,7 @@
     <Compile Include="Controllers\Proof\MyProofController.cs" />
     <Compile Include="Controllers\Proof\NewProofController.cs" />
     <Compile Include="Controllers\Proof\ProofMangeController.cs" />
+    <Compile Include="Controllers\Proof\ProofTaskController.cs" />
     <Compile Include="Controllers\Proof\ProofWorkerController.cs" />
     <Compile Include="Controllers\Public\PublicController.cs" />
     <Compile Include="Controllers\Sample\LendOutController.cs" />

@@ -24,38 +24,38 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         public IHttpActionResult DdLogin([FromBody]dynamic code)
         {
-            //try
-            //{
-            DdOperator ddoper = DdOperator.GetDdApi();
-            UserProvider uProvider = new UserProvider(ddoper);
-            UserOper uOper = new UserOper();
-
-            var uDdId = uProvider.GetDdIdByCode((string)code.code);
-            User _user = uOper.GetUserByDdId(uDdId);
-
-            if (_user != null)
+            try
             {
-                ///再次登录更新cookie信息
-                _user = uOper.UpDateLoginInfo(_user);
-            }
-            ///首次登录 
-            else
-            {
-                //取得用户信息
-                _user = uProvider.GetUserInfo(uDdId);
-                ///首次登录，在数据库登录新用户
-                uOper.AddUser(_user);
-                //将用户加入默认用户组
-                new UrOper().AddDefalutUR(_user);
-            }
+                DdOperator ddoper = DdOperator.GetDdApi();
+                UserProvider uProvider = new UserProvider(ddoper);
+                UserOper uOper = new UserOper();
 
-            SessionManage.CurrentUser = _user;
-            return Ok(LoginHelp.ReturnUser(_user));
-            //}
-            //catch (Exception e)
-            //{
-            //    return BadRequest(e.Message);
-            //}
+                var uDdId = uProvider.GetDdIdByCode((string)code.code);
+                User _user = uOper.GetUserByDdId(uDdId);
+
+                if (_user != null)
+                {
+                    ///再次登录更新cookie信息
+                    _user = uOper.UpDateLoginInfo(_user);
+                }
+                ///首次登录 
+                else
+                {
+                    //取得用户信息
+                    _user = uProvider.GetUserInfo(uDdId);
+                    ///首次登录，在数据库登录新用户
+                    uOper.AddUser(_user);
+                    //将用户加入默认用户组
+                    new UrOper().AddDefalutUR(_user);
+                }
+
+                SessionManage.CurrentUser = _user;
+                return Ok(LoginHelp.ReturnUser(_user));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
         }
 
@@ -75,14 +75,14 @@ namespace SampleApi.Controllers
                 {
                     string LoginStr = DESEncrypt.Decrypt(cookiestr, "998013");
                     UserOper uOpser = new UserOper();
-                    User _user= uOpser.GetUserByLoginStr(LoginStr);
+                    User _user = uOpser.GetUserByLoginStr(LoginStr);
                     if (_user == null) return NotFound();
                     else
                     {
                         SessionManage.CurrentUser = _user;
                         return Ok(LoginHelp.ReturnUser(_user));
                     }
-                    
+
                 }
             }
             catch (Exception e)

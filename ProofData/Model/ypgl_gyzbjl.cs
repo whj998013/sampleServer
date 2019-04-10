@@ -12,22 +12,22 @@ namespace ProofData
         [Column(Order = 0)]
         public int id { get; set; }
 
-        [Key]
+        
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_dept { get; set; }
 
-        [Key]
+       
         [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_yd { get; set; }
 
-        [Key]
+     
         [Column(Order = 3)]
         [StringLength(20)]
         public string gg { get; set; }
 
-        [Key]
+     
         [Column(Order = 4)]
         [StringLength(10)]
         public string ry_gy { get; set; }
@@ -41,7 +41,7 @@ namespace ProofData
         [Column(TypeName = "smalldatetime")]
         public DateTime? ssj_gy { get; set; }
 
-        [Key]
+      
         [Column(Order = 5)]
         [StringLength(10)]
         public string ry_zb { get; set; }
@@ -59,7 +59,7 @@ namespace ProofData
 
         public byte? speed { get; set; }
 
-        [Key]
+       
         [Column(Order = 6)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public short sl { get; set; }

@@ -122,6 +122,11 @@ namespace SampleDataOper
         /// 岗位表
         /// </summary>
         public DbSet<Job> jobs { get; set; }
+
+        /// <summary>
+        /// 工厂角色员工表
+        /// </summary>
+        public DbSet<FactryRoleWorker> FactryRolesWorker { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

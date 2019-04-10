@@ -8,6 +8,7 @@ using ProofBLL;
 using SG.Model.Proof;
 using SG.Model.Sys;
 using SampleDataOper;
+
 namespace SysBLL
 {
     public class DdCallBackOper
@@ -30,6 +31,7 @@ namespace SysBLL
                     string pid = obj.processInstanceId;
                     if (obj.result == "agree")
                     {
+                       
                         //同意
                         Poa.AgreeApprove(pid);
                     }

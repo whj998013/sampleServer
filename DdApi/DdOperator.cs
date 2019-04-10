@@ -13,7 +13,7 @@ using DingTalk.Api.Response;
 using static DingTalk.Api.Response.CorpRoleGetrolegroupResponse;
 using static DingTalk.Api.Response.OapiUserListResponse;
 using SG.Model.Sys;
-
+using SG.Utilities.Base.Security;
 namespace SG.DdApi
 {
     public class DdOperator : IDdOper
@@ -90,7 +90,8 @@ namespace SG.DdApi
         public string GetSignature(string nonceStr, string timeStamp, string url)
         {
             string str1 = string.Format("jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}", JsApiTicket, nonceStr, timeStamp, url);
-            string signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str1, "SHA1").ToLower();
+            string signature = SH1Helper.GetSwcSH1(str1).ToLower();
+            // string signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str1, "SHA1").ToLower();
             return signature;
         }
 

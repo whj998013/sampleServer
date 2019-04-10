@@ -63,7 +63,7 @@ namespace ProofBLL
 
         public  ProofOrder GetProof(string proofOrderId)
         {
-            ProofOrder po = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
+            ProofOrder po = Sdc.ProofOrders.Include(t=>t.ProofTasks).Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
             return po;
         }
         public bool DeleteProof(string proofOrderId)

@@ -36,6 +36,7 @@ namespace SampleDataOper.Migrations
 
               new Permission {  CnName = "打样中心", Name = "Proof", Key = "P020000", UpKey = "P000000" },
               new Permission {  CnName = "我的打样", Name = "Proof_MyProof", Key = "P020100", UpKey = "P020000" },
+              new Permission {  CnName = "我的任务", Name = "Proof_MyTask", Key = "P020300", UpKey = "P020000" },
               new Permission {  CnName = "打样管理", Name = "Proof_ProofMange", Key = "P020200", UpKey = "P020000" },
 
 

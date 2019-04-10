@@ -52,7 +52,7 @@
     <Compile Include="ProofOper.cs" />
     <Compile Include="ProofOrderAdapter.cs" />
     <Compile Include="ProofOrderApprove.cs" />
-    <Compile Include="ProofPlanOper.cs" />
+    <Compile Include="ProofTaskOper.cs" />
     <Compile Include="ProofTypeOper.cs" />
     <Compile Include="ProofWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

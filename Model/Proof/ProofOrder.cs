@@ -80,7 +80,7 @@ namespace SG.Model.Proof
             get
             {
 
-                if (CreateDate != null) return CreateDate.Value.ToLongDateString();
+                if (CreateDate != null) return CreateDate.Value.ToShortDateString();
                 return "";
             }
         }

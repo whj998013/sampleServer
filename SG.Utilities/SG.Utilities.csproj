@@ -96,6 +96,7 @@
     <Compile Include="Base.Extension\Permission\PermissionMode.cs" />
     <Compile Include="Base.Security\DESEncrypt.cs" />
     <Compile Include="Base.Security\Md5Helper.cs" />
+    <Compile Include="Base.Security\SH1Helper.cs" />
     <Compile Include="Base.Web\CookieHelper.cs" />
     <Compile Include="Base.Web\IPScanerHelper.cs" />
     <Compile Include="Base.Web\SessionHelper.cs" />

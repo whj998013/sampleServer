@@ -14,6 +14,10 @@ namespace SG.Model.Proof
         public Process Process { get; set; }
 
         public ProofOrder Order { get; set; }
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public int Num { get; set; }
 
         public DateTime? BeginDate { get; set; }
         public DateTime? NeedFinshDate { get; set; }

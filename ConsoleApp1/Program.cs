@@ -21,38 +21,36 @@ using System.Data.Entity;
 using ProofData.Bll;
 using ProofData;
 using ProofBLL;
+using System.Web.Security;
+using System.Security.Cryptography;
+
 namespace ConsoleApp1
 {
     class Program
     {
         static void Main(string[] args)
         {
-
-            try
-            {
-
-                SunginDataContext sdc = new SunginDataContext();
-                ProofOrder po = sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == "PS10000140").SingleOrDefault();
-
-                YdOper yo = new YdOper();
-                string re = yo.AddYd(po);
-
-            }
-            catch (Exception ess)
-            {
-
-                Console.ReadKey();
-            }
-
-
-
-
+            SunginDataContext sdc = new SunginDataContext();
+            User u = sdc.Users.FirstOrDefault(p => p.UserName == "王汉君");
+            ProofTaskOper pto = new ProofTaskOper(u);
+            var re = pto.GetMyProofTask();
+            var j = JsonHelper.ToJson(re);
 
             Console.ReadKey();
 
 
         }
-
+        public static string GetSwcSH1(string value)
+        {
+            SHA1 algorithm = SHA1.Create();
+            byte[] data = algorithm.ComputeHash(Encoding.UTF8.GetBytes(value));
+            string sh1 = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                sh1 += data[i].ToString("x2").ToUpperInvariant();
+            }
+            return sh1;
+        }
         public static void test3()
         {
             bool re = DirFileHelper.IsExistDirectory(@"//192.168.1.202/sh_erp$/ww2");

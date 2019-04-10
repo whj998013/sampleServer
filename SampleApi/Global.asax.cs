@@ -24,8 +24,12 @@ namespace SampleApi
             ddOper.CorpId = ConfigurationManager.AppSettings["CorpId"];
             ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
             ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
-            ddOper.SetDept(new DeptOper().GetDepts());
 
+            Task.Factory.StartNew(() =>
+            {
+                ddOper.SetDept(new DeptOper().GetDepts());
+            });
+          
             Task.Run(async delegate
             {
                 await Task.Delay(5000);

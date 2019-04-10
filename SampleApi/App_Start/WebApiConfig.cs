@@ -16,7 +16,7 @@ namespace SampleApi
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
-
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

@@ -7,19 +7,20 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ProofData.Bll;
 
 namespace SampleApi.Controllers.Proof
 {
     [Author]
     public class ProofMangeController : ApiController
     {
-      
+
         public IHttpActionResult GetProofPlanList()
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
             var list = poo.GetPlanProofList();
-            
+
             return Ok(list);
         }
 
@@ -28,15 +29,23 @@ namespace SampleApi.Controllers.Proof
 
             string proofOrderId = (string)obj.proofId;
             string gy = (string)obj.gy;
-            string cx = (string)obj.cx;
+            string jhrq = (string)obj.jhrq;
+            DateTime? dt = jhrq == "" ? (DateTime?)null : DateTime.Parse(jhrq).AddHours(8).Date;
             if (gy == "" || proofOrderId == "") return BadRequest("请选择工艺员！");
             else
             {
-                bool re = false;
-                ProofPlanOper pfo = new ProofPlanOper(SessionManage.CurrentUser);
-                if(gy!="") re= pfo.DoProofPlan(proofOrderId, gy, "工艺");
-                if (re) pfo.SaveChanges();
-                else return BadRequest("服务器保存错误！");
+                ProofTaskOper pfo = new ProofTaskOper(SessionManage.CurrentUser);
+                if (gy != "")
+                {
+
+                    var re = pfo.DoProofPlan(proofOrderId, gy, "工艺", dt);
+                    if (re != null)
+                    {
+                        new GyOper().AddOrUpdataGlCode(re);
+                        pfo.SaveChanges();
+                    }
+                    else return BadRequest("服务器保存错误！");
+                }
 
             }
             return Ok();
