@@ -23,20 +23,18 @@ using ProofData;
 using ProofBLL;
 using System.Web.Security;
 using System.Security.Cryptography;
-
+using SampleBLL.Bll;
 namespace ConsoleApp1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            SunginDataContext sdc = new SunginDataContext();
-            User u = sdc.Users.FirstOrDefault(p => p.UserName == "王汉君");
-            ProofTaskOper pto = new ProofTaskOper(u);
-            var re = pto.GetMyProofTask();
-            var j = JsonHelper.ToJson(re);
 
-            Console.ReadKey();
+            ProofDataContext pdc = new ProofDataContext();
+            var re = pdc.ypgl_gyzbjl.Where(p => p.id == 1).First();
+            re.task_id = 11;
+            pdc.SaveChanges();
 
 
         }

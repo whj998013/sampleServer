@@ -7,7 +7,7 @@
         FileType FileType { get; set; }
         string FileUrl { get; set; }
         int Id { get; set; }
-        string SytleId { get; set; }
+        string StyleId { get; set; }
     }
 
     public enum FileType

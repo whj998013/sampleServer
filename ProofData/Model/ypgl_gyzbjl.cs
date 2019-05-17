@@ -12,7 +12,8 @@ namespace ProofData
         [Column(Order = 0)]
         public int id { get; set; }
 
-        
+        public int? task_id { get; set; }
+
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_dept { get; set; }
@@ -22,7 +23,7 @@ namespace ProofData
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_yd { get; set; }
 
-     
+        
         [Column(Order = 3)]
         [StringLength(20)]
         public string gg { get; set; }

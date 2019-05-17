@@ -23,7 +23,7 @@ namespace ProofBLL
         {
 
             List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p=>p.CreateDate).ToList();
+            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
             poList.ForEach(p =>
             {
                 p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
@@ -49,7 +49,7 @@ namespace ProofBLL
         public List<ProofOrder> GetPlanProofList()
         {
             List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.排单||p.ProofStatus==ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p=>p.CreateDate).ToList();
+            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.排单 || p.ProofStatus == ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
             //poList.ForEach(p =>
             //{
             //    Sdc.Entry(p.ProofStyle).Collection(c => c.ProofFiles).Query().Where(f => !f.IsDelete);
@@ -61,9 +61,18 @@ namespace ProofBLL
             return poList;
         }
 
-        public  ProofOrder GetProof(string proofOrderId)
+        public ProofOrder GetProof(string proofOrderId)
         {
-            ProofOrder po = Sdc.ProofOrders.Include(t=>t.ProofTasks).Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
+          
+            ProofOrder po = Sdc.ProofOrders.Include(t => t.ProofTasks).Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
+            if (po != null)
+            {
+                Sdc.Entry(po.ProofStyle).Collection(t => t.ProofFiles).Query().Where(t => !t.IsDelete).Load();
+
+                Sdc.Entry(po).Collection(t => t.ProofTasks).Query().Include(t => t.Process).Include(t=>t.Worker).Load();
+                po.ProofTasks = po.ProofTasks.Where(p => !p.IsDelete).ToList();
+            }
+
             return po;
         }
         public bool DeleteProof(string proofOrderId)

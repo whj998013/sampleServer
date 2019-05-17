@@ -23,5 +23,6 @@ namespace SampleApi.Controllers.Public
             object ProofTypeList = new ProofTypeOper().GetProofTypeList().Select(t => new { t.Id, t.TypeName });
             return Ok(new { ColorList, SizeList, GaugeList, MaterialList, TagList, KindsList, ProofTypeList });
         }
+       
     }
 }

@@ -12,7 +12,7 @@ namespace SG.Model.Sys
         /// <summary>
         /// 款式ID
         /// </summary>
-        public string SytleId { get; set; }
+        public string StyleId { get; set; }
         /// <summary>
         /// 文件类型,0为样衣图片，1为文件
         /// </summary>

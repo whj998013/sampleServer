@@ -16,6 +16,5 @@ namespace SG.Model.Proof
         public string ProofStyleId { get; set; }
         public FileType FileType { get; set; }
 
-
     }
 }

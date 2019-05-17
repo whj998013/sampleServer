@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,13 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProofClient.cs" />
-    <Compile Include="ProofOper.cs" />
-    <Compile Include="ProofOrderAdapter.cs" />
-    <Compile Include="ProofOrderApprove.cs" />
-    <Compile Include="ProofTaskOper.cs" />
-    <Compile Include="ProofTypeOper.cs" />
-    <Compile Include="ProofWorker.cs" />
+    <Compile Include="Model\Task.cs" />
+    <Compile Include="Bll\ProofClient.cs" />
+    <Compile Include="Bll\ProofFileOper.cs" />
+    <Compile Include="Bll\ProofOper.cs" />
+    <Compile Include="Bll\ProofOrderAdapter.cs" />
+    <Compile Include="Bll\ProofOrderApprove.cs" />
+    <Compile Include="Bll\ProofTaskOper.cs" />
+    <Compile Include="Bll\ProofTypeOper.cs" />
+    <Compile Include="Bll\ProofWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,5 +86,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

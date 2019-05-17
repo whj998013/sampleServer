@@ -17,5 +17,15 @@ namespace SampleApi.Controllers.Proof
             
             return Ok(obj);
         }
+
+        [HttpGet]
+        public IHttpActionResult GetProcessList()
+        {
+            ProofWorker pw = new ProofWorker();
+            var obj = pw.GetProcessList();
+
+
+            return Ok(obj);
+        }
     }
 }

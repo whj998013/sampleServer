@@ -25,7 +25,7 @@ namespace SampleBLL
                 ISampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(item => item.StyleId == p.StyleId);
                 if (sb != null)
                 {
-                    var pic = sc.StyleFiles.FirstOrDefault(f => f.SytleId == p.StyleId && f.FileType == FileType.Pic);
+                    var pic = sc.StyleFiles.FirstOrDefault(f => f.StyleId == p.StyleId && f.FileType == FileType.Pic);
                     obj = new
                     {
                         p.Id,
@@ -57,7 +57,7 @@ namespace SampleBLL
                 if (pr == null) pr = new Proofing();
                 IProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pd == null) pd = new ProductionRecord();
-                var Files = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId).Select(p => new { p.DisplayName, p.FileName, p.FileType }).ToList();
+                var Files = sc.StyleFiles.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p => new { p.DisplayName, p.FileName, p.FileType }).ToList();
                 var FirstPic = Files.FirstOrDefault(p => p.FileType == FileType.Pic);
                 var StockData = sc.GarmentStocks.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p => new { size = p.Size, color = p.Color, num = p.Num }).ToList();
                 string Pic = FirstPic != null ? FirstPic.FileName : "";
@@ -113,8 +113,8 @@ namespace SampleBLL
                 if (pr == null) pr = new Proofing();
                 IProductionRecord pd = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == baseinfo.StyleId);
                 if (pd == null) pd = new ProductionRecord();
-                var FileList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.File).Select(p => new { name = p.DisplayName, reallyName = p.FileName }).ToList();
-                var PicList = sc.StyleFiles.Where(p => !p.IsDelete && p.SytleId == baseinfo.StyleId && p.FileType == FileType.Pic).Select(p => new { name = p.FileName, reallyName = p.FileName }).ToList();
+                var FileList = sc.StyleFiles.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId && p.FileType == FileType.File).Select(p => new { name = p.DisplayName, reallyName = p.FileName }).ToList();
+                var PicList = sc.StyleFiles.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId && p.FileType == FileType.Pic).Select(p => new { name = p.FileName, reallyName = p.FileName }).ToList();
                 var StockData = sc.GarmentStocks.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p => new { size = p.Size, color = p.Color, num = p.Num }).ToList();
                 return new
                 {

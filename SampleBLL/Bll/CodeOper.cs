@@ -69,7 +69,11 @@ namespace SampleBLL
             using (SunginDataContext sc = new SunginDataContext())
             {
                 var list = sc.Codes.Where(p => p.Type == CodeType.Gauge).OrderByDescending(t => t.UseCount).Select(p => p.CodeName).Distinct().ToList();
+                              
                 return list;
+            
+                
+
             }
         }
 

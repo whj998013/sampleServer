@@ -11,10 +11,10 @@ using SampleDataOper;
 
 namespace SysBLL
 {
-    public class DdCallBackOper
+    public class DdCallBackSysOper
     {
         string ProofProcessCode;
-        public DdCallBackOper()
+        public DdCallBackSysOper()
         {
            
             ProofProcessCode = ConfigurationManager.AppSettings["ProofProcessCode"];

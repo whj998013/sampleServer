@@ -51,6 +51,7 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="Proof\FileItemMode.cs" />
     <Compile Include="Proof\ProofFile.cs" />
+    <Compile Include="Proof\ProofLog.cs" />
     <Compile Include="Proof\ProofObj.cs" />
     <Compile Include="Proof\ProofOrder.cs" />
     <Compile Include="Proof\ProofStatus.cs" />

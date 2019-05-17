@@ -10,6 +10,7 @@ using System.Web.Routing;
 using System.Web.SessionState;
 using SysBLL;
 using System.Threading.Tasks;
+using SG.Utilities;
 
 namespace SampleApi
 {
@@ -29,16 +30,33 @@ namespace SampleApi
             {
                 ddOper.SetDept(new DeptOper().GetDepts());
             });
-          
+
             Task.Run(async delegate
             {
                 await Task.Delay(5000);
+                //注册回调
                 DdCallbackOper dcb = new DdCallbackOper(ddOper);
                 dcb.RegisterCallBack();
-            });
-           
+                var dbso = new DdCallBackSysOper();
+                //处理历吏回调
+                bool hasMore = false;
+                do
+                {
+                    var re = dcb.GetFailCallBack();
+                    re.FailedList.ForEach(p =>
+                    {
+                        dynamic robj = JsonHelper.ToObj(p.BpmsInstanceChange);
+                        dbso.DdCallBack(robj.bpmsCallBackData);
+                    });
+                    hasMore = re.HasMore;
+                } while (hasMore);
 
-            
+
+
+            });
+
+
+
         }
         public override void Init()
         {

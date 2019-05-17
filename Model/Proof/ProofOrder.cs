@@ -26,7 +26,7 @@ namespace SG.Model.Proof
         /// 打样单编号
         /// </summary>
         public string Dydbh { get; set; }
-        public ProofStyle ProofStyle { get; set; }
+        public virtual ProofStyle ProofStyle { get; set; }
         /// <summary>
         /// 申请用户DDid
         /// </summary>
@@ -61,7 +61,7 @@ namespace SG.Model.Proof
         /// <summary>
         /// 打样状态 草拟 审批 退回  排单 打样中 完成
         /// </summary>
-        public ProofStatus ProofStatus { get; set; }
+        public  ProofStatus ProofStatus { get; set; }
 
         /// <summary>
         /// 状态文本
@@ -84,7 +84,15 @@ namespace SG.Model.Proof
                 return "";
             }
         }
-        public  List<ProofTask> ProofTasks { get; set; }
+        /// <summary>
+        /// 打样任务
+        /// </summary>
+        public virtual List<ProofTask> ProofTasks { get; set; }
+
+        /// <summary>
+        /// 打样记录
+        /// </summary>
+        public virtual List<ProofLog> ProofLogs { get; set; } = new List<ProofLog>();
 
         /// <summary>
         /// 要求完成日期
@@ -107,5 +115,15 @@ namespace SG.Model.Proof
         /// 备注
         /// </summary>
         public string Remark { get; set; }
+
+        public void AddLog(string name,string msg)
+        {
+            ProofLogs.Add(new ProofLog
+            {
+                Name = name,
+                Msg = msg,
+                LogDate = DateTime.Now
+            });
+        }
     }
 }

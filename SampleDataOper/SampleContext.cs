@@ -10,6 +10,7 @@ using SG.Model.Stock;
 using SG.Model.Sys;
 using SG.Model.Proof;
 
+using SG.Interface;
 namespace SampleDataOper
 {
     public class SunginDataContext : DbContext
@@ -129,8 +130,7 @@ namespace SampleDataOper
         public DbSet<FactryRoleWorker> FactryRolesWorker { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
-            
+          
             base.OnModelCreating(modelBuilder);
         }
 

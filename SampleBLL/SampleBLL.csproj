@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bll\CodeOper.cs" />
+    <Compile Include="Bll\FileOper.cs" />
     <Compile Include="Bll\Manage.cs" />
     <Compile Include="Bll\SampleConfig.cs" />
     <Compile Include="Bll\SampleHelper.cs" />

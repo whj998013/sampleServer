@@ -24,7 +24,7 @@ namespace SampleApi.Controllers.Proof
             return Ok(list);
         }
 
-        public IHttpActionResult PoofPlan(dynamic obj)
+        public IHttpActionResult PoofPlan_stop(dynamic obj)
         {
 
             string proofOrderId = (string)obj.proofId;
@@ -41,7 +41,7 @@ namespace SampleApi.Controllers.Proof
                     var re = pfo.DoProofPlan(proofOrderId, gy, "工艺", dt);
                     if (re != null)
                     {
-                        new GyOper().AddOrUpdataGlCode(re);
+                        new GyOper().AddOrUpdataGlRecord(re);
                         pfo.SaveChanges();
                     }
                     else return BadRequest("服务器保存错误！");

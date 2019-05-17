@@ -38,6 +38,14 @@ namespace SG.DdApi
 
         }
 
+        public OapiCallBackGetCallBackFailedResultResponse GetFailCallBack()
+        {
+            IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/call_back/get_call_back_failed_result");
+            OapiCallBackGetCallBackFailedResultRequest request = new OapiCallBackGetCallBackFailedResultRequest();
+            request.SetHttpMethod("GET");
+            OapiCallBackGetCallBackFailedResultResponse response = client.Execute(request, _ddoper.AccessToken);
+            return response;
+        }
         public OapiCallBackRegisterCallBackResponse SendRegister()
         {
             //注册钉钉回调接口

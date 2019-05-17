@@ -25,12 +25,16 @@ namespace ProofBLL
                 int InCompleteNum = sdc.ProofTasks.Count(t => t.FinshDate == null && t.Worker.Id == p.Worker.Id);
                 DateTime dt = DateTime.Now.AddDays(-7);
                 int CompleteNum7Day = sdc.ProofTasks.Count(t => t.FinshDate != null && t.Worker.Id == p.Worker.Id&&t.FinshDate>=dt);
-                objs.Add(new { p.Worker.UserName, p.Worker.Avatar, p.Worker.Point, InCompleteNum, CompleteNum7Day });
+                objs.Add(new {p.Worker.Id, p.Worker.UserName, p.Worker.Avatar, p.Worker.Point, InCompleteNum, CompleteNum7Day });
             });
 
             return objs;
            
-
+              }
+        public object GetProcessList()
+        {
+            var processList = sdc.Processlist.ToList();
+            return processList;
         }
     }
 }

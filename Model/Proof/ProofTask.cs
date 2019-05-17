@@ -19,6 +19,11 @@ namespace SG.Model.Proof
         /// </summary>
         public int Num { get; set; }
 
+        /// <summary>
+        /// 工作文件
+        /// </summary>
+        public List<ProofFile> TaskFiles { get; set; } = new List<ProofFile>();
+
         public DateTime? BeginDate { get; set; }
         public DateTime? NeedFinshDate { get; set; }
 

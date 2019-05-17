@@ -43,7 +43,7 @@ namespace SampleBLL
                     ProductInfo = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == styleId);
                     if (ProductInfo == null) ProductInfo = new ProductionRecord();
                     StockList = sc.GarmentStocks.Where(p => p.StyleId == styleId).ToList();
-                    Files = sc.StyleFiles.Where(p => p.SytleId == BaseInfo.StyleId).ToList();
+                    Files = sc.StyleFiles.Where(p => p.StyleId == BaseInfo.StyleId).ToList();
                     IsNewSample = false;
                     return true;
                 }
@@ -88,7 +88,7 @@ namespace SampleBLL
             {
                 var f = new StyleFile()
                 {
-                    SytleId = StyleId,
+                    StyleId = StyleId,
                     FileName = filename,
                     FileUrl = fileUrl,
                     FileType = filetype,
