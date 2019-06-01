@@ -24,33 +24,7 @@ namespace SampleApi.Controllers.Proof
             return Ok(list);
         }
 
-        public IHttpActionResult PoofPlan_stop(dynamic obj)
-        {
-
-            string proofOrderId = (string)obj.proofId;
-            string gy = (string)obj.gy;
-            string jhrq = (string)obj.jhrq;
-            DateTime? dt = jhrq == "" ? (DateTime?)null : DateTime.Parse(jhrq).AddHours(8).Date;
-            if (gy == "" || proofOrderId == "") return BadRequest("请选择工艺员！");
-            else
-            {
-                ProofTaskOper pfo = new ProofTaskOper(SessionManage.CurrentUser);
-                if (gy != "")
-                {
-
-                    var re = pfo.DoProofPlan(proofOrderId, gy, "工艺", dt);
-                    if (re != null)
-                    {
-                        new GyOper().AddOrUpdataGlRecord(re);
-                        pfo.SaveChanges();
-                    }
-                    else return BadRequest("服务器保存错误！");
-                }
-
-            }
-            return Ok();
-        }
-
+    
         public IHttpActionResult GetClients()
         {
             var clist = new ProofClient().GetClients();

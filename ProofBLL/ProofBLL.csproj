@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\SubmitTask.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Bll\ProofClient.cs" />
     <Compile Include="Bll\ProofFileOper.cs" />

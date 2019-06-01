@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using SG.Model.Sys;
 namespace SG.Model.Proof
 {
-    public class ProofTask:BaseModel
+    public class ProofTask : BaseModel
     {
         public int Id { get; set; }
+
+        public string TaskNo { get; set; }
+        public string UpTaskNo { get; set; }
         public string UserName { get; set; }
         public Worker Worker { get; set; }
         public Process Process { get; set; }

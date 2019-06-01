@@ -10,6 +10,11 @@ namespace ProofBLL
     public class Task
     {
         public int Id { get; set; }
+     
+        [DataMember(Name = "taskNo")]
+        public string TaskNo { get; set; }
+        [DataMember(Name = "upTaskNo")]
+        public string UpTaskNo { get; set; }
 
         public string ProofOrderId { get; set; }
         public string WorkerName { get; set; }
@@ -19,8 +24,7 @@ namespace ProofBLL
         public DateTime NeedFinshDate { get; set; }
 
         public DateTime? BeginDate { get; set; }
-
-        public int UpTaskId { get; set; }
+               
         [DataMember(Name = "status")]
         public string Status { get; set; }
 

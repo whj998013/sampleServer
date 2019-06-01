@@ -12,6 +12,7 @@ using System.Web;
 using SG.Utilities;
 using ProofData.Bll;
 
+
 namespace SampleApi.Controllers.Proof
 {
     [Author]
@@ -20,9 +21,16 @@ namespace SampleApi.Controllers.Proof
         [HttpGet]
         public IHttpActionResult GetMyTasks()
         {
+            DateTime beforDT = System.DateTime.Now;
 
+            //耗时巨大的代码 
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
             var re = pto.GetMyProofTask();
+
+            DateTime afterDT = System.DateTime.Now;
+            TimeSpan ts = afterDT.Subtract(beforDT);
+            var tt = ts.TotalMilliseconds;
+
 
             return Ok(re);
 
@@ -33,13 +41,25 @@ namespace SampleApi.Controllers.Proof
             var re = poo.GetProof(id);
             return Ok(re);
         }
-        public IHttpActionResult SubmitTask(dynamic request)
+
+        public IHttpActionResult GetNextTask(int id)
         {
-            string taskId = request.TaskId;
-            string proofId = request.ProofId;
-            if (taskId == "" || proofId == "") return BadRequest();
-            return Ok();
+           // ProofTaskOper ptf = new ProofTaskOper(SessionManage.CurrentUser);
+            var re = ProofTaskOper.GetNextTask(id);
+
+            return Ok(re);
+
         }
+        public IHttpActionResult SubmitTask(SubmitTask t)
+        {
+            int taskId = t.TaskId;
+            string proofId = t.ProofId;
+            if (taskId == 0 || proofId == "") return BadRequest();
+            string re = new ProofTaskOper(SessionManage.CurrentUser).SubmitTask(proofId, taskId);
+            if (re == "") return Ok();
+            else return BadRequest(re);
+        }
+
         [HttpGet]
         public IHttpActionResult DeleteTask(string id)
         {

@@ -30,11 +30,20 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            //var e00=LabDelta.Delta_E00(14.284,-16.537,-71.738,13.36,1.905,0.768);
+            //var eab = LabDelta.Delta_Eab(14.284, -16.537, -71.738, 13.36, 1.905, 0.768);
+            double[] ylab = new double[] { 37, 48, -44 };
+            int[] yrgb = new int[] { 125, 54, 159 };
+            var rgb = LabRgb.LabToRgb(ylab);
+            var lab = LabRgb.RgbToLab(yrgb);
+            
+            Console.WriteLine("rgb:"+rgb[0]+","+rgb[1] + ","+rgb[2]);
+            Console.WriteLine("lab:" + lab[0] + "," + lab[1] + "," + lab[2]);
+            //  Console.WriteLine("eab:"+ eab);
 
-            ProofDataContext pdc = new ProofDataContext();
-            var re = pdc.ypgl_gyzbjl.Where(p => p.id == 1).First();
-            re.task_id = 11;
-            pdc.SaveChanges();
+            Console.ReadKey();
+
+           
 
 
         }
