@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ProofBLL;
+using ProofBLL.Bll;
 using SG.Model.Sys;
 using SG.SessionManage;
 using SG.Model.Proof;
@@ -13,7 +14,7 @@ using SG.DdApi.Approve;
 using SampleDataOper;
 namespace SampleApi.Controllers.Proof
 {
-   
+
     [Author]
     public class MyProofController : ApiController
     {
@@ -25,6 +26,12 @@ namespace SampleApi.Controllers.Proof
 
             return Ok(list);
         }
+        [HttpGet]
+        public IHttpActionResult GetProofRecord(string id)
+        {
+            var tlist = new ProofRecord().GetProofRecord(id);
+            return Ok(tlist);
+        }
         public IHttpActionResult GetMyFinshProofs()
         {
 
@@ -33,7 +40,7 @@ namespace SampleApi.Controllers.Proof
             var list = poo.GetUserFineshProofOrderList();
 
             return Ok(list);
-           
+
         }
         /// <summary>
         /// 删除打样
@@ -41,7 +48,7 @@ namespace SampleApi.Controllers.Proof
         /// <param name="proof"></param>
         /// <returns></returns>
         [HttpPost]
-       
+
         public IHttpActionResult DeleteProof(dynamic proof)
         {
             User u = SessionManage.CurrentUser;
@@ -61,7 +68,7 @@ namespace SampleApi.Controllers.Proof
             string proofOrderId = (string)proof.ProofOrderId;
             ProofOrderOper poo = new ProofOrderOper(u);
             ProofOrder po = poo.GetProof(proofOrderId);
-            if (po.ProofStatus == ProofStatus.草拟||po.ProofStatus==ProofStatus.退回)
+            if (po.ProofStatus == ProofStatus.草拟 || po.ProofStatus == ProofStatus.退回)
             {
                 NewApprove na = new NewApprove(DdOperator.GetDdApi())
                 {

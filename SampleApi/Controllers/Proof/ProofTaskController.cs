@@ -21,17 +21,17 @@ namespace SampleApi.Controllers.Proof
         [HttpGet]
         public IHttpActionResult GetMyTasks()
         {
-            DateTime beforDT = System.DateTime.Now;
-
-            //耗时巨大的代码 
+            
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
             var re = pto.GetMyProofTask();
+            return Ok(re);
 
-            DateTime afterDT = System.DateTime.Now;
-            TimeSpan ts = afterDT.Subtract(beforDT);
-            var tt = ts.TotalMilliseconds;
-
-
+        }
+        [HttpGet]
+        public IHttpActionResult GetMyFinshTasks()
+        {
+            ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
+            var re = pto.GetMyFinshProofTask();
             return Ok(re);
 
         }
@@ -44,18 +44,49 @@ namespace SampleApi.Controllers.Proof
 
         public IHttpActionResult GetNextTask(int id)
         {
-           // ProofTaskOper ptf = new ProofTaskOper(SessionManage.CurrentUser);
+            // ProofTaskOper ptf = new ProofTaskOper(SessionManage.CurrentUser);
             var re = ProofTaskOper.GetNextTask(id);
 
             return Ok(re);
 
         }
+        /// <summary>
+        /// 提交任务
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public IHttpActionResult SubmitTask(SubmitTask t)
         {
-            int taskId = t.TaskId;
-            string proofId = t.ProofId;
-            if (taskId == 0 || proofId == "") return BadRequest();
-            string re = new ProofTaskOper(SessionManage.CurrentUser).SubmitTask(proofId, taskId);
+
+            if (t.TaskId == 0 || t.ProofId == "") return BadRequest();
+            ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
+            //提交任务
+            string re = pto.SubmitTask(t.TaskId);
+            if (re != "") return BadRequest(re);
+            //执行下步任务
+            if (t.NextTaskId > 0)
+            {
+                re = pto.BeginTask(t.NextTaskId);
+                if (re != "") return BadRequest(re);
+            }
+            else
+            {
+                string upTaskNO = ProofTaskOper.GetTask(t.TaskId).TaskNo;
+                Task newTask = new Task
+                {
+                    TaskNo = t.NextTaskNO,
+                    ProofOrderId = t.ProofId,
+                    ProcessId = t.NextProcessId,
+                    ProcessName = t.NextProcessName,
+                    UpTaskNo = upTaskNO,
+                    WorkerName = t.NextWorkerName,
+                    BeginDate = DateTime.Now.Date,
+                    NeedFinshDate = DateTime.Now.Date.AddDays(1),
+
+                };
+                var pt = pto.AddTask(newTask,SG.Model.Stats.进行中);
+            }
+            pto.SaveChanges();
             if (re == "") return Ok();
             else return BadRequest(re);
         }
@@ -99,7 +130,8 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult AddTask(Task task)
         {
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
-            var pt = pto.AddTask(task);
+            var pt = pto.AddTask(task,SG.Model.Stats.进行中);
+            pto.SaveChanges();
             if (pt != null)
             {
                 if (task.ProcessName == "工艺") new GyOper().AddOrUpdataGlRecord(pt);

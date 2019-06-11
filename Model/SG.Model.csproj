@@ -60,6 +60,7 @@
     <Compile Include="Proof\ProofType.cs" />
     <Compile Include="Sys\FactryRole.cs" />
     <Compile Include="Sys\Job.cs" />
+    <Compile Include="Sys\Stats.cs" />
     <Compile Include="Sys\WorkDept.cs" />
     <Compile Include="Sys\Worker.cs" />
     <Compile Include="Stock\Garment\Garment.cs" />

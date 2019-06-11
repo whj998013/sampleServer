@@ -29,8 +29,26 @@ namespace ProofBLL
                 p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
 
             });
-
             return poList;
+        }
+
+        public object GetFinshPlanList()
+        {
+            List<ProofOrder> poList = new List<ProofOrder>();
+            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.完成) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
+            return poList;
+        }
+
+        /// <summary>
+        /// 完成打样，并提交审批
+        /// </summary>
+        /// <returns></returns>
+        public string FinshProof(string proofOrderid)
+        {
+            ProofOrder po = Sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == proofOrderid);
+            if (po == null) throw new Exception("找不到订单。");
+            return null;
+
         }
 
         public List<ProofOrder> GetUserFineshProofOrderList()

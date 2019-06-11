@@ -24,7 +24,28 @@ namespace SampleApi.Controllers.Proof
             return Ok(list);
         }
 
-    
+        public IHttpActionResult GetFinshPlanList()
+        {
+            User u = SessionManage.CurrentUser;
+            ProofOrderOper poo = new ProofOrderOper(u);
+            var list = poo.GetFinshPlanList();
+            return Ok(list);
+        }
+        /// <summary>
+        /// 完成打样并交样
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        public IHttpActionResult FinshProof(string id)
+        {
+            User u = SessionManage.CurrentUser;
+            ProofOrderOper poo = new ProofOrderOper(u);
+            var re = poo.FinshProof(id);
+            return Ok(re);
+        }
+        
+
         public IHttpActionResult GetClients()
         {
             var clist = new ProofClient().GetClients();

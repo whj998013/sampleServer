@@ -42,6 +42,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -106,6 +107,10 @@
     <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
       <Name>SG.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageData\StorageData.csproj">
+      <Project>{422ff65f-e6a5-4d59-9463-c2f340b1ddf6}</Project>
+      <Name>StorageData</Name>
     </ProjectReference>
     <ProjectReference Include="..\SysBLL\SysBLL.csproj">
       <Project>{b923e651-64a0-4bee-81ba-317e5b712749}</Project>

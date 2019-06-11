@@ -26,6 +26,9 @@ namespace ProofBLL
         [DataMember(Name = "nextWorkerName")]
         public string NextWorkerName { get; set; }
 
+        [DataMember(Name = "nextTaskNO")]
+
+        public string NextTaskNO { get; set; }
         ///<summary>
         /// 
         /// </summary>

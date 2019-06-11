@@ -24,27 +24,50 @@ using ProofBLL;
 using System.Web.Security;
 using System.Security.Cryptography;
 using SampleBLL.Bll;
+using StorageData;
 namespace ConsoleApp1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //var e00=LabDelta.Delta_E00(14.284,-16.537,-71.738,13.36,1.905,0.768);
-            //var eab = LabDelta.Delta_Eab(14.284, -16.537, -71.738, 13.36, 1.905, 0.768);
-            double[] ylab = new double[] { 37, 48, -44 };
-            int[] yrgb = new int[] { 125, 54, 159 };
-            var rgb = LabRgb.LabToRgb(ylab);
-            var lab = LabRgb.RgbToLab(yrgb);
-            
-            Console.WriteLine("rgb:"+rgb[0]+","+rgb[1] + ","+rgb[2]);
-            Console.WriteLine("lab:" + lab[0] + "," + lab[1] + "," + lab[2]);
-            //  Console.WriteLine("eab:"+ eab);
+            StorageDataContext sdc = new StorageDataContext();
+            var l = sdc.Color.ToList();
+            l.ForEach(p =>
+            {
+                Console.WriteLine("开始转化,颜色:" + p.Name + "  RGB:" + p.RGB);
+                string c = p.Name.Substring(p.Name.Length - 1, 1);
+                if (c != "色") p.Name += "色";
+                
+
+            });
+            sdc.SaveChanges();
+            Console.WriteLine("全部转换完成。");
 
             Console.ReadKey();
 
-           
+        }
 
+        public static void BuildColorLab()
+        {
+            StorageDataContext sdc = new StorageDataContext();
+            var l = sdc.Color.ToList();
+            l.ForEach(p =>
+            {
+                Console.WriteLine("开始转化,颜色:" + p.Name + "  RGB:" + p.RGB);
+                int r = System.Convert.ToInt32(p.RGB.Substring(1, 2), 16);
+                int b = System.Convert.ToInt32(p.RGB.Substring(3, 2), 16);
+                int g = System.Convert.ToInt32(p.RGB.Substring(5, 2), 16);
+                var lab = LabRgb.RgbToLab(new int[] { r, b, g });
+                p.Lab_L = lab[0];
+                p.Lab_a = lab[1];
+                p.Lab_b = lab[2];
+
+            });
+            sdc.SaveChanges();
+            Console.WriteLine("全部转换完成。");
+
+            Console.ReadKey();
 
         }
         public static string GetSwcSH1(string value)

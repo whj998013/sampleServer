@@ -13,15 +13,18 @@ namespace SG.Model.Proof
         public string TaskNo { get; set; }
         public string UpTaskNo { get; set; }
         public string UserName { get; set; }
-        public Worker Worker { get; set; }
-        public Process Process { get; set; }
+        public virtual Worker Worker { get; set; }
+        public virtual Process Process { get; set; }
 
-        public ProofOrder Order { get; set; }
+        public virtual ProofOrder Order { get; set; }
         /// <summary>
         /// 数量
         /// </summary>
         public int Num { get; set; }
-
+        /// <summary>
+        /// 通用状态
+        /// </summary>
+        public Stats Stats { get; set; }
         /// <summary>
         /// 工作文件
         /// </summary>

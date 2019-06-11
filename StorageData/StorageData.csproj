@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B73631FF-5811-4A33-B724-C2DFC8C65589}</ProjectGuid>
+    <ProjectGuid>{422FF65F-E6A5-4D59-9463-C2F340B1DDF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProofBLL</RootNamespace>
-    <AssemblyName>ProofBLL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>StorageData</RootNamespace>
+    <AssemblyName>StorageData</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,46 +50,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\ProofRecord.cs" />
-    <Compile Include="Model\PfRecord.cs" />
-    <Compile Include="Model\SubmitTask.cs" />
-    <Compile Include="Model\Task.cs" />
-    <Compile Include="Bll\ProofClient.cs" />
-    <Compile Include="Bll\ProofFileOper.cs" />
-    <Compile Include="Bll\ProofOper.cs" />
-    <Compile Include="Bll\ProofOrderAdapter.cs" />
-    <Compile Include="Bll\ProofOrderApprove.cs" />
-    <Compile Include="Bll\ProofTaskOper.cs" />
-    <Compile Include="Bll\ProofTypeOper.cs" />
-    <Compile Include="Bll\ProofWorker.cs" />
+    <Compile Include="Admin.cs" />
+    <Compile Include="BadReport.cs" />
+    <Compile Include="BadReportDetail.cs" />
+    <Compile Include="CheckData.cs" />
+    <Compile Include="CheckStock.cs" />
+    <Compile Include="CheckStockInfo.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="CloneHistory.cs" />
+    <Compile Include="CloneTemp.cs" />
+    <Compile Include="Color.cs" />
+    <Compile Include="CusAddress.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="InOrderView.cs" />
+    <Compile Include="InStorage.cs" />
+    <Compile Include="InStorDetail.cs" />
+    <Compile Include="InventoryBook.cs" />
+    <Compile Include="LocalProduct.cs" />
+    <Compile Include="LocalProductView.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Measure.cs" />
+    <Compile Include="MeasureRel.cs" />
+    <Compile Include="MoveOrder.cs" />
+    <Compile Include="MoveOrderDetail.cs" />
+    <Compile Include="OutOrderView.cs" />
+    <Compile Include="OutStoDetail.cs" />
+    <Compile Include="OutStorage.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
-      <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
-      <Name>SG.DdApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IBLL\SG.Interface.csproj">
-      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
-      <Name>SG.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\SG.Model.csproj">
-      <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
-      <Name>SG.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProofData\ProofData.csproj">
-      <Project>{bc7dee56-b961-4f6c-9323-4bec6892bc94}</Project>
-      <Name>ProofData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
-      <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
-      <Name>SunginDataOper</Name>
-    </ProjectReference>
+    <Compile Include="ReportParams.cs" />
+    <Compile Include="Reports.cs" />
+    <Compile Include="ReturnDetail.cs" />
+    <Compile Include="ReturnOrder.cs" />
+    <Compile Include="Sequence.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="StorageData.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SysDepart.cs" />
+    <Compile Include="SysRelation.cs" />
+    <Compile Include="SysResource.cs" />
+    <Compile Include="SysRole.cs" />
+    <Compile Include="TNum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

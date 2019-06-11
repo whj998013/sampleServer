@@ -15,6 +15,5 @@ namespace SG.Model.Proof
         打样中 = 3,
         交样 = 4,
         完成 = 5,
-
     }
 }
