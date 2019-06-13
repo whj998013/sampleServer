@@ -15,7 +15,7 @@ namespace SG.DdApi
     public class DdCallbackOper
     {
         IDdOper _ddoper;
-        public string CallBackUrl { get; set; } = "http://api.sungingroup.com:8082/api/dd/DdCallBack";
+        public string CallBackUrl { get; set; } 
         public string AesKey { get; set; } = "99801378901234567890nicky67890123wyy7890whj";
         public string Token { get; set; } = "880212";
         public List<string> Ls { get; set; } = new List<string>() { "bpms_instance_change" };

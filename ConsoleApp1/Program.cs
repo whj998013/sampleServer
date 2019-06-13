@@ -32,7 +32,22 @@ namespace ConsoleApp1
 {
     class Program
     {
+
         static void Main(string[] args)
+        {
+            SunginDataContext sdc = new SunginDataContext();
+            var fl = sdc.StyleFiles.ToList();
+            fl.ForEach(p =>
+            {
+                Console.WriteLine(p.FileName.Substring(0,10));
+                p.StyleId = p.FileName.Substring(0, 10);
+
+
+            });
+            sdc.SaveChanges();
+            Console.ReadKey();
+        }
+        static void Main2(string[] args)
         {
             IDdOper ddOper = DdOperator.GetDdApi();
             ddOper.CorpId = "ding99dd341fc99a25eb";

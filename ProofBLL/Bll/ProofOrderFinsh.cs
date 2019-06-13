@@ -51,24 +51,29 @@ namespace ProofBLL
                                if (p.Name == "样衣图片")
                                {
                                    var picList = JsonHelper.JsonToList<string>(p.Value);
-                                   picList.ForEach(f =>
+                                   if (picList != null)
                                    {
-                                       var fdata = HttpHelper.DownloadData(f);
-                                       string name = f.Substring(f.LastIndexOf('/') + 1);
-                                       string fullname = po.ProofStyle.ProofStyleId + "_" + name;
-                                       File.WriteAllBytes(SysPath+PicPath + fullname, fdata);
-                                       ProofFile pf = new ProofFile
-                                       {
-                                           FullName = fullname,
-                                           DisplayName = name,
-                                           Url = PicPath + fullname,
-                                           FileType = SG.Interface.Sys.FileType.Pic,
-                                           ProofStyleId = po.ProofStyle.ProofStyleId,
+                                       picList.ForEach(f =>
+                                                                          {
+                                                                              var fdata = HttpHelper.DownloadData(f);
+                                                                              string name = f.Substring(f.LastIndexOf('/') + 1);
+                                                                              string fullname = po.ProofStyle.ProofStyleId + "_" + name;
+                                                                              File.WriteAllBytes(SysPath + PicPath + fullname, fdata);
+                                                                              ProofFile pf = new ProofFile
+                                                                              {
+                                                                                  FullName = fullname,
+                                                                                  DisplayName = name,
+                                                                                  Url = PicPath + fullname,
+                                                                                  FileType = SG.Interface.Sys.FileType.Pic,
+                                                                                  ProofStyleId = po.ProofStyle.ProofStyleId,
 
-                                       };
-                                       pf.SetCreateUser("钉钉审批");
-                                       po.ProofStyle.ProofFiles.Add(pf);
-                                   });
+                                                                              };
+                                                                              pf.SetCreateUser("钉钉审批");
+                                                                              po.ProofStyle.ProofFiles.Add(pf);
+                                                                          });
+
+                                   }
+
 
                                }
 
@@ -81,7 +86,10 @@ namespace ProofBLL
 
         public void RefuseFinsh(string pid)
         {
-            throw new NotImplementedException();
+            var po = sdc.ProofOrders.SingleOrDefault(p => p.DdFinshApprovalCode == pid);
+            po.ProofStatus = ProofStatus.打样中;
+            sdc.SaveChanges();
+            // throw new NotImplementedException();
         }
     }
 }
