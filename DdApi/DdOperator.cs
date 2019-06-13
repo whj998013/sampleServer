@@ -145,7 +145,7 @@ namespace SG.DdApi
         /// <returns></returns>
         private string GetJsApiTicket(string _accessToken)
         {
-            string re = HttpHelper.Get(string.Format("https://oapi.dingtalk.com/get_jsapi_ticket?access_token={0}", _accessToken));
+            string re = DdHttpHelper.Get(string.Format("https://oapi.dingtalk.com/get_jsapi_ticket?access_token={0}", _accessToken));
             string result = "";
             var obj = JsonConvert.DeserializeObject<Jsticket>(re);
             if (obj.Errcode == 0)

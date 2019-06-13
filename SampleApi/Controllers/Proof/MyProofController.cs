@@ -55,6 +55,7 @@ namespace SampleApi.Controllers.Proof
             string proofOrderId = (string)proof.ProofOrderId;
             ProofOrderOper poo = new ProofOrderOper(u);
             poo.DeleteProof(proofOrderId);
+            poo.SaveChange();
             return Ok();
         }
         /// <summary>
@@ -80,6 +81,7 @@ namespace SampleApi.Controllers.Proof
                 if (DdApprovalCode != "")
                 {
                     poo.SetApprove(po, DdApprovalCode);
+                    poo.SaveChange();
                 }
             }
 

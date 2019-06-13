@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using SG.Utilities;
 namespace SampleApi
 {
-  
+
     /// <summary>
     /// 系统配置项
     /// </summary>
     public class Config
     {
 
-        private  string _ProofFilePath;
+        private string _ProofFilePath;
         private bool _IsInputStrageNeedAlow;
         private bool _InStrageAlowChange;
         private bool _EnableLimtView;
@@ -21,7 +21,9 @@ namespace SampleApi
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
         private string _SampleFilePath;
+        private string _FinshProofProcessCode;
         private string _ProofProcessCode;
+        private string _CallBackUrl;
         private static Config _instance = null; //单列对象
         public static Config GetSampleConfig()
         {
@@ -39,13 +41,30 @@ namespace SampleApi
             _SampleDevelopmentRoleId = long.Parse(ConfigHelper.GetValue("SampleDevelopmentRoleId"));
             _ProofFilePath = ConfigHelper.GetValue("ProofFilePath");
             _ProofProcessCode = ConfigHelper.GetValue("ProofProcessCode");
+            _FinshProofProcessCode = ConfigHelper.GetValue("FinshProofProcessCode");
+            _CallBackUrl = ConfigHelper.GetValue("CallBackUrl");
 
         }
+
         public string ProofProcessCode
         {
             get
             {
                 return _ProofProcessCode;
+            }
+        }
+        public string CallBackUrl
+        {
+            get
+            {
+                return _CallBackUrl;
+            }
+        }
+        public string FinshProofProcessCode
+        {
+            get
+            {
+                return _FinshProofProcessCode;
             }
         }
         public string ProofFilePath
@@ -79,9 +98,9 @@ namespace SampleApi
 
             }
         }
-              /// <summary>
-              /// 工艺开发人员角色ID
-              /// </summary>
+        /// <summary>
+        /// 工艺开发人员角色ID
+        /// </summary>
         public long SampleDevelopmentRoleId
         {
             get
@@ -91,7 +110,7 @@ namespace SampleApi
             set
             {
                 _SampleDevelopmentRoleId = value;
-                 ConfigHelper.SetValue("SampleDevelopmentRoleId",value.ToString());
+                ConfigHelper.SetValue("SampleDevelopmentRoleId", value.ToString());
             }
         }
 

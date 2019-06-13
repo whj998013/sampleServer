@@ -44,7 +44,8 @@ namespace SampleApi.Controllers
             {
                 //事件为审批回调，启用异步处理
                 dynamic robj = JsonHelper.ToObj(re);
-                new DdCallBackSysOper().DdCallBack(robj);
+                DdCallBackSysOper.GetOper().DdCallBack(robj);
+
             });
 
             //返回加密成功标志给钉钉

@@ -26,6 +26,10 @@ namespace SG.Model.Proof
         /// </summary>
         public Stats Stats { get; set; }
         /// <summary>
+        /// 评分
+        /// </summary>
+        public int Rating { get; set; }
+        /// <summary>
         /// 工作文件
         /// </summary>
         public List<ProofFile> TaskFiles { get; set; } = new List<ProofFile>();

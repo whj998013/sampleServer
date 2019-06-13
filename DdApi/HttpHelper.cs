@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SG.DdApi
 {
-    public static class HttpHelper
+    public static class DdHttpHelper
     {
         /// <summary>
         /// 通过GET方式获取页面的方法

@@ -15,21 +15,23 @@ namespace SG.DdApi
     public class DdCallbackOper
     {
         IDdOper _ddoper;
-        readonly string Url = "http://api.sungingroup.com:8082/api/dd/DdCallBack";
-        readonly string AesKey = "99801378901234567890nicky67890123wyy7890whj";
-        readonly string Token = "880212";
-        readonly List<string> ls = new List<string>() { "bpms_instance_change" };
+        public string CallBackUrl { get; set; } = "http://api.sungingroup.com:8082/api/dd/DdCallBack";
+        public string AesKey { get; set; } = "99801378901234567890nicky67890123wyy7890whj";
+        public string Token { get; set; } = "880212";
+        public List<string> Ls { get; set; } = new List<string>() { "bpms_instance_change" };
         public DdCallbackOper(IDdOper ddOper)
         {
             _ddoper = ddOper;
         }
+        // public string Url { get; set; }
+
         public void RegisterCallBack()
         {
             var reg = GetRegister();
             if (reg.Errcode == 0)
             {
-                if (reg.AesKey != AesKey || reg.Url != Url || reg.Token != Token||!Enumerable.SequenceEqual(ls, reg.CallBackTag)) UpdataRegister();
-                
+                if (reg.AesKey != AesKey || reg.Url != CallBackUrl || reg.Token != Token || !Enumerable.SequenceEqual(Ls, reg.CallBackTag)) UpdataRegister();
+
             }
             else
             {
@@ -52,10 +54,10 @@ namespace SG.DdApi
             IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/call_back/register_call_back");
             OapiCallBackRegisterCallBackRequest request = new OapiCallBackRegisterCallBackRequest
             {
-                Url = Url,
+                Url = CallBackUrl,
                 AesKey = AesKey,
                 Token = Token,
-                CallBackTag = ls
+                CallBackTag = Ls
             };
             OapiCallBackRegisterCallBackResponse response = client.Execute(request, _ddoper.AccessToken);
             return response;
@@ -66,7 +68,7 @@ namespace SG.DdApi
             IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/call_back/get_call_back");
             OapiCallBackGetCallBackRequest request = new OapiCallBackGetCallBackRequest();
             request.SetHttpMethod("GET");
-            OapiCallBackGetCallBackResponse response = client.Execute(request,_ddoper.AccessToken);
+            OapiCallBackGetCallBackResponse response = client.Execute(request, _ddoper.AccessToken);
             return response;
         }
 
@@ -75,10 +77,10 @@ namespace SG.DdApi
             IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/call_back/update_call_back");
             OapiCallBackUpdateCallBackRequest request = new OapiCallBackUpdateCallBackRequest
             {
-                Url = Url,
+                Url = CallBackUrl,
                 AesKey = AesKey,
                 Token = Token,
-                CallBackTag = ls
+                CallBackTag = Ls
             };
             OapiCallBackUpdateCallBackResponse response = client.Execute(request, _ddoper.AccessToken);
             return response;

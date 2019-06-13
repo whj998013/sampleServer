@@ -106,6 +106,7 @@
     <Compile Include="Base.Model\GridPage.cs" />
     <Compile Include="Base.Model\JqGridColumn.cs" />
     <Compile Include="Base.Model\JqGridParam.cs" />
+    <Compile Include="Color\ColorHelper.cs" />
     <Compile Include="Color\LabDelta.cs" />
     <Compile Include="Color\LabRgb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

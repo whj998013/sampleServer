@@ -8,7 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ProofData.Bll;
-
+using SG.DdApi;
+using SG.DdApi.Approve;
 namespace SampleApi.Controllers.Proof
 {
     [Author]
@@ -36,15 +37,57 @@ namespace SampleApi.Controllers.Proof
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-
+        [HttpGet]
         public IHttpActionResult FinshProof(string id)
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
-            var re = poo.FinshProof(id);
-            return Ok(re);
+            var result = poo.FinshProof(id);
+            if (result != null)
+            {
+                //发送交样申请 
+                string ddid = result.ProofApplyUserDdId;
+                User applyUser = SampleDataOper.DataQuery.GetSingle<User>(p => p.DdId == ddid);
+                NewApprove na = new NewApprove(DdOperator.GetDdApi())
+                {
+                    User = applyUser,
+                    ProcessCode = Config.GetSampleConfig().FinshProofProcessCode
+                };
+
+                List<ApproveItem> items = new List<ApproveItem>()
+                {
+                   new ApproveItem()
+                   {
+                       Name ="单号",
+                       Value=result.ProofOrderId
+                   },
+                   new ApproveItem()
+                   {
+                       Name ="款号",
+                       Value=result.ProofStyle.ClientNo
+                   },
+                    new ApproveItem()
+                   {
+                       Name ="客户",
+                       Value=result.ProofStyle.ClentName
+                   },
+                   new  ApproveItem{
+                       Name ="打样部门",
+                       Value="打样中心"
+                   },
+                };
+                string DdApprovalCode = na.SendApprove(items);
+                if (DdApprovalCode != "")
+                {
+                    poo.SetFinshApprove(result, DdApprovalCode);
+                    poo.SaveChange();
+                    return Ok();
+                };
+                
+            }
+            return BadRequest("订单号错误。");
         }
-        
+
 
         public IHttpActionResult GetClients()
         {

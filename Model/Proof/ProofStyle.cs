@@ -74,7 +74,7 @@ namespace SG.Model.Proof
         /// 打样文件
         /// </summary>
 
-        public List<ProofFile> ProofFiles { get; set; } = new List<ProofFile>();
+        public virtual List<ProofFile> ProofFiles { get; set; } = new List<ProofFile>();
 
     }
 }

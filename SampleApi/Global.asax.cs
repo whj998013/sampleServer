@@ -25,7 +25,8 @@ namespace SampleApi
             ddOper.CorpId = ConfigurationManager.AppSettings["CorpId"];
             ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
             ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
-
+            var dbso = DdCallBackSysOper.GetOper();
+            dbso.SysPath = HttpContext.Current.Server.MapPath("~") ;
             Task.Factory.StartNew(() =>
             {
                 ddOper.SetDept(new DeptOper().GetDepts());
@@ -36,8 +37,9 @@ namespace SampleApi
                 await Task.Delay(5000);
                 //注册回调
                 DdCallbackOper dcb = new DdCallbackOper(ddOper);
+                dcb.CallBackUrl = Config.GetSampleConfig().CallBackUrl;
                 dcb.RegisterCallBack();
-                var dbso = new DdCallBackSysOper();
+
                 //处理历吏回调
                 bool hasMore = false;
                 do

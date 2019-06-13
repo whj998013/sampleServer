@@ -58,6 +58,11 @@ namespace SG.Model.Proof
         /// 钉钉审批流code
         /// </summary>
         public string DdApprovalCode { get; set; }
+
+        /// <summary>
+        /// 钉钉交样code
+        /// </summary>
+        public string DdFinshApprovalCode { get; set; }
         /// <summary>
         /// 打样状态 草拟 审批 退回  排单 打样中 完成
         /// </summary>
@@ -93,6 +98,10 @@ namespace SG.Model.Proof
         /// 打样记录
         /// </summary>
         public virtual List<ProofLog> ProofLogs { get; set; } = new List<ProofLog>();
+        /// <summary>
+        /// 评分
+        /// </summary>
+        public int Rating { get; set; }
 
         /// <summary>
         /// 要求完成日期

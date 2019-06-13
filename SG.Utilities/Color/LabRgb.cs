@@ -16,7 +16,7 @@ namespace SG.Utilities
 
         public static double[] RgbToLab(int[] rgb)
         {
-            double[] drgb=new double[3];
+            double[] drgb = new double[3];
             drgb[0] = rgb[0];
             drgb[1] = rgb[1];
             drgb[2] = rgb[2];
@@ -223,9 +223,10 @@ namespace SG.Utilities
             dg = Math.Min(255, dg);
             db = Math.Min(255, db);
 
-            sRGB[0] = (int)(dr + 0.5);
-            sRGB[1] = (int)(dg + 0.5);
-            sRGB[2] = (int)(db + 0.5);
+            sRGB[0] = (int)(dr + 0.5) < 0 ? 0 : (int)(dr + 0.5);
+            sRGB[1] = (int)(dg + 0.5) < 0 ? 0 : (int)(dg + 0.5);
+            sRGB[2] = (int)(db + 0.5) < 0 ? 0 : (int)(db + 0.5);
+
             return sRGB;
         }
 

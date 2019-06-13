@@ -39,8 +39,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bll\ProofOrderFinsh.cs" />
     <Compile Include="Bll\ProofRecord.cs" />
     <Compile Include="Model\PfRecord.cs" />
     <Compile Include="Model\SubmitTask.cs" />
@@ -68,6 +71,10 @@
       <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
       <Name>SG.DdApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DdServerApi\TopSdk.csproj">
+      <Project>{9c11cae5-5188-4e71-825b-68fc3135728a}</Project>
+      <Name>TopSdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IBLL\SG.Interface.csproj">
       <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
       <Name>SG.Interface</Name>
@@ -83,6 +90,10 @@
     <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
       <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
       <Name>SunginDataOper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SG.Utilities\SG.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>SG.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

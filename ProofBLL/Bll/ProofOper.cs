@@ -38,16 +38,24 @@ namespace ProofBLL
             poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.完成) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
             return poList;
         }
-
+ 
         /// <summary>
         /// 完成打样，并提交审批
         /// </summary>
         /// <returns></returns>
-        public string FinshProof(string proofOrderid)
+        public ProofOrder FinshProof(string proofOrderid)
         {
             ProofOrder po = Sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == proofOrderid);
-            if (po == null) throw new Exception("找不到订单。");
-            return null;
+            if (po == null) return null;
+            po.ProofTasks.ForEach(p =>
+            {
+                p.FinshDate = DateTime.Now;
+                p.Stats = SG.Model.Stats.终止;
+                p.OperRemark = "订单完成，主动终止任务";
+
+            });
+            po.ProofStatus = ProofStatus.交样;
+            return po;
 
         }
 
@@ -68,14 +76,6 @@ namespace ProofBLL
         {
             List<ProofOrder> poList = new List<ProofOrder>();
             poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.排单 || p.ProofStatus == ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
-            //poList.ForEach(p =>
-            //{
-            //    Sdc.Entry(p.ProofStyle).Collection(c => c.ProofFiles).Query().Where(f => !f.IsDelete);
-            //    Sdc.Entry(p).Collection(c => c.ProofTasks).Query().Where(f => !f.IsDelete);
-
-            //    //p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).;
-
-            //});
             return poList;
         }
 
@@ -102,7 +102,7 @@ namespace ProofBLL
             {
                 p.Delete(_user.UserName);
             });
-            Sdc.SaveChanges();
+           // Sdc.SaveChanges();
 
             return true;
         }
@@ -110,7 +110,14 @@ namespace ProofBLL
         {
             po.DdApprovalCode = ddApprovalCode;
             po.ProofStatus = ProofStatus.审批;
-            Sdc.SaveChanges();
+          //  Sdc.SaveChanges();
+        }
+
+        public void SetFinshApprove(ProofOrder po, string ddApprovalCode)
+        {
+            po.DdFinshApprovalCode = ddApprovalCode;
+            po.ProofStatus = ProofStatus.交样;
+           // Sdc.SaveChanges();
         }
         public void SaveChange()
         {

@@ -12,7 +12,7 @@
 
     public enum FileType
     {
-        //图片
+        //样衣图片
         Pic = 0,
         //文件
         File = 1,

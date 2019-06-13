@@ -27,7 +27,11 @@ namespace SG.DdApi.Approve
         {
             _oper = oper;
         }
-
+        /// <summary>
+        /// 发送审批请求
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public string SendApprove(List<ApproveItem> items)
         {
             DefaultDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/processinstance/create");
@@ -53,6 +57,7 @@ namespace SG.DdApi.Approve
             return "";
 
         }
+
 
     }
 }

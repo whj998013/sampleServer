@@ -23,7 +23,7 @@ namespace SG.DdApi
         public void SendMsg(DdMsg msg)
         {
             msg.agentid = myoper.AgentID;                     
-            string result=HttpHelper.Post(url, msg.ToJsonString());            
+            string result=DdHttpHelper.Post(url, msg.ToJsonString());            
         }
 
     }
