@@ -34,10 +34,15 @@ namespace SampleDataOper.Migrations
               new Permission {  CnName = "查看所有信息", Name = "Sample_Dd_ViewAllInfo", Key = "P015001", UpKey = "P015000" },
               new Permission {  CnName = "样衣借用", Name = "Sample_Dd_SampleLend", Key = "P015002", UpKey = "P015000" },
 
+
               new Permission {  CnName = "打样中心", Name = "Proof", Key = "P020000", UpKey = "P000000" },
               new Permission {  CnName = "我的打样", Name = "Proof_MyProof", Key = "P020100", UpKey = "P020000" },
               new Permission {  CnName = "我的任务", Name = "Proof_MyTask", Key = "P020300", UpKey = "P020000" },
               new Permission {  CnName = "打样管理", Name = "Proof_ProofMange", Key = "P020200", UpKey = "P020000" },
+
+               new Permission {  CnName = "样纱管理", Name = "YarnMange", Key = "P030000", UpKey = "P000000" },
+               new Permission {  CnName = "我的样纱", Name = "Yarn_MyYarn", Key = "P030100", UpKey = "P030000" },
+               new Permission {  CnName = "样纱查询", Name = "Yarn_YarnSeach", Key = "P030200", UpKey = "P030000" },
 
 
               new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000" },

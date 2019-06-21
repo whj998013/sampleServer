@@ -32,52 +32,51 @@ namespace ProofBLL
             if (po != null)
             {
                 re.FormComponentValues.ForEach(p =>
-                           {
-                               if (p.Name == "评分")
-                               {
-                                   int Rating = 3;
-                                   if (p.Value != null)
-                                   {
-                                       if (p.Value.IndexOf('1') > 0) Rating = 1;
-                                       else if (p.Value.IndexOf('2') > 0) Rating = 2;
-                                       else if (p.Value.IndexOf('3') > 0) Rating = 3;
-                                       else if (p.Value.IndexOf('4') > 0) Rating = 4;
-                                       else if (p.Value.IndexOf('5') > 0) Rating = 5;
-                                   };
-                                   po.Rating = Rating;
-                                   po.ProofTasks.ForEach(pt => pt.Rating = Rating);
-                               }
+                    {
+                        if (p.Name == "评分")
+                        {
+                            int Rating = 3;
+                            if (p.Value != null)
+                            {
+                                if (p.Value.IndexOf('1') > 0) Rating = 1;
+                                else if (p.Value.IndexOf('2') > 0) Rating = 2;
+                                else if (p.Value.IndexOf('3') > 0) Rating = 3;
+                                else if (p.Value.IndexOf('4') > 0) Rating = 4;
+                                else if (p.Value.IndexOf('5') > 0) Rating = 5;
+                            };
+                            po.Rating = Rating;
+                            po.ProofTasks.ForEach(pt => pt.Rating = Rating);
+                        }
 
-                               if (p.Name == "样衣图片")
-                               {
-                                   var picList = JsonHelper.JsonToList<string>(p.Value);
-                                   if (picList != null)
-                                   {
-                                       picList.ForEach(f =>
-                                                                          {
-                                                                              var fdata = HttpHelper.DownloadData(f);
-                                                                              string name = f.Substring(f.LastIndexOf('/') + 1);
-                                                                              string fullname = po.ProofStyle.ProofStyleId + "_" + name;
-                                                                              File.WriteAllBytes(SysPath + PicPath + fullname, fdata);
-                                                                              ProofFile pf = new ProofFile
-                                                                              {
-                                                                                  FullName = fullname,
-                                                                                  DisplayName = name,
-                                                                                  Url = PicPath + fullname,
-                                                                                  FileType = SG.Interface.Sys.FileType.Pic,
-                                                                                  ProofStyleId = po.ProofStyle.ProofStyleId,
+                        if (p.Name == "样衣图片")
+                        {
+                            var picList = JsonHelper.JsonToList<string>(p.Value);
+                            if (picList != null)
+                            {
+                                picList.ForEach(f =>
+                                        {
+                                            var fdata = HttpHelper.DownloadData(f);
+                                            string name = f.Substring(f.LastIndexOf('/') + 1);
+                                            string fullname = po.ProofStyle.ProofStyleId + "_" + name;
+                                            File.WriteAllBytes(SysPath + PicPath + fullname, fdata);
+                                            ProofFile pf = new ProofFile
+                                            {
+                                                FullName = fullname,
+                                                DisplayName = name,
+                                                Url = PicPath + fullname,
+                                                FileType = SG.Interface.Sys.FileType.Pic,
+                                                ProofStyleId = po.ProofStyle.ProofStyleId,
+                                            };
+                                            pf.SetCreateUser("钉钉审批");
+                                            po.ProofStyle.ProofFiles.Add(pf);
+                                        });
 
-                                                                              };
-                                                                              pf.SetCreateUser("钉钉审批");
-                                                                              po.ProofStyle.ProofFiles.Add(pf);
-                                                                          });
-
-                                   }
+                            }
 
 
-                               }
+                        }
 
-                           });
+                    });
                 po.ProofStatus = ProofStatus.完成;
                 sdc.SaveChanges();
             }

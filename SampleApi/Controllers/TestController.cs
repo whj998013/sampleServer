@@ -4,18 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using SampleApi.App_Start;
 using SysBLL;
 
 
 namespace SampleApi.Controllers
 {
+   
     public class TestController : ApiController
     {
         [HttpGet]
         public object GetTestData()
         {
-            var re = new DeptOper().GetDepts();
-            return Ok(re);
+            KeyMange.GetError();
+
+            return NotFound();
         }
     }
 }

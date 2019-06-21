@@ -27,6 +27,8 @@ using SampleBLL.Bll;
 using StorageData;
 using SG.DdApi.Approve;
 using HttpHelper = SG.Utilities.HttpHelper;
+using log4net;
+using System.Configuration;
 
 namespace ConsoleApp1
 {
@@ -35,11 +37,25 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
+
+            log4net.ILog log = log4net.LogManager.GetLogger("sungin.Error");//获取一个日志记录器
+           
+            log.Warn("whj99810313ssssss1");
+            log.Fatal("位于");
+          
+            log4net.ILog logLogin = log4net.LogManager.GetLogger("sungin.Login");//获取一个日志记录器logLogin
+            logLogin.Info("王汉君登录");
+            Console.ReadKey();
+
+        }
+
+        static void Main4(string[] args)
+        {
             SunginDataContext sdc = new SunginDataContext();
             var fl = sdc.StyleFiles.ToList();
             fl.ForEach(p =>
             {
-                Console.WriteLine(p.FileName.Substring(0,10));
+                Console.WriteLine(p.FileName.Substring(0, 10));
                 p.StyleId = p.FileName.Substring(0, 10);
 
 
@@ -76,9 +92,9 @@ namespace ConsoleApp1
                 {
                     var list = JsonHelper.JsonToList<string>(p.Value);
                     var url = list[0];
-                    string name = url.Substring(url.LastIndexOf('/')+1);
+                    string name = url.Substring(url.LastIndexOf('/') + 1);
 
-                    var f =HttpHelper.DownloadData(list[0]);
+                    var f = HttpHelper.DownloadData(list[0]);
 
 
                     File.WriteAllBytes("d:\\p1.jpg", f);

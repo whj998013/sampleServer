@@ -17,6 +17,7 @@ namespace SampleApi.Controllers
 {
     public class LoginController : ApiController
     {
+        log4net.ILog logLogin = log4net.LogManager.GetLogger("sungin.Login");
         /// <summary>
         /// 钉钉登录
         /// </summary>
@@ -48,8 +49,8 @@ namespace SampleApi.Controllers
                     //将用户加入默认用户组
                     new UrOper().AddDefalutUR(_user);
                 }
-
                 SessionManage.CurrentUser = _user;
+                logLogin.Info(string.Format("用户--{0}--使用钉钉登录.", _user.UserName));
                 return Ok(LoginHelp.ReturnUser(_user));
             }
             catch (Exception e)
@@ -80,6 +81,8 @@ namespace SampleApi.Controllers
                     else
                     {
                         SessionManage.CurrentUser = _user;
+                        
+                        logLogin.Info(string.Format("用户--{0}--使用COOKIE登录.", _user.UserName));
                         return Ok(LoginHelp.ReturnUser(_user));
                     }
 
@@ -109,6 +112,7 @@ namespace SampleApi.Controllers
                 if (_user != null)
                 {
                     SessionManage.CurrentUser = _user;
+                    logLogin.Info(string.Format("用户--{0}--使用WEB登录.", _user.UserName));
                     return Ok(LoginHelp.ReturnUser(_user));
                 }
             }

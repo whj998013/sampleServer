@@ -24,5 +24,10 @@ namespace SysBLL
             return k;
 
         }
+
+        public static string GetError()
+        {
+            throw new Exception("Key取值错误");
+        }
     }
 }
