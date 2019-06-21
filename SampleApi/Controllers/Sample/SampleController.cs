@@ -27,7 +27,7 @@ namespace SampleApi.Controllers.Sample
         {
 
             var exp = PredicateBuilder.True<ISampleBaseInfo>();
-            exp = exp.And(p => !p.IsDelete && (int)p.State>2);
+            exp = exp.And(p => !p.IsDelete && (int)p.State > 2);
             if (seachObj.State != SampleState.所有)
             {
                 exp = exp.And(p => p.State == seachObj.State);
@@ -82,7 +82,7 @@ namespace SampleApi.Controllers.Sample
         public object CreateSample()
         {
             var newsample = SessionManage.CurrentSample;
-            if (newsample == null||!newsample.IsNewSample)
+            if (newsample == null || !newsample.IsNewSample)
             {
                 string id = KeyMange.GetKey("SampleInfo");
                 newsample = new SampleInfo(SessionManage.CurrentUser);
@@ -95,112 +95,97 @@ namespace SampleApi.Controllers.Sample
 
         public object SaveSample(SampleFullInfoModel sample)
         {
-          
-            try
-            {
-                var newsample = SessionManage.CurrentSample;
-                if (newsample != null && newsample.StyleId == sample.StyleId)
-                {
-                    newsample.SaveSample(sample);
-                    SessionManage.CurrentSample = null;
-                    //添加新的code数据
-                    List<Code> codelist = new List<Code>();
 
-                    //添加TAG
-                    codelist = new List<Code>();
-                    foreach (var m in sample.StyleTagItems)
-                    {
-                        string name = (string)m.Name;
-                        string color = (string)m.Color;
-                        codelist.Add(new Code { CodeName = name, Value1 = color, Type = CodeType.Tag });
-                    };
-                    CodeOper.AddCode(codelist);
-                    //添加颜色
-                    CodeOper.AddCode(new Code { CodeName = newsample.BaseInfo.Color, Type = CodeType.Color });
-                    SessionManage.CurrentSample = null;
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest("没有登录信息");
-                }
-            }
-            catch (Exception e)
+            var newsample = SessionManage.CurrentSample;
+            if (newsample != null && newsample.StyleId == sample.StyleId)
             {
-                return BadRequest(e.Message);
+                newsample.SaveSample(sample);
+                SessionManage.CurrentSample = null;
+                //添加新的code数据
+                List<Code> codelist = new List<Code>();
+
+                //添加TAG
+                codelist = new List<Code>();
+                foreach (var m in sample.StyleTagItems)
+                {
+                    string name = (string)m.Name;
+                    string color = (string)m.Color;
+                    codelist.Add(new Code { CodeName = name, Value1 = color, Type = CodeType.Tag });
+                };
+                CodeOper.AddCode(codelist);
+                //添加颜色
+                CodeOper.AddCode(new Code { CodeName = newsample.BaseInfo.Color, Type = CodeType.Color });
+                SessionManage.CurrentSample = null;
+                return Ok();
             }
+            else
+            {
+                return BadRequest("没有登录信息");
+            }
+
         }
-     
+
         public object UpLoadPic()
         {
-            //try
-            //{
-                //string minPicPath = Config.MinPicPath;
-                string webPath = HttpContext.Current.Server.MapPath("~") + Config.GetSampleConfig().SampleFilePath;
-                string picPath = webPath + @"pic\";
-                string minPicPath = webPath + @"pic\MinPic\";
-                HttpFileCollection files = HttpContext.Current.Request.Files;
-                string filename = "";
-                string styleid = SessionManage.CurrentSample.StyleId;
-                foreach (string key in files.AllKeys)
+
+            //string minPicPath = Config.MinPicPath;
+            string webPath = HttpContext.Current.Server.MapPath("~") + Config.GetSampleConfig().SampleFilePath;
+            string picPath = webPath + @"pic\";
+            string minPicPath = webPath + @"pic\MinPic\";
+            HttpFileCollection files = HttpContext.Current.Request.Files;
+            string filename = "";
+            string styleid = SessionManage.CurrentSample.StyleId;
+            foreach (string key in files.AllKeys)
+            {
+                HttpPostedFile file = files[key];//file.ContentLength文件长度
+                if (string.IsNullOrEmpty(file.FileName) == false)
                 {
-                    HttpPostedFile file = files[key];//file.ContentLength文件长度
-                    if (string.IsNullOrEmpty(file.FileName) == false)
-                    {
 
-                        string fname = DirFileHelper.GetFileName(file.FileName);
-                        fname = fname.Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
-                        filename = SessionManage.CurrentSample.StyleId + "_" + fname;
-                        string filepath = picPath + fname;
+                    string fname = DirFileHelper.GetFileName(file.FileName);
+                    fname = fname.Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
+                    filename = SessionManage.CurrentSample.StyleId + "_" + fname;
+                    string filepath = picPath + fname;
 
-                        UploadHelper.FileUpload(file, picPath, fname);
-                        //原始文件压缩
-                        ImageHelper.MakeSmallImg(filepath, picPath + filename, 1500, 1500);
+                    UploadHelper.FileUpload(file, picPath, fname);
+                    //原始文件压缩
+                    ImageHelper.MakeSmallImg(filepath, picPath + filename, 1500, 1500);
 
-                        //压缩文件再压缩
-                        ImageHelper.MakeSmallImg(filepath, minPicPath + filename, 300, 300);
-                        DirFileHelper.DeleteFile(filepath);
+                    //压缩文件再压缩
+                    ImageHelper.MakeSmallImg(filepath, minPicPath + filename, 300, 300);
+                    DirFileHelper.DeleteFile(filepath);
 
-                        SessionManage.CurrentSample.AddFile(filename, "", fname, FileType.Pic);
-                    }
+                    SessionManage.CurrentSample.AddFile(filename, "", fname, FileType.Pic);
                 }
-                return Ok(new { name = filename });
-            //}
-            //catch (Exception e)
-            //{
-            //    return BadRequest(e.Message);
-            //}
+            }
+            return Ok(new { name = filename });
+
         }
 
 
         public object UpLoadFile()
         {
-            try
+
+            //string filePath = Config.FilePath;
+            string webPath = HttpContext.Current.Server.MapPath("~") + Config.GetSampleConfig().SampleFilePath;
+            string filePath = webPath + @"uploadfile\";
+            HttpFileCollection files = HttpContext.Current.Request.Files;
+            string filename = "";
+            string styleid = SessionManage.CurrentSample.StyleId;
+            foreach (string key in files.AllKeys)
             {
-                //string filePath = Config.FilePath;
-                string webPath = HttpContext.Current.Server.MapPath("~")+Config.GetSampleConfig().SampleFilePath;
-                string filePath = webPath+ @"uploadfile\";
-                HttpFileCollection files = HttpContext.Current.Request.Files;
-                string filename = "";
-                string styleid = SessionManage.CurrentSample.StyleId;
-                foreach (string key in files.AllKeys)
+                HttpPostedFile file = files[key];//file.ContentLength文件长度
+                if (string.IsNullOrEmpty(file.FileName) == false)
                 {
-                    HttpPostedFile file = files[key];//file.ContentLength文件长度
-                    if (string.IsNullOrEmpty(file.FileName) == false)
-                    {
-                        //file.SaveAs(HttpContext.Current.Server.MapPath("~/App_Data/Image/") + file.FileName);
-                        filename = SessionManage.CurrentSample.StyleId + file.FileName;
-                        UploadHelper.FileUpload(file, filePath, filename);
-                        //file.SaveAs(filePath + filename);
-                        SessionManage.CurrentSample.AddFile(filename, "", file.FileName, FileType.File);
-                    }
+                    //file.SaveAs(HttpContext.Current.Server.MapPath("~/App_Data/Image/") + file.FileName);
+                    filename = SessionManage.CurrentSample.StyleId + file.FileName;
+                    UploadHelper.FileUpload(file, filePath, filename);
+                    //file.SaveAs(filePath + filename);
+                    SessionManage.CurrentSample.AddFile(filename, "", file.FileName, FileType.File);
                 }
-                return Ok(new {  name = filename });
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(new { name = filename });
+
+
 
         }
 
@@ -212,16 +197,11 @@ namespace SampleApi.Controllers.Sample
         public object RemoveFile(dynamic _filename)
         {
             string filename = (string)_filename.filename;
-            try
-            {
-                var result = SessionManage.CurrentSample.RemoveFile(filename);
-                if (result) return Ok();
-                else return NotFound();
-            }
-            catch
-            {
-                return BadRequest("出现删除错误。");
-            }
+
+            var result = SessionManage.CurrentSample.RemoveFile(filename);
+            if (result) return Ok();
+            else return NotFound();
+
         }
 
 

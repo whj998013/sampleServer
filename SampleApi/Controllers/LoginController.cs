@@ -25,39 +25,31 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         public IHttpActionResult DdLogin([FromBody]dynamic code)
         {
-            try
+
+            DdOperator ddoper = DdOperator.GetDdApi();
+            UserProvider uProvider = new UserProvider(ddoper);
+            UserOper uOper = new UserOper();
+            var uDdId = uProvider.GetDdIdByCode((string)code.code);
+            User _user = uOper.GetUserByDdId(uDdId);
+
+            if (_user != null)
             {
-                DdOperator ddoper = DdOperator.GetDdApi();
-                UserProvider uProvider = new UserProvider(ddoper);
-                UserOper uOper = new UserOper();
-
-                var uDdId = uProvider.GetDdIdByCode((string)code.code);
-                User _user = uOper.GetUserByDdId(uDdId);
-
-                if (_user != null)
-                {
-                    ///再次登录更新cookie信息
-                    _user = uOper.UpDateLoginInfo(_user);
-                }
-                ///首次登录 
-                else
-                {
-                    //取得用户信息
-                    _user = uProvider.GetUserInfo(uDdId);
-                    ///首次登录，在数据库登录新用户
-                    uOper.AddUser(_user);
-                    //将用户加入默认用户组
-                    new UrOper().AddDefalutUR(_user);
-                }
-                SessionManage.CurrentUser = _user;
-                logLogin.Info(string.Format("用户--{0}--使用钉钉登录.", _user.UserName));
-                return Ok(LoginHelp.ReturnUser(_user));
+                ///再次登录更新cookie信息
+                _user = uOper.UpDateLoginInfo(_user);
             }
-            catch (Exception e)
+            ///首次登录 
+            else
             {
-                return BadRequest(e.Message);
+                //取得用户信息
+                _user = uProvider.GetUserInfo(uDdId);
+                ///首次登录，在数据库登录新用户
+                uOper.AddUser(_user);
+                //将用户加入默认用户组
+                new UrOper().AddDefalutUR(_user);
             }
-
+            SessionManage.CurrentUser = _user;
+            logLogin.Info(string.Format("用户--{0}--使用钉钉登录.", _user.UserName));
+            return Ok(LoginHelp.ReturnUser(_user));
         }
 
         /// <summary>
@@ -68,30 +60,25 @@ namespace SampleApi.Controllers
 
         public IHttpActionResult CookieLogin([FromBody]dynamic Cookie)
         {
-            try
+
+            string cookiestr = (string)Cookie.cookie;
+            if (cookiestr == null || cookiestr == "") return null;
+            else
             {
-                string cookiestr = (string)Cookie.cookie;
-                if (cookiestr == null || cookiestr == "") return null;
+                string LoginStr = DESEncrypt.Decrypt(cookiestr, "998013");
+                UserOper uOpser = new UserOper();
+                User _user = uOpser.GetUserByLoginStr(LoginStr);
+                if (_user == null) return NotFound();
                 else
                 {
-                    string LoginStr = DESEncrypt.Decrypt(cookiestr, "998013");
-                    UserOper uOpser = new UserOper();
-                    User _user = uOpser.GetUserByLoginStr(LoginStr);
-                    if (_user == null) return NotFound();
-                    else
-                    {
-                        SessionManage.CurrentUser = _user;
-                        
-                        logLogin.Info(string.Format("用户--{0}--使用COOKIE登录.", _user.UserName));
-                        return Ok(LoginHelp.ReturnUser(_user));
-                    }
+                    SessionManage.CurrentUser = _user;
 
+                    logLogin.Info(string.Format("用户--{0}--使用COOKIE登录.", _user.UserName));
+                    return Ok(LoginHelp.ReturnUser(_user));
                 }
+
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+
 
         }
         /// <summary>

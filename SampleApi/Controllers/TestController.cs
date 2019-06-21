@@ -16,9 +16,7 @@ namespace SampleApi.Controllers
         [HttpGet]
         public object GetTestData()
         {
-            KeyMange.GetError();
-
-            return NotFound();
+              return NotFound();
         }
     }
 }
