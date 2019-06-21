@@ -131,7 +131,7 @@
     <Content Include="config\AppSettings.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Log4Net.config">
+    <Content Include="config\Log4Net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
