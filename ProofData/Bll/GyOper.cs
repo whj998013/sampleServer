@@ -13,8 +13,7 @@ namespace ProofData.Bll
         {
             using (ProofDataContext pdc = new ProofDataContext())
             {
-                try
-                {
+              
                     var yd = pdc.ypgl_yd.FirstOrDefault(p => p.dydbh == task.Order.Dydbh);
                     if (yd == null) return false;
                     var gy = pdc.ypgl_gyzbjl.FirstOrDefault(p => p.id_yd == yd.id && p.task_id == task.Id);
@@ -45,11 +44,7 @@ namespace ProofData.Bll
 
                     pdc.SaveChanges();
                     return true;
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
+               
             }
         }
     }

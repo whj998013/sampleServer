@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-namespace SampleDataOper
+namespace SunginData
 {
     public static class PredicateBuilder
     {

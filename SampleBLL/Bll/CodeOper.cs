@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleBLL;
-using SampleDataOper;
+using SunginData;
 using SG.Model.Sys;
 using SG.Model.Sample;
 using SG.Interface.Sys;
@@ -18,7 +18,7 @@ namespace SampleBLL
             using (SunginDataContext sc = new SunginDataContext())
             {                
                 {
-                    var code = sc.Codes.Where(p => p.CodeName == _code.CodeName).SingleOrDefault();
+                    var code = sc.Codes.Where(p => p.CodeName == _code.CodeName).FirstOrDefault();
                     if (code == null)
                     {
                         sc.Codes.Add(_code);

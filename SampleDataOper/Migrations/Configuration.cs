@@ -1,4 +1,4 @@
-namespace SampleDataOper.Migrations
+namespace SunginData.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -8,7 +8,7 @@ namespace SampleDataOper.Migrations
     using SG.Model.Sample;
     using SG.Model.Sys;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SampleDataOper.SunginDataContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SunginData.SunginDataContext>
     {
         public Configuration()
         {
@@ -17,7 +17,7 @@ namespace SampleDataOper.Migrations
             ContextKey = "SampleDataOper.SampleContext";
         }
 
-        protected override void Seed(SampleDataOper.SunginDataContext context)
+        protected override void Seed(SunginData.SunginDataContext context)
         {
             //  This method will be called after migrating to the latest version.
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

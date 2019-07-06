@@ -39,7 +39,8 @@ namespace SampleApi.Controllers.Setting
 
             if (obj != null)
             {
-                new UrpOper().UrpUpData(obj.RoleId, obj.PermissionKey);
+                new UrpOper().UrpUpData(obj.Role.RoleId, obj.PermissionKey);
+                new RoleOper().UpdateRoleRange(obj.Role);
             }
             else return BadRequest("提交了错误的修改数据！");
 

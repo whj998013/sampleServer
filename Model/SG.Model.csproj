@@ -98,7 +98,6 @@
     <Folder Include="Stock\Yarn\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Proof\ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

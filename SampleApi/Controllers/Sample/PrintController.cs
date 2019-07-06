@@ -1,5 +1,5 @@
 ﻿using SampleBLL;
-using SampleDataOper;
+using SunginData;
 using SG.SessionManage;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SG.Interface.Sample;
 using SG.Model.Sample;
 using SG.Model.Product;
-using SampleDataOper;
+using SunginData;
 using SG.Utilities;
 using SG.Interface.Product;
 using SG.Interface.Sys;

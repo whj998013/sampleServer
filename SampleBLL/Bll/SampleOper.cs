@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SG.Utilities;
 using SampleBLL;
 using SG.Interface.Sample;
-namespace SampleDataOper
+namespace SunginData
 {
     public class SampleOper
     {

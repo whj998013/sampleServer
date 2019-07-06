@@ -1,5 +1,6 @@
 namespace StorageData
 {
+    using SG.Interface;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ namespace StorageData
     using System.Data.Entity.Spatial;
 
     [Table("LocalProductView")]
-    public partial class LocalProductView
+    public partial class LocalProductView: ICovertToSon
     {
         [Key]
         [Column(Order = 0)]
@@ -78,5 +79,19 @@ namespace StorageData
 
         [StringLength(50)]
         public string UserId { get; set; }
+        [StringLength(50)]
+        public string SupName { get; set; }
+
+        public double? Cl { get; set; }
+
+        public double? Ca { get; set; }
+
+        public double? Cb { get; set; }
+
+        public double InPrice { get; set; }
+        public double Amount { get; set; }
+        [StringLength(20)]
+        public string RGB { get; set; }
+        public string SeachKey { get; set; }
     }
 }

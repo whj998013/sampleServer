@@ -58,6 +58,8 @@
     <Compile Include="DeptOper.cs" />
     <Compile Include="KeyMange.cs" />
     <Compile Include="PermissionOper.cs" />
+    <Compile Include="PvmDeptOper.cs" />
+    <Compile Include="PvmOper.cs" />
     <Compile Include="UrpOper.cs" />
     <Compile Include="Model\UrpModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

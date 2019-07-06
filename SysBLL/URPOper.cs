@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SysBLL.Model;
-using SampleDataOper;
+using SunginData;
 using SG.Model.Sys;
 namespace SysBLL
 {

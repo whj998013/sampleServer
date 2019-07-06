@@ -14,7 +14,6 @@ namespace SampleApi.Controllers.Proof
         {
             ProofWorker pw = new ProofWorker();
             var obj = pw.GetWorkList(id);
-            
             return Ok(obj);
         }
 
@@ -23,8 +22,6 @@ namespace SampleApi.Controllers.Proof
         {
             ProofWorker pw = new ProofWorker();
             var obj = pw.GetProcessList();
-
-
             return Ok(obj);
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper;
+using SunginData;
 using SG.Interface.Sys;
 using SG.Model.Sys;
 using SG.DdApi;
@@ -16,17 +16,17 @@ namespace SysBLL
     /// </summary>
     public class RoleOper
     {
- 
-             
+
+
         /// <summary>
         /// 同步数据库角色
         /// </summary>
         /// <param name="roleList"></param>
         public void UpdateRoles(List<IRole> roleList)
         {
-           using (SunginDataContext sc=new SunginDataContext())
+            using (SunginDataContext sc = new SunginDataContext())
             {
-                var re = sc.Roles.Where(p=>p.RoleId>0).ToList();
+                var re = sc.Roles.Where(p => p.RoleId > 0).ToList();
                 re.ForEach(p => p.IsDelete = true);
                 roleList.ForEach(p =>
                 {
@@ -40,9 +40,22 @@ namespace SysBLL
                         reobj.IsDelete = false;
                         reobj.RoleName = p.RoleName;
                     }
-                 });
+                });
                 sc.SaveChanges();
             };
+        }
+
+        public void UpdateRoleRange(Role r)
+        {
+            using (SunginDataContext sc = new SunginDataContext())
+            {
+
+                var re = sc.Roles.Where(p => p.RoleId == r.RoleId).SingleOrDefault();
+                re.PM = r.PM;
+                re.PV = r.PV;
+                sc.SaveChanges();
+
+            }
         }
 
     }

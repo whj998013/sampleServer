@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Model.Proof;
-using SampleDataOper;
+using SunginData;
 
 namespace ProofBLL
 {

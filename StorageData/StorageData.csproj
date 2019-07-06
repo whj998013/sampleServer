@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StorageData</RootNamespace>
     <AssemblyName>StorageData</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,7 +57,6 @@
     <Compile Include="model\CheckData.cs" />
     <Compile Include="model\CheckStock.cs" />
     <Compile Include="model\CheckStockInfo.cs" />
-    <Compile Include="model\Class1.cs" />
     <Compile Include="model\CloneHistory.cs" />
     <Compile Include="model\CloneTemp.cs" />
     <Compile Include="model\Color.cs" />
@@ -74,9 +74,9 @@
     <Compile Include="model\MeasureRel.cs" />
     <Compile Include="model\MoveOrder.cs" />
     <Compile Include="model\MoveOrderDetail.cs" />
-    <Compile Include="model\OutOrderView.cs" />
     <Compile Include="model\OutStoDetail.cs" />
     <Compile Include="model\OutStorage.cs" />
+    <Compile Include="model\OutStorageView.cs" />
     <Compile Include="model\Product.cs" />
     <Compile Include="model\ProductCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,17 +86,26 @@
     <Compile Include="model\ReturnOrder.cs" />
     <Compile Include="model\Sequence.cs" />
     <Compile Include="model\Storage.cs" />
-    <Compile Include="StorageData.cs" />
     <Compile Include="model\Supplier.cs" />
     <Compile Include="model\SysDepart.cs" />
     <Compile Include="model\SysRelation.cs" />
     <Compile Include="model\SysResource.cs" />
     <Compile Include="model\SysRole.cs" />
     <Compile Include="model\TNum.cs" />
+    <Compile Include="YarnStockContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="model\packages.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IBLL\SG.Interface.csproj">
+      <Project>{d89efad8-9536-42c5-b9b3-902e3ed88afe}</Project>
+      <Name>SG.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

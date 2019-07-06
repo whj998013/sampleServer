@@ -11,7 +11,7 @@ using SG.SessionManage;
 using SG.Model.Proof;
 using SG.DdApi;
 using SG.DdApi.Approve;
-using SampleDataOper;
+using SunginData;
 namespace SampleApi.Controllers.Proof
 {
 

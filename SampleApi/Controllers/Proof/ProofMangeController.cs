@@ -47,7 +47,7 @@ namespace SampleApi.Controllers.Proof
             {
                 //发送交样申请 
                 string ddid = result.ProofApplyUserDdId;
-                User applyUser = SampleDataOper.DataQuery.GetSingle<User>(p => p.DdId == ddid);
+                User applyUser = SunginData.DataQuery.GetSingle<User>(p => p.DdId == ddid);
                 NewApprove na = new NewApprove(DdOperator.GetDdApi())
                 {
                     User = applyUser,

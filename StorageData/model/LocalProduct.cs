@@ -14,7 +14,8 @@ namespace StorageData
         [Required]
         [StringLength(50)]
         public string Sn { get; set; }
-
+        [StringLength(50)]
+        public string InSnNum { get; set; }
         [StringLength(50)]
         public string StorageNum { get; set; }
 
@@ -81,7 +82,7 @@ namespace StorageData
 
         public double? Cb { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string RGB { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using SG.Utilities;
-using SampleDataOper;
+using SunginData;
 using SampleBLL;
 using SampleBLL.Model;
 using System;
@@ -201,7 +201,8 @@ namespace SampleBLL
                     {
                         if (p.IsDelete)
                         {
-                            File.Delete(p.FileUrl);
+                            ///url有问题，为空，暂时禁用。
+                           // File.Delete(p.FileUrl);
                         }
                     });
                     Files.RemoveAll(p => p.IsDelete);

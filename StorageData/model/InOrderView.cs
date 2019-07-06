@@ -68,8 +68,6 @@ namespace StorageData
         [StringLength(50)]
         public string LocalNum { get; set; }
 
-        [Key]
-        [Column(Order = 11)]
         [StringLength(30)]
         public string LocalName { get; set; }
 
@@ -79,24 +77,24 @@ namespace StorageData
         [StringLength(50)]
         public string StorageName { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string Color { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string Count { get; set; }
 
         [Key]
-        [Column(Order = 12)]
+        [Column(Order = 11)]
         [StringLength(50)]
         public string SupNum { get; set; }
 
         [Key]
-        [Column(Order = 13)]
+        [Column(Order = 12)]
         [StringLength(100)]
         public string SupName { get; set; }
 
         [Key]
-        [Column(Order = 14)]
+        [Column(Order = 13)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IsDelete { get; set; }
 
@@ -113,19 +111,33 @@ namespace StorageData
         public string DeptName { get; set; }
 
         [Key]
-        [Column(Order = 15)]
+        [Column(Order = 14)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int InType { get; set; }
 
         [Key]
-        [Column(Order = 16)]
+        [Column(Order = 15)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductType { get; set; }
 
         [StringLength(400)]
         public string Remark { get; set; }
 
+        public double? Cl { get; set; }
+
+        public double? Ca { get; set; }
+
+        public double? Cb { get; set; }
+
+        [StringLength(20)]
+        public string RGB { get; set; }
+
         [StringLength(400)]
         public string Size { get; set; }
+
+        [StringLength(705)]
+        public string SeachKey { get; set; }
+
+        public double? InStorNum { get; set; }
     }
 }

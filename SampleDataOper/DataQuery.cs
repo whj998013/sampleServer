@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Model;
 
-namespace SampleDataOper
+namespace SunginData
 {
     public class DataQuery
     {

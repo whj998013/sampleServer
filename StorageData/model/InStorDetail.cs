@@ -54,10 +54,10 @@ namespace StorageData
         [StringLength(50)]
         public string StorageNum { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string Color { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string Count { get; set; }
 
         public double? Cl { get; set; }
@@ -66,7 +66,10 @@ namespace StorageData
 
         public double? Cb { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string RGB { get; set; }
+
+        [StringLength(400)]
+        public string Size { get; set; }
     }
 }

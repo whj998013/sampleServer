@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Model.Proof;
-using SampleDataOper;
+using SunginData;
 using SG.Model.Sys;
 using System.Data.Entity;
 using SG.Model;

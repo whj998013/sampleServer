@@ -124,7 +124,7 @@ namespace SG.Utilities
         {
             double h = 0;
             double hab = 0;
-
+            a = a == 0 ? 0.000001 : a;
             h = (180 / Math.PI) * Math.Atan(b / a);           //有正有负
 
             if (a > 0 && b > 0)

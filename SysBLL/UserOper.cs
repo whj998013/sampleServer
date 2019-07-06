@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper;
+using SunginData;
 using SG.Interface.Sample;
 using SG.Model.Sys;
 using SG.Interface.Sys;
@@ -13,6 +13,7 @@ namespace SysBLL
     public class UserOper
     {
 
+        
         /// <summary>
         /// 根据DDid取得用户
         /// </summary>

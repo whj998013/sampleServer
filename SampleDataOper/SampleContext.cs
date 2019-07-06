@@ -9,9 +9,8 @@ using SG.Model.Sample;
 using SG.Model.Stock;
 using SG.Model.Sys;
 using SG.Model.Proof;
-
 using SG.Interface;
-namespace SampleDataOper
+namespace SunginData
 {
     public class SunginDataContext : DbContext
     {

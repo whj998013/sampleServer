@@ -120,11 +120,14 @@
     <Compile Include="Controllers\Setting\SampleController.cs" />
     <Compile Include="Controllers\Setting\WorkerController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\Yarn\MyYarnController.cs" />
+    <Compile Include="Controllers\Yarn\YarnSeachController.cs" />
     <Compile Include="Filter\Author.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\SaveRolesObj.cs" />
+    <Compile Include="Models\SeachObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +194,17 @@
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
       <Name>SG.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StorageData\StorageData.csproj">
+      <Project>{422ff65f-e6a5-4d59-9463-c2f340b1ddf6}</Project>
+      <Name>StorageData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SysBLL\SysBLL.csproj">
       <Project>{b923e651-64a0-4bee-81ba-317e5b712749}</Project>
       <Name>SysBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YarnStockBLL\YarnStockBLL.csproj">
+      <Project>{d32a31d9-df5a-4b75-a437-f9af94be2778}</Project>
+      <Name>YarnStockBLL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

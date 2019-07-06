@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Model.Proof;
 using System.Data.Entity;
-using SampleDataOper;
+using SunginData;
 using ProofData;
 namespace ProofBLL.Bll
 {

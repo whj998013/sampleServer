@@ -8,7 +8,7 @@ using SG.Model.Sample;
 using SG.Interface.Sys;
 using SG.Model.Proof;
 
-namespace SampleDataOper.Migrations
+namespace SunginData.Migrations
 {
     public class DataDefaultList
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SampleDataOper;
+using SunginData;
 using System.IO;
 using SG.DdApi;
 using SG.DdApi.Sys;
@@ -29,22 +29,66 @@ using SG.DdApi.Approve;
 using HttpHelper = SG.Utilities.HttpHelper;
 using log4net;
 using System.Configuration;
-
+using SG.Model;
 namespace ConsoleApp1
 {
     class Program
     {
-
         static void Main(string[] args)
         {
+            PvmDeptOper pdo = PvmDeptOper.GetPvmDeptOper();
+        
 
-            log4net.ILog log = log4net.LogManager.GetLogger("sungin.Error");//获取一个日志记录器
-           
-            log.Warn("whj99810313ssssss1");
-            log.Fatal("位于");
-          
-            log4net.ILog logLogin = log4net.LogManager.GetLogger("sungin.Login");//获取一个日志记录器logLogin
-            logLogin.Info("王汉君登录");
+            var re = pdo.GetDeptList(new List<long> { 1}).First();
+
+            var re2 = re.Clone();
+            re2.Items.Clear();
+            Console.Write(re);
+
+
+            Console.ReadKey();
+
+        }
+        static void MainYarnStock(string[] args)
+        {
+            YarnStockContext ysc = new YarnStockContext();
+            var inlist = ysc.InStorDetail.GroupBy(p => p.BatchNum).Where(p => p.Count() > 1).ToList();
+            inlist.ForEach(p =>
+            {
+                var l = ysc.InStorDetail.Where(b => b.BatchNum == p.Key).ToList();
+                int i = 1;
+                l.ForEach(c =>
+                {
+                    string newnum = c.BatchNum + "_" + i;
+                    c.BatchNum = newnum;
+                    Console.WriteLine("更改InStorDetail的ID为{0}的bathcnum为{1}", c.ID, c.BatchNum);
+                    var lp = ysc.LocalProduct.Where(lpc => lpc.BatchNum == p.Key && lpc.RGB == c.RGB && lpc.Cl == c.Cl).SingleOrDefault();
+                    if (lp != null)
+                    {
+                        lp.BatchNum = newnum;
+                        Console.WriteLine("更改LocalProduct的ID为{0}的bathcnum为{1}", lp.ID, lp.BatchNum);
+
+                    }
+
+
+
+                    var op = ysc.OutStoDetail.Where(osd => osd.BatchNum == p.Key && osd.Color == c.Color && osd.Count == c.Count).SingleOrDefault();
+                    if (op != null)
+                    {
+                        op.BatchNum = newnum;
+                        Console.WriteLine("OutStoDetail的{0}的bathcnum为{1}", op.ID, op.BatchNum);
+                    }
+                    Console.WriteLine("——————————————————————————————————");
+                    i++;
+                });
+
+
+            });
+
+            ysc.SaveChanges();
+
+
+
             Console.ReadKey();
 
         }
@@ -110,7 +154,7 @@ namespace ConsoleApp1
         }
         public static void CrLabToRgb()
         {
-            StorageDataContext sdc = new StorageDataContext();
+            YarnStockContext sdc = new YarnStockContext();
             var l = sdc.Color.ToList();
             l.ForEach(p =>
             {
@@ -127,7 +171,7 @@ namespace ConsoleApp1
         }
         public static void BuildColorLab()
         {
-            StorageDataContext sdc = new StorageDataContext();
+            YarnStockContext sdc = new YarnStockContext();
             var l = sdc.Color.ToList();
             l.ForEach(p =>
             {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
 using SG.Model.Sys;
-using SampleDataOper;
+using SunginData;
 using SG.DdApi;
 using SG.DdApi.Sys;
 using EntityFramework.Extensions;

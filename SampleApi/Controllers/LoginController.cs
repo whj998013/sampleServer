@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SG.DdApi;
-using SampleDataOper;
+using SunginData;
 using SysBLL;
 using SG.Utilities;
 using SG.SessionManage;
@@ -47,7 +47,7 @@ namespace SampleApi.Controllers
                 //将用户加入默认用户组
                 new UrOper().AddDefalutUR(_user);
             }
-            SessionManage.CurrentUser = _user;
+            SessionManage.Login(_user);
             logLogin.Info(string.Format("用户--{0}--使用钉钉登录.", _user.UserName));
             return Ok(LoginHelp.ReturnUser(_user));
         }
@@ -71,16 +71,13 @@ namespace SampleApi.Controllers
                 if (_user == null) return NotFound();
                 else
                 {
-                    SessionManage.CurrentUser = _user;
-
+                    SessionManage.Login(_user);
                     logLogin.Info(string.Format("用户--{0}--使用COOKIE登录.", _user.UserName));
                     return Ok(LoginHelp.ReturnUser(_user));
                 }
-
             }
-
-
         }
+
         /// <summary>
         /// 浏览器登录
         /// </summary>
@@ -98,7 +95,7 @@ namespace SampleApi.Controllers
                 _user = uoper.GetUserByAccout(name, pwd);
                 if (_user != null)
                 {
-                    SessionManage.CurrentUser = _user;
+                    SessionManage.Login(_user);
                     logLogin.Info(string.Format("用户--{0}--使用WEB登录.", _user.UserName));
                     return Ok(LoginHelp.ReturnUser(_user));
                 }

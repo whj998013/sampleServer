@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Interface.Sys;
+using SG.Interface;
 
 namespace SG.Model.Sys
 {
-    public class Dept:BaseModel,IDept
+    public class Dept:BaseModel,IDept,ICovertToSon
     {
         public int Id { get; set; }
         public string DeptName { get; set; }

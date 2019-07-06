@@ -15,6 +15,7 @@ using ProofData.Bll;
 
 namespace SampleApi.Controllers.Proof
 {
+
     [Author]
     public class ProofTaskController : ApiController
     {
@@ -25,7 +26,6 @@ namespace SampleApi.Controllers.Proof
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
             var re = pto.GetMyProofTask();
             return Ok(re);
-
         }
         [HttpGet]
         public IHttpActionResult GetMyFinshTasks()
@@ -44,11 +44,8 @@ namespace SampleApi.Controllers.Proof
 
         public IHttpActionResult GetNextTask(int id)
         {
-            // ProofTaskOper ptf = new ProofTaskOper(SessionManage.CurrentUser);
             var re = ProofTaskOper.GetNextTask(id);
-
             return Ok(re);
-
         }
         /// <summary>
         /// 提交任务

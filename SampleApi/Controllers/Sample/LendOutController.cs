@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SG.SessionManage;
-using SampleDataOper;
+using SunginData;
 using SampleApi.Controllers.Sample;
 using SampleBLL;
 using SampleBLL.Model;

@@ -7,11 +7,22 @@ using System.Web;
 using System.Web.SessionState;
 using SampleBLL;
 using SG.Model.Sys;
+using SunginData;
 namespace SG.SessionManage
 {
     public static class SessionManage
     {
-               
+
+        public static void Login(User u)
+        {
+            CurrentUser = u;
+        }
+        public static List<Dept> Depts
+        {
+            get; set;
+        }
+
+
         /// <summary>
         /// 返回当前用户是否登录 
         /// </summary>

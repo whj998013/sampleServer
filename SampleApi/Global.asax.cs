@@ -14,7 +14,13 @@ namespace SampleApi
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
-            GlobalConfiguration.Configuration.Filters.Add(new WebApiExceptionFilterAttribute());
+            bool NeedRegister = true;
+#if DEBUG
+            NeedRegister = false;
+#endif
+
+            if (NeedRegister) GlobalConfiguration.Configuration.Filters.Add(new WebApiExceptionFilterAttribute());
+
             DdConfig.Init();
 
         }

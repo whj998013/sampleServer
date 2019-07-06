@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using SampleDataOper;
+using SunginData;
 using SG.SessionManage;
 using SampleBLL;
 
@@ -34,7 +34,7 @@ namespace SampleApi.Controllers.Sample
             string cpage = seachObj.pageSize;
             int current = cstr == "" ? 1 : int.Parse(cstr);
             int pageSize = cpage == "" ? 20 : int.Parse(cpage);
-            var re = SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.DdId == ddid && (int)p.State <=2,t=>t.State, current, pageSize);
+            var re = SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.DdId == ddid && (int)p.State <=2,t=>t.CreateDate, current, pageSize);
             return Ok(re);
         }
 
@@ -46,7 +46,7 @@ namespace SampleApi.Controllers.Sample
             string cpage = seachObj.pageSize;
             int current = cstr == "" ? 1 : int.Parse(cstr);
             int pageSize = cpage == "" ? 20 : int.Parse(cpage);
-            var re = SampleOper.GetSampleList(p => !p.IsDelete && p.DdId == ddid && (int)p.State >= 3, t => t.State, current, pageSize);
+            var re = SampleOper.GetSampleList(p => !p.IsDelete && p.DdId == ddid && (int)p.State >= 3, t => t.CreateDate, current, pageSize);
             return Ok(re);
         }
     }
