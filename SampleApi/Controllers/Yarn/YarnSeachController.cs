@@ -17,11 +17,12 @@ namespace SampleApi.Controllers.Yarn
     [Author]
     public class YarnSeachController : ApiController
     {
-        [HttpGet]
-        public IHttpActionResult GetOutList(string Id)
+        [HttpPost]
+        public IHttpActionResult GetOutList(dynamic obj)
         {
-            if (Id == "") return BadRequest();
-            var re = YarnOper.GetOutView(Id).Select(p => new { p.ProductName, p.OutPrice,p.Num, p.Amount, p.OutUName, p.OutDName, p.CreateTime });
+            string id = obj.BatchNum;
+            if (id ==null||id=="") return BadRequest();
+            var re = YarnOper.GetOutView(id).Select(p => new { p.ProductName, p.OutPrice,p.Num, p.Amount, p.OutUName, p.OutDName, p.CreateTime });
             return Ok(re);
         }
         [HttpPost]
@@ -37,10 +38,7 @@ namespace SampleApi.Controllers.Yarn
                                exp = exp.And(e => e.SeachKey.Contains(p));
                            });
             }
-
-
-
-
+            
             else obj.Key = "";
             SeachReturnObj sr = new SeachReturnObj();
             sr.Result = YarnOper.GetYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize);
@@ -61,8 +59,6 @@ namespace SampleApi.Controllers.Yarn
                     exp = exp.And(e => e.SeachKey.Contains(p));
                 });
             }
-
-
 
             var list = YarnOper.GetYarnListDesc(out int count, exp.Compile(), p => p.CreateTime);
             ConcurrentBag<LabReturnView> lrv = new ConcurrentBag<LabReturnView>();

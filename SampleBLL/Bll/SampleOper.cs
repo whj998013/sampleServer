@@ -18,7 +18,7 @@ namespace SunginData
                 if (s != null)
                 {
                     var re = SampleHelper.GetEditObj(s);
-                    return new { re.PicList, re.StyleId,re.StyleNo, re.Material, re.HaveStock, re.CanLendOut,re.SalePrice,re.Counts };
+                    return new { re.PicList, re.StyleId,re.StyleNo, re.Material, re.HaveStock, re.CanLendOut,re.SalePrice,re.Counts,re.Weight,re.Gauge };
                 }
                 else return null;
 

@@ -15,7 +15,7 @@ namespace SG.Interface
     {
         public static S ToSon<F, S>(this F ObjF) where F : ICovertToSon where S : F, new()
         {
-            if (ObjF == null) return default(S);
+            if (ObjF == null) return default;
             S son = new S();
             Type t = typeof(F);
             FieldInfo[] finfos = t.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);

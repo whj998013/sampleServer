@@ -44,8 +44,7 @@ namespace SG.Utilities
         {
             if (obj != null)
             {
-                int i;
-                int.TryParse(obj.ToString(), out i);
+                int.TryParse(obj.ToString(), out int i);
                 return i;
             }
             else
@@ -54,8 +53,7 @@ namespace SG.Utilities
 
         public static float GetFloat(object obj)
         {
-            float i;
-            float.TryParse(obj.ToString(), out i);
+            float.TryParse(obj.ToString(), out float i);
             return i;
         }
 
@@ -244,8 +242,7 @@ namespace SG.Utilities
         {
             if (obj != null)
             {
-                bool flag;
-                bool.TryParse(obj.ToString(), out flag);
+                bool.TryParse(obj.ToString(), out bool flag);
                 return flag;
             }
             else

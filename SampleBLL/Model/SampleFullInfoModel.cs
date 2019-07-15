@@ -10,6 +10,17 @@ namespace SampleBLL.Model
     [DataContract]
     public class MaterialItemModel
     {
+        /// <summary>
+        /// 毛纱ID
+        /// </summary>
+        [DataMember(Name = "yarnId")]
+        public string YarnId { get; set; }
+
+        /// <summary>
+        /// 支数
+        /// </summary>
+        [DataMember(Name = "counts")]
+        public string Counts { get; set; }
         ///<summary>
         /// 羊绒
         /// </summary>
