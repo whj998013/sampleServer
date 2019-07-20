@@ -122,6 +122,20 @@ namespace SysBLL
             return nl;
         }
 
+        public List<long> GetIdList()
+        {
+            List<long> nl = new List<long>();
+            nl.Add(DeptID);
+            if (Items.Count > 0)
+            {
+                Items.ForEach(p =>
+                {
+                    nl.AddRange(p.GetIdList());
+                });
+            }
+            return nl;
+        }
+
         public DeptNode Clone()
         {
 

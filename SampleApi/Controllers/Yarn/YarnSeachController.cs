@@ -48,7 +48,7 @@ namespace SampleApi.Controllers.Yarn
         }
 
         [HttpPost]
-        public IHttpActionResult GetLabYarnList(SeachObj obj)
+        public IHttpActionResult GetLabYarnList(SeachObjLab obj)
         {
             System.Diagnostics.Debug.WriteLine("查询 L={0} A={1} B{2}", obj.Lab.L, obj.Lab.A, obj.Lab.B);
             var exp = PredicateBuilder.True<LocalProductView>().And(t => t.Num > 0);

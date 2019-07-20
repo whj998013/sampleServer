@@ -38,7 +38,7 @@ namespace SampleApi.App_Start
 
             bool NeedRegister = true;
 #if DEBUG
-            NeedRegister = false;
+          //  NeedRegister = false;
 #endif
 
             if (NeedRegister)

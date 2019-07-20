@@ -28,7 +28,7 @@ namespace SG.Model.Proof
         /// <summary>
         /// 打样类别：初样、修改样
         /// </summary>
-        public ProofType ProofType { get; set; }
+        public virtual ProofType ProofType { get; set; }
         [NotMapped]
         public string ProofTypeText
         {

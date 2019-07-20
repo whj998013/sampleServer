@@ -26,6 +26,7 @@ namespace SysBLL
             List<Dept> depts = dProvider.GetDepts();
             depts.ForEach(p =>
             {
+
                 var deptUserList = dProvider.GetDeptUserList(p.DeptID);
                 deptUserList.ForEach(d =>
                 {
@@ -33,7 +34,7 @@ namespace SysBLL
                     var u = uList.SingleOrDefault(t => t.DdId == d.DdId);
                     if (u == null) uList.Add(d);
                     else u.DepartName = u.DepartName + ',' + d.DepartName;
-                    if (d.IsLeader) p.DeptAdminDdId = d.DdId;
+                    if (d.IsLeader) p.DeptAdminDdId = p.DeptAdminDdId==null? d.DdId: p.DeptAdminDdId+","+d.DdId;
                 });
             });
             new DeptOper().SyncDepts(depts);

@@ -18,7 +18,7 @@ namespace SampleApi.Controllers.Yarn
     {
 
         [HttpPost]
-        public IHttpActionResult GetMyYarnInStock(SeachObj obj)
+        public IHttpActionResult GetMyYarnInStock(SeachObjDept obj)
         {
             if (obj == null) return BadRequest();
 
@@ -31,6 +31,13 @@ namespace SampleApi.Controllers.Yarn
                 });
             }
             else obj.Key = "";
+
+            //日期范围
+            if(obj.BeginDate!=null && obj.EndDate != null)
+            {
+                exp = exp.And(e => e.CreateTime >= obj.BeginDate && e.CreateTime <= obj.EndDate.Value.AddDays(1));
+            }
+            
             var user = SessionManage.CurrentUser;
             if (obj.DeptIdList.Count > 0)
             {
@@ -53,7 +60,7 @@ namespace SampleApi.Controllers.Yarn
             return Ok(sr);
         }
         [HttpPost]
-        public IHttpActionResult GetMyYarnOutStock(SeachObj obj)
+        public IHttpActionResult GetMyYarnOutStock(SeachObjDept obj)
         {
             if (obj == null) return BadRequest();
             var exp = PredicateBuilder.True<OutStorageView>().And(t => t.Num > 0);
@@ -69,6 +76,11 @@ namespace SampleApi.Controllers.Yarn
             {
                 //只返回个人数据
                 exp = exp.And(e => e.OutUid == user.DdId);
+            }
+            //日期范围
+            if (obj.BeginDate != null && obj.EndDate != null)
+            {
+                exp = exp.And(e => e.CreateTime >= obj.BeginDate && e.CreateTime <= obj.EndDate.Value.AddDays(1));
             }
 
             SeachReturnObj sr = new SeachReturnObj();

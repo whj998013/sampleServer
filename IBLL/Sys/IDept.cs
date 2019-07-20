@@ -11,5 +11,6 @@ namespace SG.Interface.Sys
          string DeptName { get; set; }
          long DeptID { get; set; }
          long ParentDeptId { get; set; }
+         bool IsProofDept { get; set; } 
     }
 }

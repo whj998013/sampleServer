@@ -16,7 +16,7 @@ namespace ProofBLL
         public ProofOrderApprove(SunginDataContext _sdc)
         {
             sdc = _sdc;
-            
+
         }
         public ProofOrderApprove()
         {
@@ -40,6 +40,10 @@ namespace ProofBLL
                 {
                     Name="客户",
                     Value=order.ProofStyle.ClentName,
+                },new ApproveItem
+                {
+                    Name="打样部门",
+                    Value=order.ProofDept.DeptName,
                 },
                    new ApproveItem
                 {
@@ -58,16 +62,29 @@ namespace ProofBLL
                     Name="完成日期",
                     Value=order.RequiredDate.ToString(),
                 },
-            };
 
+            };
+            var pdUser = new ApproveItem
+            {
+                Name = "派单员",
+
+            };
+            var ulist = order.ProofDept.DeptAdminDdId.Split(',').ToList();
+
+#if DEBUG
+            ulist = new List<string>() { "manager2606" };
+#endif
+            pdUser.Value = FastJSON.JSON.ToJSON(ulist);
+
+            la.Add(pdUser);
             return la;
         }
-               
+
         /// <summary>
         /// 订订审批通过，添加订单到打样系统，并修改状态
         /// </summary>
         /// <param name="DdApprovalCode"></param>
-        public  void AgreeApprove(string DdApprovalCode)
+        public void AgreeApprove(string DdApprovalCode)
         {
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             YdOper yo = new YdOper();
@@ -80,7 +97,7 @@ namespace ProofBLL
             }
 
         }
-        public  void RefuseApprove(string DdApprovalCode)
+        public void RefuseApprove(string DdApprovalCode)
         {
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             order.ProofStatus = ProofStatus.退回;

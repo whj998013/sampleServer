@@ -22,7 +22,36 @@ namespace SysBLL
         {
             _user = u;
         }
-
+        /// <summary>
+        /// 返回权限点操作部门列表
+        /// </summary>
+        /// <param name="key"></param>
+        public List<DeptNode> GetDeptsByPermissionKey(string key, PvmType pt)
+        {
+            var pr = GetPvm(key,pt );
+            return GetDeptListByPrange(pr);
+        }
+        /// <summary>
+        /// 返回权限点操作权限
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Prange GetPvm(string key,PvmType pt)
+        {
+            var roles = sdc.UserRolePermissions.Where(p => p.Key == key).Select(p => p.RoleId).ToList();
+            Prange pvm = Prange.仅个人;
+            sdc.UserRoles.Where(p => p.DdId == _user.DdId).ToList().ForEach(p =>
+            {
+                if (roles.Contains(p.RoleId))
+                {
+                    var role = sdc.Roles.Single(r => r.RoleId == p.RoleId);
+                    if (pt == PvmType.PM) pvm = role.PM > pvm ? role.PM : pvm;
+                    else pvm = role.PV > pvm ? role.PV : pvm;
+                }
+            });
+            return pvm;
+        }
         public Prange GetPvm(PvmType pt)
         {
             Prange pvm = Prange.仅个人;
@@ -45,18 +74,28 @@ namespace SysBLL
                 {
                     ls.Add(pdo.GetDeptById(p).DeptName);
                 });
-            }else if (pvm == Prange.当前及下级部门||pvm==Prange.全部)
+            }
+            else if (pvm == Prange.当前及下级部门 || pvm == Prange.全部)
             {
                 ls.AddRange(pdo.GetDeptNameList(deptIdList));
             }
-
             return ls;
         }
 
-        // 根所用户Id返回用户显示权限
+        // 根所用户Id返回用户可操作的部门列表
         public List<DeptNode> GetDeptList(PvmType pt)
         {
+            var pvm = GetPvm(pt);
+            return GetDeptListByPrange(pvm);
+        }
 
+        /// <summary>
+        /// 根据用户权限返回当前用户可操作的部门列表
+        /// </summary>
+        /// <param name="pvm"></param>
+        /// <returns></returns>
+        public List<DeptNode> GetDeptListByPrange(Prange pvm)
+        {
             List<DeptNode> depts = new List<DeptNode>();
 
             List<long> deptIdlist = new List<long>();
@@ -66,7 +105,8 @@ namespace SysBLL
                 deptIdlist.Add(long.Parse(did));
             });
 
-            var pvm = GetPvm(pt);
+
+
             if (pvm == Prange.当前部门)
             {
 
@@ -90,8 +130,33 @@ namespace SysBLL
             }
 
             return depts;
-
         }
 
     }
+
+    public static class DeptNodeHelp
+    {
+        public static List<string> ToDeptNameList(this List<DeptNode> ld)
+        {
+            List<string> ls = new List<string>();
+            ld.ForEach(p =>
+            {
+                ls.AddRange(p.GetNameList());
+            });
+           
+            return ls;
+        }
+
+        public static List<long> ToDeptIdList(this List<DeptNode> ld)
+        {
+            List<long> ls = new List<long>();
+            ld.ForEach(p =>
+            {
+                ls.AddRange(p.GetIdList());
+            });
+
+            return ls;
+        }
+    }
+
 }

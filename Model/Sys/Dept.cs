@@ -15,6 +15,7 @@ namespace SG.Model.Sys
         public long DeptID { get; set; }
         public long ParentDeptId { get; set; }
         public string DeptAdminDdId { get; set; }
+        public bool IsProofDept { get; set; } = false;
         
     }
 }

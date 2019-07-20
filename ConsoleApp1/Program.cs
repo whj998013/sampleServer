@@ -37,13 +37,16 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             PvmDeptOper pdo = PvmDeptOper.GetPvmDeptOper();
-        
+            SunginDataContext sdc = new SunginDataContext();
+            User u = sdc.Users.SingleOrDefault(p => p.UserName == "王汉君");
 
-            var re = pdo.GetDeptList(new List<long> { 1}).First();
+            ProofOrderOper poo = new ProofOrderOper(u);
 
-            var re2 = re.Clone();
-            re2.Items.Clear();
-            Console.Write(re);
+            var re = poo.GetProofListDesc(out int c, p => !p.IsDelete, p => p.Id, 1, 10);
+
+
+
+
 
 
             Console.ReadKey();

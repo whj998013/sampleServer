@@ -35,6 +35,8 @@ namespace SG.Model.Proof
         [DataMember(Name = "ClentName")]
         public string ClentName { get; set; }
 
+        [DataMember(Name = "proofDept")]
+        public long ProofDept { get; set; }
         ///<summary>
         /// 
         /// </summary>

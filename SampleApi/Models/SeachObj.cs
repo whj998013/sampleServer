@@ -16,13 +16,21 @@ namespace SampleApi
         public int PageSize { get; set; }
         [DataMember(Name = "total")]
         public int Total { get; set; }
+        [DataMember(Name = "beginDate")]
+        public DateTime? BeginDate { get; set; }
+        [DataMember(Name = "endDate")]
+        public DateTime? EndDate { get; set; }
+    }
+
+    public class SeachObjDept : SeachObj
+    {
         [DataMember(Name = "deptIdList")]
         public List<long> DeptIdList { get; set; } = new List<long>();
-        [DataMember(Name = "limits")]
-        public List<Limit> Limits { get; set; }
+    }
+    public class SeachObjLab : SeachObj
+    {
         [DataMember(Name = "lab")]
         public Lab Lab { get; set; }
-
     }
 
     public class SeachReturnObj
@@ -47,9 +55,5 @@ namespace SampleApi
 
     }
 
-    public class Limit
-    {
-        public string Key { get; set; }
-        public string Value { get; set; }
-    }
+
 }

@@ -26,6 +26,15 @@ namespace SG.Model.Proof
         /// 打样单编号
         /// </summary>
         public string Dydbh { get; set; }
+        /// <summary>
+        /// 打样部门ID
+        /// </summary>
+        public long ProofDeptId { get; set; }
+        /// <summary>
+        /// 打样部门
+        /// </summary>
+        public virtual Dept ProofDept { get; set; }
+
         public virtual ProofStyle ProofStyle { get; set; }
         /// <summary>
         /// 申请用户DDid
@@ -66,7 +75,7 @@ namespace SG.Model.Proof
         /// <summary>
         /// 打样状态 草拟 审批 退回  排单 打样中 完成
         /// </summary>
-        public  ProofStatus ProofStatus { get; set; }
+        public ProofStatus ProofStatus { get; set; }
 
         /// <summary>
         /// 状态文本
@@ -125,7 +134,7 @@ namespace SG.Model.Proof
         /// </summary>
         public string Remark { get; set; }
 
-        public void AddLog(string name,string msg)
+        public void AddLog(string name, string msg)
         {
             ProofLogs.Add(new ProofLog
             {

@@ -95,6 +95,7 @@ namespace SampleApi.Controllers
                 _user = uoper.GetUserByAccout(name, pwd);
                 if (_user != null)
                 {
+                    _user = uoper.UpDateLoginInfo(_user);
                     SessionManage.Login(_user);
                     logLogin.Info(string.Format("用户--{0}--使用WEB登录.", _user.UserName));
                     return Ok(LoginHelp.ReturnUser(_user));

@@ -19,26 +19,6 @@ namespace ProofBLL
             _user = user;
         }
 
-        public List<ProofOrder> GetUserProofOrderList()
-        {
-
-            List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
-            poList.ForEach(p =>
-            {
-                p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
-
-            });
-            return poList;
-        }
-
-        public object GetFinshPlanList()
-        {
-            List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.完成) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
-            return poList;
-        }
- 
         /// <summary>
         /// 完成打样，并提交审批
         /// </summary>
@@ -58,7 +38,26 @@ namespace ProofBLL
             return po;
 
         }
+        /// <summary>
+        /// 分页读取打样订单信息表
+        /// </summary>
+        /// <param name="Count"></param>
+        /// <param name="whereLambda"></param>
+        /// <param name="orderbyLamba"></param>
+        /// <param name="PageId"></param>
+        /// <param name="PageSize"></param>
+        /// <returns></returns>
+        public List<ProofOrder> GetProofListDesc(out int Count, Func<ProofOrder, bool> whereLambda, Func<ProofOrder, object> orderbyLamba, int PageId, int PageSize)
+        {
+            Count = Sdc.ProofOrders.Where(whereLambda).Count();
+            List<ProofOrder> list = Sdc.ProofOrders.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).ToList();
 
+            return list;
+        }
+        /// <summary>
+        /// 取得当前用户完成打样信息
+        /// </summary>
+        /// <returns></returns>
         public List<ProofOrder> GetUserFineshProofOrderList()
         {
 
@@ -71,23 +70,34 @@ namespace ProofBLL
             });
             return poList;
         }
+        /// <summary>
+        /// 取得当前用户未完成打样信息
+        /// </summary>
+        /// <returns></returns>
 
-        public List<ProofOrder> GetPlanProofList()
+        public List<ProofOrder> GetUserProofOrderList()
         {
+
             List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => (p.ProofStatus == ProofStatus.排单 || p.ProofStatus == ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete).OrderBy(p => p.ProofStatus).ThenByDescending(p => p.CreateDate).ToList();
+            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
+            poList.ForEach(p =>
+            {
+                p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
+
+            });
             return poList;
         }
 
+
         public ProofOrder GetProof(string proofOrderId)
         {
-          
+
             ProofOrder po = Sdc.ProofOrders.Include(t => t.ProofTasks).Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofOrderId == proofOrderId).SingleOrDefault();
             if (po != null)
             {
                 Sdc.Entry(po.ProofStyle).Collection(t => t.ProofFiles).Query().Where(t => !t.IsDelete).Load();
 
-                Sdc.Entry(po).Collection(t => t.ProofTasks).Query().Include(t => t.Process).Include(t=>t.Worker).Load();
+                Sdc.Entry(po).Collection(t => t.ProofTasks).Query().Include(t => t.Process).Include(t => t.Worker).Load();
                 po.ProofTasks = po.ProofTasks.Where(p => !p.IsDelete).ToList();
             }
 
@@ -102,7 +112,7 @@ namespace ProofBLL
             {
                 p.Delete(_user.UserName);
             });
-           // Sdc.SaveChanges();
+            // Sdc.SaveChanges();
 
             return true;
         }
@@ -110,14 +120,14 @@ namespace ProofBLL
         {
             po.DdApprovalCode = ddApprovalCode;
             po.ProofStatus = ProofStatus.审批;
-          //  Sdc.SaveChanges();
+            //  Sdc.SaveChanges();
         }
 
         public void SetFinshApprove(ProofOrder po, string ddApprovalCode)
         {
             po.DdFinshApprovalCode = ddApprovalCode;
             po.ProofStatus = ProofStatus.交样;
-           // Sdc.SaveChanges();
+            // Sdc.SaveChanges();
         }
         public void SaveChange()
         {

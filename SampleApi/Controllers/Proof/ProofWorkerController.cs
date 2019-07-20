@@ -24,5 +24,12 @@ namespace SampleApi.Controllers.Proof
             var obj = pw.GetProcessList();
             return Ok(obj);
         }
+        [HttpGet]
+        public IHttpActionResult GetProofDepts()
+        {
+            ProofWorker pw = new ProofWorker();
+            var obj = pw.GetProofDeptList();
+            return Ok(obj);
+        }
     }
 }

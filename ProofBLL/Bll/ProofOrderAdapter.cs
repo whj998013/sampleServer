@@ -58,6 +58,8 @@ namespace ProofBLL
                 _proofOrder.DesignatedCX = obj.DesignatedCX;
                 _proofOrder.DesignatedGY = obj.DesignatedGY;
                 _proofOrder.Remark = obj.Remark;
+                _proofOrder.ProofDeptId = obj.ProofDept;
+                _proofOrder.ProofDept = sdc.Depts.Single(d => d.DeptID == obj.ProofDept);
                 _proofOrder.Urgency = obj.Urgency;
                 _proofOrder.ProofApplyUserName = _user.UserName;
                 _proofOrder.ProofApplyDeptName = _user.DepartName;
@@ -125,6 +127,8 @@ namespace ProofBLL
                     _proofOrder.DesignatedCX = obj.DesignatedCX;
                     _proofOrder.DesignatedGY = obj.DesignatedGY;
                     _proofOrder.Remark = obj.Remark;
+                    _proofOrder.ProofDeptId = obj.ProofDept;
+                    _proofOrder.ProofDept = sdc.Depts.Single(d => d.DeptID == obj.ProofDept);
                     _proofOrder.Urgency = obj.Urgency;
                     _proofOrder.ProofStatus = ProofStatus.草拟;
                     _proofOrder.RequiredDate = obj.FinshDate;

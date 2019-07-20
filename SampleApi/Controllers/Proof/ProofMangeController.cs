@@ -10,6 +10,10 @@ using System.Web.Http;
 using ProofData.Bll;
 using SG.DdApi;
 using SG.DdApi.Approve;
+using SysBLL;
+using SunginData;
+using SG.Model.Proof;
+
 namespace SampleApi.Controllers.Proof
 {
     [Author]
@@ -20,8 +24,15 @@ namespace SampleApi.Controllers.Proof
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
-            var list = poo.GetPlanProofList();
-
+            var po = new PvmOper(SessionManage.CurrentUser);
+            var pvm = po.GetPvm("P020200", PvmType.PM);
+            var exp = PredicateBuilder.True<ProofOrder>().And(p => (p.ProofStatus == ProofStatus.排单 || p.ProofStatus == ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete);
+            if (pvm != Prange.全部)
+            {
+                var idlist = po.GetDeptsByPermissionKey("P020200", PvmType.PM).ToDeptIdList();
+                exp = exp.And(p => idlist.Contains(p.ProofDeptId));
+            };
+            var list = poo.GetProofListDesc(out int count,exp.Compile(),p=>p.CreateDate,1,65535);
             return Ok(list);
         }
 
@@ -29,7 +40,15 @@ namespace SampleApi.Controllers.Proof
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
-            var list = poo.GetFinshPlanList();
+            var po = new PvmOper(SessionManage.CurrentUser);
+            var pvm = po.GetPvm("P020200", PvmType.PM);
+            var exp = PredicateBuilder.True<ProofOrder>().And(p => (p.ProofStatus == ProofStatus.完成) && !p.IsDelete);
+            if (pvm != Prange.全部)
+            {
+                var idlist = po.GetDeptsByPermissionKey("P020200", PvmType.PM).ToDeptIdList();
+                exp = exp.And(p => idlist.Contains(p.ProofDeptId));
+            };
+            var list = poo.GetProofListDesc(out int count, exp.Compile(), p => p.CreateDate, 1, 65535);
             return Ok(list);
         }
         /// <summary>
