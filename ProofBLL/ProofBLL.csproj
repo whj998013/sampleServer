@@ -51,7 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\ProofOrderFinsh.cs" />
+    <Compile Include="DdApprove\ProofFileDownloadApprove.cs" />
+    <Compile Include="DdApprove\ProofOrderFinshApprove.cs" />
     <Compile Include="Bll\ProofRecord.cs" />
     <Compile Include="Model\PfRecord.cs" />
     <Compile Include="Model\SubmitTask.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Bll\ProofFileOper.cs" />
     <Compile Include="Bll\ProofOper.cs" />
     <Compile Include="Bll\ProofOrderAdapter.cs" />
-    <Compile Include="Bll\ProofOrderApprove.cs" />
+    <Compile Include="DdApprove\ProofOrderApprove.cs" />
     <Compile Include="Bll\ProofTaskOper.cs" />
     <Compile Include="Bll\ProofTypeOper.cs" />
     <Compile Include="Bll\ProofWorker.cs" />

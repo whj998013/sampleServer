@@ -32,7 +32,7 @@ namespace SampleApi.Controllers.Proof
                 var idlist = po.GetDeptsByPermissionKey("P020200", PvmType.PM).ToDeptIdList();
                 exp = exp.And(p => idlist.Contains(p.ProofDeptId));
             };
-            var list = poo.GetProofListDesc(out int count,exp.Compile(),p=>p.CreateDate,1,65535);
+            var list = poo.GetProofListDesc(out int count, exp.Compile(), p => p.CreateDate, 1, 65535);
             return Ok(list);
         }
 
@@ -59,61 +59,74 @@ namespace SampleApi.Controllers.Proof
         [HttpGet]
         public IHttpActionResult FinshProof(string id)
         {
-            User u = SessionManage.CurrentUser;
-            ProofOrderOper poo = new ProofOrderOper(u);
-            var result = poo.FinshProof(id);
-            if (result != null)
+            try
             {
-                //发送交样申请 
-                string ddid = result.ProofApplyUserDdId;
-                User applyUser = SunginData.DataQuery.GetSingle<User>(p => p.DdId == ddid);
-                NewApprove na = new NewApprove(DdOperator.GetDdApi())
+                User u = SessionManage.CurrentUser;
+                var ulist = new List<string>() { u.DdId };
+                ProofOrderOper poo = new ProofOrderOper(u);
+                ProofOrder result = poo.FinshProof(id);
+                if (result != null)
                 {
-                    User = applyUser,
-                    ProcessCode = Config.GetSampleConfig().FinshProofProcessCode
-                };
+                    //发送交样申请 
+                    string ddid = result.ProofApplyUserDdId;
+                    User applyUser = SunginData.DataQuery.GetSingle<User>(p => p.DdId == ddid);
+                    NewApprove na = new NewApprove(DdOperator.GetDdApi())
+                    {
+                        User = applyUser,
+                        ProcessCode = Config.GetSampleConfig().FinshProofProcessCode
+                    };
 
-                List<ApproveItem> items = new List<ApproveItem>()
-                {
-                   new ApproveItem()
-                   {
-                       Name ="单号",
-                       Value=result.ProofOrderId
-                   },
-                   new ApproveItem()
-                   {
-                       Name ="款号",
-                       Value=result.ProofStyle.ClientNo
-                   },
-                    new ApproveItem()
-                   {
-                       Name ="客户",
-                       Value=result.ProofStyle.ClentName
-                   },
-                   new  ApproveItem{
-                       Name ="打样部门",
-                       Value="打样中心"
-                   },
-                };
-                string DdApprovalCode = na.SendApprove(items);
-                if (DdApprovalCode != "")
-                {
-                    poo.SetFinshApprove(result, DdApprovalCode);
-                    poo.SaveChange();
-                    return Ok();
-                };
-                
+                    var items = ProofOrderFinshApprove.ToApprove(result, ulist);
+                    string DdApprovalCode = ProofOrderApprove.SendApprove(na, items);
+                    if (DdApprovalCode != "")
+                    {
+                        poo.SetFinshApprove(result, DdApprovalCode);
+                        poo.SaveChange();
+                        return Ok();
+                    };
+
+                }
+                return BadRequest("订单号错误。");
             }
-            return BadRequest("订单号错误。");
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
 
         public IHttpActionResult GetClients()
         {
+
             var clist = new ProofClient().GetClients();
-
-
             return Ok(clist);
+
+        }
+        [HttpGet]
+        public IHttpActionResult GetProofOrderByBh(string id)
+        {
+            try
+            {
+                if (id != "")
+                {
+                    int bh = int.Parse(id);
+                    var proofid = new YdOper().GetProofIdByBh(bh);
+                    if (proofid != "")
+                    {
+                        User u = SessionManage.CurrentUser;
+                        ProofOrderOper poo = new ProofOrderOper(u);
+                        var proof = poo.GetProof(proofid);
+                        return Ok(proof);
+                    }
+                }
+                return NotFound();
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+
         }
     }
 }

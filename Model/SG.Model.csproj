@@ -58,6 +58,7 @@
     <Compile Include="Proof\ProofStyle.cs" />
     <Compile Include="Proof\ProofTask.cs" />
     <Compile Include="Proof\ProofType.cs" />
+    <Compile Include="Sys\ApproveRecrod.cs" />
     <Compile Include="Sys\FactryRole.cs" />
     <Compile Include="Sys\Job.cs" />
     <Compile Include="Sys\Stats.cs" />

@@ -13,17 +13,18 @@ namespace SampleApi
     public class Config
     {
 
-        private string _ProofFilePath;
+        private readonly string _ProofFilePath;
         private bool _IsInputStrageNeedAlow;
         private bool _InStrageAlowChange;
         private bool _EnableLimtView;
         private bool _AllSampleCanLend;
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
-        private string _SampleFilePath;
-        private string _FinshProofProcessCode;
-        private string _ProofProcessCode;
-        private string _CallBackUrl;
+        private readonly string _SampleFilePath;
+        private readonly string _FinshProofProcessCode;
+        private readonly string _ProofProcessCode;
+        private readonly string _CallBackUrl;
+        private readonly string _ApplyDownloadProcessCode;
         private static Config _instance = null; //单列对象
         public static Config GetSampleConfig()
         {
@@ -43,7 +44,7 @@ namespace SampleApi
             _ProofProcessCode = ConfigHelper.GetValue("ProofProcessCode");
             _FinshProofProcessCode = ConfigHelper.GetValue("FinshProofProcessCode");
             _CallBackUrl = ConfigHelper.GetValue("CallBackUrl");
-
+            _ApplyDownloadProcessCode = ConfigHelper.GetValue("ApplyDownloadProcessCode");
         }
 
         public string ProofProcessCode
@@ -65,6 +66,14 @@ namespace SampleApi
             get
             {
                 return _FinshProofProcessCode;
+            }
+        }
+
+        public string ApplyDownloadProcessCode
+        {
+            get
+            {
+                return _ApplyDownloadProcessCode;
             }
         }
         public string ProofFilePath

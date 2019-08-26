@@ -1,4 +1,5 @@
-﻿using SG.DdApi;
+﻿using ProofBLL;
+using SG.DdApi;
 using SG.Utilities;
 using SysBLL;
 using System;
@@ -21,6 +22,8 @@ namespace SampleApi.App_Start
             ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
             ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
 
+            InitDdCallBack();
+
             //生成部门
             Task.Factory.StartNew(() =>
             {
@@ -28,6 +31,44 @@ namespace SampleApi.App_Start
             });
             DoHistoryCallBack(ddOper);
 
+        }
+        /// <summary>
+        /// 初始化回调组件，并注册回调插件
+        /// </summary>
+        public static void InitDdCallBack()
+        {
+            string SysPath = HttpContext.Current.Server.MapPath("~");
+            string ProofProcessCode = Config.GetSampleConfig().ProofProcessCode;
+            string FinshProofProcessCode = Config.GetSampleConfig().FinshProofProcessCode;
+            string ApplyDownloadProcessCode = Config.GetSampleConfig().ApplyDownloadProcessCode;
+
+            //初始化回调组件
+            var ddCallBack = DdCallBackSysOper.GetOper();
+            ddCallBack.EventTypes.Add("bpms_task_change");
+            ddCallBack.EventTypes.Add("bpms_instance_change");
+
+            //钉钉样衣申请回调
+            ddCallBack.HaveDdCallBack += new ProofOrderApprove
+            {
+                ProcessCode = ProofProcessCode
+            }.DoCallBack;
+
+            
+            //钉钉样衣交样回调
+            ddCallBack.HaveDdCallBack += new ProofOrderFinshApprove(DdOperator.GetDdApi())
+            {
+                SysPath = SysPath,
+                ProcessCode = FinshProofProcessCode,
+            }.DoCallBack;
+
+          
+            //文件下载申请回调
+            ddCallBack.HaveDdCallBack += new ProofFileDownloadApprove
+            {
+                ProcessCode = ApplyDownloadProcessCode
+            }.DoCallBack;
+
+           
         }
 
         /// <summary>
@@ -38,16 +79,15 @@ namespace SampleApi.App_Start
 
             bool NeedRegister = true;
 #if DEBUG
-          //  NeedRegister = false;
+            //  NeedRegister = false;
 #endif
 
             if (NeedRegister)
             {
                 var dbso = DdCallBackSysOper.GetOper();
-                dbso.SysPath = HttpContext.Current.Server.MapPath("~");
-                Task.Run(async delegate
+                System.Threading.Tasks.Task.Run(async delegate
                 {
-                    await Task.Delay(5000);
+                    await System.Threading.Tasks.Task.Delay(5000);
                     //注册回调
                     DdCallbackOper dcb = new DdCallbackOper(ddOper);
                     dcb.CallBackUrl = Config.GetSampleConfig().CallBackUrl;

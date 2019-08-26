@@ -8,6 +8,7 @@ using SunginData;
 using SG.Model.Sys;
 using System.Data.Entity;
 using SG.Model;
+using ProofBLL.Model;
 
 namespace ProofBLL
 {
@@ -32,7 +33,7 @@ namespace ProofBLL
 
         }
 
-        public ProofTask UpDateTask(Task t)
+        public ProofTask UpDateTask(TaskModel t)
         {
             ProofTask re = sdc.ProofTasks.Include(tp=>tp.Order).SingleOrDefault(p => p.Id == t.Id);
             if (re != null)
@@ -63,7 +64,7 @@ namespace ProofBLL
 
         }
 
-        public ProofTask AddTask(Task t,Stats s)
+        public ProofTask AddTask(TaskModel t,Stats s)
         {
             try
             {

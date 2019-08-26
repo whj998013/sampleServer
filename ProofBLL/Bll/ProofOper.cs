@@ -26,6 +26,7 @@ namespace ProofBLL
         public ProofOrder FinshProof(string proofOrderid)
         {
             ProofOrder po = Sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == proofOrderid);
+            if (po.ProofStatus != ProofStatus.打样中) throw new Exception("当前订单未在打样状态，无法提交交样审批");
             if (po == null) return null;
             po.ProofTasks.ForEach(p =>
             {
@@ -51,7 +52,7 @@ namespace ProofBLL
         {
             Count = Sdc.ProofOrders.Where(whereLambda).Count();
             List<ProofOrder> list = Sdc.ProofOrders.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(p => p.Id).ToList();
-
+            RemoveDeleteFile(list);
             return list;
         }
         /// <summary>
@@ -63,12 +64,16 @@ namespace ProofBLL
 
             List<ProofOrder> poList = new List<ProofOrder>();
             poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus == ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
-            poList.ForEach(p =>
-            {
-                p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
-
-            });
+            RemoveDeleteFile(poList);
             return poList;
+        }
+
+        public void RemoveDeleteFile(List<ProofOrder> po)
+        {
+            po.ForEach(p =>
+            {
+                p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(t => !t.IsDelete).ToList();
+            });
         }
         /// <summary>
         /// 取得当前用户未完成打样信息
@@ -80,11 +85,7 @@ namespace ProofBLL
 
             List<ProofOrder> poList = new List<ProofOrder>();
             poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
-            poList.ForEach(p =>
-            {
-                p.ProofStyle.ProofFiles = p.ProofStyle.ProofFiles.Where(f => !f.IsDelete).ToList();
-
-            });
+            RemoveDeleteFile(poList);
             return poList;
         }
 
@@ -96,7 +97,6 @@ namespace ProofBLL
             if (po != null)
             {
                 Sdc.Entry(po.ProofStyle).Collection(t => t.ProofFiles).Query().Where(t => !t.IsDelete).Load();
-
                 Sdc.Entry(po).Collection(t => t.ProofTasks).Query().Include(t => t.Process).Include(t => t.Worker).Load();
                 po.ProofTasks = po.ProofTasks.Where(p => !p.IsDelete).ToList();
             }

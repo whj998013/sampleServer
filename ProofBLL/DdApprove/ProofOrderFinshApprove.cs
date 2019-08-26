@@ -10,22 +10,62 @@ using SG.Utilities;
 using SG.Model.Proof;
 using System.IO;
 using System.Configuration;
+using SG.DdApi.Interface;
 
 namespace ProofBLL
 {
-    public class ProofOrderFinsh
+    public class ProofOrderFinshApprove : DdApprove
     {
-        private IDdOper _oper;
+        private IDdOper _oper { get; set; }
         SunginDataContext sdc = new SunginDataContext();
 
-        public ProofOrderFinsh(IDdOper ddOper)
+        public ProofOrderFinshApprove(IDdOper ddOper)
         {
             _oper = ddOper;
         }
         public string SysPath { get; set; }
         private readonly string PicPath = ConfigurationManager.AppSettings["ProofFilePath"] + "pic\\";
-        public void AgreeFinsh(string pid)
+
+
+
+        public static ApproveItems ToApprove(ProofOrder po, List<string> ulist)
         {
+            ApproveItems items = new ApproveItems()
+                {
+                   new ApproveItem()
+                   {
+                       Name ="单号",
+                       Value=po.ProofOrderId
+                   },
+                   new ApproveItem()
+                   {
+                       Name ="款号",
+                       Value=po.ProofStyle.ClientNo
+                   },
+                    new ApproveItem()
+                   {
+                       Name ="客户",
+                       Value=po.ProofStyle.ClentName
+                   },
+                    new ApproveItem(){
+                       Name ="提交审批",
+                       Value = FastJSON.JSON.ToJSON(ulist)
+                },
+                   new  ApproveItem{
+                       Name ="打样部门",
+                       Value=po.ProofDept.DeptName
+                   },
+
+                };
+            items.ApproveName = "样衣提交申请";
+            items.ObjId = po.ProofOrderId;
+
+            return items;
+        }
+
+        protected override void AgreeApprove(string pid)
+        {
+            base.Agree(pid);
             ApproveOper ao = new ApproveOper(_oper);
             var re = ao.GetApprove(pid);
             var po = sdc.ProofOrders.SingleOrDefault(p => p.DdFinshApprovalCode == pid);
@@ -72,23 +112,20 @@ namespace ProofBLL
                                         });
 
                             }
-
-
                         }
 
                     });
                 po.ProofStatus = ProofStatus.完成;
                 sdc.SaveChanges();
+
             }
-
         }
-
-        public void RefuseFinsh(string pid)
+        protected override void RefuseApprove(string pid)
         {
+            base.Refuse(pid);
             var po = sdc.ProofOrders.SingleOrDefault(p => p.DdFinshApprovalCode == pid);
             po.ProofStatus = ProofStatus.打样中;
             sdc.SaveChanges();
-            // throw new NotImplementedException();
         }
     }
 }

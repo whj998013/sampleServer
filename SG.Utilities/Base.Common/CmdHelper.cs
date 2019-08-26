@@ -33,7 +33,7 @@ namespace SG.Utilities
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
-            string strOutput = null;
+            string strOutput;
             try
             {
                 p.Start();

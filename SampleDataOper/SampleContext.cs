@@ -124,6 +124,10 @@ namespace SunginData
         public DbSet<Job> jobs { get; set; }
 
         /// <summary>
+        /// 钉钉申请表
+        /// </summary>
+        public DbSet<ApproveRecrod> ApproveRecrods { get; set; }
+        /// <summary>
         /// 工厂角色员工表
         /// </summary>
         public DbSet<FactryRoleWorker> FactryRolesWorker { get; set; }

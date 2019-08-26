@@ -69,7 +69,7 @@ namespace SampleApi.Controllers.Proof
             else
             {
                 string upTaskNO = ProofTaskOper.GetTask(t.TaskId).TaskNo;
-                Task newTask = new Task
+                TaskModel newTask = new TaskModel
                 {
                     TaskNo = t.NextTaskNO,
                     ProofOrderId = t.ProofId,
@@ -111,7 +111,7 @@ namespace SampleApi.Controllers.Proof
 
         }
 
-        public IHttpActionResult UpdateTask(Task task)
+        public IHttpActionResult UpdateTask(TaskModel task)
         {
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
             var pt = pto.UpDateTask(task);
@@ -124,7 +124,7 @@ namespace SampleApi.Controllers.Proof
             return NotFound();
         }
 
-        public IHttpActionResult AddTask(Task task)
+        public IHttpActionResult AddTask(TaskModel task)
         {
             ProofTaskOper pto = new ProofTaskOper(SessionManage.CurrentUser);
             var pt = pto.AddTask(task,SG.Model.Stats.进行中);

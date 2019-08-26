@@ -18,20 +18,22 @@ namespace SampleApi.Controllers.Proof
     [Author]
     public class MyProofController : ApiController
     {
+
         public IHttpActionResult GetMyProofs()
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
             var list = poo.GetUserProofOrderList();
-
             return Ok(list);
         }
+
         [HttpGet]
         public IHttpActionResult GetProofRecord(string id)
         {
             var tlist = new ProofRecord().GetProofRecord(id);
             return Ok(tlist);
         }
+
         public IHttpActionResult GetMyFinshProofs()
         {
 
@@ -48,7 +50,6 @@ namespace SampleApi.Controllers.Proof
         /// <param name="proof"></param>
         /// <returns></returns>
         [HttpPost]
-
         public IHttpActionResult DeleteProof(dynamic proof)
         {
             User u = SessionManage.CurrentUser;
@@ -58,6 +59,7 @@ namespace SampleApi.Controllers.Proof
             poo.SaveChange();
             return Ok();
         }
+
         /// <summary>
         /// 提交审批
         /// </summary>
@@ -76,8 +78,8 @@ namespace SampleApi.Controllers.Proof
                     User = u,
                     ProcessCode = Config.GetSampleConfig().ProofProcessCode
                 };
-                var ApproveItems = ProofOrderApprove.ToApprove(po);
-                string DdApprovalCode = na.SendApprove(ApproveItems);
+                var items = ProofOrderApprove.ToApprove(po);
+                string DdApprovalCode = ProofOrderApprove.SendApprove(na, items);
                 if (DdApprovalCode != "")
                 {
                     poo.SetApprove(po, DdApprovalCode);
@@ -86,6 +88,34 @@ namespace SampleApi.Controllers.Proof
             }
 
             return Ok(po);
+        }
+
+        /// <summary>
+        /// 发送下载申请
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult ApplyDownload(string id)
+        {
+           var c= DataQuery.GetSingle<ApproveRecrod>(p => p.ObjId == id && !p.Finshed);
+            if (c != null) return BadRequest("正在申请中，请勿重复申请。");
+
+            User u = SessionManage.CurrentUser;
+            NewApprove na = new NewApprove(DdOperator.GetDdApi())
+            {
+                User = u,
+                ProcessCode = Config.GetSampleConfig().ApplyDownloadProcessCode
+            };
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                var pf = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == id);
+                if (pf == null) return NotFound();
+                ProofFileDownloadApprove.SendApprove(na, ProofFileDownloadApprove.ToApprove(pf.ProofStyle));
+                return Ok();
+            }
+
+
         }
     }
 

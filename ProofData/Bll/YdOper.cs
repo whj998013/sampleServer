@@ -93,5 +93,22 @@ namespace ProofData.Bll
             return new { id = ++bigId, dydbh };
 
         }
+
+        public string GetProofIdByBh(int bh)
+        {
+            string proofId = "";
+            var ddbh = pdc.scgl_bh.SingleOrDefault(p => p.bh == bh);
+            if (ddbh != null)
+            {
+                var ddkh = ddbh.id_ddkh;
+                var yp = pdc.ypgl_yd.SingleOrDefault(p => p.id == ddkh);
+                if (yp != null&&yp.proofId!=null)
+                {
+                    proofId = yp.proofId;
+                }
+
+            }
+            return proofId;
+        }
     }
 }

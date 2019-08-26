@@ -117,6 +117,10 @@ namespace SG.Model.Proof
         /// </summary>
         public DateTime? RequiredDate { get; set; }
         /// <summary>
+        /// 申请者是否可下载打样文件
+        /// </summary>
+        public bool AlowDownloadFile { get; set; }
+        /// <summary>
         /// 打样数量
         /// </summary>
         public int ProofNum { get; set; }

@@ -25,7 +25,7 @@ namespace SampleBLL
         public static bool DoLend(string styleId, User _user)
         {
             using (SunginDataContext sc = new SunginDataContext())
-            {             
+            {
 
                 var style = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
                 LendRecord lr = sc.LendRecords.SingleOrDefault(p => p.StyleId == styleId && p.DdId == _user.DdId && (p.State != LendRecordStats.已还回));
@@ -84,7 +84,7 @@ namespace SampleBLL
                 lendlist.ForEach(p =>
                 {
                     var obj = SampleHelper.GetDdLenOutObj(p);
-                    if(obj!=null) lo.Add(obj);
+                    if (obj != null) lo.Add(obj);
 
                 });
 
@@ -117,7 +117,7 @@ namespace SampleBLL
             {
                 var lr = sc.LendRecords.SingleOrDefault(p => p.StyleId == StyleId && p.DdId == _user.DdId && p.State == LendRecordStats.借出审批);
                 if (lr != null)
-                {                   
+                {
                     sc.Entry(lr).State = System.Data.Entity.EntityState.Deleted;
                     sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == StyleId).State = SampleState.在库;
                     sc.SaveChanges();
@@ -144,11 +144,18 @@ namespace SampleBLL
                     sl.State = LendRecordStats.草拟;
                     sl.OperRemark = sl.OperRemark + " 退回借出申请：" + user;
                     var sb = sc.SampleBaseInfos.SingleOrDefault(p => !p.IsDelete && p.StyleId == sl.StyleId);
-                    sb.State = SampleState.在库;
+                    if (sb != null)
+                    {
+                        sb.State = SampleState.在库;
+                    }
+                    else
+                    {
+                        sl.Delete(user);
+                    }
                     sc.SaveChanges();
                     return true;
                 }
-                else return false;
+                return false;
             }
         }
 

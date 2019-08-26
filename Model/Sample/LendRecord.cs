@@ -45,7 +45,7 @@ namespace SG.Model.Sample
         /// 还回单Id
         /// </summary>
         public string ReturnNo { get; set; }
-       
+
         public LendRecordStats State { get; set; }
     }
 

@@ -38,13 +38,13 @@ namespace SG.DdApi.Approve
             OapiProcessinstanceCreateRequest request = new OapiProcessinstanceCreateRequest();
             request.AgentId = long.Parse(_oper.AgentID);
             request.ProcessCode = ProcessCode;
-            
+
             List<OapiProcessinstanceCreateRequest.FormComponentValueVoDomain> formComponentValues = new List<OapiProcessinstanceCreateRequest.FormComponentValueVoDomain>();
             items.ForEach(p =>
             {
                 OapiProcessinstanceCreateRequest.FormComponentValueVoDomain vo = new OapiProcessinstanceCreateRequest.FormComponentValueVoDomain();
                 vo.Name = p.Name;
-                vo.Value =p.Value;
+                vo.Value = p.Value;
                 vo.ExtValue = p.ExtValue;
                 formComponentValues.Add(vo);
             });

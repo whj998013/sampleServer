@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.DdApi.Approve;
+using SG.DdApi.Interface;
 using SG.Model.Proof;
 using SunginData;
 using System.Data.Entity;
 using ProofData.Bll;
+
 namespace ProofBLL
 {
-    public class ProofOrderApprove
+    public class ProofOrderApprove: DdApprove
     {
         private SunginDataContext sdc;
         public ProofOrderApprove(SunginDataContext _sdc)
@@ -23,69 +25,73 @@ namespace ProofBLL
             sdc = new SunginDataContext();
 
         }
-        public static List<ApproveItem> ToApprove(ProofOrder order)
+       
+        public static ApproveItems ToApprove(ProofOrder po)
         {
-            List<ApproveItem> la = new List<ApproveItem>() {
+            ApproveItems items = new ApproveItems {
                 new ApproveItem
                 {
                     Name="申请人",
-                    Value=order.ProofApplyUserName,
+                    Value=po.ProofApplyUserName,
                 },
                  new ApproveItem
                 {
                     Name="编号",
-                    Value=order.ProofOrderId,
+                    Value=po.ProofOrderId,
                 },
                   new ApproveItem
                 {
                     Name="客户",
-                    Value=order.ProofStyle.ClentName,
+                    Value=po.ProofStyle.ClentName,
                 },new ApproveItem
                 {
                     Name="打样部门",
-                    Value=order.ProofDept.DeptName,
+                    Value=po.ProofDept.DeptName,
                 },
                    new ApproveItem
                 {
                     Name="款号",
-                    Value=order.ProofStyle.ProofStyleNo,
+                    Value=po.ProofStyle.ProofStyleNo,
                 }, new ApproveItem
                 {
                     Name="打样类别",
-                    Value=order.ProofStyle.ProofTypeText,
+                    Value=po.ProofStyle.ProofTypeText,
                 }, new ApproveItem
                 {
                     Name="件数",
-                    Value=order.ProofNum.ToString(),
+                    Value=po.ProofNum.ToString(),
                 },new ApproveItem
                 {
                     Name="完成日期",
-                    Value=order.RequiredDate.ToString(),
+                    Value=po.RequiredDate.ToString(),
                 },
 
             };
+            items.ApproveName = "打样申请";
+            items.ObjId = po.ProofOrderId;
             var pdUser = new ApproveItem
             {
                 Name = "派单员",
 
             };
-            var ulist = order.ProofDept.DeptAdminDdId.Split(',').ToList();
+            var ulist = po.ProofDept.DeptAdminDdId.Split(',').ToList();
 
 #if DEBUG
             ulist = new List<string>() { "manager2606" };
 #endif
             pdUser.Value = FastJSON.JSON.ToJSON(ulist);
 
-            la.Add(pdUser);
-            return la;
+            items.Add(pdUser);
+            return items;
         }
 
         /// <summary>
         /// 订订审批通过，添加订单到打样系统，并修改状态
         /// </summary>
         /// <param name="DdApprovalCode"></param>
-        public void AgreeApprove(string DdApprovalCode)
+        protected override void AgreeApprove(string DdApprovalCode)
         {
+            base.Agree(DdApprovalCode);
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             YdOper yo = new YdOper();
             string dio = yo.AddYd(order);
@@ -96,17 +102,22 @@ namespace ProofBLL
                 sdc.SaveChanges();
             }
 
+           
+
         }
-        public void RefuseApprove(string DdApprovalCode)
+        protected override void RefuseApprove(string DdApprovalCode)
         {
+            base.Refuse(DdApprovalCode);
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             order.ProofStatus = ProofStatus.退回;
             sdc.SaveChanges();
+          
         }
         public ProofOrder GetProofByDdApprovalCode(string DdApprovalCode)
         {
             ProofOrder po = sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.DdApprovalCode == DdApprovalCode).SingleOrDefault();
             return po;
         }
+              
     }
 }
