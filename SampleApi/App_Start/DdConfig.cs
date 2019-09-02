@@ -32,6 +32,9 @@ namespace SampleApi.App_Start
             DoHistoryCallBack(ddOper);
 
         }
+
+
+        
         /// <summary>
         /// 初始化回调组件，并注册回调插件
         /// </summary>
