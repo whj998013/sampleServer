@@ -153,7 +153,7 @@ namespace SunginData.Migrations
                 new Km{KeyName="Stock",KeyValue=10000001,BeginKey="ST",Comment="样衣库存信息"},
                 new Km{KeyName="ProofOrder",KeyValue=10000001,BeginKey="PO",Comment="打样申请单"},
                 new Km{KeyName="ProofStyle",KeyValue=10000001,BeginKey="PS",Comment="打样款式信息"},
-
+                new Km{KeyName="YarnApply",KeyValue=10000001,BeginKey="YA",Comment="毛纱出库申请信息"},
 
             };
 
@@ -191,8 +191,8 @@ namespace SunginData.Migrations
                 new Process{ProcessName="初检"},
                 new Process{ProcessName="终检"},
                 new Process{ProcessName="包装"},
-                
-        };
+
+            };
         }
 
         public static List<WorkerDept> GetWorkerDepts()

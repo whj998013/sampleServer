@@ -10,6 +10,8 @@ using SG.Model.Stock;
 using SG.Model.Sys;
 using SG.Model.Proof;
 using SG.Interface;
+using SG.Model.Yarn;
+
 namespace SunginData
 {
     public class SunginDataContext : DbContext
@@ -131,6 +133,10 @@ namespace SunginData
         /// 工厂角色员工表
         /// </summary>
         public DbSet<FactryRoleWorker> FactryRolesWorker { get; set; }
+        /// <summary>
+        /// 毛纱出库申请
+        /// </summary>
+        public DbSet<YarnOutApply> YarnOutApplies { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
           

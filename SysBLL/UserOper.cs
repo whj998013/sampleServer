@@ -13,7 +13,7 @@ namespace SysBLL
     public class UserOper
     {
 
-        
+
         /// <summary>
         /// 根据DDid取得用户
         /// </summary>
@@ -89,11 +89,23 @@ namespace SysBLL
 
             using (SunginDataContext sc = new SunginDataContext())
             {
-                SetLoginInfo(ref user);
-                user.SetCreateUser("system");
-                user.Pinyin = PinyinHelper.PinyinString(user.UserName);
-                sc.Users.Add(user);
+
+                var u = sc.Users.FirstOrDefault(p => p.DdId == user.DdId);
+
+                if (u == null)
+                {
+                    SetLoginInfo(ref user);
+                    user.SetCreateUser("system");
+                    user.Pinyin = PinyinHelper.PinyinString(user.UserName);
+                    sc.Users.Add(user);
+                }
+                else
+                {
+                    SetLoginInfo(ref u);
+                    u.UnDelete("system");
+                }
                 sc.SaveChanges();
+
             }
         }
 
@@ -105,8 +117,8 @@ namespace SysBLL
                 ulist.ForEach(p => p.IsDelete = true);
                 users.ForEach(p =>
                 {
-                    
-                    var u = ulist.SingleOrDefault(t => t.DdId == p.DdId);
+
+                    var u = ulist.FirstOrDefault(t => t.DdId == p.DdId);
                     if (u == null)
                     {
                         p.Pinyin = PinyinHelper.PinyinString(p.UserName);

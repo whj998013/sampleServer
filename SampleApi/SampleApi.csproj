@@ -119,6 +119,7 @@
     <Compile Include="Controllers\Setting\RoleController.cs" />
     <Compile Include="Controllers\Setting\SampleController.cs" />
     <Compile Include="Controllers\Setting\WorkerController.cs" />
+    <Compile Include="Controllers\Setting\YarnController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\Yarn\MyYarnController.cs" />
     <Compile Include="Controllers\Yarn\YarnSeachController.cs" />

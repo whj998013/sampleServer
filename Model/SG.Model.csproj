@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplyState.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Proof\FileItemMode.cs" />
     <Compile Include="Proof\ProofFile.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Sys\User.cs" />
     <Compile Include="Sys\UserRole.cs" />
     <Compile Include="Sys\UserRolePermission.cs" />
+    <Compile Include="State\YarnOutApply.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IBLL\SG.Interface.csproj">
@@ -97,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Stock\Yarn\" />
+    <Folder Include="Yarn\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Proof\ClassDiagram1.cd" />

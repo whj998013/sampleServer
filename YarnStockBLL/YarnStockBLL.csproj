@@ -51,6 +51,7 @@
     <Compile Include="MyYarn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YarnOper.cs" />
+    <Compile Include="YarnStockOper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

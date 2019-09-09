@@ -36,14 +36,12 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            PvmDeptOper pdo = PvmDeptOper.GetPvmDeptOper();
-            SunginDataContext sdc = new SunginDataContext();
-            User u = sdc.Users.SingleOrDefault(p => p.UserName == "王汉君");
 
-            ProofOrderOper poo = new ProofOrderOper(u);
-
-            var re = poo.GetProofListDesc(out int c, p => !p.IsDelete, p => p.Id, 1, 10);
-
+            double ww = 1.009909991;
+            
+            YarnStockContext ysc = new YarnStockContext();
+            var re = ysc.LocalProduct.FirstOrDefault(p => p.BatchNum == "001");
+            int i = Digits(re.Num);
 
 
 
@@ -51,6 +49,11 @@ namespace ConsoleApp1
 
             Console.ReadKey();
 
+        }
+        public static int Digits(double Number)
+        {
+            var s = Number.ToString();
+            return s.Length - s.IndexOf('.') - 1;
         }
         static void MainYarnStock(string[] args)
         {
@@ -89,9 +92,7 @@ namespace ConsoleApp1
             });
 
             ysc.SaveChanges();
-
-
-
+            
             Console.ReadKey();
 
         }
