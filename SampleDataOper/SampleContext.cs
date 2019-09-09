@@ -18,7 +18,7 @@ namespace SunginData
     {
         
         /// <summary>
-        /// 样品信息表
+        /// 样品信息表  
         /// </summary>
         public DbSet<SampleBaseInfo> SampleBaseInfos { get; set; }
         /// <summary>
