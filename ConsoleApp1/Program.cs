@@ -30,6 +30,8 @@ using HttpHelper = SG.Utilities.HttpHelper;
 using log4net;
 using System.Configuration;
 using SG.Model;
+using YarnStockBLL;
+using System.Data.Entity.Validation;
 namespace ConsoleApp1
 {
     class Program
@@ -37,13 +39,27 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            double ww = 1.009909991;
-            
-            YarnStockContext ysc = new YarnStockContext();
-            var re = ysc.LocalProduct.FirstOrDefault(p => p.BatchNum == "001");
-            int i = Digits(re.Num);
+            try
+            {
+                NewYarnOutStock nyos = new NewYarnOutStock();
+                SunginDataContext sdc = new SunginDataContext();
+                var yoa = sdc.YarnOutApplies.First(p => p.Id == 8);
+                nyos.AddYarnOutStock(yoa);
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
 
+                       Console.WriteLine(string.Format("Class: {0}, Property: {1}, Error: {2}", validationErrors.Entry.Entity.GetType().FullName,
+                            validationError.PropertyName,
+                            validationError.ErrorMessage), "error");
+                    }
+                }
 
+            }
 
 
 
@@ -92,7 +108,7 @@ namespace ConsoleApp1
             });
 
             ysc.SaveChanges();
-            
+
             Console.ReadKey();
 
         }
@@ -236,14 +252,8 @@ namespace ConsoleApp1
             ddOper.CorpId = "ding99dd341fc99a25eb";
             ddOper.CorpSecret = "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0";
             ddOper.AgentID = "132907517";
-
             var dck = new DdCallbackOper(ddOper);
-            //var dre = dck.DeleteRegister();
-            //var regre = dck.SendRegister();
             var re = dck.GetRegister();
-
-
-
 
             Console.ReadLine();
 

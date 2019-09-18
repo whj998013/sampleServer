@@ -86,7 +86,7 @@ namespace SG.SessionManage
         }
 
         /// <summary>
-        /// 用户备注
+        /// 用户样品
         /// </summary>
 
         public static SampleInfo CurrentSample  //添加文字备注信息

@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using YarnStockBLL;
 
 namespace SampleApi.App_Start
 {
@@ -34,7 +35,7 @@ namespace SampleApi.App_Start
         }
 
 
-        
+
         /// <summary>
         /// 初始化回调组件，并注册回调插件
         /// </summary>
@@ -44,7 +45,7 @@ namespace SampleApi.App_Start
             string ProofProcessCode = Config.GetSampleConfig().ProofProcessCode;
             string FinshProofProcessCode = Config.GetSampleConfig().FinshProofProcessCode;
             string ApplyDownloadProcessCode = Config.GetSampleConfig().ApplyDownloadProcessCode;
-
+            string ApplyYarnOutStockProcessCode = Config.GetSampleConfig().ApplyYarnOutStockProcessCode;
             //初始化回调组件
             var ddCallBack = DdCallBackSysOper.GetOper();
             ddCallBack.EventTypes.Add("bpms_task_change");
@@ -56,7 +57,7 @@ namespace SampleApi.App_Start
                 ProcessCode = ProofProcessCode
             }.DoCallBack;
 
-            
+
             //钉钉样衣交样回调
             ddCallBack.HaveDdCallBack += new ProofOrderFinshApprove(DdOperator.GetDdApi())
             {
@@ -64,14 +65,20 @@ namespace SampleApi.App_Start
                 ProcessCode = FinshProofProcessCode,
             }.DoCallBack;
 
-          
+
             //文件下载申请回调
             ddCallBack.HaveDdCallBack += new ProofFileDownloadApprove
             {
                 ProcessCode = ApplyDownloadProcessCode
             }.DoCallBack;
 
-           
+            //样纱出库回调
+            ddCallBack.HaveDdCallBack += new YarnOutStockApprove(DdOperator.GetDdApi())
+            {
+                ProcessCode = ApplyYarnOutStockProcessCode
+
+            }.DoCallBack;
+
         }
 
         /// <summary>

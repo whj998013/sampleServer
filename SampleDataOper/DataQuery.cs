@@ -20,7 +20,11 @@ namespace SunginData
         public static List<T> GetRecords<T>(int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SunginDataContext().Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                return sdc.Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
+            }
         }
 
         /// <summary>
@@ -29,10 +33,15 @@ namespace SunginData
         /// <typeparam name="T">继承至BaseModel</typeparam>
         /// <param name="whereLambda">查询条件</param>
         /// <returns></returns>
-        public static List<T> GetRecords<T>(Func<T, bool> whereLambda=null) where T : BaseModel
+        public static List<T> GetRecords<T>(Func<T, bool> whereLambda = null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SunginDataContext().Set<T>().Where(whereLambda).Where(p=>p.IsDelete==false).ToList();
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                return sdc.Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).ToList();
+            }
+
+
         }
 
         /// <summary>
@@ -43,10 +52,14 @@ namespace SunginData
         /// <param name="pageSize">单页记录数</param>
         /// <param name="pageIndex">页数</param>
         /// <returns></returns>
-        public static List<T> GetAllRecords<T>( int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : class
+        public static List<T> GetAllRecords<T>(int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SunginDataContext().Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                return sdc.Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            }
+
         }
 
         /// <summary>
@@ -55,18 +68,27 @@ namespace SunginData
         /// <typeparam name="T">继承至BaseModel</typeparam>
         /// <param name="whereLambda">查询条件</param>
         /// <returns></returns>
-        public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda=null) where T : class
+        public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SunginDataContext().Set<T>().Where(whereLambda).ToList();
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                return sdc.Set<T>().Where(whereLambda).ToList();
+            }
+
         }
 
-        public static T GetSingle<T>(Func<T, bool> whereLambda=null)  where T:class
+        public static T GetSingle<T>(Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            return new SunginDataContext().Set<T>().Where(whereLambda).ToList().FirstOrDefault();
+
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                return sdc.Set<T>().Where(whereLambda).ToList().FirstOrDefault();
+            }
+
         }
-            
-       
+
+
     }
 }

@@ -4,6 +4,8 @@ using SunginData;
 using System.Linq;
 using System;
 using EntityFramework;
+using SG.Model.Sys;
+
 namespace SG.DdApi.Interface
 {
     public abstract class DdApprove
@@ -17,12 +19,12 @@ namespace SG.DdApi.Interface
         /// </summary>
         public string ProcessCode { get; set; }
         /// <summary>
-        /// 钉钉完成标志 start/change/finish
+        /// 钉钉完成标志 start/change/finish/terminate
         /// </summary>
-        public string CallBackType { get; set; } = "finish";
+        public List<string> CallBackType { get; set; } = new List<string> { "finish", "terminate" };
 
 
-        protected string Refuse(string DdApprovalCode)
+        protected ApproveRecrod Refuse(string DdApprovalCode)
         {
             using (SunginDataContext sdc = new SunginDataContext())
             {
@@ -32,10 +34,10 @@ namespace SG.DdApi.Interface
                 ar.Finshed = true;
                 ar.Agree = false;
                 sdc.SaveChanges();
-                return ar.ObjId;
+                return ar;
             }
         }
-        protected string Agree(string DdApprovalCode)
+        protected ApproveRecrod Agree(string DdApprovalCode)
         {
             using (SunginDataContext sdc = new SunginDataContext())
             {
@@ -45,13 +47,50 @@ namespace SG.DdApi.Interface
                 ar.Finshed = true;
                 ar.Agree = true;
                 sdc.SaveChanges();
-                return ar.ObjId;
+                return ar;
+            }
+        }
+        protected ApproveRecrod GetApproveRecrod(string DdApprovalCode)
+        {
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
+                return ar;
+            }
+
+        }
+        protected abstract void AgreeApprove(string DdApprovalCode);
+
+        protected abstract void RefuseApprove(string DdApprovalCode);
+
+        /// <summary>
+        /// 发送请求2
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public string SendApprove2(Model.Sys.User user, ApproveItems items)
+        {
+            NewApprove approve = new NewApprove(DdOperator.GetDdApi())
+            {
+                User = user,
+            };
+            approve.ProcessCode = ProcessCode;
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                string DdApprovalCode = approve.SendApprove(items);
+                sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
+                {
+                    ApproveCode = DdApprovalCode,
+                    ApproveName = items.ApproveName,
+                    ApproveDate = DateTime.Now,
+                    ObjId = items.ObjId,
+                });
+                sdc.SaveChanges();
+                return DdApprovalCode;
             }
         }
 
-        protected abstract void AgreeApprove(string DdApprovalCode);
-        
-        protected abstract void RefuseApprove(string DdApprovalCode);
         /// <summary>
         /// 发送请求
         /// </summary>
@@ -77,17 +116,30 @@ namespace SG.DdApi.Interface
 
         public void DoCallBack(dynamic obj)
         {
-            if (obj.processCode == ProcessCode && obj.type == CallBackType)
+            string type = (string)obj.type;
+            if (obj.processCode == ProcessCode)
             {
                 string pid = obj.processInstanceId;
-                if (obj.result == "agree")
+                if (CallBackType.Contains(type))
                 {
-                    AgreeApprove(pid); //同意
+
+                    if (obj.result == "agree")
+                    {
+                        Agree(pid);
+                        AgreeApprove(pid); //同意
+                    }
+                    else
+                    {
+                        Refuse(pid);
+                        RefuseApprove(pid);//拒绝
+                    }
                 }
-                else
+                else if (type == "start")
                 {
-                    RefuseApprove(pid);//拒绝
+                    //开始
+
                 }
+
             }
 
         }

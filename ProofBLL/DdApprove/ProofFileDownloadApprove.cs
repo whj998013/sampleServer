@@ -48,7 +48,7 @@ namespace ProofBLL
         /// <param name="DdApprovalCode"></param>
         protected override void AgreeApprove(string DdApprovalCode)
         {
-            string oid = Agree(DdApprovalCode);
+            string oid = GetApproveRecrod(DdApprovalCode).ObjId;
             using (SunginDataContext sdc = new SunginDataContext())
             {
                 var po = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == oid);
@@ -64,7 +64,7 @@ namespace ProofBLL
         /// <param name="DdApprovalCode"></param>
         protected override void RefuseApprove(string DdApprovalCode)
         {
-            Refuse(DdApprovalCode);
+           
         }
     }
 }

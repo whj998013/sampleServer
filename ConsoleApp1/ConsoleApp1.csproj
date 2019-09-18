@@ -122,6 +122,10 @@
       <Project>{b923e651-64a0-4bee-81ba-317e5b712749}</Project>
       <Name>SysBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\YarnStockBLL\YarnStockBLL.csproj">
+      <Project>{d32a31d9-df5a-4b75-a437-f9af94be2778}</Project>
+      <Name>YarnStockBLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

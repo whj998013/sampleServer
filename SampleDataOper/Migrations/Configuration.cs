@@ -90,9 +90,9 @@ namespace SunginData.Migrations
 
             DataDefaultList.GetJobs().ForEach(p =>
             {
-                if (context.jobs.SingleOrDefault(job => job.JobName == p.JobName) == null)
+                if (context.Jobs.SingleOrDefault(job => job.JobName == p.JobName) == null)
                 {
-                    context.jobs.Add(p);
+                    context.Jobs.Add(p);
                 }
             });
             context.SaveChanges();

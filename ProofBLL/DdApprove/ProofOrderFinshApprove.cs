@@ -65,7 +65,7 @@ namespace ProofBLL
 
         protected override void AgreeApprove(string pid)
         {
-            base.Agree(pid);
+           
             ApproveOper ao = new ApproveOper(_oper);
             var re = ao.GetApprove(pid);
             var po = sdc.ProofOrders.SingleOrDefault(p => p.DdFinshApprovalCode == pid);
@@ -122,7 +122,7 @@ namespace ProofBLL
         }
         protected override void RefuseApprove(string pid)
         {
-            base.Refuse(pid);
+          
             var po = sdc.ProofOrders.SingleOrDefault(p => p.DdFinshApprovalCode == pid);
             po.ProofStatus = ProofStatus.打样中;
             sdc.SaveChanges();

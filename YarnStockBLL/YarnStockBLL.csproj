@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DdApprove\YarnOutStockApprove.cs" />
     <Compile Include="MyYarn.cs" />
+    <Compile Include="NewYarnOutStock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YarnOper.cs" />
     <Compile Include="YarnStockOper.cs" />
@@ -58,9 +60,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DdApi\SG.DdApi.csproj">
+      <Project>{2df7e39e-d790-49ab-a130-7cecf22b1541}</Project>
+      <Name>SG.DdApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DdServerApi\TopSdk.csproj">
+      <Project>{9C11CAE5-5188-4E71-825B-68FC3135728A}</Project>
+      <Name>TopSdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\SG.Model.csproj">
       <Project>{3475771b-01a1-4f5c-ae9d-866d9da8d6e5}</Project>
       <Name>SG.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleDataOper\SunginDataOper.csproj">
+      <Project>{b28a44c0-49ba-4687-8a38-addaa7de1943}</Project>
+      <Name>SunginDataOper</Name>
     </ProjectReference>
     <ProjectReference Include="..\StorageData\StorageData.csproj">
       <Project>{422ff65f-e6a5-4d59-9463-c2f340b1ddf6}</Project>

@@ -25,6 +25,7 @@ namespace SampleApi
         private readonly string _ProofProcessCode;
         private readonly string _CallBackUrl;
         private readonly string _ApplyDownloadProcessCode;
+        private readonly string _ApplyYarnOutStockProcessCode;
         private static Config _instance = null; //单列对象
         public static Config GetSampleConfig()
         {
@@ -45,6 +46,14 @@ namespace SampleApi
             _FinshProofProcessCode = ConfigHelper.GetValue("FinshProofProcessCode");
             _CallBackUrl = ConfigHelper.GetValue("CallBackUrl");
             _ApplyDownloadProcessCode = ConfigHelper.GetValue("ApplyDownloadProcessCode");
+            _ApplyYarnOutStockProcessCode = ConfigHelper.GetValue("ApplyYarnOutStockProcessCode");
+        }
+        public string ApplyYarnOutStockProcessCode
+        {
+            get
+            {
+                return _ApplyYarnOutStockProcessCode;
+            }
         }
 
         public string ProofProcessCode

@@ -123,13 +123,13 @@ namespace SunginData
         /// <summary>
         /// 岗位表
         /// </summary>
-        public DbSet<Job> jobs { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
         /// <summary>
         /// 钉钉申请表
         /// </summary>
         public DbSet<ApproveRecrod> ApproveRecrods { get; set; }
-        /// <summary>
+        /// <summary> 
         /// 工厂角色员工表
         /// </summary>
         public DbSet<FactryRoleWorker> FactryRolesWorker { get; set; }

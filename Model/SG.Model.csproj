@@ -89,7 +89,7 @@
     <Compile Include="Sys\User.cs" />
     <Compile Include="Sys\UserRole.cs" />
     <Compile Include="Sys\UserRolePermission.cs" />
-    <Compile Include="State\YarnOutApply.cs" />
+    <Compile Include="Yarn\YarnOutApply.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IBLL\SG.Interface.csproj">
@@ -98,8 +98,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="State\" />
     <Folder Include="Stock\Yarn\" />
-    <Folder Include="Yarn\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Proof\ClassDiagram1.cd" />

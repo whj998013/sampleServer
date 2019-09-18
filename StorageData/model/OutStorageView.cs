@@ -114,5 +114,7 @@ namespace StorageData
         public double InPrice { get; set; }
 
         public string RGB { get; set; }
+
+        public int Status { get; set; }
     }
 }

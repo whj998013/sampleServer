@@ -27,7 +27,7 @@ namespace SysBLL
             workerRole.ForEach(t => t.IsDelete = true);
             ur.ForEach(p =>
             {
-                var job = sdc.jobs.SingleOrDefault(j => j.JobName == roleName);
+                var job = sdc.Jobs.SingleOrDefault(j => j.JobName == roleName);
                 var user = sdc.Users.SingleOrDefault(u => u.DdId == p.DdId);
                 var wr = workerRole.SingleOrDefault(w => w.WorkName == p.UserName);
                 var worker = workers.SingleOrDefault(w => w.UserName == p.UserName);
@@ -45,7 +45,6 @@ namespace SysBLL
 
                 if (wr == null)
                 {
-                  
 
                     FactryRoleWorker wk = new FactryRoleWorker
                     {
@@ -67,7 +66,6 @@ namespace SysBLL
             sdc.SaveChanges();
 
         }
-
 
     }
 }

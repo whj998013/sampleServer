@@ -91,7 +91,7 @@ namespace ProofBLL
         /// <param name="DdApprovalCode"></param>
         protected override void AgreeApprove(string DdApprovalCode)
         {
-            base.Agree(DdApprovalCode);
+          
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             YdOper yo = new YdOper();
             string dio = yo.AddYd(order);
@@ -107,7 +107,7 @@ namespace ProofBLL
         }
         protected override void RefuseApprove(string DdApprovalCode)
         {
-            base.Refuse(DdApprovalCode);
+          
             var order = GetProofByDdApprovalCode(DdApprovalCode);
             order.ProofStatus = ProofStatus.退回;
             sdc.SaveChanges();

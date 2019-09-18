@@ -63,7 +63,7 @@ namespace SampleApi.Controllers.Yarn
         public IHttpActionResult GetMyYarnOutStock(SeachObjDept obj)
         {
             if (obj == null) return BadRequest();
-            var exp = PredicateBuilder.True<OutStorageView>().And(t => t.Num > 0);
+            var exp = PredicateBuilder.True<OutStorageView>().And(t => t.Num > 0&&t.Status==2);
             var user = SessionManage.CurrentUser;
             if (obj.DeptIdList.Count > 0)
             {
@@ -90,5 +90,6 @@ namespace SampleApi.Controllers.Yarn
             return Ok(sr);
 
         }
+        
     }
 }

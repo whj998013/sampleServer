@@ -5,20 +5,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SG.Model.Yarn;
+using SunginData;
 namespace YarnStockBLL
 {
     public class MyYarn
     {
-        User _user { get; set; } 
+        User _user { get; set; }
         YarnStockContext ysc { get; set; } = new YarnStockContext();
         public MyYarn(User u)
         {
             _user = u;
         }
-      
 
-        public  List<InOrderView> GetMyInStockYarnList(out int Count, Func<InOrderView, bool> whereLambda, Func<InOrderView, object> orderbyLamba, int PageId, int PageSize)
+        private void YarnOutApplyStatsUpdate(List<YarnOutApply> list)
+        {
+            using (YarnStockContext ysc = new YarnStockContext())
+            {
+                list.Where(t=>t.Stats==SG.Model.ApplyState.通过).ToList().ForEach(p =>
+                {
+                        var os = ysc.OutStorage.FirstOrDefault(o => o.OrderNum == p.OrderNum && o.IsDelete == 0);
+                        if (os != null)
+                        {
+                            if (os.Status == 2) p.Stats = SG.Model.ApplyState.已出库;
+                            else if (os.Status == 1) { }
+                            else p.Stats = SG.Model.ApplyState.仓库审核不通过;
+                        }
+                        else
+                        {
+                            ///已删除出库单
+                            p.Stats = SG.Model.ApplyState.仓库审核不通过;
+                        }
+                });
+
+            }
+
+        }
+        public List<YarnOutApply> GetMyOutApplyList(out int Count, Func<YarnOutApply, bool> whereLambda, Func<YarnOutApply, object> orderbyLamba, int PageId, int PageSize)
+        {
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                Count = sdc.YarnOutApplies.Where(p => p.ApplyEmpDdid == _user.DdId).Where(whereLambda).Count();
+                List<YarnOutApply> list = sdc.YarnOutApplies.Where(whereLambda).OrderBy(orderbyLamba).ThenBy(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+                YarnOutApplyStatsUpdate(list);
+                sdc.SaveChanges();
+                return list;
+            }
+        }
+        public List<YarnOutApply> GetMyOutApplyListDesc(out int Count, Func<YarnOutApply, bool> whereLambda, Func<YarnOutApply, object> orderbyLamba, int PageId, int PageSize)
+        {
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                Count = sdc.YarnOutApplies.Where(p => p.ApplyEmpDdid == _user.DdId).Where(whereLambda).Count();
+                List<YarnOutApply> list = sdc.YarnOutApplies.Where(whereLambda).OrderByDescending(orderbyLamba).OrderByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+                YarnOutApplyStatsUpdate(list);
+                sdc.SaveChanges();
+                return list;
+            }
+        }
+
+        public List<InOrderView> GetMyInStockYarnList(out int Count, Func<InOrderView, bool> whereLambda, Func<InOrderView, object> orderbyLamba, int PageId, int PageSize)
         {
             YarnStockContext ysc = new YarnStockContext();
             Count = ysc.InOrderView.Where(p => p.UserID == _user.DdId).Where(whereLambda).Count();
@@ -27,7 +73,7 @@ namespace YarnStockBLL
         }
 
 
-        public  List<InOrderView> GetMyInStockYarnListDesc(out int Count, Func<InOrderView, bool> whereLambda, Func<InOrderView, object> orderbyLamba, int PageId, int PageSize)
+        public List<InOrderView> GetMyInStockYarnListDesc(out int Count, Func<InOrderView, bool> whereLambda, Func<InOrderView, object> orderbyLamba, int PageId, int PageSize)
         {
             YarnStockContext ysc = new YarnStockContext();
             Count = ysc.InOrderView.Where(whereLambda).Count();

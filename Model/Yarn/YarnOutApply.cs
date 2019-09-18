@@ -9,7 +9,7 @@ namespace SG.Model.Yarn
     /// <summary>
     /// 毛纱出库申请
     /// </summary>
-    public class YarnOutApply
+    public class YarnOutApply : BaseModel
     {
         public int Id { get; set; }
         public string NO { get; set; }
@@ -33,9 +33,14 @@ namespace SG.Model.Yarn
         /// </summary>
         public string BatchNum { get; set; }
         /// <summary>
-        /// 查询码
+        /// 产品码
         /// </summary>
         public string ProductNum { get; set; }
+
+        /// <summary>
+        /// 查询码
+        /// </summary>
+        public string BarCode { get; set; }
         /// <summary>
         /// 支数
         /// </summary>
@@ -91,6 +96,39 @@ namespace SG.Model.Yarn
         /// </summary>
         public string OrderNum { get; set; }
 
+        /// <summary>
+        /// 是否需发快递 
+        /// </summary>
+        public bool NeedSending { get; set; }
+        /// <summary>
+        /// 收货方信息
+        /// </summary>
+        public string ReceivingInfo { get; set; }
+        /// <summary>
+        /// 进货价
+        /// </summary>
+        public double InPrice { get; set; }
+        /// <summary>
+        /// 出库价
+        /// </summary>
+        public double OutPrice { get; set; }
+
+        /// <summary>
+        /// 金额
+        /// </summary>
+        public double Amount { get; set; }
+        /// <summary>
+        /// 搜索关键词
+        /// </summary>
+        public string  SeachKey { get; set; }
+
+        public DateTime? ApplyDate
+        {
+            get
+            {
+                return CreateDate;
+            }
+        }
     }
 
 
