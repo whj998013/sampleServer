@@ -23,8 +23,9 @@ namespace SampleApi.Controllers.Proof
         {
             User u = SessionManage.CurrentUser;
             ProofOrderOper poo = new ProofOrderOper(u);
-            var list = poo.GetUserProofOrderList();
+            var list = poo.GetUserProofOrderList().ToArray();
             return Ok(list);
+
         }
 
         [HttpGet]
@@ -98,7 +99,7 @@ namespace SampleApi.Controllers.Proof
         [HttpGet]
         public IHttpActionResult ApplyDownload(string id)
         {
-           var c= DataQuery.GetSingle<ApproveRecrod>(p => p.ObjId == id && !p.Finshed);
+            var c = DataQuery.GetSingle<ApproveRecrod>(p => p.ObjId == id && !p.Finshed);
             if (c != null) return BadRequest("正在申请中，请勿重复申请。");
 
             User u = SessionManage.CurrentUser;

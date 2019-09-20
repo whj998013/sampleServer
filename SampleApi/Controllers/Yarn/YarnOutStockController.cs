@@ -141,7 +141,8 @@ namespace SampleApi.Controllers.Yarn
                 yoa.SeachKey = yoa.NO +"_" +yoa.ApplyEmpName + "_" + yoa.ProductName + "_" + yoa.BatchNum + "_" + yoa.Color + "_"+yoa.Size;
                 yoa.SetCreateUser(current.UserName);
                 //发送申请
-                var approve = YarnOutStockApprove.ToApprove(yoa);
+                string publicOwerId =Config.GetSampleConfig().PublicOwerId;
+                var approve = YarnOutStockApprove.ToApprove(yoa, publicOwerId);
                 NewApprove na = new NewApprove(DdOperator.GetDdApi())
                 {
                     User = current,
@@ -152,6 +153,10 @@ namespace SampleApi.Controllers.Yarn
                 {
                     sdc.YarnOutApplies.Add(yoa);
                     sdc.SaveChanges();
+                }
+                else
+                {
+                    return BadRequest("重复申请或出现错误");
                 }
 
                 return Ok();

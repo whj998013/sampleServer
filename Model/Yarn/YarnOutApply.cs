@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
+using SG.Model.Proof;
 namespace SG.Model.Yarn
 {
     /// <summary>
@@ -11,6 +13,7 @@ namespace SG.Model.Yarn
     /// </summary>
     public class YarnOutApply : BaseModel
     {
+        
         public int Id { get; set; }
         public string NO { get; set; }
         public string ApplyEmpName { get; set; }
@@ -121,7 +124,11 @@ namespace SG.Model.Yarn
         /// 搜索关键词
         /// </summary>
         public string  SeachKey { get; set; }
-
+        /// <summary>
+        /// 打样订单
+        /// </summary>
+        [JsonIgnore]
+        public virtual List<ProofOrder> Orders { get; set; }
         public DateTime? ApplyDate
         {
             get

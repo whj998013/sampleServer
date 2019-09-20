@@ -101,6 +101,8 @@ namespace SG.DdApi.Interface
 
             using (SunginDataContext sdc = new SunginDataContext())
             {
+                var re = sdc.ApproveRecrods.Count(p => p.ObjId == items.ObjId && p.Finshed == false);
+                if (re > 0) return "";
                 string DdApprovalCode = na.SendApprove(items);
                 sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
                 {

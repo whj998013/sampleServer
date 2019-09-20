@@ -38,13 +38,20 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Maintestef();
+
+        }
+
+        static void Maintestef()
+        {
 
             try
             {
-                NewYarnOutStock nyos = new NewYarnOutStock();
                 SunginDataContext sdc = new SunginDataContext();
-                var yoa = sdc.YarnOutApplies.First(p => p.Id == 8);
-                nyos.AddYarnOutStock(yoa);
+                var po = sdc.ProofOrders.FirstOrDefault(p => p.Id == 8);
+                new YdOper().AddYd(po);
+                Console.ReadKey();
+
             }
             catch (DbEntityValidationException dbEx)
             {

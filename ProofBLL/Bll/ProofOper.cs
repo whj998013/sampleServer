@@ -10,13 +10,14 @@ using System.Data.Entity;
 
 namespace ProofBLL
 {
-    public class ProofOrderOper
+    public class ProofOrderOper:IDisposable
     {
         private User _user;
         public SunginDataContext Sdc { get; set; } = new SunginDataContext();
         public ProofOrderOper(User user)
         {
             _user = user;
+            
         }
 
         /// <summary>
@@ -33,7 +34,6 @@ namespace ProofBLL
                 p.FinshDate = DateTime.Now;
                 p.Stats = SG.Model.Stats.终止;
                 p.OperRemark = "订单完成，主动终止任务";
-
             });
             po.ProofStatus = ProofStatus.交样;
             return po;
@@ -133,6 +133,43 @@ namespace ProofBLL
         {
             Sdc.SaveChanges();
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // 要检测冗余调用
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: 释放托管状态(托管对象)。
+                }
+
+                // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
+                // TODO: 将大型字段设置为 null。
+                Sdc.Dispose();
+                disposedValue = true;
+            }
+        }
+
+        // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
+        // ~ProofOrderOper()
+        // {
+        //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+        //   Dispose(false);
+        // }
+
+        // 添加此代码以正确实现可处置模式。
+        public void Dispose()
+        {
+            // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+            Dispose(true);
+            // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+
 
     }
 }

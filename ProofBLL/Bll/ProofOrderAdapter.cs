@@ -7,6 +7,7 @@ using SG.Model.Proof;
 using SG.Model.Sys;
 using SunginData;
 using SG.Interface.Sys;
+using SG.Model.Yarn;
 using System.Data.Entity;
 namespace ProofBLL
 {
@@ -51,7 +52,9 @@ namespace ProofBLL
                     _proofSryle.ProofFiles.Add(npf);
 
                 });
-
+                AttachYarnApplys(obj.YarnApplys);
+                _proofOrder.YarnSelfProvide = obj.YarnSelfProvide;
+                _proofOrder.YarnApplys = obj.YarnApplys;
                 _proofOrder.ProofStyle = _proofSryle;
                 _proofOrder.ProofOrderId = obj.ProofOrderId;
                 _proofOrder.ProofApplyUserDdId = _user.DdId;
@@ -69,9 +72,29 @@ namespace ProofBLL
                 _proofSryle.SetCreateUser(_user.UserName);
                 _proofOrder.SetCreateUser(_user.UserName);
             }
+            SetYarnInfo(_proofOrder, _proofSryle);
             sdc.ProofStyles.Add(_proofSryle);
             sdc.ProofOrders.Add(_proofOrder);
             return true;
+        }
+
+        private void SetYarnInfo(ProofOrder o, ProofStyle s)
+        {
+            if (!o.YarnSelfProvide)
+            {
+                string c = "";
+                string m = "";
+                int i = 1;
+                o.YarnApplys.ForEach(p =>
+                {
+                    c += "(" + i + ")" + p.Count + " ";
+                    m += "(" + i + ")" + p.Size + " ";
+                    i++;
+                });
+                s.Counts = c;
+                s.Material = m;
+            }
+
         }
 
         public bool UpdateProofOrder(ProofObj obj)
@@ -120,6 +143,10 @@ namespace ProofBLL
 
 
                     });
+                    AttachYarnApplys(obj.YarnApplys);
+                    _proofOrder.YarnApplys.Clear();
+                    _proofOrder.YarnApplys = obj.YarnApplys;
+                    _proofOrder.YarnSelfProvide = obj.YarnSelfProvide;
                     _proofOrder.ProofOrderId = obj.ProofOrderId;
                     _proofOrder.ProofApplyUserDdId = _user.DdId;
                     _proofOrder.ProofApplyUserName = _user.UserName;
@@ -135,6 +162,7 @@ namespace ProofBLL
                     _proofOrder.ProofNum = obj.ProofNum;
                     _proofSryle.SetEditUser(_user.UserName);
                     _proofOrder.SetEditUser(_user.UserName);
+                    SetYarnInfo(_proofOrder, _proofSryle);
                 }
 
                 return true;
@@ -142,7 +170,14 @@ namespace ProofBLL
             }
             return false;
         }
+        private void AttachYarnApplys(List<YarnOutApply> yarns)
+        {
+            yarns.ForEach(p =>
+            {
 
+                sdc.YarnOutApplies.Attach(p);
+            });
+        }
         private bool CheckObj(ProofObj obj)
         {
             bool re = true;

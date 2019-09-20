@@ -21,6 +21,7 @@ namespace SampleApi
         private long _SampleAdminRoleId;
         private long _SampleDevelopmentRoleId;
         private readonly string _SampleFilePath;
+        private readonly string _PublicOwerId;
         private readonly string _FinshProofProcessCode;
         private readonly string _ProofProcessCode;
         private readonly string _CallBackUrl;
@@ -47,6 +48,15 @@ namespace SampleApi
             _CallBackUrl = ConfigHelper.GetValue("CallBackUrl");
             _ApplyDownloadProcessCode = ConfigHelper.GetValue("ApplyDownloadProcessCode");
             _ApplyYarnOutStockProcessCode = ConfigHelper.GetValue("ApplyYarnOutStockProcessCode");
+            _PublicOwerId = ConfigHelper.GetValue("PublicOwerId");
+        }
+
+        public string PublicOwerId
+        {
+            get
+            {
+                return _PublicOwerId;
+            }
         }
         public string ApplyYarnOutStockProcessCode
         {

@@ -14,6 +14,7 @@ namespace YarnStockBLL
     {
         private IDdOper _oper { get; set; }
 
+
         public YarnOutStockApprove(IDdOper ddOper)
         {
             _oper = ddOper;
@@ -72,10 +73,10 @@ namespace YarnStockBLL
 
         }
 
-        public static ApproveItems ToApprove(SG.Model.Yarn.YarnOutApply yoa)
+        public static ApproveItems ToApprove(SG.Model.Yarn.YarnOutApply yoa,string publicOwerId)
         {
             string ddid = "";
-            if (yoa.YarnOwerEmpName == "李圣锦") ddid = yoa.ApplyEmpDdid;
+            if (yoa.YarnOwerEmpName == "李圣锦") ddid = publicOwerId;
             else ddid = yoa.YarnOwerEmpDdid;
 
             List<string> idlist = new List<string>();

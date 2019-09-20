@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using SG.Model.Yarn;
 namespace SG.Model.Proof
 {
 
@@ -91,6 +91,10 @@ namespace SG.Model.Proof
         [DataMember(Name = "FileList")]
         public List<FileItemModel> FileListItems { get; set; }
 
+        [DataMember(Name = "YarnApplys")]
+        public List<YarnOutApply> YarnApplys { get; set; }
+        [DataMember(Name = "YarnSelfProvide")]
+        public bool YarnSelfProvide { get; set; }
         ///<summary>
         /// 
         /// </summary>

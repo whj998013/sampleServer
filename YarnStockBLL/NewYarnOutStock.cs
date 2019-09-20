@@ -40,7 +40,7 @@ namespace YarnStockBLL
                 OperateType = 1,
                 UserID = yoa.ApplyEmpDdid,
                 UserName = yoa.ApplyEmpName,
-                DeptName = yoa.ApplyEmpName,
+                DeptName = yoa.ApplyDeptName,
                 Amount=yoa.Amount,
                 Remark = yoa.NeedSending ? yoa.ReceivingInfo : "",
                 EquipmentNum="a",

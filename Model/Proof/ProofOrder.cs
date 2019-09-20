@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SG.Model.Sys;
+using SG.Model.Yarn;
 
 namespace SG.Model.Proof
 {
@@ -76,6 +77,15 @@ namespace SG.Model.Proof
         /// 打样状态 草拟 审批 退回  排单 打样中 完成
         /// </summary>
         public ProofStatus ProofStatus { get; set; }
+        /// <summary>
+        /// 毛纱自供
+        /// </summary>
+        public bool YarnSelfProvide { get; set; }
+
+        /// <summary>
+        /// 关联的毛纱出库单
+        /// </summary>
+        public virtual List<YarnOutApply> YarnApplys { get; set; }
 
         /// <summary>
         /// 状态文本

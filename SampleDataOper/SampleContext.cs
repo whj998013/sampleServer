@@ -139,7 +139,7 @@ namespace SunginData
         public DbSet<YarnOutApply> YarnOutApplies { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-          
+           
             base.OnModelCreating(modelBuilder);
         }
 
