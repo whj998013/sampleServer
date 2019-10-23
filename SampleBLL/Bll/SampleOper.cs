@@ -41,6 +41,22 @@ namespace SunginData
             }
         }
 
+        public static object GetSampleInfo(string styleId)
+        {
+            using (SunginDataContext sc = new SunginDataContext())
+            {
+                ISampleBaseInfo s = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
+                if (s != null)
+                {
+
+                    return SampleHelper.GetReturnObj(s);
+
+                }
+                else return null;
+
+            }
+        }
+
         public static ISampleBaseInfo DeleteSample(string styleId, string user)
         {
             using (SunginDataContext sc = new SunginDataContext())

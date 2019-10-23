@@ -38,8 +38,20 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Maintestef();
+            using (SunginDataContext sdc = new SunginDataContext())
+            {
+                var re = sdc.LendRecords.GroupBy(p => p.StyleId).Select(p=>new { p.Key,w=p.Count()}).ToList();
+                var r = from p in sdc.LendRecords
+                        group p by p.StyleId into num
+                        select new
+                        {   key=num.Key,
+                            nn = num.Count(),
+                        };
+                var tt = r.ToList();
 
+                Console.WriteLine("aaa");
+
+            }
         }
 
         static void Maintestef()
@@ -60,9 +72,9 @@ namespace ConsoleApp1
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
 
-                       Console.WriteLine(string.Format("Class: {0}, Property: {1}, Error: {2}", validationErrors.Entry.Entity.GetType().FullName,
-                            validationError.PropertyName,
-                            validationError.ErrorMessage), "error");
+                        Console.WriteLine(string.Format("Class: {0}, Property: {1}, Error: {2}", validationErrors.Entry.Entity.GetType().FullName,
+                             validationError.PropertyName,
+                             validationError.ErrorMessage), "error");
                     }
                 }
 

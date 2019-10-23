@@ -91,7 +91,7 @@ namespace SampleApi.Controllers.Sample
         /// <param name="obj"></param>
         /// <returns></returns>
         [HttpPost]
-        public object GetInStorageList(SeachModel obj)
+        public object GetInStorageList(SeachObjSample obj)
         {
             object re ;
             if (obj.UserId.Count > 0)
@@ -104,11 +104,11 @@ namespace SampleApi.Controllers.Sample
                 });
                 exp2 = exp2.And(p => !p.IsDelete && p.State == SampleState.待入库).And(exp);
              
-                 re=SampleOper.GetSampleListOrderByDesc(exp2.Compile(), p => p.CreateDate, obj.Current, obj.PageSize);
+                 re=SampleOper.GetSampleListOrderByDesc(exp2.Compile(), p => p.CreateDate, obj.PageId, obj.PageSize);
             }
             else
             {
-                re=SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.State == SampleState.待入库, p => p.CreateDate, obj.Current, obj.PageSize);
+                re=SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.State == SampleState.待入库, p => p.CreateDate, obj.PageId, obj.PageSize);
             }
 
             return Ok(re);

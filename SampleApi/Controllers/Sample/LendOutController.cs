@@ -10,6 +10,9 @@ using SampleApi.Controllers.Sample;
 using SampleBLL;
 using SampleBLL.Model;
 using SG.Model.Sys;
+using SG.Utilities;
+using SG.Model.Sample;
+using SG.Interface.Sample;
 
 namespace SampleApi.Controllers
 {
@@ -122,23 +125,26 @@ namespace SampleApi.Controllers
             else return BadRequest("请传入样衣有效ID");
         }
         /// <summary>
-        /// 返回有借用样衣的用户清单
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public object GetLendoutUserList()
-        {
-            var re = SampleLend.GetLendOutUserList();
-            return Ok(re);
-        }
-        /// <summary>
         /// 返回借用申请的用户清单
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public object GetLendUserList()
+        public IHttpActionResult GetLendUserList(int id)
         {
-            var re = SampleLend.GetLendUserList();
+            
+            var re = SampleLend.GetLendUserList((SG.Interface.Sample.LendRecordStats)id);
+            return Ok(re);
+        }
+
+        /// <summary>
+        /// 返回有样衣入库用户清单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult GetInUserList()
+        {
+
+            var re = SampleLend.GetInUserList();
             return Ok(re);
         }
         /// <summary>
@@ -147,15 +153,47 @@ namespace SampleApi.Controllers
         /// <param name="seachObj"></param>
         /// <returns></returns>
         [HttpPost]
-        public object GetAllLendList(SeachModel seachObj)
+        public IHttpActionResult GetAllLendList(SeachObj seachObj)
         {
-            var re = SampleLend.GetAllLendList(seachObj.Current, seachObj.PageSize);
+            var re = SampleLend.GetAllLendList(seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
+        /// <summary>
+        /// 返回已还回的借用清单
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
-        public object GetAllLendOutList(SeachModel seachObj)
+        public IHttpActionResult GetAllLendOutReturnList(SeachObjSample obj)
         {
-            var re = SampleLend.GetAllLendOutList(seachObj.Current, seachObj.PageSize);
+            if (obj == null) return BadRequest();
+            var exp = PredicateBuilder.True<LendOutView>().And(t => !t.IsDelete && t.State == LendRecordStats.已还回);
+            if (obj.UserId.Count > 0)
+            {
+                exp = exp.And(t => obj.UserId.Contains(t.DdId));
+            }
+            if (obj.InUserId.Count > 0)
+            {
+                exp = exp.And(t => obj.InUserId.Contains(t.InDdId));
+            }
+            if (obj.BeginDate != null && obj.EndDate != null)
+            {
+                var bd = (DateTime)obj.BeginDate;
+                var ed = (DateTime)obj.EndDate;
+                exp = exp.And(t => t.LendOutDate >= bd && t.LendOutDate < ed);
+            }
+            var list = SampleLend.GetLendOutViewList(out int count, exp.Compile(), p => p.ReturnDate, obj.PageId, obj.PageSize);
+            return Ok(new {count,list});
+        }
+
+        /// <summary>
+        /// 返回已借出的样衣清单
+        /// </summary>
+        /// <param name="seachObj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IHttpActionResult GetAllLendOutList(SeachObj seachObj)
+        {
+            var re = SampleLend.GetAllLendOutList(seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
         /// <summary>
@@ -165,7 +203,7 @@ namespace SampleApi.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public object DoInstroage(List<int> LendIdList)
+        public IHttpActionResult DoInstroage(List<int> LendIdList)
         {
             User user = SessionManage.CurrentUser;
             LendIdList.ForEach(p =>
@@ -180,7 +218,7 @@ namespace SampleApi.Controllers
         /// <param name="styleIdList"></param>
         /// <returns></returns>
         [HttpPost]
-        public object DoBackLend(List<int> lendId)
+        public IHttpActionResult DoBackLend(List<int> lendId)
         {
             User user = SessionManage.CurrentUser;
             lendId.ForEach(p =>
@@ -196,7 +234,7 @@ namespace SampleApi.Controllers
         /// <param name="styleIdList"></param>
         /// <returns></returns>
         [HttpPost]
-        public object DoReturnLend(List<int> LendIdList)
+        public IHttpActionResult DoReturnLend(List<int> LendIdList)
         {
             User user = SessionManage.CurrentUser;
             LendIdList.ForEach(p =>

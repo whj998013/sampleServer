@@ -59,7 +59,6 @@
     <Compile Include="Bll\SampleOper.cs" />
     <Compile Include="Bll\UserOper.cs" />
     <Compile Include="Model\SampleFullInfoModel.cs" />
-    <Compile Include="Model\SeachModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

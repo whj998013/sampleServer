@@ -61,6 +61,7 @@ namespace SampleBLL
                 var FirstPic = Files.FirstOrDefault(p => p.FileType == FileType.Pic);
                 var StockData = sc.GarmentStocks.Where(p => !p.IsDelete && p.StyleId == baseinfo.StyleId).Select(p => new { size = p.Size, color = p.Color, num = p.Num }).ToList();
                 string Pic = FirstPic != null ? FirstPic.FileName : "";
+                var LendNum = sc.LendRecords.Count(p => p.StyleId == pr.StyleId&&p.State== LendRecordStats.已还回 && !p.IsDelete);
 
                 return new
                 {
@@ -81,6 +82,7 @@ namespace SampleBLL
                     baseinfo.SalePrice,
                     baseinfo.DiscountPrice,
                     baseinfo.Counts,
+                    LendNum,
                     StateText = baseinfo.State.ToString(),
                     StyleTag = JsonHelper.ToObj(baseinfo.StyleTag),
                     Material = JsonHelper.ToObj(baseinfo.Material),

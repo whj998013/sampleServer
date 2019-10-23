@@ -137,6 +137,8 @@ namespace SunginData
         /// 毛纱出库申请
         /// </summary>
         public DbSet<YarnOutApply> YarnOutApplies { get; set; }
+
+         public DbSet<LendOutView> LendOutViews { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
            

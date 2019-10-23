@@ -14,39 +14,27 @@ namespace SampleApi.Controllers.Sample
     public class MySampleController : ApiController
     {
         [HttpPost]
-        public object GetLendOutSample(dynamic seachObj)
+        public object GetLendOutSample(SeachObjSample seachObj)
         {
             var  user = SessionManage.CurrentUser;
-            string cstr = (string)seachObj.current; ;
-            string cpage = seachObj.pageSize;
-            int current = cstr == "" ? 1 : int.Parse(cstr);
-            int pageSize = cpage == "" ? 20 : int.Parse(cpage);
             var re = SampleLend.GetLendOutListPC(user);
             return Ok(re);
 
         }
 
         [HttpPost]
-        public object GetNotInStorageSample(dynamic seachObj)
+        public object GetNotInStorageSample(SeachObjSample seachObj)
         {
             string ddid = SessionManage.CurrentUser.DdId;
-            string cstr = (string)seachObj.current; ;
-            string cpage = seachObj.pageSize;
-            int current = cstr == "" ? 1 : int.Parse(cstr);
-            int pageSize = cpage == "" ? 20 : int.Parse(cpage);
-            var re = SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.DdId == ddid && (int)p.State <=2,t=>t.CreateDate, current, pageSize);
+            var re = SampleOper.GetSampleListOrderByDesc(p => !p.IsDelete && p.DdId == ddid && (int)p.State <=2,t=>t.CreateDate, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
 
         [HttpPost]
-        public object GetInStorageSample(dynamic seachObj)
+        public object GetInStorageSample(SeachObjSample seachObj)
         {
             string ddid = SessionManage.CurrentUser.DdId;
-            string cstr = (string)seachObj.current; ;
-            string cpage = seachObj.pageSize;
-            int current = cstr == "" ? 1 : int.Parse(cstr);
-            int pageSize = cpage == "" ? 20 : int.Parse(cpage);
-            var re = SampleOper.GetSampleList(p => !p.IsDelete && p.DdId == ddid && (int)p.State >= 3, t => t.CreateDate, current, pageSize);
+            var re = SampleOper.GetSampleList(p => !p.IsDelete && p.DdId == ddid && (int)p.State >= 3, t => t.CreateDate, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
     }

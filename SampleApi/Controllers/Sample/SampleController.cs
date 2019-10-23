@@ -23,7 +23,7 @@ namespace SampleApi.Controllers.Sample
     public class SampleController : ApiController
     {
         [HttpPost]
-        public object GetSampleList(SeachModel seachObj)
+        public object GetSampleList(SeachObjSample seachObj)
         {
 
             var exp = PredicateBuilder.True<ISampleBaseInfo>();
@@ -32,18 +32,18 @@ namespace SampleApi.Controllers.Sample
             {
                 exp = exp.And(p => p.State == seachObj.State);
             };
-            if (seachObj.DateValue.Count() > 1)
+            if (seachObj.BeginDate!=null&&seachObj.EndDate!=null)
             {
-                var d1 = seachObj.DateValue[0];
-                var d2 = seachObj.DateValue[1].AddDays(1);
+                var d1 = (DateTime)seachObj.BeginDate;
+                var d2 = ((DateTime)seachObj.EndDate).AddDays(1);
                 exp = exp.And(p => p.CreateDate >= d1 & p.CreateDate < d2);
             };
-            if (seachObj.KeyWord != "")
+            if (seachObj.Key != "")
             {
-                exp = exp.And(p => p.SeachStr.Contains(seachObj.KeyWord));
+                exp = exp.And(p => p.SeachStr.Contains(seachObj.Key));
             }
 
-            var re = SampleOper.GetSampleListOrderByDesc(exp.Compile(), t => t.State, seachObj.Current, seachObj.PageSize);
+            var re = SampleOper.GetSampleListOrderByDesc(exp.Compile(), t => t.State, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
         [HttpGet]
@@ -59,6 +59,21 @@ namespace SampleApi.Controllers.Sample
                 else return BadRequest("找到不指定ID的样衣信息");
             }
             return NotFound();
+        }
+        [HttpGet]
+        public IHttpActionResult GetSampleInfo(string Id)
+        {
+            if (Id != "")
+            {
+                var obj = SampleOper.GetSampleInfo(Id);
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+                else return BadRequest("找到不指定ID的样衣信息");
+            }
+            return NotFound();
+
         }
 
         [HttpGet]
@@ -184,9 +199,7 @@ namespace SampleApi.Controllers.Sample
                 }
             }
             return Ok(new { name = filename });
-
-
-
+            
         }
 
         /// <summary>

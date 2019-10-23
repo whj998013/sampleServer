@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SG.Interface.Sample;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -8,18 +9,56 @@ namespace SampleApi
 {
     public class SeachObj
     {
+        private int pid = 1;
+        private int pSize = 20;
         [DataMember(Name = "key")]
-        public string Key { get; set; }
+        public string Key{get; set;}
         [DataMember(Name = "pageId")]
-        public int PageId { get; set; }
+        public int PageId
+        {
+            get
+            {
+                return pid;
+            }
+            set
+            {
+                if (value < 1) pid = 1;
+                else pid = value;
+            }
+        }
         [DataMember(Name = "pageSize")]
-        public int PageSize { get; set; }
+        public int PageSize
+        {
+            get
+            {
+                return pSize;
+            }
+            set
+            {
+                if (value < 1) pSize = 10;
+                else pSize = value;
+            }
+        }
         [DataMember(Name = "total")]
         public int Total { get; set; }
         [DataMember(Name = "beginDate")]
         public DateTime? BeginDate { get; set; }
         [DataMember(Name = "endDate")]
         public DateTime? EndDate { get; set; }
+        [DataMember(Name = "getAll")]
+        public bool GetAll { get; set; }
+
+    }
+    public class SeachObjSample : SeachObj
+    {
+        [DataMember(Name = "userId")]
+        public List<string> UserId { get; set; }
+
+        [DataMember(Name = "inUserId")]
+        public List<string> InUserId { get; set; }
+        
+        [DataMember(Name = "state")]
+        public SampleState State { get; set; }
     }
 
     public class SeachObjDept : SeachObj

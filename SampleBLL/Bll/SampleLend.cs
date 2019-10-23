@@ -13,9 +13,6 @@ namespace SampleBLL
 {
     public class SampleLend
     {
-
-
-
         /// <summary>
         /// 样衣借出
         /// </summary>
@@ -69,6 +66,7 @@ namespace SampleBLL
             }
 
         }
+
         /// <summary>
         /// 当前用户的借出清单
         /// </summary>
@@ -124,6 +122,20 @@ namespace SampleBLL
                     return true;
                 }
                 else return false;
+            }
+        }
+        /// <summary>
+        /// 取得有样及入库的用户清单
+        /// </summary>
+        /// <returns></returns>
+        public static object GetInUserList()
+        {
+            using (SunginDataContext sc = new SunginDataContext())
+            {
+                var re = sc.LendOutViews.Select(p =>new { DdId=p.InDdId, Name = p.InUserName}).Distinct().ToList();
+               
+                return re;
+
             }
         }
 
@@ -276,28 +288,16 @@ namespace SampleBLL
 
             }
         }
-        /// <summary>
-        /// 返回有借出样衣的用户清单
-        /// </summary>
-        /// <returns></returns>
-        public static object GetLendOutUserList()
-        {
-            using (SunginDataContext sc = new SunginDataContext())
-            {
-                var re = sc.LendRecords.Where(p => p.State == LendRecordStats.已借出).Select(p => new { p.DdId, Name = p.UserName }).Distinct().ToList();
-                return re;
-            }
 
-        }
         /// <summary>
         /// 返回有借用申请的用户清单
         /// </summary>
         /// <returns></returns>
-        public static object GetLendUserList()
+        public static object GetLendUserList(LendRecordStats stats)
         {
             using (SunginDataContext sc = new SunginDataContext())
             {
-                var re = sc.LendRecords.Where(p => p.State == LendRecordStats.借出审批).Select(p => new { p.DdId, Name = p.UserName }).Distinct().ToList();
+                var re = sc.LendRecords.Where(p => p.State == stats).Select(p => new { p.DdId, Name = p.UserName }).Distinct().ToList();
                 return re;
             }
         }
@@ -343,6 +343,22 @@ namespace SampleBLL
                     obj.Add(new { p.Id, p.StyleId, p.UserName, p.UserDept, sb.StyleNo, p.CreateDate, baseinfo = SampleHelper.GetReturnObj(sb) });
                 });
                 return new { items = obj, total = count, current = PageId, pageSize = PageSize };
+            }
+        }
+
+        /// <summary>
+        /// 返回所有借用还回清单
+        /// </summary>
+        /// <param name="PageId"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static object GetLendOutViewList(out int Count, Func<LendOutView, bool> whereLambda, Func<LendOutView, object> orderbyLamba, int PageId, int PageSize)
+        {
+            using (SunginDataContext sc = new SunginDataContext())
+            {
+                Count = sc.LendOutViews.Where(whereLambda).Count();
+                var list=sc.LendOutViews.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(t=>t.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+               return list;
             }
         }
 
