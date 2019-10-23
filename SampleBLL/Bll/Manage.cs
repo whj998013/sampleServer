@@ -23,12 +23,9 @@ namespace SampleBLL
 
         public static object GetInputUserList()
         {
-            using (SunginDataContext sc = new SunginDataContext())
-            {
-
-                var re = sc.SampleBaseInfos.Where(p => !p.IsDelete && p.State == SampleState.待入库).Select(p => new { p.DdId, p.CreateUser }).Distinct();
-                return re;
-            }
+            using SunginDataContext sc = new SunginDataContext();
+            var re = sc.SampleBaseInfos.Where(p => !p.IsDelete && p.State == SampleState.待入库).Select(p => new { p.DdId, p.CreateUser }).Distinct();
+            return re;
 
         }
 

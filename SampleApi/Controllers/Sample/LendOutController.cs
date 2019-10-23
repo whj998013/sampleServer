@@ -74,7 +74,7 @@ namespace SampleApi.Controllers
             {
                 LendIdList.ForEach(p =>
                    {
-                       re = SampleLend.DoDelete(p, user);
+                       re = SampleLend.DoDelete(p);
                    });
 
                 if (re) return Ok();
@@ -96,7 +96,7 @@ namespace SampleApi.Controllers
             {
                 LendIdList.ForEach(p =>
                 {
-                    bool re = SampleLend.ApplyLendOut(p, user);
+                    bool re = SampleLend.ApplyLendOut(p);
 
                 });
                 return Ok();

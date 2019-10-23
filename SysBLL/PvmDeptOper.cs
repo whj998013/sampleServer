@@ -24,22 +24,20 @@ namespace SysBLL
         }
         private PvmDeptOper()
         {
-            using (SunginDataContext sdc = new SunginDataContext())
+            using SunginDataContext sdc = new SunginDataContext();
+            Depts = new List<DeptNode>();
+            sdc.Depts.Where(p => !p.IsDelete).ToList().ForEach(p =>
+              {
+                  Depts.Add(p.ToSon<Dept, DeptNode>());
+              });
+            Depts.ForEach(p =>
             {
-                Depts = new List<DeptNode>();
-                sdc.Depts.Where(p => !p.IsDelete).ToList().ForEach(p =>
-                  {
-                      Depts.Add(p.ToSon<Dept, DeptNode>());
-                  });
-                Depts.ForEach(p =>
+                if (p.ParentDeptId != 0)
                 {
-                    if (p.ParentDeptId != 0)
-                    {
-                        Depts.SingleOrDefault(t => t.DeptID == p.ParentDeptId).Items.Add(p);
-                    };
+                    Depts.SingleOrDefault(t => t.DeptID == p.ParentDeptId).Items.Add(p);
+                };
 
-                });
-            }
+            });
         }
 
         public List<DeptNode> GetDeptList(List<long> idList)

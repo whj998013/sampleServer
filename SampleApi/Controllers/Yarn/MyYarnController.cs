@@ -53,8 +53,10 @@ namespace SampleApi.Controllers.Yarn
             }
 
 
-            SeachReturnObj sr = new SeachReturnObj();
-            sr.Result = new MyYarn(SessionManage.CurrentUser).GetMyInStockYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize);
+            SeachReturnObj sr = new SeachReturnObj
+            {
+                Result = new MyYarn(SessionManage.CurrentUser).GetMyInStockYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize)
+            };
             obj.Total = count;
             sr.SeachObj = obj;
             return Ok(sr);

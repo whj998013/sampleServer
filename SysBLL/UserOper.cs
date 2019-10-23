@@ -64,13 +64,11 @@ namespace SysBLL
         /// </summary>
         public User UpDateLoginInfo(User _user)
         {
-            using (SunginDataContext sc = new SunginDataContext())
-            {
-                var user = sc.Users.SingleOrDefault(p => p.DdId == _user.DdId);
-                SetLoginInfo(ref user);
-                sc.SaveChanges();
-                return user;
-            }
+            using SunginDataContext sc = new SunginDataContext();
+            var user = sc.Users.SingleOrDefault(p => p.DdId == _user.DdId);
+            SetLoginInfo(ref user);
+            sc.SaveChanges();
+            return user;
 
         }
         /// <summary>
@@ -87,56 +85,49 @@ namespace SysBLL
         public void AddUser(User user)
         {
 
-            using (SunginDataContext sc = new SunginDataContext())
+            using SunginDataContext sc = new SunginDataContext();
+            var u = sc.Users.FirstOrDefault(p => p.DdId == user.DdId);
+            if (u == null)
             {
-
-                var u = sc.Users.FirstOrDefault(p => p.DdId == user.DdId);
-
-                if (u == null)
-                {
-                    SetLoginInfo(ref user);
-                    user.SetCreateUser("system");
-                    user.Pinyin = PinyinHelper.PinyinString(user.UserName);
-                    sc.Users.Add(user);
-                }
-                else
-                {
-                    SetLoginInfo(ref u);
-                    u.UnDelete("system");
-                }
-                sc.SaveChanges();
-
+                SetLoginInfo(ref user);
+                user.SetCreateUser("system");
+                user.Pinyin = PinyinHelper.PinyinString(user.UserName);
+                sc.Users.Add(user);
             }
+            else
+            {
+                SetLoginInfo(ref u);
+                u.UnDelete("system");
+            }
+            sc.SaveChanges();
         }
 
         public void SyncUsers(List<User> users)
         {
-            using (SunginDataContext sc = new SunginDataContext())
+            using SunginDataContext sc = new SunginDataContext();
+            var ulist = sc.Users.ToList();
+            ulist.ForEach(p => p.IsDelete = true);
+            users.ForEach(p =>
             {
-                var ulist = sc.Users.ToList();
-                ulist.ForEach(p => p.IsDelete = true);
-                users.ForEach(p =>
-                {
 
-                    var u = ulist.FirstOrDefault(t => t.DdId == p.DdId);
-                    if (u == null)
-                    {
-                        p.Pinyin = PinyinHelper.PinyinString(p.UserName);
-                        sc.Users.Add(p);
-                    }
-                    else
-                    {
-                        u.Pinyin = PinyinHelper.PinyinString(u.UserName);
-                        u.UserName = p.UserName;
-                        u.IsLeader = p.IsLeader;
-                        u.DeptId = p.DeptId;
-                        u.DepartName = p.DepartName;
-                        u.Avatar = p.Avatar;
-                        u.IsDelete = false;
-                    };
-                });
-                sc.SaveChanges();
-            }
+                var u = ulist.FirstOrDefault(t => t.DdId == p.DdId);
+                if (u == null)
+                {
+                    p.Pinyin = PinyinHelper.PinyinString(p.UserName);
+                    sc.Users.Add(p);
+                }
+                else
+                {
+                    u.Pinyin = PinyinHelper.PinyinString(u.UserName);
+                    u.UserName = p.UserName;
+                    u.IsLeader = p.IsLeader;
+                    u.DeptId = p.DeptId;
+                    u.DepartName = p.DepartName;
+                    u.Avatar = p.Avatar;
+                    u.IsDelete = false;
+                };
+            });
+            sc.SaveChanges();
 
         }
 

@@ -8,12 +8,12 @@ using SG.Model.Sys;
 
 namespace SampleBLL.Bll
 {
-   public class FileOper
+    public class FileOper
     {
-       
-       public static void RebuildFileStyleId()
+
+        public static void RebuildFileStyleId()
         {
-            SunginDataContext sdc = new SunginDataContext();
+            using SunginDataContext sdc = new SunginDataContext();
             sdc.StyleFiles.ToList().ForEach(f =>
             {
                 string name = f.FileName;
@@ -25,7 +25,7 @@ namespace SampleBLL.Bll
             });
             sdc.SaveChanges();
         }
-             
+
 
     }
 }

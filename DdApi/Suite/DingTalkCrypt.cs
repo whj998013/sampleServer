@@ -13,7 +13,7 @@ namespace SG.DdApi.Suite
         /**ask getPaddingBytes key固定长度**/
         private static int AES_ENCODE_KEY_LENGTH = 43;
         /**加密随机字符串字节长度**/
-        private static int RANDOM_LENGTH = 16;
+      //  private static int RANDOM_LENGTH = 16;
 
         enum DingTalkCryptErrorCode
         {

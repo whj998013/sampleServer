@@ -101,16 +101,18 @@ namespace SG.DdApi.Suite
 
         private static String AES_encrypt(String Input, byte[] Iv, byte[] Key)
         {
-            var aes = new RijndaelManaged();
-            //秘钥的大小，以位为单位
-            aes.KeySize = 256;
-            //支持的块大小
-            aes.BlockSize = 128;
-            //填充模式
-            aes.Padding = PaddingMode.PKCS7;
-            aes.Mode = CipherMode.CBC;
-            aes.Key = Key;
-            aes.IV = Iv;
+            using var aes = new RijndaelManaged
+            {
+                //秘钥的大小，以位为单位
+                KeySize = 256,
+                //支持的块大小
+                BlockSize = 128,
+                //填充模式
+                Padding = PaddingMode.PKCS7,
+                Mode = CipherMode.CBC,
+                Key = Key,
+                IV = Iv
+            };
             var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
             byte[] xBuff = null;
 
@@ -129,17 +131,19 @@ namespace SG.DdApi.Suite
 
         private static String AES_encrypt(byte[] Input, byte[] Iv, byte[] Key)
         {
-            var aes = new RijndaelManaged();
-            //秘钥的大小，以位为单位
-            aes.KeySize = 256;
-            //支持的块大小
-            aes.BlockSize = 128;
-            //填充模式
-            //aes.Padding = PaddingMode.PKCS7;
-            aes.Padding = PaddingMode.None;
-            aes.Mode = CipherMode.CBC;
-            aes.Key = Key;
-            aes.IV = Iv;
+            using var aes = new RijndaelManaged
+            {
+                //秘钥的大小，以位为单位
+                KeySize = 256,
+                //支持的块大小
+                BlockSize = 128,
+                //填充模式
+                //aes.Padding = PaddingMode.PKCS7;
+                Padding = PaddingMode.None,
+                Mode = CipherMode.CBC,
+                Key = Key,
+                IV = Iv
+            };
             var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
             byte[] xBuff = null;
 

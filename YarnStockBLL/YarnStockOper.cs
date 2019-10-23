@@ -11,20 +11,18 @@ namespace YarnStockBLL
     {
         public static void  YarnStockCorrect()
         {
-            using (YarnStockContext ysc = new YarnStockContext())
+            using YarnStockContext ysc = new YarnStockContext();
+            foreach (var p in ysc.LocalProduct)
             {
-                foreach(var p in ysc.LocalProduct)
+
+                p.Num = Math.Round(p.Num, 2);
+                if (p.Num < 0.1)
                 {
-
-                    p.Num = Math.Round(p.Num, 2);
-                    if (p.Num < 0.1)
-                    {
-                        ysc.LocalProduct.Remove(p);
-                    }
-
+                    ysc.LocalProduct.Remove(p);
                 }
-                ysc.SaveChanges();
+
             }
+            ysc.SaveChanges();
         }
     
     }

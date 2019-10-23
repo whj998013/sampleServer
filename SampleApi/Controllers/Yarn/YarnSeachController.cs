@@ -21,8 +21,8 @@ namespace SampleApi.Controllers.Yarn
         public IHttpActionResult GetOutList(dynamic obj)
         {
             string id = obj.BatchNum;
-            if (id ==null||id=="") return BadRequest();
-            var re = YarnOper.GetOutView(id).Select(p => new { p.ProductName, p.OutPrice,p.Num, p.Amount, p.OutUName, p.OutDName, p.CreateTime });
+            if (id == null || id == "") return BadRequest();
+            var re = YarnOper.GetOutView(id).Select(p => new {p.ProductName, p.OutPrice, p.Num, p.Amount, p.OutUName, p.OutDName, p.CreateTime });
             return Ok(re);
         }
         [HttpPost]
@@ -38,10 +38,12 @@ namespace SampleApi.Controllers.Yarn
                                exp = exp.And(e => e.SeachKey.Contains(p));
                            });
             }
-            
+
             else obj.Key = "";
-            SeachReturnObj sr = new SeachReturnObj();
-            sr.Result = YarnOper.GetYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize);
+            SeachReturnObj sr = new SeachReturnObj
+            {
+                Result = YarnOper.GetYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize)
+            };
             obj.Total = count;
             sr.SeachObj = obj;
             return Ok(sr);
@@ -70,12 +72,14 @@ namespace SampleApi.Controllers.Yarn
                 lrv.Add(labv);
             });
 
-            SeachReturnObj sr = new SeachReturnObj();
-            sr.Result = lrv.Where(p => p.Sc <= 20).OrderBy(p => p.Sc).Take(100);
+            SeachReturnObj sr = new SeachReturnObj
+            {
+                Result = lrv.Where(p => p.Sc <= 20).OrderBy(p => p.Sc).Take(100)
+            };
             obj.Total = count;
             sr.SeachObj = obj;
             System.Diagnostics.Debug.WriteLine("查询完成，返回.");
-            return Ok(sr); 
+            return Ok(sr);
 
         }
 

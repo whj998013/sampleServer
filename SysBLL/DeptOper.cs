@@ -39,12 +39,7 @@ namespace SysBLL
 
         }
 
-        public string GetDeptName(long deptId)
-        {
-
-            return null;
-
-        }
+    
 
     }
 }

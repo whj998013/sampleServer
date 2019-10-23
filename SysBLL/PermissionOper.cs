@@ -12,8 +12,9 @@ namespace SysBLL
     {
         public List<IPermission> GetList()
         {
+            using SunginDataContext sdc = new SunginDataContext();
             List<IPermission> list = new List<IPermission>();
-            var re = new SunginDataContext().Permissions.OrderBy(p=>p.Key).ToList();
+            var re = sdc.Permissions.OrderBy(p=>p.Key).ToList();
             list.AddRange(re);
             return list;
         }

@@ -14,7 +14,6 @@ namespace ProofBLL
     public class ProofOrderAdapter
     {
 
-        private ProofObj _proofObj { get; set; }
         private User _user { get; set; }
         private SunginDataContext sdc = new SunginDataContext();
         public ProofOrderAdapter(User user)

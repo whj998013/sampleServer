@@ -15,12 +15,9 @@ namespace SampleApi.Controllers.Yarn
         [HttpGet]
         public IHttpActionResult GetCusList()
         {
-            using (YarnStockContext ysc = new YarnStockContext())
-            {
-                var curList = ysc.Customer.Select(p => p.CusName).ToArray();
-
-                return Ok(curList);
-            }
+            using YarnStockContext ysc = new YarnStockContext();
+            var curList = ysc.Customer.Select(p => p.CusName).ToArray();
+            return Ok(curList);
 
 
         }

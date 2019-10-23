@@ -11,7 +11,7 @@ namespace SysBLL
 {
     public class WorkerOper
     {
-        SunginDataContext sdc = new SunginDataContext();
+        readonly SunginDataContext sdc = new SunginDataContext();
         public void SyncWorker()
         {
 

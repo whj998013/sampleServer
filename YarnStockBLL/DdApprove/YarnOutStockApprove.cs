@@ -22,60 +22,53 @@ namespace YarnStockBLL
         protected override void AgreeApprove(string DdApprovalCode)
         {
             var ar = GetApproveRecrod(DdApprovalCode);
-            using (SunginDataContext sdc = new SunginDataContext())
+            using SunginDataContext sdc = new SunginDataContext();
+            var yoa = sdc.YarnOutApplies.FirstOrDefault(p => p.NO == ar.ObjId);
+            yoa.Stats = SG.Model.ApplyState.通过;
+            using YarnStockContext ysc = new YarnStockContext();
+            ApproveOper ao = new ApproveOper(_oper);
+            var re = ao.GetApprove(DdApprovalCode);
+            if (re != null)
             {
-                var yoa = sdc.YarnOutApplies.FirstOrDefault(p => p.NO == ar.ObjId);
-                yoa.Stats = SG.Model.ApplyState.通过;
-                using (YarnStockContext ysc = new YarnStockContext())
+                re.FormComponentValues.ForEach(p =>
                 {
-                    ApproveOper ao = new ApproveOper(_oper);
-                    var re = ao.GetApprove(DdApprovalCode);
-                    if (re != null)
+                    if (p.Name == "实际出库数量")
                     {
-                        re.FormComponentValues.ForEach(p =>
-                        {
-                            if (p.Name == "实际出库数量")
-                            {
-                                double rNum = double.Parse(p.Value);
-                                if (rNum <= 0 || rNum > yoa.LocalNum) rNum = yoa.MinNum;
-                                yoa.Num = rNum;
+                        double rNum = double.Parse(p.Value);
+                        if (rNum <= 0 || rNum > yoa.LocalNum) rNum = yoa.MinNum;
+                        yoa.Num = rNum;
 
 
-                            }
-                            if (p.Name == "出库价")
-                            {
-                                double price = double.Parse(p.Value);
-                                yoa.OutPrice = price;
-                            }
-                        });
-                        yoa.Stats = SG.Model.ApplyState.通过;
-                        yoa.Amount = Math.Round(yoa.OutPrice * yoa.Num, 1);
                     }
-
-                    //生成出库单
-                    NewYarnOutStock nyos = new NewYarnOutStock();
-                    nyos.AddYarnOutStock(yoa);
-                    sdc.SaveChanges();
-                }
-
+                    if (p.Name == "出库价")
+                    {
+                        double price = double.Parse(p.Value);
+                        yoa.OutPrice = price;
+                    }
+                });
+                yoa.Stats = SG.Model.ApplyState.通过;
+                yoa.Amount = Math.Round(yoa.OutPrice * yoa.Num, 1);
             }
+
+            //生成出库单
+            NewYarnOutStock nyos = new NewYarnOutStock();
+            nyos.AddYarnOutStock(yoa);
+            sdc.SaveChanges();
         }
 
         protected override void RefuseApprove(string DdApprovalCode)
         {
             var ar = GetApproveRecrod(DdApprovalCode);
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var yoa = sdc.YarnOutApplies.FirstOrDefault(p => p.NO == ar.ObjId);
-                yoa.Stats = SG.Model.ApplyState.拒绝;
-                sdc.SaveChanges();
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            var yoa = sdc.YarnOutApplies.FirstOrDefault(p => p.NO == ar.ObjId);
+            yoa.Stats = SG.Model.ApplyState.拒绝;
+            sdc.SaveChanges();
 
         }
 
         public static ApproveItems ToApprove(SG.Model.Yarn.YarnOutApply yoa,string publicOwerId)
         {
-            string ddid = "";
+            string ddid;
             if (yoa.YarnOwerEmpName == "李圣锦") ddid = publicOwerId;
             else ddid = yoa.YarnOwerEmpDdid;
 

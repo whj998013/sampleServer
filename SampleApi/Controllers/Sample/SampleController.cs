@@ -32,7 +32,7 @@ namespace SampleApi.Controllers.Sample
             {
                 exp = exp.And(p => p.State == seachObj.State);
             };
-            if (seachObj.BeginDate!=null&&seachObj.EndDate!=null)
+            if (seachObj.BeginDate != null && seachObj.EndDate != null)
             {
                 var d1 = (DateTime)seachObj.BeginDate;
                 var d2 = ((DateTime)seachObj.EndDate).AddDays(1);
@@ -117,10 +117,9 @@ namespace SampleApi.Controllers.Sample
                 newsample.SaveSample(sample);
                 SessionManage.CurrentSample = null;
                 //添加新的code数据
-                List<Code> codelist = new List<Code>();
 
                 //添加TAG
-                codelist = new List<Code>();
+                List<Code> codelist = new List<Code>();
                 foreach (var m in sample.StyleTagItems)
                 {
                     string name = (string)m.Name;
@@ -149,7 +148,6 @@ namespace SampleApi.Controllers.Sample
             string minPicPath = webPath + @"pic\MinPic\";
             HttpFileCollection files = HttpContext.Current.Request.Files;
             string filename = "";
-            string styleid = SessionManage.CurrentSample.StyleId;
             foreach (string key in files.AllKeys)
             {
                 HttpPostedFile file = files[key];//file.ContentLength文件长度
@@ -185,7 +183,6 @@ namespace SampleApi.Controllers.Sample
             string filePath = webPath + @"uploadfile\";
             HttpFileCollection files = HttpContext.Current.Request.Files;
             string filename = "";
-            string styleid = SessionManage.CurrentSample.StyleId;
             foreach (string key in files.AllKeys)
             {
                 HttpPostedFile file = files[key];//file.ContentLength文件长度
@@ -199,7 +196,7 @@ namespace SampleApi.Controllers.Sample
                 }
             }
             return Ok(new { name = filename });
-            
+
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult GetMyProofs()
         {
             User u = SessionManage.CurrentUser;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             var list = poo.GetUserProofOrderList().ToArray();
             return Ok(list);
 
@@ -39,7 +39,7 @@ namespace SampleApi.Controllers.Proof
         {
 
             User u = SessionManage.CurrentUser;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             var list = poo.GetUserFineshProofOrderList();
 
             return Ok(list);
@@ -55,7 +55,7 @@ namespace SampleApi.Controllers.Proof
         {
             User u = SessionManage.CurrentUser;
             string proofOrderId = (string)proof.ProofOrderId;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             poo.DeleteProof(proofOrderId);
             poo.SaveChange();
             return Ok();
@@ -70,7 +70,7 @@ namespace SampleApi.Controllers.Proof
         {
             User u = SessionManage.CurrentUser;
             string proofOrderId = (string)proof.ProofOrderId;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             ProofOrder po = poo.GetProof(proofOrderId);
             if (po.ProofStatus == ProofStatus.草拟 || po.ProofStatus == ProofStatus.退回)
             {
@@ -108,14 +108,11 @@ namespace SampleApi.Controllers.Proof
                 User = u,
                 ProcessCode = Config.GetSampleConfig().ApplyDownloadProcessCode
             };
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var pf = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == id);
-                if (pf == null) return NotFound();
-                ProofFileDownloadApprove.SendApprove(na, ProofFileDownloadApprove.ToApprove(pf.ProofStyle));
-                return Ok();
-            }
-
+            using SunginDataContext sdc = new SunginDataContext();
+            var pf = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == id);
+            if (pf == null) return NotFound();
+            ProofFileDownloadApprove.SendApprove(na, ProofFileDownloadApprove.ToApprove(pf.ProofStyle));
+            return Ok();
 
         }
     }

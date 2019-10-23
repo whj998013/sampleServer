@@ -23,7 +23,7 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult GetProofPlanList()
         {
             User u = SessionManage.CurrentUser;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             var po = new PvmOper(SessionManage.CurrentUser);
             var pvm = po.GetPvm("P020200", PvmType.PM);
             var exp = PredicateBuilder.True<ProofOrder>().And(p => (p.ProofStatus == ProofStatus.排单 || p.ProofStatus == ProofStatus.打样中 || p.ProofStatus == ProofStatus.交样) && !p.IsDelete);
@@ -39,7 +39,7 @@ namespace SampleApi.Controllers.Proof
         public IHttpActionResult GetFinshPlanList()
         {
             User u = SessionManage.CurrentUser;
-            ProofOrderOper poo = new ProofOrderOper(u);
+            using ProofOrderOper poo = new ProofOrderOper(u);
             var po = new PvmOper(SessionManage.CurrentUser);
             var pvm = po.GetPvm("P020200", PvmType.PM);
             var exp = PredicateBuilder.True<ProofOrder>().And(p => (p.ProofStatus == ProofStatus.完成) && !p.IsDelete);
@@ -63,7 +63,7 @@ namespace SampleApi.Controllers.Proof
             {
                 User u = SessionManage.CurrentUser;
                 var ulist = new List<string>() { u.DdId };
-                ProofOrderOper poo = new ProofOrderOper(u);
+                using ProofOrderOper poo = new ProofOrderOper(u);
                 ProofOrder result = poo.FinshProof(id);
                 if (result != null)
                 {
@@ -114,7 +114,7 @@ namespace SampleApi.Controllers.Proof
                     if (proofid != "")
                     {
                         User u = SessionManage.CurrentUser;
-                        ProofOrderOper poo = new ProofOrderOper(u);
+                        using ProofOrderOper poo = new ProofOrderOper(u);
                         var proof = poo.GetProof(proofid);
                         return Ok(proof);
                     }

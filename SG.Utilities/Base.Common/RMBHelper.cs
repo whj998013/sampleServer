@@ -120,7 +120,7 @@ namespace SG.Utilities
                 if (i == j - 1 && str3 == "0")
                 {
                     //最后一位（分）为0时，加上“整” 
-                    str5 = str5 + '整';
+                    str5 += '整';
                 }
             }
             if (num == 0)

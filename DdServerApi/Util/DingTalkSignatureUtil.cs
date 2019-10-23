@@ -7,10 +7,10 @@ namespace Top.Api.Util
 {
     public class DingTalkSignatureUtil
     {
-        private static string DEFAULT_ENCODING = "UTF-8";
+       // private static string DEFAULT_ENCODING = "UTF-8";
 
         /* Signature method. */
-        private static string ALGORITHM = "HmacSHA256";
+       // private static string ALGORITHM = "HmacSHA256";
 
         private static string NEW_LINE = "\n";
 

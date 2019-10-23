@@ -37,7 +37,7 @@ namespace SampleApi.Controllers.Proof
         }
         public IHttpActionResult GetTasks(string id)
         {
-            ProofOrderOper poo = new ProofOrderOper(SessionManage.CurrentUser);
+            using ProofOrderOper poo = new ProofOrderOper(SessionManage.CurrentUser);
             var re = poo.GetProof(id);
             return Ok(re);
         }
@@ -164,8 +164,8 @@ namespace SampleApi.Controllers.Proof
             ProofFile pf = new ProofFile();
             if (proofId != "" && TaskId != "" && ProcessName != "")
             {
-                string filename = "";
-                string url = "";
+                string filename;
+                string url;
                 foreach (string key in files.AllKeys)
                 {
                     HttpPostedFile file = files[key];//file.ContentLength文件长度

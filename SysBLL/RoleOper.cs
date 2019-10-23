@@ -47,15 +47,11 @@ namespace SysBLL
 
         public void UpdateRoleRange(Role r)
         {
-            using (SunginDataContext sc = new SunginDataContext())
-            {
-
-                var re = sc.Roles.Where(p => p.RoleId == r.RoleId).SingleOrDefault();
-                re.PM = r.PM;
-                re.PV = r.PV;
-                sc.SaveChanges();
-
-            }
+            using SunginDataContext sc = new SunginDataContext();
+            var re = sc.Roles.Where(p => p.RoleId == r.RoleId).SingleOrDefault();
+            re.PM = r.PM;
+            re.PV = r.PV;
+            sc.SaveChanges();
         }
 
     }

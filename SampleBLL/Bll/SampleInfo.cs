@@ -35,18 +35,16 @@ namespace SampleBLL
         {
             try
             {
-                using (SunginDataContext sc = new SunginDataContext())
-                {
-                    BaseInfo = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
-                    ProofingInfo = sc.Proofings.SingleOrDefault(p => p.StyleId == styleId);
-                    if (ProofingInfo == null) ProofingInfo = new Proofing();
-                    ProductInfo = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == styleId);
-                    if (ProductInfo == null) ProductInfo = new ProductionRecord();
-                    StockList = sc.GarmentStocks.Where(p => p.StyleId == styleId).ToList();
-                    Files = sc.StyleFiles.Where(p => p.StyleId == BaseInfo.StyleId).ToList();
-                    IsNewSample = false;
-                    return true;
-                }
+                using SunginDataContext sc = new SunginDataContext();
+                BaseInfo = sc.SampleBaseInfos.SingleOrDefault(p => p.StyleId == styleId);
+                ProofingInfo = sc.Proofings.SingleOrDefault(p => p.StyleId == styleId);
+                if (ProofingInfo == null) ProofingInfo = new Proofing();
+                ProductInfo = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == styleId);
+                if (ProductInfo == null) ProductInfo = new ProductionRecord();
+                StockList = sc.GarmentStocks.Where(p => p.StyleId == styleId).ToList();
+                Files = sc.StyleFiles.Where(p => p.StyleId == BaseInfo.StyleId).ToList();
+                IsNewSample = false;
+                return true;
 
             }
             catch

@@ -7,7 +7,7 @@ namespace SG.DdApi.Suite
 {
     class API_DingTalk
     {
-       string postStr = "";
+      // string postStr = "";
 
         private void Valid()
         {

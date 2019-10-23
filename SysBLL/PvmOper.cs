@@ -16,8 +16,8 @@ namespace SysBLL
     public class PvmOper
     {
         User _user;
-        SunginDataContext sdc = new SunginDataContext();
-        PvmDeptOper pdo = PvmDeptOper.GetPvmDeptOper();
+        readonly SunginDataContext sdc = new SunginDataContext();
+        readonly PvmDeptOper pdo = PvmDeptOper.GetPvmDeptOper();
         public PvmOper(User u)
         {
             _user = u;

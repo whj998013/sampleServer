@@ -49,13 +49,11 @@ namespace ProofBLL
         protected override void AgreeApprove(string DdApprovalCode)
         {
             string oid = GetApproveRecrod(DdApprovalCode).ObjId;
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var po = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == oid);
-                if (po == null) throw new Exception("错误的返回审批申请单号:" + oid);
-                po.AlowDownloadFile = true;
-                sdc.SaveChanges();
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            var po = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == oid);
+            if (po == null) throw new Exception("错误的返回审批申请单号:" + oid);
+            po.AlowDownloadFile = true;
+            sdc.SaveChanges();
 
         }
         /// <summary>
