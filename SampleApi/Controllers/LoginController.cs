@@ -88,7 +88,7 @@ namespace SampleApi.Controllers
         {
             string name = data.name;
             string pwd = data.pwd;
-            User _user = null;
+            User _user;
             UserOper uoper = new UserOper();
             if (name != "" && pwd != "")
             {

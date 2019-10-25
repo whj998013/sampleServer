@@ -14,8 +14,8 @@ namespace ProofBLL
 {
     public class ProofTaskOper
     {
-        SunginDataContext sdc = new SunginDataContext();
-        User _user;
+        readonly SunginDataContext sdc = new SunginDataContext();
+        readonly User _user;
         public ProofTaskOper(User u)
         {
             _user = u;
@@ -35,7 +35,7 @@ namespace ProofBLL
 
         public ProofTask UpDateTask(TaskModel t)
         {
-            ProofTask re = sdc.ProofTasks.Include(tp=>tp.Order).SingleOrDefault(p => p.Id == t.Id);
+            ProofTask re = sdc.ProofTasks.Include(tp => tp.Order).SingleOrDefault(p => p.Id == t.Id);
             if (re != null)
             {
                 re.UserName = t.WorkerName;
@@ -57,14 +57,14 @@ namespace ProofBLL
             DateTime dt = DateTime.Now.Date;
             if (worker != null)
             {
-                ptlist = sdc.ProofTasks.Where(p => p.Worker.Id == worker.Id &&  p.FinshDate != null).Select(p => new { p.Id, p.UserName, p.Order.ProofNum, p.BeginDate, p.NeedFinshDate, p.Process.ProcessName, p.Order.ProofOrderId, p.Order.ProofStyle.ProofStyleNo, p.Order.Urgency, p.Order.ProofStyle.ProofType.TypeName ,p.FinshDate}).ToList();
+                ptlist = sdc.ProofTasks.Where(p => p.Worker.Id == worker.Id && p.FinshDate != null).Select(p => new { p.Id, p.UserName, p.Order.ProofNum, p.BeginDate, p.NeedFinshDate, p.Process.ProcessName, p.Order.ProofOrderId, p.Order.ProofStyle.ProofStyleNo, p.Order.Urgency, p.Order.ProofStyle.ProofType.TypeName, p.FinshDate }).ToList();
 
             }
             return ptlist;
 
         }
 
-        public ProofTask AddTask(TaskModel t,Stats s)
+        public ProofTask AddTask(TaskModel t, Stats s)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace ProofBLL
                 var worker = sdc.Workers.FirstOrDefault(p => p.UserName == t.WorkerName);
                 var order = sdc.ProofOrders.SingleOrDefault(p => p.ProofOrderId == t.ProofOrderId);
                 if (process == null || worker == null || order == null) return null;
-                var pt = sdc.ProofTasks.Where(p => p.Order.Id == order.Id && p.Process.Id == process.Id&&p.Worker.Id==worker.Id).SingleOrDefault();
+                var pt = sdc.ProofTasks.Where(p => p.Order.Id == order.Id && p.Process.Id == process.Id && p.Worker.Id == worker.Id).SingleOrDefault();
                 if (pt == null)
                 {
                     pt = new ProofTask
@@ -106,7 +106,7 @@ namespace ProofBLL
                     pt.Stats = s;
                     if (pt.IsDelete) pt.UnDelete(_user.UserName);
                     pt.SetEditUser(_user.UserName);
-                    
+
                 }
                 //sdc.SaveChanges();
                 return pt;
@@ -125,7 +125,7 @@ namespace ProofBLL
 
         public string SubmitTask(int taskId)
         {
-            ProofTask task = sdc.ProofTasks.Include(t=>t.TaskFiles).SingleOrDefault(t => t.Id == taskId);
+            ProofTask task = sdc.ProofTasks.Include(t => t.TaskFiles).SingleOrDefault(t => t.Id == taskId);
             if (task == null) return "无此任务";
             if (task.TaskFiles.Count == 0) return "请上传任务文件";
             task.FinshDate = DateTime.Now;
@@ -141,7 +141,7 @@ namespace ProofBLL
             return "";
         }
 
-      
+
         public object GetMyProofTask()
         {
             object ptlist = new object();
@@ -149,7 +149,7 @@ namespace ProofBLL
             DateTime dt = DateTime.Now.Date;
             if (worker != null)
             {
-                ptlist = sdc.ProofTasks.Where(p => p.Worker.Id == worker.Id&&p.BeginDate<=dt&&p.FinshDate==null).Select(p => new { p.Id, p.UserName, p.Order.ProofNum, p.BeginDate, p.NeedFinshDate, p.Process.ProcessName, p.Order.ProofOrderId, p.Order.ProofStyle.ProofStyleNo, p.Order.Urgency, p.Order.ProofStyle.ProofType.TypeName, p.FinshDate }).ToList();
+                ptlist = sdc.ProofTasks.Where(p => p.Worker.Id == worker.Id && p.BeginDate <= dt && p.FinshDate == null).Select(p => new { p.Id, p.UserName, p.Order.ProofNum, p.BeginDate, p.NeedFinshDate, p.Process.ProcessName, p.Order.ProofOrderId, p.Order.ProofStyle.ProofStyleNo, p.Order.Urgency, p.Order.ProofStyle.ProofType.TypeName, p.FinshDate }).ToList();
 
             }
             return ptlist;
@@ -162,7 +162,7 @@ namespace ProofBLL
         public static List<ProofTask> GetNextTask(int Id)
         {
 
-            SunginDataContext sungindc = new SunginDataContext();
+            using SunginDataContext sungindc = new SunginDataContext();
             var no = sungindc.ProofTasks.SingleOrDefault(p => p.Id == Id).TaskNo;
             var tlist = sungindc.ProofTasks.Include(t => t.Process).Where(p => p.UpTaskNo == no).ToList();
             return tlist;

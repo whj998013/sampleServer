@@ -18,6 +18,31 @@ namespace SG.Model.Sample
         /// 款号
         /// </summary>
         public string StyleNo { get; set; }
+
+        /// <summary>
+        /// 针型
+        /// </summary>
+        public string Gauge { get; set; }
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        public string Color { get; set; }
+        /// <summary>
+        /// 尺码
+        /// </summary>
+        public string Size { get; set; }
+
+        /// <summary>
+        /// 样衣性质 开发样， 外购，  初样， 复办， 推销样留底， 生产样， 合同样
+        /// </summary>
+        public string Kinds { get; set; }
+
+        /// <summary>
+        /// 原料成份
+        /// 原料成份
+        /// </summary>
+        public string Material { get; set; }
+        /// <summary>
         /// <summary>
         /// 钉钉ID
         /// </summary>

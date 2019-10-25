@@ -7,6 +7,7 @@ using System.Web.Http;
 using SunginData;
 using SG.SessionManage;
 using SampleBLL;
+using SG.Interface.Sample;
 
 namespace SampleApi.Controllers.Sample
 {
@@ -34,7 +35,15 @@ namespace SampleApi.Controllers.Sample
         public object GetInStorageSample(SeachObjSample seachObj)
         {
             string ddid = SessionManage.CurrentUser.DdId;
-            var re = SampleOper.GetSampleList(p => !p.IsDelete && p.DdId == ddid && (int)p.State >= 3, t => t.CreateDate, seachObj.PageId, seachObj.PageSize);
+            if (seachObj == null) return BadRequest();
+            var exp = PredicateBuilder.True<ISampleBaseInfo>().And(t => !t.IsDelete && (int)t.State >= 3&&t.DdId==ddid);
+
+            if (seachObj.BeginDate != null && seachObj.EndDate != null)
+            {
+                var ed = seachObj.EndDate.Value.AddDays(1);
+                exp = exp.And(p => p.CreateDate >= seachObj.BeginDate&&p.CreateDate<= ed);
+            }
+            var re = SampleOper.GetSampleList(exp.Compile(), t => t.CreateDate, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
     }

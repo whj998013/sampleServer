@@ -29,6 +29,10 @@ namespace SysBLL
         {
 
         }
+        public void AddCallBack(SG.DdApi.Interface.DdApprove approve)
+        {
+            HaveDdCallBack += approve.DoCallBack;
+        }
         public static DdCallBackSysOper GetOper()
         {
             if (_instance == null) _instance = new DdCallBackSysOper();

@@ -22,7 +22,7 @@ namespace SampleApi.Controllers.Sample
             string id = (string)obj.styleId;
             if (id != "")
             {
-                ISampleBaseInfo sample = new SampleBaseInfo();
+                ISampleBaseInfo sample;
                 string title, content;
                 if (Config.GetSampleConfig().IsInputStrageNeedAlow)
                 {

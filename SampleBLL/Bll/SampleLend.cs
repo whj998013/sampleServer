@@ -199,7 +199,8 @@ namespace SampleBLL
             using SunginDataContext sc = new SunginDataContext();
             var lr = sc.LendRecords.SingleOrDefault(p => p.Id == LendId);
             SampleBaseInfo sb = sc.SampleBaseInfos.SingleOrDefault(s => s.StyleId == lr.StyleId);
-            if (sb != null && sb.State == SampleState.在库)
+            // if (sb != null && sb.State == SampleState.在库)
+            if (sb != null)
             {
                 lr.State = LendRecordStats.借出审批;
                 sb.State = SampleState.待借出;
@@ -229,6 +230,15 @@ namespace SampleBLL
             sc.SaveChanges();
             return true;
 
+        }
+
+        public static object GetLendChart(out int Count, Func<LendOutView, bool> whereLambda, int PageId, int PageSize)
+        {
+            using SunginDataContext sc = new SunginDataContext();
+            Count = sc.LendOutViews.Where(whereLambda).GroupBy(p => p.StyleId).Count();
+            var list = sc.LendOutViews.Where(whereLambda).GroupBy(p => new { p.StyleId, p.StyleNo, p.StylePic, p.InUserName, p.Kinds }).Select(p => new { p.Key.StyleId, p.Key.Kinds, p.Key.StyleNo, p.Key.StylePic, p.Key.InUserName, LendCount = p.Count() }).OrderByDescending(p => p.LendCount).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList(); ;
+
+            return list;
         }
 
         /// <summary>

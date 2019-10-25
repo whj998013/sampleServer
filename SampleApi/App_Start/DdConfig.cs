@@ -52,32 +52,32 @@ namespace SampleApi.App_Start
             ddCallBack.EventTypes.Add("bpms_instance_change");
 
             //钉钉样衣申请回调
-            ddCallBack.HaveDdCallBack += new ProofOrderApprove
+            ddCallBack.AddCallBack(new ProofOrderApprove
             {
                 ProcessCode = ProofProcessCode
-            }.DoCallBack;
+            });
 
 
             //钉钉样衣交样回调
-            ddCallBack.HaveDdCallBack += new ProofOrderFinshApprove(DdOperator.GetDdApi())
+            ddCallBack.AddCallBack(new ProofOrderFinshApprove(DdOperator.GetDdApi())
             {
                 SysPath = SysPath,
                 ProcessCode = FinshProofProcessCode,
-            }.DoCallBack;
+            });
 
 
             //文件下载申请回调
-            ddCallBack.HaveDdCallBack += new ProofFileDownloadApprove
+            ddCallBack.AddCallBack(new ProofFileDownloadApprove
             {
                 ProcessCode = ApplyDownloadProcessCode
-            }.DoCallBack;
+            });
 
             //样纱出库回调
-            ddCallBack.HaveDdCallBack += new YarnOutStockApprove(DdOperator.GetDdApi())
+            ddCallBack.AddCallBack(new YarnOutStockApprove(DdOperator.GetDdApi())
             {
                 ProcessCode = ApplyYarnOutStockProcessCode
 
-            }.DoCallBack;
+            });
 
         }
 
@@ -99,8 +99,10 @@ namespace SampleApi.App_Start
                 {
                     await System.Threading.Tasks.Task.Delay(5000);
                     //注册回调
-                    DdCallbackOper dcb = new DdCallbackOper(ddOper);
-                    dcb.CallBackUrl = Config.GetSampleConfig().CallBackUrl;
+                    DdCallbackOper dcb = new DdCallbackOper(ddOper)
+                    {
+                        CallBackUrl = Config.GetSampleConfig().CallBackUrl
+                    };
                     dcb.RegisterCallBack();
 
                     //处理历吏回调

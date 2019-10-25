@@ -12,8 +12,8 @@ namespace ProofBLL.Bll
 {
     public class ProofRecord
     {
-        SunginDataContext sdc = new SunginDataContext();
-        ProofDataContext pdc = new ProofDataContext();
+        readonly SunginDataContext sdc = new SunginDataContext();
+        readonly ProofDataContext pdc = new ProofDataContext();
         public List<PfRecord> GetProofRecord(string ProofOrderId)
         {
             List<PfRecord> pflist = new List<PfRecord>();

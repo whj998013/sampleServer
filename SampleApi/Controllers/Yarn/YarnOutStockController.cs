@@ -34,8 +34,10 @@ namespace SampleApi.Controllers.Yarn
             }
             else obj.Key = "";
 
-            SeachReturnObj sr = new SeachReturnObj();
-            sr.Result = new MyYarn(SessionManage.CurrentUser).GetMyOutApplyListDesc(out int count, exp.Compile(), p => p.Id, obj.PageId, obj.PageSize);
+            SeachReturnObj sr = new SeachReturnObj
+            {
+                Result = new MyYarn(SessionManage.CurrentUser).GetMyOutApplyListDesc(out int count, exp.Compile(), p => p.Id, obj.PageId, obj.PageSize)
+            };
             obj.Total = count;
             sr.SeachObj = obj;
             return Ok(sr);

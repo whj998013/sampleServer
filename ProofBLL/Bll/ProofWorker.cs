@@ -10,7 +10,7 @@ namespace ProofBLL
 {
     public class ProofWorker
     {
-        SunginDataContext sdc = new SunginDataContext();
+        readonly SunginDataContext sdc = new SunginDataContext();
         public ProofWorker()
         {
 

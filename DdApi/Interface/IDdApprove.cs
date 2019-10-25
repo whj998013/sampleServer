@@ -26,37 +26,31 @@ namespace SG.DdApi.Interface
 
         protected ApproveRecrod Refuse(string DdApprovalCode)
         {
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
-                if (ar == null) throw new Exception("错误的返回审批ID" + DdApprovalCode);
-                ar.FinshDate = DateTime.Now;
-                ar.Finshed = true;
-                ar.Agree = false;
-                sdc.SaveChanges();
-                return ar;
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
+            if (ar == null) throw new Exception("错误的返回审批ID" + DdApprovalCode);
+            ar.FinshDate = DateTime.Now;
+            ar.Finshed = true;
+            ar.Agree = false;
+            sdc.SaveChanges();
+            return ar;
         }
         protected ApproveRecrod Agree(string DdApprovalCode)
         {
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
-                if (ar == null) throw new Exception("错误的返回审批ID" + DdApprovalCode);
-                ar.FinshDate = DateTime.Now;
-                ar.Finshed = true;
-                ar.Agree = true;
-                sdc.SaveChanges();
-                return ar;
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
+            if (ar == null) throw new Exception("错误的返回审批ID" + DdApprovalCode);
+            ar.FinshDate = DateTime.Now;
+            ar.Finshed = true;
+            ar.Agree = true;
+            sdc.SaveChanges();
+            return ar;
         }
         protected ApproveRecrod GetApproveRecrod(string DdApprovalCode)
         {
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
-                return ar;
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            var ar = sdc.ApproveRecrods.SingleOrDefault(p => p.ApproveCode == DdApprovalCode);
+            return ar;
 
         }
         protected abstract void AgreeApprove(string DdApprovalCode);
@@ -76,19 +70,17 @@ namespace SG.DdApi.Interface
                 User = user,
             };
             approve.ProcessCode = ProcessCode;
-            using (SunginDataContext sdc = new SunginDataContext())
+            using SunginDataContext sdc = new SunginDataContext();
+            string DdApprovalCode = approve.SendApprove(items);
+            sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
             {
-                string DdApprovalCode = approve.SendApprove(items);
-                sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
-                {
-                    ApproveCode = DdApprovalCode,
-                    ApproveName = items.ApproveName,
-                    ApproveDate = DateTime.Now,
-                    ObjId = items.ObjId,
-                });
-                sdc.SaveChanges();
-                return DdApprovalCode;
-            }
+                ApproveCode = DdApprovalCode,
+                ApproveName = items.ApproveName,
+                ApproveDate = DateTime.Now,
+                ObjId = items.ObjId,
+            });
+            sdc.SaveChanges();
+            return DdApprovalCode;
         }
 
         /// <summary>
@@ -99,21 +91,19 @@ namespace SG.DdApi.Interface
         public static string SendApprove(NewApprove na, ApproveItems items)
         {
 
-            using (SunginDataContext sdc = new SunginDataContext())
+            using SunginDataContext sdc = new SunginDataContext();
+            var re = sdc.ApproveRecrods.Count(p => p.ObjId == items.ObjId && p.Finshed == false);
+            if (re > 0) return "";
+            string DdApprovalCode = na.SendApprove(items);
+            sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
             {
-                var re = sdc.ApproveRecrods.Count(p => p.ObjId == items.ObjId && p.Finshed == false);
-                if (re > 0) return "";
-                string DdApprovalCode = na.SendApprove(items);
-                sdc.ApproveRecrods.Add(new Model.Sys.ApproveRecrod()
-                {
-                    ApproveCode = DdApprovalCode,
-                    ApproveName = items.ApproveName,
-                    ApproveDate = DateTime.Now,
-                    ObjId = items.ObjId,
-                });
-                sdc.SaveChanges();
-                return DdApprovalCode;
-            }
+                ApproveCode = DdApprovalCode,
+                ApproveName = items.ApproveName,
+                ApproveDate = DateTime.Now,
+                ObjId = items.ObjId,
+            });
+            sdc.SaveChanges();
+            return DdApprovalCode;
         }
 
         public void DoCallBack(dynamic obj)

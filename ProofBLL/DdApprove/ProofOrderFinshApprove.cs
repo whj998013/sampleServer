@@ -17,7 +17,8 @@ namespace ProofBLL
     public class ProofOrderFinshApprove : DdApprove
     {
         private IDdOper _oper { get; set; }
-        SunginDataContext sdc = new SunginDataContext();
+
+        readonly SunginDataContext sdc = new SunginDataContext();
 
         public ProofOrderFinshApprove(IDdOper ddOper)
         {

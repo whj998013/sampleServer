@@ -19,7 +19,7 @@ namespace SampleApi
             NeedRegister = false;
 #endif
 
-           if (NeedRegister) GlobalConfiguration.Configuration.Filters.Add(new WebApiExceptionFilterAttribute());
+            if (NeedRegister) GlobalConfiguration.Configuration.Filters.Add(new WebApiExceptionFilterAttribute());
 
             DdConfig.Init();
 

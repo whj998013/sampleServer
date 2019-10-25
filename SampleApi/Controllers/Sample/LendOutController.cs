@@ -131,7 +131,7 @@ namespace SampleApi.Controllers
         [HttpGet]
         public IHttpActionResult GetLendUserList(int id)
         {
-            
+
             var re = SampleLend.GetLendUserList((SG.Interface.Sample.LendRecordStats)id);
             return Ok(re);
         }
@@ -182,7 +182,7 @@ namespace SampleApi.Controllers
                 exp = exp.And(t => t.LendOutDate >= bd && t.LendOutDate < ed);
             }
             var list = SampleLend.GetLendOutViewList(out int count, exp.Compile(), p => p.ReturnDate, obj.PageId, obj.PageSize);
-            return Ok(new {count,list});
+            return Ok(new { count, list });
         }
 
         /// <summary>
@@ -242,6 +242,22 @@ namespace SampleApi.Controllers
                 SampleLend.DoReturnLend(p, user.UserName);
             });
             return Ok();
+        }
+        [HttpPost]
+        public IHttpActionResult GetLendChart(SeachObjSample obj)
+        {
+            if (obj == null) return BadRequest();
+            var exp = PredicateBuilder.True<LendOutView>().And(t => !t.IsDelete && t.State == LendRecordStats.已还回);
+            if (obj.InUserId.Count > 0)
+            {
+                exp = exp.And(t => obj.InUserId.Contains(t.InDdId));
+            }
+            if (obj.BeginDate != null && obj.EndDate != null)
+            {
+                exp = exp.And(t => t.ReturnDate >= obj.BeginDate && t.ReturnDate <= ((DateTime)obj.EndDate).AddDays(1));
+            }
+            var list = SampleLend.GetLendChart(out int count, exp.Compile(), obj.PageId, obj.PageSize);
+            return Ok(new { count, list });
         }
     }
 }

@@ -26,8 +26,8 @@ namespace SampleApi.Controllers.Sample
         public object GetSampleList(SeachObjSample seachObj)
         {
 
-            var exp = PredicateBuilder.True<ISampleBaseInfo>();
-            exp = exp.And(p => !p.IsDelete && (int)p.State > 2);
+
+            var exp = PredicateBuilder.True<ISampleBaseInfo>().And(p => !p.IsDelete && (int)p.State > 2);
             if (seachObj.State != SampleState.所有)
             {
                 exp = exp.And(p => p.State == seachObj.State);
@@ -38,12 +38,12 @@ namespace SampleApi.Controllers.Sample
                 var d2 = ((DateTime)seachObj.EndDate).AddDays(1);
                 exp = exp.And(p => p.CreateDate >= d1 & p.CreateDate < d2);
             };
-            if (seachObj.Key != "")
+            if (seachObj.Key != null && seachObj.Key != "")
             {
                 exp = exp.And(p => p.SeachStr.Contains(seachObj.Key));
             }
-
-            var re = SampleOper.GetSampleListOrderByDesc(exp.Compile(), t => t.State, seachObj.PageId, seachObj.PageSize);
+            var expc = exp.Compile();
+            var re = SampleOper.GetSampleListOrderByDesc(expc, t => t.State, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
         [HttpGet]

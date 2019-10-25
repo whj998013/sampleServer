@@ -81,7 +81,7 @@ namespace SampleApi.Controllers.Proof
                     NeedFinshDate = DateTime.Now.Date.AddDays(1),
 
                 };
-                var pt = pto.AddTask(newTask,SG.Model.Stats.进行中);
+                pto.AddTask(newTask,SG.Model.Stats.进行中);
             }
             pto.SaveChanges();
             if (re == "") return Ok();

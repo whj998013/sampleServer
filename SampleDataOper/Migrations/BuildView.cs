@@ -16,7 +16,7 @@ namespace SunginData.Migrations
         /// <param name="context"></param>
         public static void BuildData(SunginData.SunginDataContext context)
         {
-            
+
             int i = 1;
             context.Roles.AddOrUpdate(m => m.RoleId, new Role
             {
@@ -91,6 +91,19 @@ namespace SunginData.Migrations
             });
             context.SaveChanges();
         }
+        public static void ReNameDatatabel(SunginData.SunginDataContext context)
+        {
+            try
+            {
+                //重命名表
+                var drop1 = "EXEC sp_rename  'LendOutViews_bak','LendOutViews'";
+                context.Database.ExecuteSqlCommand(drop1);
+            }
+            catch
+            { 
+            }
+        }
+
         /// <summary>
         ///重建视图
         /// </summary>
@@ -99,8 +112,8 @@ namespace SunginData.Migrations
         public static void ReBuildLendOutViews(SunginData.SunginDataContext context)
         {
             //删除表或视图
-         
-            
+
+
             try
             {
                 //重命名表
@@ -124,6 +137,7 @@ namespace SunginData.Migrations
                 dbo.LendRecords.ReturnDate, dbo.LendRecords.ReturnNo, dbo.LendRecords.State, 
                 dbo.SampleBaseInfoes.CreateUser AS InUserName, dbo.SampleBaseInfoes.DeptName AS InUserDept, 
                 dbo.SampleBaseInfoes.DdId AS InDdId, dbo.LendRecords.IsDelete,dbo.SampleBaseInfoes.StyleNo,
+                dbo.SampleBaseInfoes.Gauge,dbo.SampleBaseInfoes.Color,dbo.SampleBaseInfoes.Size,dbo.SampleBaseInfoes.Kinds,dbo.SampleBaseInfoes.Material,
                     (SELECT   TOP (1) FileName
                      FROM      dbo.StyleFiles
                      WHERE   (StyleId = dbo.LendRecords.StyleId) AND (FileType = 0)) AS StylePic

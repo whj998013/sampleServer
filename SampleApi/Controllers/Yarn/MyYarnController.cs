@@ -85,8 +85,10 @@ namespace SampleApi.Controllers.Yarn
                 exp = exp.And(e => e.CreateTime >= obj.BeginDate && e.CreateTime <= obj.EndDate.Value.AddDays(1));
             }
 
-            SeachReturnObj sr = new SeachReturnObj();
-            sr.Result = new MyYarn(SessionManage.CurrentUser).GetMyOutStockYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize);
+            SeachReturnObj sr = new SeachReturnObj
+            {
+                Result = new MyYarn(SessionManage.CurrentUser).GetMyOutStockYarnListDesc(out int count, exp.Compile(), p => p.CreateTime, obj.PageId, obj.PageSize)
+            };
             obj.Total = count;
             sr.SeachObj = obj;
             return Ok(sr);

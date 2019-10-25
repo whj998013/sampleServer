@@ -15,7 +15,7 @@ namespace ProofBLL
     {
 
         private User _user { get; set; }
-        private SunginDataContext sdc = new SunginDataContext();
+        private readonly SunginDataContext sdc = new SunginDataContext();
         public ProofOrderAdapter(User user)
         {
             _user = user;

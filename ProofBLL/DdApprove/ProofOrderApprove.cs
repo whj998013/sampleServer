@@ -14,7 +14,7 @@ namespace ProofBLL
 {
     public class ProofOrderApprove: DdApprove
     {
-        private SunginDataContext sdc;
+        private readonly SunginDataContext sdc;
         public ProofOrderApprove(SunginDataContext _sdc)
         {
             sdc = _sdc;
