@@ -41,10 +41,10 @@ namespace YarnStockBLL
                 UserID = yoa.ApplyEmpDdid,
                 UserName = yoa.ApplyEmpName,
                 DeptName = yoa.ApplyDeptName,
-                Amount=yoa.Amount,
+                Amount = yoa.Amount,
                 Remark = yoa.NeedSending ? yoa.ReceivingInfo : "",
-                EquipmentNum="a",
-                EquipmentCode="a",
+                EquipmentNum = "a",
+                EquipmentCode = "a",
                 Address = yoa.NeedSending ? yoa.ReceivingInfo : "",
             };
 
@@ -54,25 +54,25 @@ namespace YarnStockBLL
                 OrderNum = os.OrderNum,
                 ProductName = lp.ProductName,
                 BarCode = lp.BarCode,
-                ProductNum =lp.ProductNum,
-                BatchNum=lp.BatchNum,
-                LocalNum=lp.LocalNum,
-                StorageNum=lp.StorageNum,
-                Num=yoa.Num,
-                IsPick=1,
-                RealNum=0,
-                OutPrice=yoa.OutPrice,
-                Amount=yoa.Amount,
-                CreateTime=DateTime.Now,
-                Count=lp.Count,
-                Color=lp.Color,
-                Size=lp.Size,
+                ProductNum = lp.ProductNum,
+                BatchNum = lp.BatchNum,
+                LocalNum = lp.LocalNum,
+                StorageNum = lp.StorageNum,
+                Num = yoa.Num,
+                IsPick = 1,
+                RealNum = 0,
+                OutPrice = yoa.OutPrice,
+                Amount = yoa.Amount,
+                CreateTime = DateTime.Now,
+                Count = lp.Count,
+                Color = lp.Color,
+                Size = lp.Size,
             };
             Ysc.OutStorage.Add(os);
             Ysc.OutStoDetail.Add(osd);
             Ysc.SaveChanges();
             yoa.OrderNum = os.OrderNum;
-           
+
         }
 
         public Admin GetDingDingAdmin()
@@ -84,15 +84,14 @@ namespace YarnStockBLL
                 {
                     UserName = "DingDingSystem",
                     PassWord = "DingDingSystem",
-                    RealName="钉钉系统",
-
+                    RealName = "钉钉系统",
                     UserCode = "DD_001",
                     CreateTime = DateTime.Now,
                     LoginCount = 0,
                     UpdateTime = DateTime.Now,
                     IsDelete = 0,
                     Status = 0,
-                    ParentCode="a",
+                    ParentCode = "a",
                     RoleNum = "DR_0000",
                 };
                 Ysc.Admin.Add(u);

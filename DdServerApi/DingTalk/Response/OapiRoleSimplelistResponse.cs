@@ -29,12 +29,39 @@ namespace DingTalk.Api.Response
         public PageVoDomain Result { get; set; }
 
 	/// <summary>
+/// OrgDeptVoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class OrgDeptVoDomain : TopObject
+{
+	        /// <summary>
+	        /// 部门id
+	        /// </summary>
+	        [XmlElement("dept_id")]
+	        public long DeptId { get; set; }
+	
+	        /// <summary>
+	        /// 部门名称
+	        /// </summary>
+	        [XmlElement("name")]
+	        public string Name { get; set; }
+}
+
+	/// <summary>
 /// OpenEmpSimpleDomain Data Structure.
 /// </summary>
 [Serializable]
 
 public class OpenEmpSimpleDomain : TopObject
 {
+	        /// <summary>
+	        /// 管理范围
+	        /// </summary>
+	        [XmlArray("manageScopes")]
+	        [XmlArrayItem("org_dept_vo")]
+	        public List<OrgDeptVoDomain> ManageScopes { get; set; }
+	
 	        /// <summary>
 	        /// 员工姓名
 	        /// </summary>

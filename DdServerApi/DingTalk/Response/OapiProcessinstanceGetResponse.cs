@@ -29,32 +29,6 @@ namespace DingTalk.Api.Response
         public ProcessInstanceTopVoDomain ProcessInstance { get; set; }
 
 	/// <summary>
-/// FormComponentValueVoDomain Data Structure.
-/// </summary>
-[Serializable]
-
-public class FormComponentValueVoDomain : TopObject
-{
-	        /// <summary>
-	        /// 标签扩展值
-	        /// </summary>
-	        [XmlElement("ext_value")]
-	        public string ExtValue { get; set; }
-	
-	        /// <summary>
-	        /// 标签名
-	        /// </summary>
-	        [XmlElement("name")]
-	        public string Name { get; set; }
-	
-	        /// <summary>
-	        /// 标签值
-	        /// </summary>
-	        [XmlElement("value")]
-	        public string Value { get; set; }
-}
-
-	/// <summary>
 /// OperationRecordsVoDomain Data Structure.
 /// </summary>
 [Serializable]
@@ -130,10 +104,54 @@ public class TaskTopVoDomain : TopObject
 	        public string Taskid { get; set; }
 	
 	        /// <summary>
+	        /// 任务url
+	        /// </summary>
+	        [XmlElement("url")]
+	        public string Url { get; set; }
+	
+	        /// <summary>
 	        /// 任务处理人
 	        /// </summary>
 	        [XmlElement("userid")]
 	        public string Userid { get; set; }
+}
+
+	/// <summary>
+/// FormComponentValueVoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class FormComponentValueVoDomain : TopObject
+{
+	        /// <summary>
+	        /// 组件类型
+	        /// </summary>
+	        [XmlElement("component_type")]
+	        public string ComponentType { get; set; }
+	
+	        /// <summary>
+	        /// 标签扩展值
+	        /// </summary>
+	        [XmlElement("ext_value")]
+	        public string ExtValue { get; set; }
+	
+	        /// <summary>
+	        /// 组件id
+	        /// </summary>
+	        [XmlElement("id")]
+	        public string Id { get; set; }
+	
+	        /// <summary>
+	        /// 标签名
+	        /// </summary>
+	        [XmlElement("name")]
+	        public string Name { get; set; }
+	
+	        /// <summary>
+	        /// 标签值
+	        /// </summary>
+	        [XmlElement("value")]
+	        public string Value { get; set; }
 }
 
 	/// <summary>
@@ -194,6 +212,12 @@ public class ProcessInstanceTopVoDomain : TopObject
 	        [XmlArray("form_component_values")]
 	        [XmlArrayItem("form_component_value_vo")]
 	        public List<FormComponentValueVoDomain> FormComponentValues { get; set; }
+	
+	        /// <summary>
+	        /// 主流程实例标识
+	        /// </summary>
+	        [XmlElement("main_process_instance_id")]
+	        public string MainProcessInstanceId { get; set; }
 	
 	        /// <summary>
 	        /// 操作记录列表

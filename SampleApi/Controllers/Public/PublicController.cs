@@ -9,6 +9,8 @@ using ProofBLL;
 using SG.Utilities;
 using SysBLL;
 using SG.SessionManage;
+using SunginData;
+using SG.Model.Sys;
 namespace SampleApi.Controllers.Public
 {
     [Author]
@@ -42,6 +44,13 @@ namespace SampleApi.Controllers.Public
         {
             var re = new PvmOper(SessionManage.CurrentUser).GetDeptList(PvmType.PV);
             return Ok(re);
+        }
+
+        public IHttpActionResult GetPurpose()
+        {
+            var plist = DataQuery.GetAllRecords<Purpose>().Select(P => P.Name).ToList();
+            return Ok(plist);
+
         }
 
 

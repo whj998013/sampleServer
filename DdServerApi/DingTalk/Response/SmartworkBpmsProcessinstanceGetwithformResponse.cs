@@ -106,6 +106,12 @@ public class TaskTopVoDomain : TopObject
 public class SubFormValueVoDomain : TopObject
 {
 	        /// <summary>
+	        /// 组件类型
+	        /// </summary>
+	        [XmlElement("detail_component_type")]
+	        public string DetailComponentType { get; set; }
+	
+	        /// <summary>
 	        /// 明细表单别名
 	        /// </summary>
 	        [XmlElement("detail_form_biz_alias")]
@@ -163,6 +169,12 @@ public class FormValueVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("biz_alias")]
 	        public string BizAlias { get; set; }
+	
+	        /// <summary>
+	        /// 组件类型
+	        /// </summary>
+	        [XmlElement("component_type")]
+	        public string ComponentType { get; set; }
 	
 	        /// <summary>
 	        /// 明细列表

@@ -32,26 +32,75 @@ using System.Configuration;
 using SG.Model;
 using YarnStockBLL;
 using System.Data.Entity.Validation;
+using System.Threading;
+using SG.DdApi.Msg;
 namespace ConsoleApp1
 {
     class Program
     {
-        static void Main(string[] args)
+
+        public static void Main()
         {
-            using (SunginDataContext sdc = new SunginDataContext())
+            IDdOper ddOper = DdOperator.GetDdApi();
+            ddOper.CorpId = "ding99dd341fc99a25eb";
+            ddOper.CorpSecret = "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0";
+            ddOper.AgentID = "132907517";
+            DdMsgOper dmo = new DdMsgOper(ddOper);
+            Console.Write("send ok");
+            Console.ReadKey();
+
+        }
+        public static void Maininit()
+        {
+
+            SettingOper.SetValue("SampleAdminRoleId", "338565326");
+            SettingOper.SetValue("SampleDevelopmentRoleId", "338598449");
+            SettingOper.SetValue("AgentID", "132907517");
+            SettingOper.SetValue("CorpId", "ding99dd341fc99a25eb");
+            SettingOper.SetValue("CorpSecret", "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0");
+            SettingOper.SetValue("SampleFilePath", @"\src\sample\");
+            SettingOper.SetValue("ProofFilePath", @"\src\proof\");
+            SettingOper.SetValue("InStrageAlowChange", "true");
+            SettingOper.SetValue("IsInputStrageNeedAlow", "true");
+            SettingOper.SetValue("EnableLimtView", "true");
+            SettingOper.SetValue("AllSampleCanLend", "true");
+            SettingOper.SetValue("ProofProcessCode", "PROC-EFYJFT8W-LH24JJOXYC3TQ13O0LQM1-3D5I0OTJ-3");
+            SettingOper.SetValue("FinshProofProcessCode", "PROC-E144D6D0-BD30-41CC-B1C1-433E8579E461");
+            SettingOper.SetValue("ApplyDownloadProcessCode", "PROC-6FFDEE61-8570-41EB-8EDC-DFE9527CCBFF");
+            SettingOper.SetValue("ApplyYarnOutStockProcessCode", "PROC-BCD691DF-B1BF-477C-B3BE-3A56EC43EA6B");
+            SettingOper.SetValue("CallBackUrl", @"http://api.sungingroup.com:8082/api/dd/DdCallBack");
+            SettingOper.SetValue("PublicOwerId", "031352526624092519");
+            SettingOper.SetValue("PublicOwerId2", "manager2606");
+            SettingOper.SetValue("SampleLendOutDay", "6");
+            SettingOper.SetValue("SampleRemindBackDay", "5");
+
+
+            Console.ReadKey();
+
+        }
+
+        async static void AsyncFunction()
+        {
+            await Task.Delay(2000);
+            Console.WriteLine("使用System.Threading.Tasks.Task执行异步操作.");
+            for (int i = 0; i < 10; i++)
             {
-                var re = sdc.LendRecords.GroupBy(p => p.StyleId).Select(p=>new { p.Key,w=p.Count()}).ToList();
-                var r = from p in sdc.LendRecords
-                        group p by p.StyleId into num
-                        select new
-                        {   key=num.Key,
-                            nn = num.Count(),
-                        };
-                var tt = r.ToList();
 
-                Console.WriteLine("aaa");
-
+                Console.WriteLine(string.Format("AsyncFunction:i={0}", i));
             }
+        }
+
+        public static void Main2()
+        {
+            Console.WriteLine("主线程执行业务处理.");
+            AsyncFunction();
+            Console.WriteLine("主线程执行其他处理");
+            for (int i = 0; i < 10; i++)
+            {
+                Task.Delay(500);
+                Console.WriteLine(string.Format("Main:i={0}", i));
+            }
+            Console.ReadLine();
         }
 
         static void Maintestef()

@@ -92,7 +92,19 @@ namespace SG.Model.Sample
         public string StylePic { get; set; }
 
         public LendRecordStats State { get; set; }
+        /// <summary>
+        /// 借出天数
+        /// </summary>
+        public int LendDay { get; set; }
+        /// <summary>
+        /// 借出用途
+        /// </summary>
+        public string LendPurpose { get; set; }
 
         public bool IsDelete { get; set; }
+        /// <summary>
+        /// 生成时间
+        /// </summary>
+        public DateTime? CreateDate { get; set; }
     }
 }

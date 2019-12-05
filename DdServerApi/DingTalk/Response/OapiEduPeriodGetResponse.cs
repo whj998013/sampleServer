@@ -42,10 +42,22 @@ namespace DingTalk.Api.Response
 public class PeriodResponseDomain : TopObject
 {
 	        /// <summary>
+	        /// 校区ID
+	        /// </summary>
+	        [XmlElement("campus_id")]
+	        public long CampusId { get; set; }
+	
+	        /// <summary>
 	        /// 学段名称
 	        /// </summary>
 	        [XmlElement("name")]
 	        public string Name { get; set; }
+	
+	        /// <summary>
+	        /// 学段名称类型，text表示文本型，如中学为七年级，八年级，九年级，number表示数字型，如初中一年级1班，二年级1班等
+	        /// </summary>
+	        [XmlElement("name_mode")]
+	        public string NameMode { get; set; }
 	
 	        /// <summary>
 	        /// 学段别名

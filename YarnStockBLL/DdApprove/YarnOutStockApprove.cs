@@ -70,7 +70,11 @@ namespace YarnStockBLL
         {
             string ddid;
             if (yoa.YarnOwerEmpName == "李圣锦") ddid = publicOwerId;
+
             else ddid = yoa.YarnOwerEmpDdid;
+#if DEBUG
+            ddid = "manager2606";
+#endif
 
             List<string> idlist = new List<string>();
             idlist.Add(ddid);

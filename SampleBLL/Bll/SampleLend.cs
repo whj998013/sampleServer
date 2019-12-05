@@ -194,7 +194,7 @@ namespace SampleBLL
         /// </summary>
         /// <param name="_lendOutNo"></param>
         /// <returns></returns>
-        public static bool ApplyLendOut(int LendId)
+        public static bool ApplyLendOut(int LendId,int LendDay,string LendPurpost)
         {
             using SunginDataContext sc = new SunginDataContext();
             var lr = sc.LendRecords.SingleOrDefault(p => p.Id == LendId);
@@ -203,6 +203,8 @@ namespace SampleBLL
             if (sb != null)
             {
                 lr.State = LendRecordStats.借出审批;
+                lr.LendDay = LendDay;
+                lr.LendPurpose = LendPurpost;
                 sb.State = SampleState.待借出;
                 lr.LendOutNo = "";
                 sc.Entry(lr).State = System.Data.Entity.EntityState.Modified;
@@ -318,6 +320,20 @@ namespace SampleBLL
         /// <param name="pageSize"></param>
         /// <returns></returns>
         public static object GetLendOutViewList(out int Count, Func<LendOutView, bool> whereLambda, Func<LendOutView, object> orderbyLamba, int PageId, int PageSize)
+        {
+            using SunginDataContext sc = new SunginDataContext();
+            Count = sc.LendOutViews.Where(whereLambda).Count();
+            var list = sc.LendOutViews.Where(whereLambda).OrderBy(orderbyLamba).ThenByDescending(t => t.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 返回所有借用还回清单
+        /// </summary>
+        /// <param name="PageId"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static object GetLendOutViewListByDesc(out int Count, Func<LendOutView, bool> whereLambda, Func<LendOutView, object> orderbyLamba, int PageId, int PageSize)
         {
             using SunginDataContext sc = new SunginDataContext();
             Count = sc.LendOutViews.Where(whereLambda).Count();

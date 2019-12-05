@@ -77,6 +77,11 @@ namespace DingTalk.Api.Request
         public Nullable<long> MinAmount { get; set; }
 
         /// <summary>
+        /// 第一次调用传空，后面翻页根据上次response的nextKey回传
+        /// </summary>
+        public string NextKey { get; set; }
+
+        /// <summary>
         /// 页码，从1开始
         /// </summary>
         public Nullable<long> PageNum { get; set; }
@@ -117,9 +122,24 @@ namespace DingTalk.Api.Request
         public string PayerUserType { get; set; }
 
         /// <summary>
+        /// 收款人账户类型
+        /// </summary>
+        public string ReceiptorTypeList { get; set; }
+
+        /// <summary>
+        /// 查询的条目数
+        /// </summary>
+        public Nullable<long> Size { get; set; }
+
+        /// <summary>
         /// 状态列表
         /// </summary>
         public string StatusList { get; set; }
+
+        /// <summary>
+        /// 中止支付原因
+        /// </summary>
+        public string TerminationReason { get; set; }
 
         /// <summary>
         /// 标题
@@ -154,6 +174,7 @@ namespace DingTalk.Api.Request
             parameters.Add("gmt_pay_end_time", this.GmtPayEndTime);
             parameters.Add("max_amount", this.MaxAmount);
             parameters.Add("min_amount", this.MinAmount);
+            parameters.Add("next_key", this.NextKey);
             parameters.Add("page_num", this.PageNum);
             parameters.Add("page_size", this.PageSize);
             parameters.Add("pay_channel_list", this.PayChannelList);
@@ -162,7 +183,10 @@ namespace DingTalk.Api.Request
             parameters.Add("payee_user_type", this.PayeeUserType);
             parameters.Add("payer_id", this.PayerId);
             parameters.Add("payer_user_type", this.PayerUserType);
+            parameters.Add("receiptor_type_list", this.ReceiptorTypeList);
+            parameters.Add("size", this.Size);
             parameters.Add("status_list", this.StatusList);
+            parameters.Add("termination_reason", this.TerminationReason);
             parameters.Add("title", this.Title);
             if (this.otherParams != null)
             {
@@ -173,9 +197,8 @@ namespace DingTalk.Api.Request
 
         public override void Validate()
         {
-            RequestValidator.ValidateRequired("page_num", this.PageNum);
-            RequestValidator.ValidateRequired("page_size", this.PageSize);
             RequestValidator.ValidateMaxListSize("pay_channel_list", this.PayChannelList, 20);
+            RequestValidator.ValidateMaxListSize("receiptor_type_list", this.ReceiptorTypeList, 20);
             RequestValidator.ValidateMaxListSize("status_list", this.StatusList, 20);
         }
 

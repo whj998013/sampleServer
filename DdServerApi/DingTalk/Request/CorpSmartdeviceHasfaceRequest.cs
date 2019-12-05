@@ -42,7 +42,7 @@ namespace DingTalk.Api.Request
         public override void Validate()
         {
             RequestValidator.ValidateRequired("userid_list", this.UseridList);
-            RequestValidator.ValidateMaxListSize("userid_list", this.UseridList, 20);
+            RequestValidator.ValidateMaxListSize("userid_list", this.UseridList, 100);
         }
 
         #endregion

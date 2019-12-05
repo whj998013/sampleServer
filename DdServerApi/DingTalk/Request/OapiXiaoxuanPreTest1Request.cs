@@ -14,6 +14,11 @@ namespace DingTalk.Api.Request
         /// <summary>
         /// 1
         /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 1
+        /// </summary>
         public string SystemData { get; set; }
 
         #region IDingTalkRequest Members
@@ -31,6 +36,7 @@ namespace DingTalk.Api.Request
         public override IDictionary<string, string> GetParameters()
         {
             TopDictionary parameters = new TopDictionary();
+            parameters.Add("name", this.Name);
             parameters.Add("systemData", this.SystemData);
             if (this.otherParams != null)
             {

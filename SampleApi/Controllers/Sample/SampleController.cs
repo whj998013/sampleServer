@@ -43,7 +43,7 @@ namespace SampleApi.Controllers.Sample
                 exp = exp.And(p => p.SeachStr.Contains(seachObj.Key));
             }
             var expc = exp.Compile();
-            var re = SampleOper.GetSampleListOrderByDesc(expc, t => t.State, seachObj.PageId, seachObj.PageSize);
+            var re = SampleOper.GetSampleListOrderByDesc(expc, t => t.CreateDate, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
         [HttpGet]

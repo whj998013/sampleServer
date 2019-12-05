@@ -11,7 +11,7 @@ using SG.Interface.Sample;
 
 namespace SampleBLL
 {
-    public class UserOper
+    public class SampleUserOper
     {
         public static User GetUser(string Ddid)
         {

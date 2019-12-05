@@ -17,7 +17,7 @@ namespace DingTalk.Api.Request
         public Nullable<DateTime> FromDate { get; set; }
 
         /// <summary>
-        /// 列id
+        /// 假期名称
         /// </summary>
         public string LeaveNames { get; set; }
 

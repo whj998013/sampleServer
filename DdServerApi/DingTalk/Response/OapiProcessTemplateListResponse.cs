@@ -42,6 +42,12 @@ namespace DingTalk.Api.Response
 public class TemplatelistDomain : TopObject
 {
 	        /// <summary>
+	        /// 是否可升级，加入收款账户组件
+	        /// </summary>
+	        [XmlElement("can_be_upgraded")]
+	        public bool CanBeUpgraded { get; set; }
+	
+	        /// <summary>
 	        /// 是否有管理权限
 	        /// </summary>
 	        [XmlElement("can_modify")]

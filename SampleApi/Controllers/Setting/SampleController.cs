@@ -25,6 +25,9 @@ namespace SampleApi.Controllers.Setting
                 InStrageAlowChange = Config.GetSampleConfig().InStrageAlowChange,
                 EnableLimtView = Config.GetSampleConfig().EnableLimtView,
                 AllSampleCanLend = Config.GetSampleConfig().AllSampleCanLend,
+                SampleLendOutDay=Config.GetSampleConfig().SampleLendOutDay,
+                SampleRemindBackDay = Config.GetSampleConfig().SampleRemindBackDay,
+
             };
             return Ok(obj);
         }
@@ -34,6 +37,8 @@ namespace SampleApi.Controllers.Setting
             Config.GetSampleConfig().InStrageAlowChange = obj.InStrageAlowChange;
             Config.GetSampleConfig().EnableLimtView = obj.EnableLimtView;
             Config.GetSampleConfig().AllSampleCanLend = obj.AllSampleCanLend;
+            Config.GetSampleConfig().SampleLendOutDay = obj.SampleLendOutDay;
+            Config.GetSampleConfig().SampleRemindBackDay = obj.SampleRemindBackDay;
             return Ok();
 
 

@@ -12,6 +12,11 @@ namespace DingTalk.Api.Request
     public class OapiImChatServicegroupCreateRequest : BaseDingTalkRequest<DingTalk.Api.Response.OapiImChatServicegroupCreateResponse>
     {
         /// <summary>
+        /// 建群去重的业务id
+        /// </summary>
+        public string GroupUniqId { get; set; }
+
+        /// <summary>
         /// 是否企业内部服务群
         /// </summary>
         public Nullable<bool> OrgInnerGroup { get; set; }
@@ -41,6 +46,7 @@ namespace DingTalk.Api.Request
         public override IDictionary<string, string> GetParameters()
         {
             TopDictionary parameters = new TopDictionary();
+            parameters.Add("group_uniq_id", this.GroupUniqId);
             parameters.Add("org_inner_group", this.OrgInnerGroup);
             parameters.Add("owner_userid", this.OwnerUserid);
             parameters.Add("title", this.Title);

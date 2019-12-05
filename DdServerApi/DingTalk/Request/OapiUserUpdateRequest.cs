@@ -27,6 +27,11 @@ namespace DingTalk.Api.Request
         public string Extattr { get; set; }
 
         /// <summary>
+        /// 入职时间
+        /// </summary>
+        public Nullable<long> HiredDate { get; set; }
+
+        /// <summary>
         /// 是否号码隐藏
         /// </summary>
         public Nullable<bool> IsHide { get; set; }
@@ -114,6 +119,7 @@ namespace DingTalk.Api.Request
             parameters.Add("department", TopUtils.ObjectToJson(this.Department));
             parameters.Add("email", this.Email);
             parameters.Add("extattr", this.Extattr);
+            parameters.Add("hiredDate", this.HiredDate);
             parameters.Add("isHide", this.IsHide);
             parameters.Add("isSenior", this.IsSenior);
             parameters.Add("jobnumber", this.Jobnumber);

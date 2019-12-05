@@ -41,7 +41,6 @@ namespace DingTalk.Api.Request
 
         public override void Validate()
         {
-            RequestValidator.ValidateRequired("process_codes", this.ProcessCodes);
             RequestValidator.ValidateMaxListSize("process_codes", this.ProcessCodes, 20);
         }
 

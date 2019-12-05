@@ -112,6 +112,12 @@ public class CreateGroupRequestDomain : TopObject
 	        public string Name { get; set; }
 	
 	        /// <summary>
+	        /// 新人进群是否能查看最近100条记录。0:不能；1:可以查看最近100条记录；不填默认为0
+	        /// </summary>
+	        [XmlElement("show_history_type")]
+	        public Nullable<long> ShowHistoryType { get; set; }
+	
+	        /// <summary>
 	        /// 群类型,目前没有使用，填0即可
 	        /// </summary>
 	        [XmlElement("type")]

@@ -84,7 +84,7 @@ namespace ProofBLL
         {
 
             List<ProofOrder> poList = new List<ProofOrder>();
-            poList = Sdc.ProofOrders.Include(t => t.ProofStyle).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
+            poList = Sdc.ProofOrders.Include(t=>t.YarnApplys).Include(t => t.ProofStyle).Include(t=>t.ProofDept).Include(t => t.ProofStyle.ProofFiles).Include(t => t.ProofStyle.ProofType).Where(p => p.ProofApplyUserDdId == _user.DdId && p.ProofStatus != ProofStatus.完成 && !p.IsDelete).OrderByDescending(p => p.CreateDate).ToList();
             RemoveDeleteFile(poList);
             return poList;
         }

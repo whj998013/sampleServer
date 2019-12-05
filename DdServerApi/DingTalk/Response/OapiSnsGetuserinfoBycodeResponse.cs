@@ -36,6 +36,12 @@ namespace DingTalk.Api.Response
 public class UserInfoDomain : TopObject
 {
 	        /// <summary>
+	        /// 用户主企业是否达到高级认证级别
+	        /// </summary>
+	        [XmlElement("main_org_auth_high_level")]
+	        public bool MainOrgAuthHighLevel { get; set; }
+	
+	        /// <summary>
 	        /// nick
 	        /// </summary>
 	        [XmlElement("nick")]

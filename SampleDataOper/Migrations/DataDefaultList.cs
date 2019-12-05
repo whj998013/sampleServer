@@ -43,6 +43,8 @@ namespace SunginData.Migrations
                new Permission {  CnName = "样纱管理", Name = "YarnMange", Key = "P030000", UpKey = "P000000" },
                new Permission {  CnName = "我的样纱", Name = "Yarn_MyYarn", Key = "P030100", UpKey = "P030000" },
                new Permission {  CnName = "样纱查询", Name = "Yarn_YarnSeach", Key = "P030200", UpKey = "P030000" },
+               new Permission {  CnName = "纱线管理", Name = "Yarn_Mange", Key = "P030300", UpKey = "P030000" },
+
 
 
               new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000" },
@@ -223,6 +225,21 @@ namespace SunginData.Migrations
              new Job{JobName="检验工"},
 
            };
+        }
+
+        public static List<Purpose> GetPurposes()
+        {
+            return new List<Purpose>
+            {
+                new Purpose{Name="展会",Comment="用于各类参展"},
+                new Purpose{Name="参考",Comment="用于参考"},
+                new Purpose{Name="报价",Comment="用于客户报价"},
+                new Purpose{Name="打样",Comment="用于内外部打样"},
+                new Purpose{Name="开会",Comment="用于客户开会"},
+                new Purpose{Name="拍照",Comment="拍照留底"},
+                new Purpose{Name="其它",Comment="其它用途填写"},
+
+            };
         }
 
     }

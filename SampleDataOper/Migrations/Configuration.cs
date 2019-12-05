@@ -26,6 +26,7 @@ namespace SampleDataOper.Migrations
 
             BuildHelper.BuildData(context);
             BuildHelper.ReBuildLendOutViews(context);
+            BuildHelper.InitData(context);
 
         }
     }

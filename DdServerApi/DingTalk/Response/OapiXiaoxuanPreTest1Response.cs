@@ -23,6 +23,12 @@ namespace DingTalk.Api.Response
         public string Errmsg { get; set; }
 
         /// <summary>
+        /// 1
+        /// </summary>
+        [XmlElement("name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// result
         /// </summary>
         [XmlElement("resultData")]

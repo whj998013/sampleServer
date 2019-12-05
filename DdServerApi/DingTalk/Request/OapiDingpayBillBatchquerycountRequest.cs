@@ -107,9 +107,19 @@ namespace DingTalk.Api.Request
         public string PayerUserType { get; set; }
 
         /// <summary>
+        /// 收款人账户类型
+        /// </summary>
+        public string ReceiptorTypeList { get; set; }
+
+        /// <summary>
         /// 状态列表
         /// </summary>
         public string StatusList { get; set; }
+
+        /// <summary>
+        /// 中止支付原因
+        /// </summary>
+        public string TerminationReason { get; set; }
 
         /// <summary>
         /// 标题
@@ -150,7 +160,9 @@ namespace DingTalk.Api.Request
             parameters.Add("payee_user_type", this.PayeeUserType);
             parameters.Add("payer_id", this.PayerId);
             parameters.Add("payer_user_type", this.PayerUserType);
+            parameters.Add("receiptor_type_list", this.ReceiptorTypeList);
             parameters.Add("status_list", this.StatusList);
+            parameters.Add("termination_reason", this.TerminationReason);
             parameters.Add("title", this.Title);
             if (this.otherParams != null)
             {
@@ -162,6 +174,7 @@ namespace DingTalk.Api.Request
         public override void Validate()
         {
             RequestValidator.ValidateMaxListSize("pay_channel_list", this.PayChannelList, 20);
+            RequestValidator.ValidateMaxListSize("receiptor_type_list", this.ReceiptorTypeList, 20);
             RequestValidator.ValidateMaxListSize("status_list", this.StatusList, 20);
         }
 

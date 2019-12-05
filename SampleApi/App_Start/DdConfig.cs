@@ -19,10 +19,12 @@ namespace SampleApi.App_Start
 
             //钉钉初始化
             DdOperator ddOper = DdOperator.GetDdApi();
-            ddOper.CorpId = ConfigurationManager.AppSettings["CorpId"];
-            ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
-            ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
-
+            //ddOper.CorpId = ConfigurationManager.AppSettings["CorpId"];
+            //ddOper.CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
+            //ddOper.AgentID = ConfigurationManager.AppSettings["AgentID"];
+            ddOper.CorpId = Config.GetSampleConfig().CorpId;
+            ddOper.CorpSecret = Config.GetSampleConfig().CorpSecret;
+            ddOper.AgentID = Config.GetSampleConfig().AgentID;
             InitDdCallBack();
 
             //生成部门
@@ -89,7 +91,7 @@ namespace SampleApi.App_Start
 
             bool NeedRegister = true;
 #if DEBUG
-            //  NeedRegister = false;
+           // NeedRegister = false;
 #endif
 
             if (NeedRegister)

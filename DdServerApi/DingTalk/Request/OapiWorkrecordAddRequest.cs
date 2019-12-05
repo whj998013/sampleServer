@@ -25,6 +25,16 @@ namespace DingTalk.Api.Request
         public List<FormItemVoDomain> FormItemList_ { set { this.FormItemList = TopUtils.ObjectToJson(value); } } 
 
         /// <summary>
+        /// manager7078
+        /// </summary>
+        public string OriginatorUserId { get; set; }
+
+        /// <summary>
+        /// 待办来源名称
+        /// </summary>
+        public string SourceName { get; set; }
+
+        /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
@@ -56,6 +66,8 @@ namespace DingTalk.Api.Request
             TopDictionary parameters = new TopDictionary();
             parameters.Add("create_time", this.CreateTime);
             parameters.Add("formItemList", this.FormItemList);
+            parameters.Add("originator_user_id", this.OriginatorUserId);
+            parameters.Add("source_name", this.SourceName);
             parameters.Add("title", this.Title);
             parameters.Add("url", this.Url);
             parameters.Add("userid", this.Userid);

@@ -16,7 +16,7 @@ namespace SunginData
 {
     public class SunginDataContext : DbContext
     {
-        
+
         /// <summary>
         /// 样品信息表  
         /// </summary>
@@ -51,7 +51,7 @@ namespace SunginData
         /// 库存记录
         /// </summary>
         public DbSet<GarmentStock> GarmentStocks { get; set; }
-               
+
         /// <summary>
         /// 成份表
         /// </summary>
@@ -137,11 +137,20 @@ namespace SunginData
         /// 毛纱出库申请
         /// </summary>
         public DbSet<YarnOutApply> YarnOutApplies { get; set; }
-
-         public DbSet<LendOutView> LendOutViews { get; set; }
+        /// <summary>
+        /// 设置表
+        /// </summary>
+        public DbSet<Setting> Settings { get; set; }
+        /// <summary>
+        /// 借出视图
+        /// </summary>
+        public DbSet<LendOutView> LendOutViews { get; set; }
+        /// <summary>
+        /// 用途表
+        /// </summary>
+        public DbSet<Purpose> Purposes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           
             base.OnModelCreating(modelBuilder);
         }
 

@@ -47,7 +47,6 @@ namespace DingTalk.Api.Request
 
         public override void Validate()
         {
-            RequestValidator.ValidateMaxValue("size", this.Size, 100);
         }
 
         #endregion

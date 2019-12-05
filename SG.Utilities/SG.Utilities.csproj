@@ -48,6 +48,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -113,10 +114,10 @@
     <Compile Include="Color\LabRgb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base.Model\TreeJson.cs" />
+    <Compile Include="HardInfo\HardwareInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base.Document\PDF\" />
-    <Folder Include="System\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

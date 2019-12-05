@@ -26,7 +26,7 @@ namespace DingTalk.Api.Response
         /// 业务结果
         /// </summary>
         [XmlElement("result")]
-        public LeaveStatusVODomain Result { get; set; }
+        public LeaveStatusListVODomain Result { get; set; }
 
         /// <summary>
         /// 请求是否成功
@@ -70,6 +70,27 @@ public class LeaveStatusVODomain : TopObject
 	        /// </summary>
 	        [XmlElement("userid")]
 	        public string Userid { get; set; }
+}
+
+	/// <summary>
+/// LeaveStatusListVODomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class LeaveStatusListVODomain : TopObject
+{
+	        /// <summary>
+	        /// 是否有更多数据
+	        /// </summary>
+	        [XmlElement("has_more")]
+	        public bool HasMore { get; set; }
+	
+	        /// <summary>
+	        /// 请假状态列表
+	        /// </summary>
+	        [XmlArray("leave_status")]
+	        [XmlArrayItem("leave_status_v_o")]
+	        public List<LeaveStatusVODomain> LeaveStatus { get; set; }
 }
 
     }

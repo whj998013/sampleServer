@@ -62,16 +62,16 @@ public class ProcessTopVoDomain : TopObject
 	        public string Name { get; set; }
 	
 	        /// <summary>
+	        /// 是否开启自定义打印
+	        /// </summary>
+	        [XmlElement("open_custom_print")]
+	        public bool OpenCustomPrint { get; set; }
+	
+	        /// <summary>
 	        /// 模板code
 	        /// </summary>
 	        [XmlElement("process_code")]
 	        public string ProcessCode { get; set; }
-	
-	        /// <summary>
-	        /// 模板状态：PUBLISHED(启用)，INVALID(停用)
-	        /// </summary>
-	        [XmlElement("status")]
-	        public string Status { get; set; }
 }
 
     }

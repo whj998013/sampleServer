@@ -45,7 +45,14 @@ namespace SG.Model.Sample
         /// 还回单Id
         /// </summary>
         public string ReturnNo { get; set; }
-
+        /// <summary>
+        /// 借出天数
+        /// </summary>
+        public int LendDay { get; set; }
+        /// <summary>
+        /// 借出用途
+        /// </summary>
+        public string LendPurpose { get; set; }
         public LendRecordStats State { get; set; }
     }
 

@@ -10,7 +10,7 @@ using SG.SessionManage;
 using SampleBLL;
 using SampleBLL.Model;
 using SG.Interface.Sample;
-
+using SysBLL;
 namespace SampleApi.Controllers.Sample
 {
     [Author]
@@ -121,7 +121,7 @@ namespace SampleApi.Controllers.Sample
         public object GetInStorageUserList()
         {
 
-            return Ok(UserOper.GetInStorageUserList());
+            return Ok(SampleBLL.SampleUserOper.GetInStorageUserList());
         }
     }
 }

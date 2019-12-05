@@ -36,6 +36,24 @@ namespace DingTalk.Api.Response
 public class FormComponentValueVoDomain : TopObject
 {
 	        /// <summary>
+	        /// 组件类型
+	        /// </summary>
+	        [XmlElement("component_type")]
+	        public string ComponentType { get; set; }
+	
+	        /// <summary>
+	        /// 表单额外值
+	        /// </summary>
+	        [XmlElement("ext_value")]
+	        public string ExtValue { get; set; }
+	
+	        /// <summary>
+	        /// 组件id
+	        /// </summary>
+	        [XmlElement("id")]
+	        public string Id { get; set; }
+	
+	        /// <summary>
 	        /// 表单标签名
 	        /// </summary>
 	        [XmlElement("name")]

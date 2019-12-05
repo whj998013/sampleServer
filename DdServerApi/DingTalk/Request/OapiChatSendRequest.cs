@@ -169,6 +169,12 @@ public class ActionCardDomain : TopObject
 	        public string BtnOrientation { get; set; }
 	
 	        /// <summary>
+	        /// 是否隐藏发送者头像
+	        /// </summary>
+	        [XmlElement("hide_avatar")]
+	        public Nullable<bool> HideAvatar { get; set; }
+	
+	        /// <summary>
 	        /// 消息内容
 	        /// </summary>
 	        [XmlElement("markdown")]
@@ -343,6 +349,12 @@ public class OaDomain : TopObject
 
 public class VoiceDomain : TopObject
 {
+	        /// <summary>
+	        /// 语音时长
+	        /// </summary>
+	        [XmlElement("duration")]
+	        public Nullable<long> Duration { get; set; }
+	
 	        /// <summary>
 	        /// 语音mediaId
 	        /// </summary>

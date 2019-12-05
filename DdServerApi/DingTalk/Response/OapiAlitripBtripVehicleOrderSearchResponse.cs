@@ -55,6 +55,12 @@ public class OpenPriceInfoDomain : TopObject
 	        public string GmtCreate { get; set; }
 	
 	        /// <summary>
+	        /// 出行人，多个用‘,’分割
+	        /// </summary>
+	        [XmlElement("passenger_name")]
+	        public string PassengerName { get; set; }
+	
+	        /// <summary>
 	        /// 结算方式:1：个人现付，2:企业现付,4:企业月结，8、企业预存
 	        /// </summary>
 	        [XmlElement("pay_type")]
@@ -71,6 +77,26 @@ public class OpenPriceInfoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("type")]
 	        public long Type { get; set; }
+}
+
+	/// <summary>
+/// OpenUserAffiliateDoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class OpenUserAffiliateDoDomain : TopObject
+{
+	        /// <summary>
+	        /// 出行人名称
+	        /// </summary>
+	        [XmlElement("user_name")]
+	        public string UserName { get; set; }
+	
+	        /// <summary>
+	        /// 出行人ID
+	        /// </summary>
+	        [XmlElement("userid")]
+	        public string Userid { get; set; }
 }
 
 	/// <summary>
@@ -308,6 +334,13 @@ public class OpenVehicleOrderRsDomain : TopObject
 	        /// </summary>
 	        [XmlElement("travel_distance")]
 	        public string TravelDistance { get; set; }
+	
+	        /// <summary>
+	        /// 出行人列表
+	        /// </summary>
+	        [XmlArray("user_affiliate_list")]
+	        [XmlArrayItem("open_user_affiliate_do")]
+	        public List<OpenUserAffiliateDoDomain> UserAffiliateList { get; set; }
 	
 	        /// <summary>
 	        /// 预定人名称

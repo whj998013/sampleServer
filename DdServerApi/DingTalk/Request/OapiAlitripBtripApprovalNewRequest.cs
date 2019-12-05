@@ -185,7 +185,7 @@ public class OpenApiNewApplyRqDomain : TopObject
 	        public string DeptName { get; set; }
 	
 	        /// <summary>
-	        /// 部门id
+	        /// 部门id，如果不传，会根据user相关信息去获取对应的部门信息，如果传的是错误的部门信息，后面无法做部门的费用归属；部门ID只能是数字
 	        /// </summary>
 	        [XmlElement("deptid")]
 	        public string Deptid { get; set; }
@@ -208,6 +208,12 @@ public class OpenApiNewApplyRqDomain : TopObject
 	        /// </summary>
 	        [XmlElement("thirdpart_apply_id")]
 	        public string ThirdpartApplyId { get; set; }
+	
+	        /// <summary>
+	        /// 用户展示的外部审批单id信息
+	        /// </summary>
+	        [XmlElement("thirdpart_business_id")]
+	        public string ThirdpartBusinessId { get; set; }
 	
 	        /// <summary>
 	        /// 出行人列表
@@ -235,7 +241,7 @@ public class OpenApiNewApplyRqDomain : TopObject
 	        public string TripTitle { get; set; }
 	
 	        /// <summary>
-	        /// 用户名称
+	        /// 用户名称，如果要传必须传真实姓名，如果不传则会以系统当前维护userId对应的名称进行预订
 	        /// </summary>
 	        [XmlElement("user_name")]
 	        public string UserName { get; set; }

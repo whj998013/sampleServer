@@ -23,7 +23,7 @@ namespace SampleApi.Controllers.Yarn
         {
             if (obj == null) return BadRequest();
 
-            var exp = PredicateBuilder.True<YarnOutApply>().And(t => (t.Stats == SG.Model.ApplyState.审批中 || t.Stats == SG.Model.ApplyState.通过 || t.Stats == SG.Model.ApplyState.已出库));
+            var exp = PredicateBuilder.True<YarnOutApply>().And(t => (t.Stats == SG.Model.ApplyState.审批中 || t.Stats == SG.Model.ApplyState.通过 || t.Stats == SG.Model.ApplyState.已出库)&&!t.IsDelete);
 
             if (obj.Key != null && obj.Key != "")
             {
@@ -48,7 +48,7 @@ namespace SampleApi.Controllers.Yarn
         {
             if (obj == null) return BadRequest();
 
-            var exp = PredicateBuilder.True<YarnOutApply>().And(t => true);
+            var exp = PredicateBuilder.True<YarnOutApply>().And(t => !t.IsDelete);
             if (obj.Key != null && obj.Key != "")
             {
                 obj.Key.Split(' ').ToList().ForEach(p =>
@@ -89,7 +89,18 @@ namespace SampleApi.Controllers.Yarn
 
 
         }
+        /// <summary>
+        /// 撤回删除申请单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult YarnOutStock(string id)
+        {
+            YarnApplyOper.DeleteYarnApply(id,SessionManage.CurrentUser.UserName);
+            return Ok();
 
+        }
 
         /// <summary>
         /// 新的毛纱出库申请

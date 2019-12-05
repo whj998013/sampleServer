@@ -48,7 +48,7 @@ public class CityVoDomain : TopObject
 	        public string Code { get; set; }
 	
 	        /// <summary>
-	        /// 与搜索城市距离，单位千米，只在临近机场推荐有值
+	        /// 与搜索城市距离，单位千米，只在邻近机场推荐有值
 	        /// </summary>
 	        [XmlElement("distance")]
 	        public long Distance { get; set; }
@@ -58,6 +58,12 @@ public class CityVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("name")]
 	        public string Name { get; set; }
+	
+	        /// <summary>
+	        /// 邻近机场城市，只在邻近机场推荐有值
+	        /// </summary>
+	        [XmlElement("travel_name")]
+	        public string TravelName { get; set; }
 }
 
 	/// <summary>
@@ -75,7 +81,7 @@ public class SuggestRsDomain : TopObject
 	        public List<CityVoDomain> Cities { get; set; }
 	
 	        /// <summary>
-	        /// 是否为临近城市
+	        /// 是否为邻近城市
 	        /// </summary>
 	        [XmlElement("nearby")]
 	        public bool Nearby { get; set; }

@@ -31,6 +31,12 @@ namespace Top.Api
         public string SubErrMsg { get; set; }
 
         /// <summary>
+        /// TOP请求唯一标识符
+        /// </summary>
+        [XmlElement("request_id")]
+        public string RequestId { get; set; }
+
+        /// <summary>
         /// 响应原始内容
         /// </summary>
         public string Body { get; set; }

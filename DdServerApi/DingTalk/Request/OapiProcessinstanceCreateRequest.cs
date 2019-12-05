@@ -23,6 +23,13 @@ namespace DingTalk.Api.Request
         public string Approvers { get; set; }
 
         /// <summary>
+        /// 审批人列表，支持会签/或签，优先级高于approvers变量
+        /// </summary>
+        public string ApproversV2 { get; set; }
+
+        public List<ProcessInstanceApproverVoDomain> ApproversV2_ { set { this.ApproversV2 = TopUtils.ObjectToJson(value); } } 
+
+        /// <summary>
         /// 抄送人userid列表
         /// </summary>
         public string CcList { get; set; }
@@ -71,6 +78,7 @@ namespace DingTalk.Api.Request
             TopDictionary parameters = new TopDictionary();
             parameters.Add("agent_id", this.AgentId);
             parameters.Add("approvers", this.Approvers);
+            parameters.Add("approvers_v2", this.ApproversV2);
             parameters.Add("cc_list", this.CcList);
             parameters.Add("cc_position", this.CcPosition);
             parameters.Add("dept_id", this.DeptId);
@@ -87,10 +95,11 @@ namespace DingTalk.Api.Request
         public override void Validate()
         {
             RequestValidator.ValidateMaxListSize("approvers", this.Approvers, 20);
+            RequestValidator.ValidateObjectMaxListSize("approvers_v2", this.ApproversV2, 20);
             RequestValidator.ValidateMaxListSize("cc_list", this.CcList, 20);
             RequestValidator.ValidateRequired("dept_id", this.DeptId);
             RequestValidator.ValidateRequired("form_component_values", this.FormComponentValues);
-            RequestValidator.ValidateObjectMaxListSize("form_component_values", this.FormComponentValues, 20);
+            RequestValidator.ValidateObjectMaxListSize("form_component_values", this.FormComponentValues, 150);
             RequestValidator.ValidateRequired("originator_user_id", this.OriginatorUserId);
             RequestValidator.ValidateRequired("process_code", this.ProcessCode);
         }
@@ -119,6 +128,27 @@ public class FormComponentValueVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("value")]
 	        public string Value { get; set; }
+}
+
+	/// <summary>
+/// ProcessInstanceApproverVoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class ProcessInstanceApproverVoDomain : TopObject
+{
+	        /// <summary>
+	        /// 审批类型，会签：AND；或签：OR；单人：NONE
+	        /// </summary>
+	        [XmlElement("task_action_type")]
+	        public string TaskActionType { get; set; }
+	
+	        /// <summary>
+	        /// 审批人userid列表，会签/或签列表长度必须大于1，非会签/或签列表长度只能为1
+	        /// </summary>
+	        [XmlArray("user_ids")]
+	        [XmlArrayItem("string")]
+	        public List<string> UserIds { get; set; }
 }
 
         #endregion

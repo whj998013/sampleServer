@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Security;
 using Newtonsoft.Json;
-using System.Security.Cryptography;
 using DingTalk.Api;
-using DingTalk;
 using DingTalk.Api.Request;
 using DingTalk.Api.Response;
-using static DingTalk.Api.Response.CorpRoleGetrolegroupResponse;
-using static DingTalk.Api.Response.OapiUserListResponse;
 using SG.Model.Sys;
 using SG.Utilities.Base.Security;
 namespace SG.DdApi
@@ -155,7 +148,10 @@ namespace SG.DdApi
 
             return result;
         }
-
+        /// <summary>
+        /// 设置部门
+        /// </summary>
+        /// <param name="depts"></param>
         public void SetDept(List<Dept> depts)
         {
             _deptList.Clear();

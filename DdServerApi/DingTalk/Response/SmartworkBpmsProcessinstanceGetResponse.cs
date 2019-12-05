@@ -17,32 +17,6 @@ namespace DingTalk.Api.Response
         public DingOpenResultDomain Result { get; set; }
 
 	/// <summary>
-/// FormComponentValueVoDomain Data Structure.
-/// </summary>
-[Serializable]
-
-public class FormComponentValueVoDomain : TopObject
-{
-	        /// <summary>
-	        /// 标签扩展值
-	        /// </summary>
-	        [XmlElement("ext_value")]
-	        public string ExtValue { get; set; }
-	
-	        /// <summary>
-	        /// 标签名
-	        /// </summary>
-	        [XmlElement("name")]
-	        public string Name { get; set; }
-	
-	        /// <summary>
-	        /// 标签值
-	        /// </summary>
-	        [XmlElement("value")]
-	        public string Value { get; set; }
-}
-
-	/// <summary>
 /// OperationRecordsVoDomain Data Structure.
 /// </summary>
 [Serializable]
@@ -122,6 +96,44 @@ public class TaskTopVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("userid")]
 	        public string Userid { get; set; }
+}
+
+	/// <summary>
+/// FormComponentValueVoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class FormComponentValueVoDomain : TopObject
+{
+	        /// <summary>
+	        /// 组件类型
+	        /// </summary>
+	        [XmlElement("component_type")]
+	        public string ComponentType { get; set; }
+	
+	        /// <summary>
+	        /// 标签扩展值
+	        /// </summary>
+	        [XmlElement("ext_value")]
+	        public string ExtValue { get; set; }
+	
+	        /// <summary>
+	        /// 组件id
+	        /// </summary>
+	        [XmlElement("id")]
+	        public string Id { get; set; }
+	
+	        /// <summary>
+	        /// 标签名
+	        /// </summary>
+	        [XmlElement("name")]
+	        public string Name { get; set; }
+	
+	        /// <summary>
+	        /// 标签值
+	        /// </summary>
+	        [XmlElement("value")]
+	        public string Value { get; set; }
 }
 
 	/// <summary>

@@ -43,12 +43,14 @@ namespace SampleApi.Controllers
         /// <returns></returns>
 
         public IHttpActionResult GetLendOutList()
-        {
-
+        { 
             User user = SessionManage.CurrentUser;
-            var re = SampleLend.GetLendOutListDD(user);
-            if (re == null) return NotFound();
-            return Ok(re);
+            var exp = PredicateBuilder.True<LendOutView>().And(t => !t.IsDelete &&(t.State == LendRecordStats.借出审批||t.State==LendRecordStats.已借出)&&t.DdId==user.DdId);
+            var list = SampleLend.GetLendOutViewListByDesc(out int count, exp.Compile(), p => p.CreateDate,1, 6000);
+
+            //var re = SampleLend.GetLendOutListDD(user);
+            //if (re == null) return NotFound();
+            return Ok(new { count,list});
         }
         /// <summary>
         /// 客户端取得当前用户的待借出清单
@@ -88,15 +90,18 @@ namespace SampleApi.Controllers
         /// <param name="obj"></param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult ApplyLendOut(List<int> LendIdList)
+        public IHttpActionResult ApplyLendOut(dynamic requestObj)
         {
             User user = SessionManage.CurrentUser;
+            int LendDay = requestObj.lendDay;
+            string LendPurpost = requestObj.lendPurpost;
+            List<int> LendIdList = requestObj.lendIdList.ToObject<List<int>>();
 
             if (LendIdList.Count > 0)
             {
                 LendIdList.ForEach(p =>
                 {
-                    bool re = SampleLend.ApplyLendOut(p);
+                    bool re = SampleLend.ApplyLendOut(p, LendDay, LendPurpost);
 
                 });
                 return Ok();
@@ -150,13 +155,25 @@ namespace SampleApi.Controllers
         /// <summary>
         /// 返回待借用清单
         /// </summary>
-        /// <param name="seachObj"></param>
+        /// <param name="obj"></param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult GetAllLendList(SeachObj seachObj)
+        public IHttpActionResult GetAllLendList(SeachObjSample obj)
         {
-            var re = SampleLend.GetAllLendList(seachObj.PageId, seachObj.PageSize);
-            return Ok(re);
+            if (obj == null) return BadRequest();
+            var exp = PredicateBuilder.True<LendOutView>().And(t => !t.IsDelete && t.State == LendRecordStats.借出审批);
+            if (obj.UserId.Count > 0)
+            {
+                exp = exp.And(t => obj.UserId.Contains(t.DdId));
+            }
+            if (obj.InUserId!=null&&obj.InUserId.Count > 0)
+            {
+                exp = exp.And(t => obj.InUserId.Contains(t.InDdId));
+            }
+             var list = SampleLend.GetLendOutViewListByDesc(out int count, exp.Compile(), p => p.CreateDate, obj.PageId, obj.PageSize);
+
+            //var re = SampleLend.GetAllLendList(obj.PageId, obj.PageSize);
+            return Ok(new { count, list });
         }
         /// <summary>
         /// 返回已还回的借用清单
@@ -181,7 +198,7 @@ namespace SampleApi.Controllers
                 var ed = (DateTime)obj.EndDate;
                 exp = exp.And(t => t.LendOutDate >= bd && t.LendOutDate < ed);
             }
-            var list = SampleLend.GetLendOutViewList(out int count, exp.Compile(), p => p.ReturnDate, obj.PageId, obj.PageSize);
+            var list = SampleLend.GetLendOutViewListByDesc(out int count, exp.Compile(), p => p.ReturnDate, obj.PageId, obj.PageSize);
             return Ok(new { count, list });
         }
 
@@ -191,10 +208,22 @@ namespace SampleApi.Controllers
         /// <param name="seachObj"></param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult GetAllLendOutList(SeachObj seachObj)
+        public IHttpActionResult GetAllLendOutList(SeachObjSample obj)
         {
-            var re = SampleLend.GetAllLendOutList(seachObj.PageId, seachObj.PageSize);
-            return Ok(re);
+            if (obj == null) return BadRequest();
+            var exp = PredicateBuilder.True<LendOutView>().And(t => !t.IsDelete && t.State == LendRecordStats.已借出);
+            if (obj.UserId.Count > 0)
+            {
+                exp = exp.And(t => obj.UserId.Contains(t.DdId));
+            }
+            if (obj.InUserId.Count > 0)
+            {
+                exp = exp.And(t => obj.InUserId.Contains(t.InDdId));
+            }
+
+
+            var list = SampleLend.GetLendOutViewList(out int count, exp.Compile(), p => p.LendOutDate, obj.PageId, obj.PageSize);
+            return Ok(new { count, list });
         }
         /// <summary>
         /// 执行通过借用申请 

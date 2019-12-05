@@ -35,12 +35,50 @@ namespace DingTalk.Api.Response
         public bool Success { get; set; }
 
 	/// <summary>
+/// FormComponentStatVoDomain Data Structure.
+/// </summary>
+[Serializable]
+
+public class FormComponentStatVoDomain : TopObject
+{
+	        /// <summary>
+	        /// 组件id
+	        /// </summary>
+	        [XmlElement("id")]
+	        public string Id { get; set; }
+	
+	        /// <summary>
+	        /// 标题
+	        /// </summary>
+	        [XmlElement("label")]
+	        public string Label { get; set; }
+	
+	        /// <summary>
+	        /// 单位
+	        /// </summary>
+	        [XmlElement("unit")]
+	        public string Unit { get; set; }
+	
+	        /// <summary>
+	        /// 是否大写
+	        /// </summary>
+	        [XmlElement("upper")]
+	        public bool Upper { get; set; }
+}
+
+	/// <summary>
 /// FormComponentPropVoDomain Data Structure.
 /// </summary>
 [Serializable]
 
 public class FormComponentPropVoDomain : TopObject
 {
+	        /// <summary>
+	        /// 考勤类型文案
+	        /// </summary>
+	        [XmlElement("attend_type_label")]
+	        public string AttendTypeLabel { get; set; }
+	
 	        /// <summary>
 	        /// 业务别名, 当组件属于业务套件的一部分时方便业务识别(DDBizSuite)
 	        /// </summary>
@@ -64,6 +102,18 @@ public class FormComponentPropVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("disable")]
 	        public bool Disable { get; set; }
+	
+	        /// <summary>
+	        /// 是否开启时长
+	        /// </summary>
+	        [XmlElement("duration")]
+	        public bool Duration { get; set; }
+	
+	        /// <summary>
+	        /// 时长文案
+	        /// </summary>
+	        [XmlElement("duration_label")]
+	        public string DurationLabel { get; set; }
 	
 	        /// <summary>
 	        /// id
@@ -90,10 +140,23 @@ public class FormComponentPropVoDomain : TopObject
 	        public string NotPrint { get; set; }
 	
 	        /// <summary>
+	        /// 是否需要大写 默认是需要; 1:不需要大写, 空或者0:需要大写
+	        /// </summary>
+	        [XmlElement("not_upper")]
+	        public string NotUpper { get; set; }
+	
+	        /// <summary>
 	        /// 必填
 	        /// </summary>
 	        [XmlElement("required")]
 	        public bool Required { get; set; }
+	
+	        /// <summary>
+	        /// 明细里需要统计的字段
+	        /// </summary>
+	        [XmlArray("stat_field")]
+	        [XmlArrayItem("form_component_stat_vo")]
+	        public List<FormComponentStatVoDomain> StatField { get; set; }
 }
 
 	/// <summary>
@@ -191,6 +254,12 @@ public class ProcessTopVoDomain : TopObject
 	        public List<FormComponentVoDomain> FormComponentVos { get; set; }
 	
 	        /// <summary>
+	        /// 是否开启手写签名
+	        /// </summary>
+	        [XmlElement("hand_sign_enable")]
+	        public bool HandSignEnable { get; set; }
+	
+	        /// <summary>
 	        /// 图片地址
 	        /// </summary>
 	        [XmlElement("icon_url")]
@@ -201,6 +270,12 @@ public class ProcessTopVoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("name")]
 	        public string Name { get; set; }
+	
+	        /// <summary>
+	        /// 流程相关信息
+	        /// </summary>
+	        [XmlElement("processConfig")]
+	        public string ProcessConfig { get; set; }
 }
 
     }

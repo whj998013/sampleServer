@@ -27,6 +27,11 @@ namespace DingTalk.Api.Request
         public string Extattr { get; set; }
 
         /// <summary>
+        /// 入职时间
+        /// </summary>
+        public Nullable<long> HiredDate { get; set; }
+
+        /// <summary>
         /// 是否号码隐藏, true表示隐藏, false表示不隐藏。隐藏手机号后，手机号在个人资料页隐藏，但仍可对其发DING、发起钉钉免费商务电话。
         /// </summary>
         public Nullable<bool> IsHide { get; set; }
@@ -104,6 +109,7 @@ namespace DingTalk.Api.Request
             parameters.Add("department", this.Department);
             parameters.Add("email", this.Email);
             parameters.Add("extattr", this.Extattr);
+            parameters.Add("hiredDate", this.HiredDate);
             parameters.Add("isHide", this.IsHide);
             parameters.Add("isSenior", this.IsSenior);
             parameters.Add("jobnumber", this.Jobnumber);

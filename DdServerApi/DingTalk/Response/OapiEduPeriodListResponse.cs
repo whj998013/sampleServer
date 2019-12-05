@@ -49,6 +49,12 @@ public class PeriodResponseDomain : TopObject
 	        public string Name { get; set; }
 	
 	        /// <summary>
+	        /// 学段名称类型，text表示文本型，如中学为七年级，八年级，九年级，number表示数字型，如初中一年级1班，二年级1班等
+	        /// </summary>
+	        [XmlElement("name_mode")]
+	        public string NameMode { get; set; }
+	
+	        /// <summary>
 	        /// 学段别名
 	        /// </summary>
 	        [XmlElement("nick")]

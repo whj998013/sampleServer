@@ -106,6 +106,18 @@ public class ReportOapiVoDomain : TopObject
 	        public List<string> Images { get; set; }
 	
 	        /// <summary>
+	        /// 提交日志时点击获取位置，定位到的纬度（没有获取位置则为空），此字段的值默认为空，需要单独申请开通
+	        /// </summary>
+	        [XmlElement("latitude")]
+	        public string Latitude { get; set; }
+	
+	        /// <summary>
+	        /// 提交日志时点击获取位置，定位到的经度（没有获取位置则为空），此字段的值默认为空，需要单独申请开通
+	        /// </summary>
+	        [XmlElement("longitude")]
+	        public string Longitude { get; set; }
+	
+	        /// <summary>
 	        /// 备注
 	        /// </summary>
 	        [XmlElement("remark")]

@@ -12,18 +12,21 @@ using SG.Model.Proof;
 using SG.DdApi;
 using SG.DdApi.Approve;
 using SunginData;
+using SysBLL;
+using SG.Utilities;
 namespace SampleApi.Controllers.Proof
 {
 
     [Author]
     public class MyProofController : ApiController
     {
-
+                                                              
         public IHttpActionResult GetMyProofs()
         {
             User u = SessionManage.CurrentUser;
             using ProofOrderOper poo = new ProofOrderOper(u);
             var list = poo.GetUserProofOrderList().ToArray();
+            var str = JsonHelper.ToJson(list);
             return Ok(list);
 
         }
@@ -94,6 +97,7 @@ namespace SampleApi.Controllers.Proof
         /// <summary>
         /// 发送下载申请
         /// </summary>
+        /// 
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]

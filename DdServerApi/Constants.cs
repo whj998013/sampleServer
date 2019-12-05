@@ -27,8 +27,8 @@ namespace Top.Api
         public const string QIMEN_CLOUD_ERROR_CODE = "code";
         public const string QIMEN_CLOUD_ERROR_MSG = "message";
 
-        public const string SDK_VERSION = "top-sdk-net-20190322";
-        public const string SDK_VERSION_CLUSTER = "top-sdk-net-cluster-20190322";
+        public const string SDK_VERSION = "top-sdk-net-20191122";
+        public const string SDK_VERSION_CLUSTER = "top-sdk-net-cluster-20191122";
 
         public const string APP_KEY = "app_key";
         public const string FORMAT = "format";

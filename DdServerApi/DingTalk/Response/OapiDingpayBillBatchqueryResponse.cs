@@ -132,6 +132,12 @@ public class DingPayBillOpenBoDomain : TopObject
 	        public string PayChannelBizNo { get; set; }
 	
 	        /// <summary>
+	        /// 收款方真实账号
+	        /// </summary>
+	        [XmlElement("pay_channel_payee_real_uid")]
+	        public string PayChannelPayeeRealUid { get; set; }
+	
+	        /// <summary>
 	        /// 支付渠道方付款者实际出资UID
 	        /// </summary>
 	        [XmlElement("pay_channel_payer_real_uid")]
@@ -168,6 +174,12 @@ public class DingPayBillOpenBoDomain : TopObject
 	        public string PrincipalId { get; set; }
 	
 	        /// <summary>
+	        /// 收款人账户类型
+	        /// </summary>
+	        [XmlElement("receiptor_type")]
+	        public string ReceiptorType { get; set; }
+	
+	        /// <summary>
 	        /// 来源应用ID
 	        /// </summary>
 	        [XmlElement("source_app_id")]
@@ -178,6 +190,18 @@ public class DingPayBillOpenBoDomain : TopObject
 	        /// </summary>
 	        [XmlElement("status")]
 	        public string Status { get; set; }
+	
+	        /// <summary>
+	        /// 中止操作员id
+	        /// </summary>
+	        [XmlElement("termination_operator_id")]
+	        public string TerminationOperatorId { get; set; }
+	
+	        /// <summary>
+	        /// 中止支付原因
+	        /// </summary>
+	        [XmlElement("termination_reason")]
+	        public string TerminationReason { get; set; }
 	
 	        /// <summary>
 	        /// 标题
@@ -205,6 +229,12 @@ public class BillBatchQueryOpenResponseDomain : TopObject
 	        /// </summary>
 	        [XmlElement("current_page_num")]
 	        public long CurrentPageNum { get; set; }
+	
+	        /// <summary>
+	        /// 如果nextKey不为空，说明还有翻页数据
+	        /// </summary>
+	        [XmlElement("next_key")]
+	        public string NextKey { get; set; }
 	
 	        /// <summary>
 	        /// 每页大小

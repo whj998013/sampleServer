@@ -89,7 +89,28 @@ namespace SunginData.Migrations
                     context.Jobs.Add(p);
                 }
             });
+            DataDefaultList.GetPurposes().ForEach(p =>
+            {
+                if (context.Purposes.SingleOrDefault(pur => pur.Name == p.Name) == null)
+                {
+                    context.Purposes.Add(p);
+                }
+            });
             context.SaveChanges();
+        }
+
+        public static void InitData(SunginDataContext context)
+        {
+            var f = context.LendRecords.FirstOrDefault();
+            if (f != null && f.LendDay == 0)
+            {
+                context.LendRecords.ToList().ForEach(p =>
+                {
+                    p.LendDay = 7;
+                    p.LendPurpose = "其它";
+                });
+                context.SaveChanges();
+            }
         }
         public static void ReNameDatatabel(SunginData.SunginDataContext context)
         {
@@ -133,8 +154,8 @@ namespace SunginData.Migrations
             //建立视图
             var createView = @"CREATE VIEW [dbo].[LendOutViews] AS 
                 SELECT   dbo.LendRecords.Id, dbo.LendRecords.StyleId, dbo.LendRecords.DdId, dbo.LendRecords.UserName, 
-                dbo.LendRecords.UserDept, dbo.LendRecords.LendOutDate, dbo.LendRecords.LendOutNo, 
-                dbo.LendRecords.ReturnDate, dbo.LendRecords.ReturnNo, dbo.LendRecords.State, 
+                dbo.LendRecords.UserDept, dbo.LendRecords.LendOutDate, dbo.LendRecords.LendOutNo,dbo.LendRecords.CreateDate,
+                dbo.LendRecords.ReturnDate, dbo.LendRecords.ReturnNo, dbo.LendRecords.State,  dbo.LendRecords.LendDay,  dbo.LendRecords.LendPurpose, 
                 dbo.SampleBaseInfoes.CreateUser AS InUserName, dbo.SampleBaseInfoes.DeptName AS InUserDept, 
                 dbo.SampleBaseInfoes.DdId AS InDdId, dbo.LendRecords.IsDelete,dbo.SampleBaseInfoes.StyleNo,
                 dbo.SampleBaseInfoes.Gauge,dbo.SampleBaseInfoes.Color,dbo.SampleBaseInfoes.Size,dbo.SampleBaseInfoes.Kinds,dbo.SampleBaseInfoes.Material,

@@ -36,6 +36,12 @@ public class OpenDeviceVoDomain : TopObject
 	        public string DeviceId { get; set; }
 	
 	        /// <summary>
+	        /// 设备MAC地址
+	        /// </summary>
+	        [XmlElement("device_mac")]
+	        public string DeviceMac { get; set; }
+	
+	        /// <summary>
 	        /// 设备SN
 	        /// </summary>
 	        [XmlElement("device_sn")]
