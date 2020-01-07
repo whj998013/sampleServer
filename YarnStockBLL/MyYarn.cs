@@ -17,10 +17,11 @@ namespace YarnStockBLL
             _user = u;
         }
 
-        private void YarnOutApplyStatsUpdate(List<YarnOutApply> list)
+        public static void YarnOutApplyStatsUpdate()
         {
             using YarnStockContext ysc = new YarnStockContext();
-            list.Where(t => t.Stats == SG.Model.ApplyState.通过).ToList().ForEach(p =>
+            using SunginDataContext sdc = new SunginDataContext();
+            sdc.YarnOutApplies.Where(t => t.Stats == SG.Model.ApplyState.通过&&!t.IsDelete).ToList().ForEach(p =>
                {
                    var os = ysc.OutStorage.FirstOrDefault(o => o.OrderNum == p.OrderNum && o.IsDelete == 0);
                    if (os != null)
@@ -35,6 +36,7 @@ namespace YarnStockBLL
                        p.Stats = SG.Model.ApplyState.仓库审核不通过;
                    }
                });
+            sdc.SaveChanges();
 
         }
         public List<YarnOutApply> GetMyOutApplyList(out int Count, Func<YarnOutApply, bool> whereLambda, Func<YarnOutApply, object> orderbyLamba, int PageId, int PageSize)
@@ -42,8 +44,6 @@ namespace YarnStockBLL
             using SunginDataContext sdc = new SunginDataContext();
             Count = sdc.YarnOutApplies.Where(p => p.ApplyEmpDdid == _user.DdId).Where(whereLambda).Count();
             List<YarnOutApply> list = sdc.YarnOutApplies.AsNoTracking().Where(whereLambda).OrderBy(orderbyLamba).ThenBy(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
-            YarnOutApplyStatsUpdate(list);
-            sdc.SaveChanges();
             return list;
 
         }
@@ -53,8 +53,6 @@ namespace YarnStockBLL
             using SunginDataContext sdc = new SunginDataContext();
             Count = sdc.YarnOutApplies.Where(p => p.ApplyEmpDdid == _user.DdId).Where(whereLambda).Count();
             List<YarnOutApply> list = sdc.YarnOutApplies.AsNoTracking().Where(whereLambda).OrderByDescending(orderbyLamba).OrderByDescending(p => p.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
-            YarnOutApplyStatsUpdate(list);
-            sdc.SaveChanges();
             return list;
 
         }

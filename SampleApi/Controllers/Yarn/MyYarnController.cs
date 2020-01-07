@@ -50,6 +50,7 @@ namespace SampleApi.Controllers.Yarn
             {
                 //只返回个人数据
                 exp = exp.And(e => e.UserID == user.DdId);
+
             }
 
 

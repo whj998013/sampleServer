@@ -65,6 +65,13 @@ namespace SampleApi
     {
         [DataMember(Name = "deptIdList")]
         public List<long> DeptIdList { get; set; } = new List<long>();
+        [DataMember(Name = "getAllDept")]
+        public bool GetAllDept { get; set; }
+    }
+    public class SeachObjDeptAndState: SeachObjDept
+    {
+        [DataMember(Name ="state")]
+        public int State { get; set; }
     }
     public class SeachObjLab : SeachObj
     {

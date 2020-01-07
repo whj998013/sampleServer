@@ -28,14 +28,13 @@ namespace SampleApi.App_Start
             InitDdCallBack();
 
             //生成部门
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 ddOper.SetDept(new DeptOper().GetDepts());
             });
             DoHistoryCallBack(ddOper);
 
         }
-
 
 
         /// <summary>

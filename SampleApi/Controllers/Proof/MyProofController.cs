@@ -20,7 +20,7 @@ namespace SampleApi.Controllers.Proof
     [Author]
     public class MyProofController : ApiController
     {
-                                                              
+        [HttpGet]
         public IHttpActionResult GetMyProofs()
         {
             User u = SessionManage.CurrentUser;
@@ -37,7 +37,7 @@ namespace SampleApi.Controllers.Proof
             var tlist = new ProofRecord().GetProofRecord(id);
             return Ok(tlist);
         }
-
+        [HttpGet]
         public IHttpActionResult GetMyFinshProofs()
         {
 
@@ -97,7 +97,6 @@ namespace SampleApi.Controllers.Proof
         /// <summary>
         /// 发送下载申请
         /// </summary>
-        /// 
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]

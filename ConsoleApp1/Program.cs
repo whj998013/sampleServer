@@ -39,15 +39,34 @@ namespace ConsoleApp1
     class Program
     {
 
+
+
         public static void Main()
         {
-            IDdOper ddOper = DdOperator.GetDdApi();
-            ddOper.CorpId = "ding99dd341fc99a25eb";
-            ddOper.CorpSecret = "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0";
-            ddOper.AgentID = "132907517";
-            DdMsgOper dmo = new DdMsgOper(ddOper);
-            Console.Write("send ok");
+            //IDdOper ddOper = DdOperator.GetDdApi();
+            //ddOper.CorpId = "ding99dd341fc99a25eb";
+            //ddOper.CorpSecret = "szdxoAP2Wp2knwzsDcsDYvd_qLAjvx0YANa1RH4hOU-O8VxENo5hYE5glb_CsQg0";
+            //ddOper.AgentID = "132907517";
+            //DdMsgOper dmo = new DdMsgOper(ddOper);
+            //Console.Write("send ok");
+            //Console.ReadKey();
+
+            var RE = Task.Run(async () =>
+                {
+                    Console.WriteLine("t0");
+
+                    await Task.Delay(3000);
+                    Console.WriteLine("t1");
+
+                    return "HELLO";
+
+                });
+            Console.WriteLine("p1");
+            Console.WriteLine(RE.Result);
+            Console.WriteLine("p2");
+
             Console.ReadKey();
+
 
         }
         public static void Maininit()
@@ -73,10 +92,9 @@ namespace ConsoleApp1
             SettingOper.SetValue("PublicOwerId2", "manager2606");
             SettingOper.SetValue("SampleLendOutDay", "6");
             SettingOper.SetValue("SampleRemindBackDay", "5");
-
-
             Console.ReadKey();
 
+        
         }
 
         async static void AsyncFunction()

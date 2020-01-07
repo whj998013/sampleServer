@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.SessionState;
 using SampleApi.App_Start;
+using System.Timers;
 
 namespace SampleApi
 {
@@ -16,12 +17,13 @@ namespace SampleApi
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             bool NeedRegister = true;
 #if DEBUG
-            NeedRegister = false;
+            NeedRegister = true;
 #endif
 
             if (NeedRegister) GlobalConfiguration.Configuration.Filters.Add(new WebApiExceptionFilterAttribute());
 
             DdConfig.Init();
+            YarnStateSync.BeginSync();
 
         }
         public override void Init()

@@ -22,9 +22,8 @@ namespace SampleApi.Controllers.Yarn
         public IHttpActionResult GetMyYarnOutApplyList(SeachObj obj)
         {
             if (obj == null) return BadRequest();
-
-            var exp = PredicateBuilder.True<YarnOutApply>().And(t => (t.Stats == SG.Model.ApplyState.审批中 || t.Stats == SG.Model.ApplyState.通过 || t.Stats == SG.Model.ApplyState.已出库)&&!t.IsDelete);
-
+            var exp = PredicateBuilder.True<YarnOutApply>().And(t =>t.ApplyEmpDdid== SessionManage.CurrentUser.DdId && (t.Stats == SG.Model.ApplyState.审批中 || t.Stats == SG.Model.ApplyState.通过 || t.Stats == SG.Model.ApplyState.已出库) && !t.IsDelete);
+            
             if (obj.Key != null && obj.Key != "")
             {
                 obj.Key.Split(' ').ToList().ForEach(p =>
@@ -44,11 +43,15 @@ namespace SampleApi.Controllers.Yarn
         }
 
         [HttpPost]
-        public IHttpActionResult GetYarnOutApplyList(SeachObjDept obj)
+        public IHttpActionResult GetYarnOutApplyList(SeachObjDeptAndState obj)
         {
             if (obj == null) return BadRequest();
 
             var exp = PredicateBuilder.True<YarnOutApply>().And(t => !t.IsDelete);
+            if (obj.State > 0)
+            {
+                exp = exp.And(p => p.Stats == (SG.Model.ApplyState)obj.State);
+            }
             if (obj.Key != null && obj.Key != "")
             {
                 obj.Key.Split(' ').ToList().ForEach(p =>
@@ -65,17 +68,20 @@ namespace SampleApi.Controllers.Yarn
             }
             var user = SessionManage.CurrentUser;
 
-            if (obj.DeptIdList.Count > 0)
+            if (!obj.GetAllDept)
             {
-                //根据部门返回
-                var namelist = new PvmOper(user).GetDeptNameList(obj.DeptIdList, PvmType.PV);
-                exp = exp.And(e => namelist.Contains(e.ApplyDeptName));
+                if (obj.DeptIdList.Count > 0)
+                {
+                    //根据部门返回
+                    var namelist = new PvmOper(user).GetDeptNameList(obj.DeptIdList, PvmType.PV);
+                    exp = exp.And(e => namelist.Contains(e.ApplyDeptName));
 
-            }
-            else
-            {
-                //只返回个人数据
-                exp = exp.And(e => e.ApplyEmpDdid == user.DdId);
+                }
+                else
+                {
+                    //只返回个人数据
+                    exp = exp.And(e => e.ApplyEmpDdid == user.DdId);
+                }
             }
 
 
@@ -95,9 +101,21 @@ namespace SampleApi.Controllers.Yarn
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public IHttpActionResult YarnOutStock(string id)
+        public IHttpActionResult DeleteYarnOutStock(string id)
         {
-            YarnApplyOper.DeleteYarnApply(id,SessionManage.CurrentUser.UserName);
+            YarnApplyOper.DeleteYarnApply(id, SessionManage.CurrentUser.UserName);
+            return Ok();
+
+        }
+        /// <summary>
+        /// 强制通过申请单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult AlowYarnOutStock(string id)
+        {
+            YarnApplyOper.AlowYarnApply(id);
             return Ok();
 
         }
