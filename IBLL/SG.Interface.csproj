@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseModel.cs" />
+    <Compile Include="IDataQuery.cs" />
     <Compile Include="IFToS.cs" />
     <Compile Include="Product\IProductionRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

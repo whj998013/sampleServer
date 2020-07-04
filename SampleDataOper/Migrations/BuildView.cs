@@ -99,6 +99,7 @@ namespace SunginData.Migrations
             context.SaveChanges();
         }
 
+
         public static void InitData(SunginDataContext context)
         {
             var f = context.LendRecords.FirstOrDefault();

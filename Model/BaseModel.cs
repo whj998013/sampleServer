@@ -8,7 +8,7 @@ using SG.Interface;
 namespace SG.Model
 {
   
-    public abstract class BaseModel :  IBaseModel
+    public abstract class BaseModel :  IBaseModel,IDataQuery
     {
         [JsonIgnore]
         public string OperRemark { get; set; }

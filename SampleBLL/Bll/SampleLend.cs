@@ -194,7 +194,7 @@ namespace SampleBLL
         /// </summary>
         /// <param name="_lendOutNo"></param>
         /// <returns></returns>
-        public static bool ApplyLendOut(int LendId,int LendDay,string LendPurpost)
+        public static bool ApplyLendOut(int LendId, int LendDay, string LendPurpost)
         {
             using SunginDataContext sc = new SunginDataContext();
             var lr = sc.LendRecords.SingleOrDefault(p => p.Id == LendId);
@@ -336,8 +336,9 @@ namespace SampleBLL
         public static object GetLendOutViewListByDesc(out int Count, Func<LendOutView, bool> whereLambda, Func<LendOutView, object> orderbyLamba, int PageId, int PageSize)
         {
             using SunginDataContext sc = new SunginDataContext();
-            Count = sc.LendOutViews.Where(whereLambda).Count();
-            var list = sc.LendOutViews.Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(t => t.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
+            // Count = sc.LendOutViews.Where(whereLambda).Count();
+            Count = sc.LendOutViews.AsNoTracking().Count(whereLambda);
+            var list = sc.LendOutViews.AsNoTracking().Where(whereLambda).OrderByDescending(orderbyLamba).ThenByDescending(t => t.Id).Skip(PageSize * (PageId - 1)).Take(PageSize).ToList();
             return list;
         }
 

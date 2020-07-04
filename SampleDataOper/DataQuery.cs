@@ -20,11 +20,8 @@ namespace SunginData
         public static List<T> GetRecords<T>(int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                return sdc.Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            return sdc.Set<T>().AsNoTracking().Where(whereLambda).Where(p => p.IsDelete == false).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
         /// <summary>
@@ -36,12 +33,8 @@ namespace SunginData
         public static List<T> GetRecords<T>(Func<T, bool> whereLambda = null) where T : BaseModel
         {
             if (whereLambda == null) whereLambda = p => true;
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                return sdc.Set<T>().Where(whereLambda).Where(p => p.IsDelete == false).ToList();
-            }
-
-
+            using SunginDataContext sdc = new SunginDataContext();
+            return sdc.Set<T>().AsNoTracking().Where(whereLambda).Where(p => p.IsDelete == false).ToList();
         }
 
         /// <summary>
@@ -55,10 +48,8 @@ namespace SunginData
         public static List<T> GetAllRecords<T>(int pageSize, int pageIndex, Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                return sdc.Set<T>().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            return sdc.Set<T>().AsNoTracking().Where(whereLambda).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
         }
 
@@ -71,22 +62,16 @@ namespace SunginData
         public static List<T> GetAllRecords<T>(Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                return sdc.Set<T>().Where(whereLambda).ToList();
-            }
+            using SunginDataContext sdc = new SunginDataContext();
+            return sdc.Set<T>().AsNoTracking().Where(whereLambda).ToList();
 
         }
 
         public static T GetSingle<T>(Func<T, bool> whereLambda = null) where T : class
         {
             if (whereLambda == null) whereLambda = p => true;
-
-            using (SunginDataContext sdc = new SunginDataContext())
-            {
-                return sdc.Set<T>().Where(whereLambda).ToList().FirstOrDefault();
-            }
-
+            using SunginDataContext sdc = new SunginDataContext();
+            return sdc.Set<T>().AsNoTracking().FirstOrDefault(whereLambda);
         }
 
 

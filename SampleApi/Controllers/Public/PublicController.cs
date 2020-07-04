@@ -11,6 +11,7 @@ using SysBLL;
 using SG.SessionManage;
 using SunginData;
 using SG.Model.Sys;
+using SampleApi.Models;
 namespace SampleApi.Controllers.Public
 {
     [Author]
@@ -52,7 +53,34 @@ namespace SampleApi.Controllers.Public
             return Ok(plist);
 
         }
-
+        [HttpGet]
+        public IHttpActionResult GetMenuItem()
+        {
+            var menulit = DataQuery.GetAllRecords<Permission>(p => p.Type == PermissionType.Menu || p.Type == PermissionType.Item).ToList().OrderBy(p => p.Px);
+            List<MenuObj> menu = new List<MenuObj>();
+            menulit.Where(p => p.Type == PermissionType.Menu).ToList().ForEach(p =>
+            {
+                var m = new MenuObj
+                {
+                    Cname = p.CnName,
+                    Icon = p.Icon,
+                    Key = p.Key,
+                    Name = p.Name
+                };
+                menulit.Where(i => i.UpKey == m.Key).ToList().ForEach(i =>
+                {
+                    m.Items.Add(new ItmeObj
+                    {
+                        Cname=i.CnName,
+                        Name=i.Name,
+                        Key=i.Key,
+                        Url=i.Url
+                    });
+                });
+                menu.Add(m);
+            });
+            return Ok(menu);
+        }
 
     }
 }

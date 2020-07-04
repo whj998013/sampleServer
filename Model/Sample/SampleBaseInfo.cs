@@ -67,7 +67,7 @@ namespace SG.Model.Sample
         /// <summary>
         /// 搜索字符串
         /// </summary>
-        public string SeachStr { get; set; }
+        public string SeachStr { get; set; }            
         /// <summary>
         /// 是否有库存
         /// </summary>
@@ -97,6 +97,5 @@ namespace SG.Model.Sample
         public string Counts { get; set; }
 
     }
-
  
 }

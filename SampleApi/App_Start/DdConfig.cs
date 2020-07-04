@@ -90,7 +90,7 @@ namespace SampleApi.App_Start
 
             bool NeedRegister = true;
 #if DEBUG
-           // NeedRegister = false;
+            // NeedRegister = false;
 #endif
 
             if (NeedRegister)
@@ -111,12 +111,16 @@ namespace SampleApi.App_Start
                     do
                     {
                         var re = dcb.GetFailCallBack();
-                        re.FailedList.ForEach(p =>
+                        if (re.FailedList != null)
                         {
-                            dynamic robj = JsonHelper.ToObj(p.BpmsInstanceChange);
-                            dbso.DdCallBack(robj.bpmsCallBackData);
-                        });
-                        hasMore = re.HasMore;
+                            re.FailedList.ForEach(p =>
+                                                    {
+                                                        dynamic robj = JsonHelper.ToObj(p.BpmsInstanceChange);
+                                                        dbso.DdCallBack(robj.bpmsCallBackData);
+                                                    });
+                            hasMore = re.HasMore;
+                        }
+
                     } while (hasMore);
 
                 });
