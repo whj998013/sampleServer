@@ -5,7 +5,8 @@
         string Color { get; set; }
         int Num { get; set; }
         string Size { get; set; }
-        string StockId { get; set; }
-        string StyleId { get; set; }
+        string GoodsId { get; set; }
+
+        double InStockPrice { get; set; }
     }
 }

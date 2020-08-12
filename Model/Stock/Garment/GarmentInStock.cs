@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SG.Interface.Stock;
+
 namespace SG.Model.Stock
 {
-    /// <summary>
-    /// 库存记录
-    /// </summary>
-    public class GarmentStock : BaseModel, IStock
+    public class GarmentInStock
     {
         public int Id { get; set; }
+        /// <summary>
+        /// 入库ID
+        /// </summary>
+        public string InStockId { get; set; }
         /// <summary>
         /// 库存ID
         /// </summary>
@@ -33,7 +34,7 @@ namespace SG.Model.Stock
         /// </summary>
         public string Color { get; set; }
         /// <summary>
-        /// 当前库存数量
+        /// 入库数量
         /// </summary>
         public int Num { get; set; }
         /// <summary>
@@ -52,7 +53,10 @@ namespace SG.Model.Stock
         /// 库位
         /// </summary>
         public string Location { get; set; }
-        
+        /// <summary>
+        /// 搜索关键词
+        /// </summary>
+        public string SeachKey { get; set; }
         /// <summary>
         /// 入库员工姓名
         /// </summary>
@@ -64,7 +68,7 @@ namespace SG.Model.Stock
         /// <summary>
         /// 入库员工
         /// </summary>
-        public SG.Model.Sys.User InStockStaff { get; set; }
+        public Sys.User InStockStaff { get; set; }
         /// <summary>
         /// 入库时间
         /// </summary>

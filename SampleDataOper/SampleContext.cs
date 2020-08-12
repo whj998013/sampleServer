@@ -47,10 +47,7 @@ namespace SunginData
         /// 数据序号记录表
         /// </summary>
         public DbSet<Km> KMs { get; set; }
-        /// <summary>
-        /// 库存记录
-        /// </summary>
-        public DbSet<GarmentStock> GarmentStocks { get; set; }
+        
 
         /// <summary>
         /// 成份表
@@ -149,6 +146,42 @@ namespace SunginData
         /// 用途表
         /// </summary>
         public DbSet<Purpose> Purposes { get; set; }
+
+        /// <summary>
+        /// 库存记录
+        /// </summary>
+        public DbSet<GarmentStock> StockGarmentStocks { get; set; }
+
+        /// <summary>
+        /// 商品种类表
+        /// </summary>
+        public DbSet<Category> StockCategories { get; set; }
+        /// <summary>
+        /// 商品库位表
+        /// </summary>
+        public DbSet<Location> StockLocations { get; set; }
+        /// <summary>
+        /// 商品区域表
+        /// </summary>
+        public DbSet<StockArea> StockAreas { get; set; }
+        /// <summary>
+        /// 仓库表
+        /// </summary>
+        public DbSet<Warehouse> StockWarehouses { get; set; }
+        /// <summary>
+        /// 毛衣商品信息表
+        /// </summary>
+        public DbSet<Garment> StockGerments { get; set; }
+        /// <summary>
+        /// 入库信息表
+        /// </summary>
+        public DbSet<GarmentInStock> StockGarmentInStocks { get; set; }
+        ///// <summary>
+        ///// 商口库存表
+        ///// </summary>
+        //public DbSet<GarmentStock> StockGarmentStocks { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

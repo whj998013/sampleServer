@@ -62,6 +62,10 @@
     <Compile Include="Proof\ProofTask.cs" />
     <Compile Include="Proof\ProofType.cs" />
     <Compile Include="Sample\LendOutView.cs" />
+    <Compile Include="Stock\Category.cs" />
+    <Compile Include="Stock\Garment\GarmentInStock.cs" />
+    <Compile Include="Stock\Location.cs" />
+    <Compile Include="Stock\StockArea.cs" />
     <Compile Include="Sys\ApproveRecrod.cs" />
     <Compile Include="Sys\FactryRole.cs" />
     <Compile Include="Sys\Job.cs" />

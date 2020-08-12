@@ -18,8 +18,14 @@ namespace SampleApi
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Routes.MapHttpRoute(
+                name: "DefaultApiAction",
+                routeTemplate: "apiaction/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

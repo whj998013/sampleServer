@@ -7,7 +7,7 @@ using SG.Model.Sys;
 using SG.Model.Sample;
 using SG.Interface.Sys;
 using SG.Model.Proof;
-
+using SG.Model.Stock;
 namespace SunginData.Migrations
 {
     public class DataDefaultList
@@ -34,7 +34,7 @@ namespace SunginData.Migrations
               new Permission {  CnName = "查看所有信息", Name = "Sample_Dd_ViewAllInfo", Key = "P015001", UpKey = "P015000" ,Type=PermissionType.Point},
               new Permission {  CnName = "样衣借用", Name = "Sample_Dd_SampleLend", Key = "P015002", UpKey = "P015000",Type=PermissionType.Point },
 
-              new Permission {  CnName = "打样中心", Name = "Proof", Key = "P020000", UpKey = "P000000" ,Type=PermissionType.Menu,Icon="ios-cut-outline" ,Px=9},
+              new Permission {  CnName = "打样中心", Name = "Proof", Key = "P020000", UpKey = "P000000" ,Type=PermissionType.Menu,Icon="md-cut" ,Px=9},
               new Permission {  CnName = "我的打样", Name = "Proof_MyProof", Key = "P020100", UpKey = "P020000",Type=PermissionType.Item,Url=@"/Proof/MyProof"  ,Px=10},
               new Permission {  CnName = "我的任务", Name = "Proof_MyTask", Key = "P020300", UpKey = "P020000",Type=PermissionType.Item,Url=@"/Proof/MyTask" ,Px=11 },
               new Permission {  CnName = "打样管理", Name = "Proof_ProofMange", Key = "P020200", UpKey = "P020000",Type=PermissionType.Item,Url=@"/Proof/ProofMange",Px=12 },
@@ -43,6 +43,13 @@ namespace SunginData.Migrations
               new Permission {  CnName = "我的样纱", Name = "Yarn_MyYarn", Key = "P030100", UpKey = "P030000",Type=PermissionType.Item,Url=@"/YarnMange/MyYarn" ,Px=7},
               new Permission {  CnName = "样纱查询", Name = "Yarn_YarnSeach", Key = "P030200", UpKey = "P030000" ,Type=PermissionType.Item,Url=@"/YarnMange/YarnSeach",Px=6},
               new Permission {  CnName = "纱线管理", Name = "Yarn_Mange", Key = "P030300", UpKey = "P030000" ,Type=PermissionType.Item,Url=@"/YarnMange/Mange",Px=8},
+
+              new Permission {  CnName = "成衣仓库", Name = "GarmentWarehouse", Key = "P040000", UpKey = "P000000",Type=PermissionType.Menu,Icon="ios-home-outline" ,Px=9},
+              new Permission {  CnName = "成衣入库", Name = "GarmentInStock", Key = "P040100", UpKey = "P040000",Type=PermissionType.Item,Url=@"/warehouse/GarmentInStock" ,Px=10},
+              new Permission {  CnName = "成衣出库", Name = "GarmentOutStock", Key = "P040200", UpKey = "P040000" ,Type=PermissionType.Item,Url=@"/warehouse/GarmentOutStock",Px=11},
+              new Permission {  CnName = "库存管理", Name = "GarmentStock", Key = "P040300", UpKey = "P040000" ,Type=PermissionType.Item,Url=@"/warehouse/GarmentStock",Px=12},
+              new Permission {  CnName = "基本设置", Name = "GarmentSetting", Key = "P050300", UpKey = "P040000" ,Type=PermissionType.Item,Url=@"/warehouse/GarmentSetting",Px=13},
+
 
               new Permission {  CnName = "系统设置", Name = "SystemMange", Key = "P990000", UpKey = "P000000",Type=PermissionType.Menu,Icon="md-construct",Px=100 },
               new Permission {  CnName = "角色权限配置", Name = "SystemMange_RoleUserMange", Key = "P990100", UpKey = "P990000",Type=PermissionType.Item,Url=@"/system/RoleSetting" ,Px=101},
@@ -238,6 +245,24 @@ namespace SunginData.Migrations
 
             };
         }
+        public static List<Warehouse> GetWarehouses()
+        {
+            return new List<Warehouse>
+            {
+                new Warehouse{WarehouseId="sungincyck",WarehouseName="服饰成衣仓库",WarehouseAddress="滨文路15号",WarehouseType=WarehouseType.Garment},
+                new Warehouse{WarehouseId="sunginmsck",WarehouseName="纱纱仓库",WarehouseAddress="滨文路15号",WarehouseType=WarehouseType.Yarn}
+            };
 
+        }
+        public static List<StockArea> GetStockAreas()
+        {
+            return new List<StockArea>
+            {
+                new StockArea{AreaId="hegequ",AreaName="合格区"},
+                new StockArea{AreaId="buhegequ",AreaName="不合格区"},
+                new StockArea{AreaId="daijianqu",AreaName="待检区"},
+
+            };
+        }
     }
 }

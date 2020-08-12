@@ -123,6 +123,7 @@
     <Compile Include="Controllers\Setting\SampleController.cs" />
     <Compile Include="Controllers\Setting\WorkerController.cs" />
     <Compile Include="Controllers\Setting\YarnController.cs" />
+    <Compile Include="Controllers\Stock\WarehouseController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\Yarn\CusController.cs" />
     <Compile Include="Controllers\Yarn\MyYarnController.cs" />

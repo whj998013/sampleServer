@@ -22,6 +22,8 @@ namespace SampleApi.Controllers.Sample
     [Author]
     public class SampleController : ApiController
     {
+
+
         [HttpPost]
         public object GetSampleList(SeachObjSample seachObj)
         {
@@ -46,6 +48,7 @@ namespace SampleApi.Controllers.Sample
             var re = SampleOper.GetSampleListOrderByDesc(expc, t => t.CreateDate, seachObj.PageId, seachObj.PageSize);
             return Ok(re);
         }
+
         [HttpGet]
         public object GetSample([FromUri]string styleId)
         {
@@ -60,6 +63,8 @@ namespace SampleApi.Controllers.Sample
             }
             return NotFound();
         }
+        
+        
         [HttpGet]
         public IHttpActionResult GetSampleInfo(string Id)
         {

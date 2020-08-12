@@ -96,6 +96,22 @@ namespace SunginData.Migrations
                     context.Purposes.Add(p);
                 }
             });
+            DataDefaultList.GetWarehouses().ForEach(p =>
+            {
+                if (context.StockWarehouses.SingleOrDefault(w => p.WarehouseId == w.WarehouseId) == null)
+                {
+                    context.StockWarehouses.Add(p);
+                }
+
+            });
+            DataDefaultList.GetStockAreas().ForEach(p =>
+            {
+                if (context.StockAreas.SingleOrDefault(w => p.AreaId == w.AreaId) == null)
+                {
+                    context.StockAreas.Add(p);
+                }
+
+            });
             context.SaveChanges();
         }
 
@@ -167,6 +183,7 @@ namespace SunginData.Migrations
                 dbo.SampleBaseInfoes ON dbo.LendRecords.StyleId = dbo.SampleBaseInfoes.StyleId
                 ";
             context.Database.ExecuteSqlCommand(createView);
+
         }
     }
 }

@@ -41,7 +41,7 @@ namespace SampleBLL
                 if (ProofingInfo == null) ProofingInfo = new Proofing();
                 ProductInfo = sc.ProductionRecords.SingleOrDefault(p => p.StyleId == styleId);
                 if (ProductInfo == null) ProductInfo = new ProductionRecord();
-                StockList = sc.GarmentStocks.Where(p => p.StyleId == styleId).ToList();
+                StockList = sc.StockGarmentStocks.Where(p => p.StyleId == styleId).ToList();
                 Files = sc.StyleFiles.Where(p => p.StyleId == BaseInfo.StyleId).ToList();
                 IsNewSample = false;
                 return true;
@@ -180,17 +180,23 @@ namespace SampleBLL
                     });
 
                     //新增数据 
-                    sample.StockDataItems.ForEach(p =>
+
+                    if (sample.StockDataItems.Count > 0)
                     {
-                        sc.GarmentStocks.Add(new GarmentStock
-                        {
-                            Color = p.Color,
-                            Size = p.Size,
-                            Num = p.Num,
-                            StyleId = BaseInfo.StyleId,
-                            StockId = KeyMange.GetKey("Stock")
-                        });
-                    });
+                        string sid = KeyMange.GetKey("Stock");
+                        sample.StockDataItems.ForEach(p =>
+                                            {
+                                                sc.StockGarmentStocks.Add(new GarmentStock
+                                                {
+                                                    Color = p.Color,
+                                                    Size = p.Size,
+                                                    Num = p.Num,
+                                                    StyleId = BaseInfo.StyleId,
+                                                    StockId = sid
+                                                });
+                                            });
+                    }
+
                 }
 
                 if (IsNewSample)
