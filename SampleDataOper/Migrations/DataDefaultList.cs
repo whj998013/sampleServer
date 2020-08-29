@@ -261,8 +261,9 @@ namespace SunginData.Migrations
                 new StockArea{AreaId="hegequ",AreaName="合格区"},
                 new StockArea{AreaId="buhegequ",AreaName="不合格区"},
                 new StockArea{AreaId="daijianqu",AreaName="待检区"},
-
             };
         }
+
+
     }
 }
